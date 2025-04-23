@@ -1,15 +1,18 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import TeamComponent from '../../components/TeamComponent/TeamComponent';
+import HeaderMenu from '../../components/HeaderMenu/HeaderMenu';
 import './Team.css';
 
 export const Team = ({ setShowMenu }) => {
-  const navigate = useNavigate();
-
   useEffect(() => {
-    // Ensure menu is shown when this component is mounted
-    setShowMenu(true);
+    // Hide the default menu since we're using HeaderMenu
+    setShowMenu(false);
   }, [setShowMenu]);
 
-  return <TeamComponent />;
+  return (
+    <>
+      <HeaderMenu isHomePage={false} />
+      <TeamComponent />
+    </>
+  );
 }; 

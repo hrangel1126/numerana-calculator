@@ -4,7 +4,6 @@ import Home from './pages/home/Home';
 import Single from './pages/single/Single';
 import Couple from './pages/couple/Couple';
 import { Team } from './pages/team/Team';
-import Menu from './components/Menu';
 import './App.css';
 
 function App() {
@@ -13,8 +12,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-        {showMenu && <div className="menudiv"><Menu /></div>}
-        
         <Routes>
           <Route path="/" element={<Navigate to="/home" replace />} />
           <Route path="/home" element={<Home setShowMenu={setShowMenu} />} />
