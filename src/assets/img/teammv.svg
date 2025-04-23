@@ -1,0 +1,22 @@
+<svg width="200" height="50" xmlns="http://www.w3.org/2000/svg">
+ <g id="Layer_1">
+  <title>Layer 1</title>
+  <g id="svg_11">
+   <rect stroke="#000" fill="#fff" x="4.99999" y="5.39999" width="44" height="42" id="svg_1" rx="10"/>
+   <text fill="#000000" stroke-width="0" x="30.88344" y="35.65949" id="svg_2" font-size="24" font-family="'Rasa'" text-anchor="start" xml:space="preserve" stroke="#000" transform="matrix(2.24607 0 0 1.56781 -56.8742 -21.4045)" font-weight="bold">A</text>
+  </g>
+  <g id="svg_14">
+   <rect stroke="#000" fill="#fff" x="52.99999" y="4.39999" width="44" height="42" id="svg_12" rx="10"/>
+   <text fill="#000000" stroke-width="0" x="52.2541" y="35.02167" id="svg_13" font-size="24" font-family="'Rasa'" text-anchor="start" xml:space="preserve" stroke="#000" transform="matrix(2.24607 0 0 1.56781 -56.8742 -21.4045)" font-weight="bold">A</text>
+  </g>
+  <g id="svg_17">
+   <rect stroke="#000" fill="#fff" x="100.99999" y="5.39999" width="44" height="42" id="svg_15" rx="10"/>
+   <text fill="#000000" stroke-width="0" x="73.62476" y="35.6595" id="svg_16" font-size="24" font-family="'Rasa'" text-anchor="start" xml:space="preserve" stroke="#000" transform="matrix(2.24607 0 0 1.56781 -56.8742 -21.4045)" font-weight="bold">A</text>
+  </g>
+  <g id="svg_20">
+   <rect stroke="#000" fill="#fff" x="148.99999" y="5.39999" width="44" height="42" id="svg_18" rx="10"/>
+   <text fill="#000000" stroke-width="0" x="94.99542" y="35.6595" id="svg_19" font-size="24" font-family="'Rasa'" text-anchor="start" xml:space="preserve" stroke="#000" transform="matrix(2.24607 0 0 1.56781 -56.8742 -21.4045)" font-weight="bold">A</text>
+  </g>
+ </g>
+
+</svg>

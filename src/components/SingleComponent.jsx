@@ -5,6 +5,11 @@ import PinaculoSvg from './PinaculoSvg';
 import YearSvg from './YearSvg';
 import './SingleComponent.css';
 
+// Import images directly
+import leftDecoration from '../assets/img/Lleft.png';
+import rightDecoration from '../assets/img/Lright.png';
+import logoImage from '../assets/img/logonumerana80.png';
+
 const SingleComponent = () => {
   // State variables
   const [nombre, setNombre] = useState('');
@@ -148,13 +153,26 @@ const SingleComponent = () => {
   
   // Handle birthdate input with mask
   const handleBirthdateChange = (e) => {
-    let value = e.target.value.replace(/\D/g, '');
+    let value = e.target.value.replace(/[^\d]/g, ''); // Remove non-digits
+    
+    // Format with slashes in correct positions
     if (value.length > 0) {
-      value = value.match(new RegExp('.{1,2}', 'g')).join('/');
+      // Add first slash after day (after first 2 digits)
+      if (value.length > 2) {
+        value = value.substring(0, 2) + '/' + value.substring(2);
+      }
+      
+      // Add second slash after month (after first 5 chars: dd/mm)
       if (value.length > 5) {
-        value = value.substring(0, 5) + '/' + value.substring(5, 9);
+        value = value.substring(0, 5) + '/' + value.substring(5);
+      }
+      
+      // Limit to 10 chars (dd/mm/yyyy)
+      if (value.length > 10) {
+        value = value.substring(0, 10);
       }
     }
+    
     setBirthdate(value);
   };
   
@@ -181,14 +199,14 @@ const SingleComponent = () => {
         <div className="col-8 person resultado2" style={{ border: '5px solid #858585', borderRadius: '5px' }}>
           <div className="row">
             <div className="col-2">
-              <img src="/assets/img/Lleft.png" className="Lleft" alt="Left decoration" />
+              <img src={leftDecoration} className="Lleft" alt="Left decoration" />
             </div>
             <div className="col-8">
-              <img src="/assets/img/logonumerana80.png" alt="numeranamx" className="logo" />
+              <img src={logoImage} alt="numeranamx" className="logo" />
               <h1 className="numerologia">Numerology | Numerología</h1>
             </div>
             <div className="col-2">
-              <img src="/assets/img/Lright.png" className="Lright" alt="Right decoration" />
+              <img src={rightDecoration} className="Lright" alt="Right decoration" />
             </div>
           </div>
           
@@ -273,14 +291,14 @@ const SingleComponent = () => {
           <div className="col-8 person resultado2" style={{ border: '5px solid #858585', borderRadius: '5px' }}>
             <div className="row">
               <div className="col-2">
-                <img src="/assets/img/Lleft.png" className="Lleft" alt="Left decoration" />
+                <img src={leftDecoration} className="Lleft" alt="Left decoration" />
               </div>
               <div className="col-8">
-                <img src="/assets/img/logonumerana80.png" alt="numeranamx" className="logo" />
+                <img src={logoImage} alt="numeranamx" className="logo" />
                 <h1 className="numerologia">Numerology | Numerología</h1>
               </div>
               <div className="col-2">
-                <img src="/assets/img/Lright.png" className="Lright" alt="Right decoration" />
+                <img src={rightDecoration} className="Lright" alt="Right decoration" />
               </div>
             </div>
             

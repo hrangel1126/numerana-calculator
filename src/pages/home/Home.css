@@ -1,0 +1,87 @@
+.bntcontain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+  width: 100%;
+}
+
+.col-12 {
+  padding: 0 15px;
+  box-sizing: border-box;
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+/* Button Styles */
+.button-container-1, .button-container-2, .button-container-3 {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  cursor: pointer;
+  perspective: 500px;
+  -webkit-perspective: 500px;
+}
+
+.button-container-1 button, .button-container-2 button, .button-container-3 button {
+  background-color: #3b5998;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 20px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.button-container-1 button:hover, .button-container-2 button:hover, .button-container-3 button:hover {
+  background-color: #2d4373;
+  transform: scale(1.05);
+}
+
+.button-container-1 .mas, .button-container-2 .mas, .button-container-3 .mas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 24px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.icon {
+  font-size: 2rem;
+}
+
+.iconin {
+  font-size: 1.5rem;
+}
+
+.button-container-1 button {
+  background-color: #4285f4;
+}
+
+.button-container-2 button {
+  background-color: #ea4335;
+}
+
+.button-container-3 button {
+  background-color: #34a853;
+} 
