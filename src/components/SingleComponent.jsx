@@ -3,6 +3,8 @@ import moment from 'moment';
 import calculosUtils from '../utils/calculosUtils';
 import PinaculoSvg from './PinaculoSvg';
 import YearSvg from './YearSvg';
+import MonthVisualizer from './MonthVisualizer';
+import DayTable from './DayTable';
 import './SingleComponent.css';
 
 // Import images directly
@@ -385,6 +387,16 @@ const SingleComponent = () => {
             </div>
           </div>
         </div>
+        
+        {/* Add the Monthly Calculations */}
+        <div className="section-divider"></div>
+        <h3 className="section-title">Monthly Calculations</h3>
+        {birthdate && <MonthVisualizer birthdate={birthdate} year={0} />}
+        
+        {/* Add the Day Calculations Table */}
+        <div className="section-divider"></div>
+        <h3 className="section-title">Daily Calculations</h3>
+        {birthdate && <DayTable birthdate={birthdate} />}
       </div>
     </div>
   );
