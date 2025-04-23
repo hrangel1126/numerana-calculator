@@ -62,30 +62,29 @@ const SingleComponent = () => {
     });
     
     // Get current month to determine which quarters to show
-    calculosUtils.getTodaysMonth().then((meshoy) => {
-      if (meshoy === 1) {
-        setMonthsVisible({
-          CYQ1: true,
-          CYQ2: true,
-          CYQ3: true,
-          NYQ: false
-        });
-      } else if (meshoy === 2) {
-        setMonthsVisible({
-          CYQ1: true,
-          CYQ2: true,
-          CYQ3: true,
-          NYQ: false
-        });
-      } else if (meshoy === 3) {
-        setMonthsVisible({
-          CYQ1: false,
-          CYQ2: false,
-          CYQ3: true,
-          NYQ: true
-        });
-      }
-    });
+    const currentMonth = calculosUtils.getTodaysMonth();
+    if (currentMonth === 1) {
+      setMonthsVisible({
+        CYQ1: true,
+        CYQ2: true,
+        CYQ3: true,
+        NYQ: false
+      });
+    } else if (currentMonth === 2) {
+      setMonthsVisible({
+        CYQ1: true,
+        CYQ2: true,
+        CYQ3: true,
+        NYQ: false
+      });
+    } else if (currentMonth === 3) {
+      setMonthsVisible({
+        CYQ1: false,
+        CYQ2: false,
+        CYQ3: true,
+        NYQ: true
+      });
+    }
     
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -120,19 +119,37 @@ const SingleComponent = () => {
       return;
     }
     
+    // Validate date parts
+    const day = parseInt(fixDate[0]);
+    const month = parseInt(fixDate[1]);
+    const year = parseInt(fixDate[2]);
+    
+    if (isNaN(day) || isNaN(month) || isNaN(year) || 
+        day < 1 || day > 31 || month < 1 || month > 12 || year < 1000 || year > 9999) {
+      alert("Invalid date format. Please use DD/MM/YYYY format.");
+      return;
+    }
+    
+    // Ensure the date parts have proper leading zeros if needed
+    const formattedDay = day < 10 ? `0${day}` : `${day}`;
+    const formattedMonth = month < 10 ? `0${month}` : `${month}`;
+    const formattedDate = `${formattedDay}/${formattedMonth}/${year}`;
+    
     setLoading(true);
     setIsVisible(false);
     
     // Process the date
-    const processedDate = `${fixDate[0]}/${fixDate[1]}/${fixDate[2]}`;
-    setBirthdateShow(processedDate);
+    setBirthdateShow(formattedDate);
     
     // Calculate results
     try {
-      const pinaculo = calculosUtils.GetFirstLine(processedDate);
+      console.log("Calculating with date:", formattedDate);
+      const pinaculo = calculosUtils.GetFirstLine(formattedDate);
+      console.log("Pinaculo result:", pinaculo);
       setRpinaculo([pinaculo]);
       
-      const yearData = calculosUtils.GetYear(processedDate);
+      const yearData = calculosUtils.GetYear(formattedDate);
+      console.log("Year data result:", yearData);
       setPinYear([yearData]);
       
       setResultados(true);
@@ -145,10 +162,13 @@ const SingleComponent = () => {
       }, 100);
     } catch (error) {
       console.error('Error calculating results:', error);
-      alert('Error in calculations. Please try again.');
-    } finally {
+      alert(`Calculation error: ${error.message || 'Please try again with a valid date.'}` );
       setLoading(false);
+      setIsVisible(true);
+      return;
     }
+    
+    setLoading(false);
   };
   
   // Handle birthdate input with mask
