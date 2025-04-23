@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Home from './pages/home/Home';
 import Single from './pages/single/Single';
 import Couple from './pages/couple/Couple';
-import Team from './pages/team/Team';
+import { Team } from './pages/team/Team';
 import Menu from './components/Menu';
 import './App.css';
 

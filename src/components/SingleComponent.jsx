@@ -209,9 +209,23 @@ const SingleComponent = () => {
     setPinYear([]);
   };
   
-  // Print function (simplified for this example)
+  // Print function with PDF generation
   const downloadPdf = () => {
-    alert('PDF download functionality would be implemented here');
+    if (typeof window !== 'undefined' && window.html2pdf && contentRef.current) {
+      const content = contentRef.current;
+      
+      const opt = {
+        margin: [10, 10, 10, 10],
+        filename: 'SingleNumerologyCalculation.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+      
+      window.html2pdf().set(opt).from(content).save();
+    } else {
+      alert('PDF generation is not available. Please check if the html2pdf library is loaded.');
+    }
   };
   
   // Render the input form
@@ -410,11 +424,15 @@ const SingleComponent = () => {
 
   return (
     <main className="main">
-      {renderLoading()}
-      
-      {!resultados && renderForm()}
-      
-      {resultados && renderResults()}
+      <div ref={contentRef} className="content">
+        {renderLoading()}
+        
+        {!resultados && renderForm()}
+        
+        {resultados && renderResults()}
+        
+        <div ref={myScrollContainerRef}></div>
+      </div>
     </main>
   );
 };

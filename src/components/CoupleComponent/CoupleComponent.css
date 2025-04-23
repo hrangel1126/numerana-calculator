@@ -1,0 +1,128 @@
+.couple-calculator-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.couple-calculator-container h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.couple-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 30px;
+  justify-content: space-between;
+}
+
+.person-info {
+  flex: 1;
+  min-width: 300px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.person-info h2 {
+  margin-top: 0;
+  color: #444;
+  font-size: 1.3rem;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.results {
+  background-color: #e9f7ef;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.results h2 {
+  margin: 0;
+  color: #27ae60;
+  font-size: 1.5rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.actions button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.print-button {
+  background-color: #3498db;
+  color: white;
+}
+
+.print-button:hover {
+  background-color: #2980b9;
+}
+
+.back-button {
+  background-color: #7f8c8d;
+  color: white;
+}
+
+.back-button:hover {
+  background-color: #6c7a7c;
+}
+
+/* Print styles */
+@media print {
+  .couple-calculator-container {
+    padding: 0;
+    max-width: 100%;
+  }
+  
+  .actions {
+    display: none;
+  }
+  
+  .couple-form, .results {
+    box-shadow: none;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+  }
+  
+  .person-info {
+    box-shadow: none;
+    page-break-inside: avoid;
+  }
+} 

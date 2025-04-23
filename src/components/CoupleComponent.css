@@ -1,0 +1,288 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  margin-top: 3rem;
+  padding: 0 25px;
+}
+
+.containerBox {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1200px;
+}
+
+.resultado2 {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.titulo {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.person-title {
+  text-align: center;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  color: #5b356c;
+}
+
+.nombres {
+  padding: 0.5rem;
+  font-size: 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
+.telefono {
+  display: none;
+}
+
+.website {
+  font-size: 12px;
+  float: right;
+  color: #666;
+}
+
+.Lleft {
+  position: absolute;
+  width: 5rem;
+  float: left;
+  display: flex;
+  margin-top: 10px;
+}
+
+.Lright {
+  width: 5rem;
+  float: right;
+  display: flex;
+  margin-top: 10px;
+}
+
+.logo {
+  height: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flow;
+}
+
+.send {
+  width: 100%;
+  padding: 0;
+  margin-top: 0rem;
+  background-color: #594363;
+  height: 38px;
+}
+
+.send:hover {
+  background-color: #6e01a0;
+  color: white;
+}
+
+.A svg {
+  width: 100%;
+  max-width: 530px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+.rside {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.rside div {
+  padding: 10px;
+  min-height: 50%;
+  border-left: 2px solid #5b356c;
+  text-align: center;
+}
+
+.compatibility-container {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.compatibility-chart {
+  margin-bottom: 30px;
+}
+
+.compatibility-chart h4,
+.compatibility-summary h4 {
+  color: #5b356c;
+  text-align: center;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.compatibility-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.compatibility-table th,
+.compatibility-table td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.compatibility-table th {
+  background-color: #5b356c;
+  color: white;
+}
+
+.compatibility-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.compatibility-excellent {
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+}
+
+.compatibility-good {
+  background-color: #8bc34a;
+  color: white;
+  font-weight: bold;
+}
+
+.compatibility-average {
+  background-color: #ffc107;
+  color: #333;
+  font-weight: bold;
+}
+
+.compatibility-challenging {
+  background-color: #f44336;
+  color: white;
+  font-weight: bold;
+}
+
+.compatibility-summary {
+  margin-top: 20px;
+}
+
+.compatibility-summary p {
+  text-align: justify;
+  line-height: 1.6;
+}
+
+.section-divider {
+  height: 2px;
+  background-color: #eee;
+  margin: 40px 0 20px;
+  width: 100%;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  font-weight: 500;
+  color: #5b356c;
+}
+
+.centerVertHoriz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.masc {
+  position: relative;
+  display: inline-block;
+}
+
+.iconin {
+  font-size: 2rem;
+  color: #5b356c;
+}
+
+@media (max-width: 992px) {
+  .compatibility-table th, 
+  .compatibility-table td {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    margin-top: 2rem;
+    padding: 0 15px;
+  }
+  
+  .titulo {
+    font-size: 1.2rem;
+  }
+  
+  .logo {
+    height: 60px;
+  }
+  
+  .Lleft, .Lright {
+    width: 3.5rem;
+  }
+  
+  .masc {
+    transform: scale(0.8);
+  }
+  
+  .rside div {
+    border-left: none;
+    border-top: 2px solid #5b356c;
+    margin-top: 20px;
+  }
+  
+  .compatibility-table th, 
+  .compatibility-table td {
+    padding: 6px;
+    font-size: 0.8rem;
+  }
+  
+  .compatibility-container {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 0 10px;
+  }
+  
+  .titulo {
+    font-size: 1rem;
+  }
+  
+  .compatibility-table th, 
+  .compatibility-table td {
+    padding: 4px;
+    font-size: 0.7rem;
+  }
+  
+  .compatibility-container {
+    padding: 10px;
+  }
+} 
