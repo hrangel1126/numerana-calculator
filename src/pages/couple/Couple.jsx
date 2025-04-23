@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Couple.css';
 
-const Couple = () => {
+const Couple = ({ setShowMenu }) => {
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    // Ensure menu is shown when this component is mounted
+    setShowMenu(true);
+  }, [setShowMenu]);
 
   return (
     <main className="main">

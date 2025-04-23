@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Team.css';
 
-const Team = () => {
+const Team = ({ setShowMenu }) => {
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    // Ensure menu is shown when this component is mounted
+    setShowMenu(true);
+  }, [setShowMenu]);
 
   return (
     <main className="main">

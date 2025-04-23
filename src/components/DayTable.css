@@ -29,6 +29,8 @@
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  width: calc(33.333% - 20px);
+  min-width: 220px;
 }
 
 .month-header {
@@ -59,14 +61,41 @@ tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
+@media (max-width: 992px) {
+  .month-table {
+    width: calc(50% - 20px);
+  }
+}
+
 @media (max-width: 768px) {
   .month-table {
     width: calc(50% - 20px);
+    min-width: 180px;
+  }
+  
+  th, td {
+    padding: 4px;
+    font-size: 0.9rem;
   }
 }
 
 @media (max-width: 480px) {
   .month-table {
     width: 100%;
+    margin: 10px 5px;
+  }
+  
+  .day-table-header {
+    flex-direction: column;
+  }
+  
+  th, td {
+    padding: 3px;
+    font-size: 0.8rem;
+  }
+  
+  .month-header {
+    padding: 5px;
+    font-size: 0.9rem;
   }
 } 

@@ -3,6 +3,11 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  font-family: 'Roboto Mono', monospace, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 body {
@@ -12,6 +17,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  background-color: #f8f9fa;
 }
 
 .main {
@@ -26,6 +33,10 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  padding: 0 15px;
+  box-sizing: border-box;
+  margin-top: 3rem;
 }
 
 .loading {
@@ -44,7 +55,7 @@ body {
 
 .lds-ripple div {
   position: absolute;
-  border: 4px solid #007bff;
+  border: 4px solid #5b356c;
   opacity: 1;
   border-radius: 50%;
   animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
@@ -68,5 +79,136 @@ body {
     width: 72px;
     height: 72px;
     opacity: 0;
+  }
+}
+
+/* Menu styles */
+.menudiv {
+  display: flow;
+  width: 104%;
+}
+
+/* Add global button styles to match Angular app */
+button.btn-primary {
+  background-color: #594363;
+  border-color: #5b356c;
+}
+
+button.btn-primary:hover {
+  background-color: #6e01a0;
+  border-color: #5b356c;
+}
+
+/* Add global animations and transitions from Angular */
+@-webkit-keyframes ani {
+ from {
+  -webkit-mask-position: 0 0;
+  mask-position: 0 0;
+ }
+
+ to {
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+ }
+}
+
+@keyframes ani {
+ from {
+  -webkit-mask-position: 0 0;
+  mask-position: 0 0;
+ }
+
+ to {
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+ }
+}
+
+@-webkit-keyframes ani2 {
+ from {
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+ }
+
+ to {
+  -webkit-mask-position: 0 0;
+  mask-position: 0 0;
+ }
+}
+
+@keyframes ani2 {
+ from {
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+ }
+
+ to {
+  -webkit-mask-position: 0 0;
+  mask-position: 0 0;
+ }
+}
+
+/* Add links style from Angular */
+a {
+  color: #00ff95;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.page {
+  width: 100%;
+}
+
+/* Center and style containers */
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+/* Add responsive media queries */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 10px;
+  }
+  
+  .containerBox {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .row {
+    margin: 0 -10px;
+  }
+  
+  .loading {
+    padding: 0 15px;
+  }
+  
+  .content {
+    margin-top: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 5px;
+  }
+  
+  .row {
+    margin: 0 -5px;
+  }
+  
+  .lds-ripple {
+    transform: scale(0.8);
+  }
+  
+  .content {
+    margin-top: 1rem;
   }
 } 

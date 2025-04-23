@@ -2,18 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
 
-const Home = () => {
+const Home = ({ setShowMenu }) => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Ensure menu is shown
+    setShowMenu(true);
+    
     // Simulate loading time for animation
     const timer = setTimeout(() => {
       setLoading(false);
     }, 1500);
     
     return () => clearTimeout(timer);
-  }, []);
+  }, [setShowMenu]);
 
   return (
     <main className="main">
