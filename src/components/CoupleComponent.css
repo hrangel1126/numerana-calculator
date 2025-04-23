@@ -5,17 +5,25 @@
 }
 
 .content {
-  margin-top: 3rem;
+  margin-top: 2rem;
   padding: 0 25px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+/* Container styling to match Angular app */
 .containerBox {
   width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding: 30px;
   margin-right: auto;
   margin-left: auto;
-  max-width: 1200px;
+  margin-bottom: 30px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: relative;
 }
 
 .resultado2 {
@@ -28,6 +36,15 @@
   font-size: 1.5rem;
   margin-bottom: 1rem;
   font-family: 'Roboto', sans-serif;
+  text-align: center;
+}
+
+.titulom {
+  text-align: center;
+  font-weight: bold;
+  font-size: 22px;
+  margin-top: 10px;
+  margin-bottom: 15px;
 }
 
 .person-title {
@@ -36,6 +53,22 @@
   margin-top: 20px;
   margin-bottom: 15px;
   color: #5b356c;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.person-title .number {
+  font-size: 2.2rem;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.person-title i {
+  margin-right: 5px;
+  color: #5b356c;
+  font-size: 1.8rem;
 }
 
 .nombres {
@@ -45,6 +78,16 @@
   margin-bottom: 1rem;
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
+  box-sizing: border-box;
+  height: 38px;
+}
+
+/* Labels styling */
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333;
 }
 
 .telefono {
@@ -53,12 +96,13 @@
 
 .website {
   font-size: 12px;
-  float: right;
+  text-align: right;
   color: #666;
+  margin-top: 8px;
+  margin-bottom: 0;
 }
 
 .Lleft {
-  position: absolute;
   width: 5rem;
   float: left;
   display: flex;
@@ -76,15 +120,22 @@
   height: 80px;
   margin-left: auto;
   margin-right: auto;
-  display: flow;
+  display: block;
 }
 
+/* Button styling */
 .send {
   width: 100%;
   padding: 0;
   margin-top: 0rem;
   background-color: #594363;
   height: 38px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .send:hover {
@@ -137,11 +188,12 @@
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .compatibility-table th,
 .compatibility-table td {
-  padding: 10px;
+  padding: 12px;
   text-align: center;
   border: 1px solid #ddd;
 }
@@ -149,6 +201,7 @@
 .compatibility-table th {
   background-color: #5b356c;
   color: white;
+  font-weight: 600;
 }
 
 .compatibility-table tr:nth-child(even) {
@@ -196,11 +249,11 @@
 }
 
 .section-title {
-  text-align: center;
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-  font-weight: 500;
   color: #5b356c;
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  font-weight: 600;
 }
 
 .centerVertHoriz {
@@ -220,6 +273,59 @@
   color: #5b356c;
 }
 
+/* Fix for couple layout specific issues */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.col-md-6, .col-12, .col-md-4, .col-md-2, .col-md-3, .col-2, .col-3 {
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  box-sizing: border-box;
+}
+
+.col-12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+.col-2 {
+  flex: 0 0 16.666667%;
+  max-width: 16.666667%;
+}
+
+.col-3 {
+  flex: 0 0 25%;
+  max-width: 25%;
+}
+
+@media (min-width: 768px) {
+  .col-md-2 {
+    flex: 0 0 16.666667%;
+    max-width: 16.666667%;
+  }
+  
+  .col-md-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+  
+  .col-md-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+  
+  .col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
 @media (max-width: 992px) {
   .compatibility-table th, 
   .compatibility-table td {
@@ -230,8 +336,12 @@
 
 @media (max-width: 768px) {
   .content {
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     padding: 0 15px;
+  }
+  
+  .containerBox {
+    padding: 20px;
   }
   
   .titulo {
@@ -272,6 +382,10 @@
     padding: 0 10px;
   }
   
+  .containerBox {
+    padding: 15px;
+  }
+  
   .titulo {
     font-size: 1rem;
   }
@@ -285,4 +399,42 @@
   .compatibility-container {
     padding: 10px;
   }
+}
+
+/* Name styles in results */
+h3.name {
+  color: #5b356c;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+/* Form headers */
+.form-group label {
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Button icon styling */
+.send i {
+  font-size: 1.3rem;
+}
+
+/* PDF button styling */
+.btn-primary.btn-lg {
+  background-color: #5b356c;
+  border-color: #5b356c;
+  padding: 10px 20px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-primary.btn-lg:hover {
+  background-color: #6e01a0;
+  border-color: #6e01a0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 } 

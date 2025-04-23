@@ -326,55 +326,35 @@ const CoupleComponent = () => {
   
   // Render the input form
   const renderForm = () => (
-    <div className={`containerBox ${isVisible ? 'visible' : 'hidden'}`} style={{display: !resultados ? 'flex' : 'none', border: '5px solid #858585', borderRadius: '5px'}}>
+    <div className={`containerBox ${isVisible ? 'visible' : 'hidden'}`} style={{display: !resultados ? 'block' : 'none', border: '1px solid #ccc', borderRadius: '8px'}}>
       <div className="row person resultado2">
-        <div className="col-2">
+        <div className="col-md-2 col-2">
           <img src={leftDecoration} className="Lleft" alt="Left decoration" />
         </div>
-        <div className="col-8" style={{ textAlign: 'center' }}>
+        <div className="col-md-8 col-8" style={{ textAlign: 'center' }}>
           <img src={logoImage} alt="numeranamx" className="logo" />
-          <h1 className="titulo">Numerology | Numerología</h1>
+          <h1 className="titulom">Numerology | Numerología</h1>
         </div>
-        <div className="col-2">
+        <div className="col-md-2 col-2">
           <img src={rightDecoration} className="Lright" alt="Right decoration" />
         </div>
       </div>
       
       <div className="row">
-        <div className="col-2"></div>
-        <div className="col-3">
-          <h2 className="name bold titulo">{nombre}</h2>
+        <div className="col-md-6 col-6 text-center">
+          <div className="person-title">
+            <span className="number">1</span> <i className="bi bi-person-fill"></i>
+          </div>
         </div>
-        <div className="col-1"></div>
-        <div className="col-3">
-          <h2 className="name bold titulo">{nombre2}</h2>
+        <div className="col-md-6 col-6 text-center">
+          <div className="person-title">
+            <span className="number">2</span> <i className="bi bi-person-fill"></i>
+          </div>
         </div>
-        <div className="col-2"></div>
-      </div>
-      
-      <br />
-      
-      <div className="row">
-        <div className="col-2"></div>
-        <div className="col-3" style={{ textAlign: 'center' }}>
-          <span className="masc">
-            <b style={{ fontSize: '2.6rem', position: 'absolute', marginLeft: '-2rem', marginTop: '-7px' }}>1</b>
-            <i className="bi bi-person-fill iconin"></i>
-          </span>
-        </div>
-        <div className="col-2"></div>
-        <div className="col-3" style={{ textAlign: 'center' }}>
-          <span className="masc">
-            <b style={{ fontSize: '2.6rem', position: 'absolute', marginLeft: '-2rem', marginTop: '-7px' }}>2</b>
-            <i className="bi bi-person-fill iconin"></i>
-          </span>
-        </div>
-        <div className="col-2"></div>
       </div>
       
       <div className="row" id="name">
-        <div className="col-2 telefono"></div>
-        <div className="col-3" style={{ textAlign: 'center' }}>
+        <div className="col-md-6 col-6">
           <div className="form-group">
             <label htmlFor="Name"><b>Name/Nombre</b></label>
             <input 
@@ -388,9 +368,8 @@ const CoupleComponent = () => {
             />
           </div>
         </div>
-        <div className="col-2"></div>
-        <div className="col-3">
-          <div className="form-group" style={{ textAlign: 'center' }}>
+        <div className="col-md-6 col-6">
+          <div className="form-group">
             <label htmlFor="Name2"><b>Name/Nombre</b></label>
             <input 
               type="text" 
@@ -403,12 +382,10 @@ const CoupleComponent = () => {
             />
           </div>
         </div>
-        <div className="col-2"></div>
       </div>
       
-      <div className="row" style={{ textAlign: 'center' }}>
-        <div className="col-2 telefono"></div>
-        <div className="col-3">
+      <div className="row">
+        <div className="col-md-6 col-6">
           <div className="form-group">
             <label htmlFor="birth"><b>Birthdate/Cumple</b></label>
             <input
@@ -423,8 +400,7 @@ const CoupleComponent = () => {
             />
           </div>
         </div>
-        <div className="col-2"></div>
-        <div className="col-3">
+        <div className="col-md-6 col-6">
           <div className="form-group">
             <label htmlFor="birth2"><b>Birthdate/Cumple</b></label>
             <input
@@ -439,32 +415,27 @@ const CoupleComponent = () => {
             />
           </div>
         </div>
-        <div className="col-2"></div>
       </div>
       
-      <div className="row" style={{ marginBottom: '1rem' }}>
-        <div className="col-3"></div>
-        <div className="col-6">
+      <div className="row">
+        <div className="col-md-4 col-2"></div>
+        <div className="col-md-4 col-8">
           <button 
             style={{ marginTop: '1rem' }} 
             type="button" 
             onClick={handleSubmit} 
             className="btn btn-primary btn-lg btn-block send"
           >
-            <i className="bi bi-play-btn-fill" style={{ zoom: 2, lineHeight: 1 }}></i>
+            <i className="bi bi-play-btn-fill" style={{ marginRight: '5px' }}></i>
           </button>
         </div>
-        <div className="col-3">
-          <div className="row">
-            <div className="col-3"></div>
-            <div className="col-3"></div>
-            <div className="col-6"><h2 className="website" style={{ fontSize: '11px' }}>www.numerana.com</h2></div>
-          </div>
-          <div className="row">
-            <div className="col-2"></div>
-            <div className="col-2"></div>
-            <div className="col-8"><h2 className="website ana" style={{ fontSize: '11px' }}>By: Ana Dorotea</h2></div>
-          </div>
+        <div className="col-md-4 col-2"></div>
+      </div>
+      
+      <div className="row mt-3">
+        <div className="col-md-8 col-8 offset-md-4 offset-4">
+          <p className="website">www.numerana.com</p>
+          <p className="website">By: Ana Dorotea</p>
         </div>
       </div>
     </div>
@@ -473,108 +444,86 @@ const CoupleComponent = () => {
   // Render the results header with calculations visualization
   const renderResults = () => (
     <div className="results-container">
-      <div className={`containerBox ${resultados ? 'visible' : 'hidden'}`} style={{border: '5px solid #858585', borderRadius: '5px'}}>
+      <div className={`containerBox ${resultados ? 'visible' : 'hidden'}`} style={{display: resultados ? 'block' : 'none', border: '1px solid #ccc', borderRadius: '8px'}}>
         <div className="row person resultado2">
-          <div className="col-2">
+          <div className="col-md-2 col-2">
             <img src={leftDecoration} className="Lleft" alt="Left decoration" />
           </div>
-          <div className="col-8" style={{ textAlign: 'center' }}>
+          <div className="col-md-8 col-8" style={{ textAlign: 'center' }}>
             <img src={logoImage} alt="numeranamx" className="logo" />
-            <h1 className="titulo">Numerology | Numerología</h1>
+            <h1 className="titulom">Numerology | Numerología</h1>
           </div>
-          <div className="col-2">
+          <div className="col-md-2 col-2">
             <img src={rightDecoration} className="Lright" alt="Right decoration" />
           </div>
         </div>
         
         <div className="row">
-          <div className="col-2"></div>
-          <div className="col-3" style={{ textAlign: 'center' }}>
-            <span className="masc">
-              <b style={{ fontSize: '2.6rem', position: 'absolute', marginLeft: '-2rem', marginTop: '-7px' }}>1</b>
-              <i className="bi bi-person-fill iconin"></i>
-            </span>
+          <div className="col-md-6 col-6 text-center">
+            <div className="person-title">
+              <span className="number">1</span> <i className="bi bi-person-fill"></i>
+            </div>
+            <h3 className="name">{nombre}</h3>
+            <p>{birthdateShow}</p>
           </div>
-          <div className="col-2"></div>
-          <div className="col-3" style={{ textAlign: 'center' }}>
-            <span className="masc">
-              <b style={{ fontSize: '2.6rem', position: 'absolute', marginLeft: '-2rem', marginTop: '-7px' }}>2</b>
-              <i className="bi bi-person-fill iconin"></i>
-            </span>
+          <div className="col-md-6 col-6 text-center">
+            <div className="person-title">
+              <span className="number">2</span> <i className="bi bi-person-fill"></i>
+            </div>
+            <h3 className="name">{nombre2}</h3>
+            <p>{birthdateShow2}</p>
           </div>
-          <div className="col-2"></div>
         </div>
         
         <div className="row">
-          <div className="col-2"></div>
-          <div className="col-3">
-            <h2 className="name bold titulo" style={{ textAlign: 'center' }}>{nombre}</h2>
-          </div>
-          <div className="col-1"></div>
-          <div className="col-3">
-            <h2 className="name bold titulo" style={{ textAlign: 'center' }}>{nombre2}</h2>
-          </div>
-          <div className="col-2"></div>
-        </div>
-        
-        <div className="row">
-          <div className="col-2"></div>
-          <div className="col-3">
-            <h2 className="name bold titulo" style={{ textAlign: 'center' }}>{birthdate}</h2>
-          </div>
-          <div className="col-1"></div>
-          <div className="col-3">
-            <h2 className="name bold titulo" style={{ textAlign: 'center' }}>{birthdate2}</h2>
-          </div>
-          <div className="col-2"></div>
-        </div>
-        
-        <div className="row" style={{ marginBottom: '1rem' }}>
-          <div className="col-3"></div>
-          <div className="col-6">
+          <div className="col-md-4 col-2"></div>
+          <div className="col-md-4 col-8">
             <button 
               style={{ marginTop: '1rem' }} 
               type="button" 
               onClick={reload} 
               className="btn btn-primary btn-lg btn-block send"
             >
-              <i className="bi bi-arrow-clockwise" style={{ zoom: 2, lineHeight: 1 }}></i>
+              <i className="bi bi-arrow-clockwise" style={{ marginRight: '5px' }}></i>
             </button>
           </div>
-          <div className="col-3">
-            <div className="row">
-              <div className="col-3"></div>
-              <div className="col-3"></div>
-              <div className="col-6"><h2 className="website" style={{ fontSize: '11px' }}>www.numerana.com</h2></div>
-            </div>
-            <div className="row">
-              <div className="col-2"></div>
-              <div className="col-2"></div>
-              <div className="col-8"><h2 className="website ana" style={{ fontSize: '11px' }}>By: Ana Dorotea</h2></div>
-            </div>
+          <div className="col-md-4 col-2"></div>
+        </div>
+        
+        <div className="row mt-3">
+          <div className="col-md-8 col-8 offset-md-4 offset-4">
+            <p className="website">www.numerana.com</p>
+            <p className="website">By: Ana Dorotea</p>
           </div>
         </div>
       </div>
 
       {/* Display the calculation results with SVG visualizations */}
-      <div className="container" style={{ display: resultados ? 'block' : 'none' }}>
+      <div className="container mt-4" style={{ display: resultados ? 'block' : 'none' }}>
         <div className="section-divider"></div>
         <h3 className="section-title">Individual Calculations</h3>
         
         {/* Person 1 Calculations */}
         {rpinaculo.length > 0 && (
-          <div className="row">
-            <div className="col-6">
+          <div className="row mb-4">
+            <div className="col-md-6 col-12">
               <h4 className="person-title">{nombre}</h4>
               <div className="A">
                 <PinaculoSvg pinaculo={rpinaculo[0]} />
               </div>
             </div>
-            <div className="col-6">
+            <div className="col-md-6 col-12">
               <div className="rside">
                 <div className="centerVertHoriz">
-                  <p><span style={{ fontWeight: '800', fontSize: '2rem' }}>{year}</span></p>
-                  {pinYear.length > 0 && <YearSvg year={year} data={pinYear[0]} isCurrentYear={true} />}
+                  <div style={{ margin: '0.5rem 0' }}>
+                    <YearSvg year={year} years={pinYear[0]} />
+                  </div>
+                  <div style={{ margin: '0.5rem 0' }}>
+                    <YearSvg year={nxYear} years={pinYear[0]} />
+                  </div>
+                </div>
+                <div className="centerVertHoriz" style={{ marginBottom: '1rem' }}>
+                  <MonthVisualizer birthdate={birthdate} year={year} />
                 </div>
               </div>
             </div>
@@ -583,18 +532,25 @@ const CoupleComponent = () => {
         
         {/* Person 2 Calculations */}
         {rpinaculo2.length > 0 && (
-          <div className="row">
-            <div className="col-6">
+          <div className="row mb-4">
+            <div className="col-md-6 col-12">
               <h4 className="person-title">{nombre2}</h4>
               <div className="A">
                 <PinaculoSvg pinaculo={rpinaculo2[0]} />
               </div>
             </div>
-            <div className="col-6">
+            <div className="col-md-6 col-12">
               <div className="rside">
                 <div className="centerVertHoriz">
-                  <p><span style={{ fontWeight: '800', fontSize: '2rem' }}>{year}</span></p>
-                  {pinYear2.length > 0 && <YearSvg year={year} data={pinYear2[0]} isCurrentYear={true} />}
+                  <div style={{ margin: '0.5rem 0' }}>
+                    <YearSvg year={year} years={pinYear2[0]} />
+                  </div>
+                  <div style={{ margin: '0.5rem 0' }}>
+                    <YearSvg year={nxYear} years={pinYear2[0]} />
+                  </div>
+                </div>
+                <div className="centerVertHoriz" style={{ marginBottom: '1rem' }}>
+                  <MonthVisualizer birthdate={birthdate2} year={year} />
                 </div>
               </div>
             </div>
@@ -605,110 +561,85 @@ const CoupleComponent = () => {
         {rpinaculo.length > 0 && rpinaculo2.length > 0 && (
           <>
             <div className="section-divider"></div>
-            <h3 className="section-title">Couple Compatibility Analysis</h3>
+            <h3 className="section-title">Compatibility Analysis</h3>
+            
             <div className="compatibility-container">
-              <div className="row">
-                <div className="col-12">
-                  <div className="compatibility-chart">
-                    <h4>Compatibility Chart</h4>
-                    <table className="compatibility-table">
-                      <thead>
-                        <tr>
-                          <th>Aspect</th>
-                          <th>{nombre}</th>
-                          <th>{nombre2}</th>
-                          <th>Compatibility</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>Emotional</td>
-                          <td>{rpinaculo[0].P1}</td>
-                          <td>{rpinaculo2[0].P1}</td>
-                          <td className={`compatibility-${determineCompatibilityLevel(rpinaculo[0].P1, rpinaculo2[0].P1).toLowerCase()}`}>
-                            {determineCompatibilityLevel(rpinaculo[0].P1, rpinaculo2[0].P1)}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Mental</td>
-                          <td>{rpinaculo[0].P2}</td>
-                          <td>{rpinaculo2[0].P2}</td>
-                          <td className={`compatibility-${determineCompatibilityLevel(rpinaculo[0].P2, rpinaculo2[0].P2).toLowerCase()}`}>
-                            {determineCompatibilityLevel(rpinaculo[0].P2, rpinaculo2[0].P2)}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Spiritual</td>
-                          <td>{rpinaculo[0].P3}</td>
-                          <td>{rpinaculo2[0].P3}</td>
-                          <td className={`compatibility-${determineCompatibilityLevel(rpinaculo[0].P3, rpinaculo2[0].P3).toLowerCase()}`}>
-                            {determineCompatibilityLevel(rpinaculo[0].P3, rpinaculo2[0].P3)}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Overall</td>
-                          <td colSpan="2" style={{ textAlign: 'center' }}>Combined Energy</td>
-                          <td className={`compatibility-${determineCompatibilityLevel(
-                            parseInt(rpinaculo[0].P1) + parseInt(rpinaculo[0].P2) + parseInt(rpinaculo[0].P3),
-                            parseInt(rpinaculo2[0].P1) + parseInt(rpinaculo2[0].P2) + parseInt(rpinaculo2[0].P3)
-                          ).toLowerCase()}`}>
-                            {determineCompatibilityLevel(
-                              parseInt(rpinaculo[0].P1) + parseInt(rpinaculo[0].P2) + parseInt(rpinaculo[0].P3),
-                              parseInt(rpinaculo2[0].P1) + parseInt(rpinaculo2[0].P2) + parseInt(rpinaculo2[0].P3)
-                            )}
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+              <div className="compatibility-chart">
+                <h4>Numerological Compatibility</h4>
+                <table className="compatibility-table">
+                  <thead>
+                    <tr>
+                      <th>Aspect</th>
+                      <th>{nombre}</th>
+                      <th>{nombre2}</th>
+                      <th>Compatibility</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Emotional (P1)</td>
+                      <td>{rpinaculo[0].P1}</td>
+                      <td>{rpinaculo2[0].P1}</td>
+                      <td className={`compatibility-${rpinaculo[0].P1 === rpinaculo2[0].P1 ? 'excellent' : Math.abs(rpinaculo[0].P1 - rpinaculo2[0].P1) <= 2 ? 'good' : Math.abs(rpinaculo[0].P1 - rpinaculo2[0].P1) <= 4 ? 'average' : 'challenging'}`}>
+                        {determineCompatibilityLevel(rpinaculo[0].P1, rpinaculo2[0].P1)}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Mental (P2)</td>
+                      <td>{rpinaculo[0].P2}</td>
+                      <td>{rpinaculo2[0].P2}</td>
+                      <td className={`compatibility-${rpinaculo[0].P2 === rpinaculo2[0].P2 ? 'excellent' : Math.abs(rpinaculo[0].P2 - rpinaculo2[0].P2) <= 2 ? 'good' : Math.abs(rpinaculo[0].P2 - rpinaculo2[0].P2) <= 4 ? 'average' : 'challenging'}`}>
+                        {determineCompatibilityLevel(rpinaculo[0].P2, rpinaculo2[0].P2)}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Spiritual (P3)</td>
+                      <td>{rpinaculo[0].P3}</td>
+                      <td>{rpinaculo2[0].P3}</td>
+                      <td className={`compatibility-${rpinaculo[0].P3 === rpinaculo2[0].P3 ? 'excellent' : Math.abs(rpinaculo[0].P3 - rpinaculo2[0].P3) <= 2 ? 'good' : Math.abs(rpinaculo[0].P3 - rpinaculo2[0].P3) <= 4 ? 'average' : 'challenging'}`}>
+                        {determineCompatibilityLevel(rpinaculo[0].P3, rpinaculo2[0].P3)}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>Overall</strong></td>
+                      <td>{parseInt(rpinaculo[0].P1) + parseInt(rpinaculo[0].P2) + parseInt(rpinaculo[0].P3)}</td>
+                      <td>{parseInt(rpinaculo2[0].P1) + parseInt(rpinaculo2[0].P2) + parseInt(rpinaculo2[0].P3)}</td>
+                      <td className={`compatibility-${determineCompatibilityLevel(parseInt(rpinaculo[0].P1) + parseInt(rpinaculo[0].P2) + parseInt(rpinaculo[0].P3), parseInt(rpinaculo2[0].P1) + parseInt(rpinaculo2[0].P2) + parseInt(rpinaculo2[0].P3)).toLowerCase()}`}>
+                        {determineCompatibilityLevel(
+                          parseInt(rpinaculo[0].P1) + parseInt(rpinaculo[0].P2) + parseInt(rpinaculo[0].P3),
+                          parseInt(rpinaculo2[0].P1) + parseInt(rpinaculo2[0].P2) + parseInt(rpinaculo2[0].P3)
+                        )}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
               
-              <div className="row">
-                <div className="col-12">
-                  <div className="compatibility-summary">
-                    <h4>Summary</h4>
-                    <p>
-                      The numerological compatibility between {nombre} and {nombre2} shows 
-                      {determineCompatibilityLevel(
-                        parseInt(rpinaculo[0].P1) + parseInt(rpinaculo[0].P2) + parseInt(rpinaculo[0].P3),
-                        parseInt(rpinaculo2[0].P1) + parseInt(rpinaculo2[0].P2) + parseInt(rpinaculo2[0].P3)
-                      ).toLowerCase() === 'excellent' ? ' an excellent' : 
-                      determineCompatibilityLevel(
-                        parseInt(rpinaculo[0].P1) + parseInt(rpinaculo[0].P2) + parseInt(rpinaculo[0].P3),
-                        parseInt(rpinaculo2[0].P1) + parseInt(rpinaculo2[0].P2) + parseInt(rpinaculo2[0].P3)
-                      ).toLowerCase() === 'good' ? ' a good' : 
-                      determineCompatibilityLevel(
-                        parseInt(rpinaculo[0].P1) + parseInt(rpinaculo[0].P2) + parseInt(rpinaculo[0].P3),
-                        parseInt(rpinaculo2[0].P1) + parseInt(rpinaculo2[0].P2) + parseInt(rpinaculo2[0].P3)
-                      ).toLowerCase() === 'average' ? ' an average' : ' a challenging'} 
-                      overall compatibility. The emotional connection is 
-                      {determineCompatibilityLevel(rpinaculo[0].P1, rpinaculo2[0].P1).toLowerCase()}, 
-                      the mental connection is 
-                      {determineCompatibilityLevel(rpinaculo[0].P2, rpinaculo2[0].P2).toLowerCase()}, 
-                      and the spiritual connection is 
-                      {determineCompatibilityLevel(rpinaculo[0].P3, rpinaculo2[0].P3).toLowerCase()}.
-                    </p>
-                  </div>
-                </div>
+              <div className="compatibility-summary">
+                <h4>Summary</h4>
+                <p>
+                  This numerological analysis shows the compatibility between {nombre} and {nombre2} based on their birth dates. 
+                  The emotional, mental, and spiritual aspects of their relationship are represented by the numbers above, 
+                  with overall compatibility determined by the combination of these key factors.
+                </p>
+              </div>
+            </div>
+            
+            {/* Download PDF Button */}
+            <div className="row mt-4">
+              <div className="col-12 text-center">
+                <button 
+                  type="button" 
+                  onClick={downloadPdf} 
+                  className="btn btn-primary btn-lg"
+                  style={{ margin: '20px auto' }}
+                >
+                  <i className="bi bi-printer-fill" style={{ marginRight: '5px' }}></i> Download PDF
+                </button>
               </div>
             </div>
           </>
         )}
-        
-        {/* Print/Download Button */}
-        <div className="row mt-4">
-          <div className="col-12 text-center">
-            <button 
-              type="button" 
-              onClick={downloadPdf} 
-              className="btn btn-primary btn-lg"
-              style={{ margin: '20px auto' }}
-            >
-              <i className="bi bi-printer-fill" style={{ marginRight: '5px' }}></i> Download PDF
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   );
