@@ -1,5 +1,6 @@
 [build]
-  command = "npm run build"
+  # Add CI=false before the command
+  command = "CI=false npm run build"
   publish = "build/"
 
 [[redirects]]
