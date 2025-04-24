@@ -1,3 +1,4 @@
+/* Base styling to match Angular app */
 .App {
   text-align: center;
   min-height: 100vh;
@@ -6,15 +7,12 @@
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
-  font-family: 'Roboto Mono', monospace, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Lato', 'Roboto', sans-serif;
 }
 
 body {
   margin: 0;
-  font-family: 'Roboto Mono', monospace, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Lato', 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -32,25 +30,87 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   width: 100%;
-  padding: 0 15px;
   box-sizing: border-box;
-  margin-top: 3rem;
 }
 
-.loading {
+/* Homepage cards layout */
+.home-options-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 60px;
+  width: 100%;
+  max-width: 1200px;
 }
 
+.option-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 30px;
+  width: 250px;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-decoration: none;
+  color: #333;
+  cursor: pointer;
+}
+
+.option-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.option-icon {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.option-icon svg,
+.option-icon i {
+  width: 100%;
+  height: 100%;
+  font-size: 4rem;
+  color: #a862ff;
+}
+
+.option-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 0;
+  color: #333;
+}
+
+.section-header {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 15px;
+  margin-top: 0;
+  text-align: center;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 250px;
+}
+
+/* Loading spinner - exactly matching Angular */
 .lds-ripple {
   display: inline-block;
   position: relative;
-  width: 80px;
-  height: 80px;
 }
 
 .lds-ripple div {
@@ -58,7 +118,8 @@ body {
   border: 4px solid #5b356c;
   opacity: 1;
   border-radius: 50%;
-  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.3, 1) infinite;
+  zoom: 3.5;
 }
 
 .lds-ripple div:nth-child(2) {
@@ -67,31 +128,32 @@ body {
 
 @keyframes lds-ripple {
   0% {
-    top: 36px;
-    left: 36px;
+    top: 28px;
+    left: 28px;
     width: 0;
     height: 0;
     opacity: 1;
   }
   100% {
-    top: 0px;
-    left: 0px;
-    width: 72px;
-    height: 72px;
+    top: -1px;
+    left: -1px;
+    width: 58px;
+    height: 58px;
     opacity: 0;
   }
 }
 
-/* Menu styles */
+/* Menu styles to match Angular */
 .menudiv {
   display: flow;
   width: 104%;
 }
 
-/* Add global button styles to match Angular app */
+/* Button styles to match Angular */
 button.btn-primary {
   background-color: #594363;
   border-color: #5b356c;
+  transition: background-color 0.3s;
 }
 
 button.btn-primary:hover {
@@ -99,56 +161,25 @@ button.btn-primary:hover {
   border-color: #5b356c;
 }
 
-/* Add global animations and transitions from Angular */
-@-webkit-keyframes ani {
- from {
-  -webkit-mask-position: 0 0;
-  mask-position: 0 0;
- }
-
- to {
-  -webkit-mask-position: 100% 0;
-  mask-position: 100% 0;
- }
+/* Language selector button */
+.btn-language {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  padding: 0.35rem 1rem;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  font-size: 0.9rem;
+  display: inline-block;
+  text-decoration: none;
 }
 
-@keyframes ani {
- from {
-  -webkit-mask-position: 0 0;
-  mask-position: 0 0;
- }
-
- to {
-  -webkit-mask-position: 100% 0;
-  mask-position: 100% 0;
- }
+.btn-language:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: white;
+  text-decoration: none;
 }
 
-@-webkit-keyframes ani2 {
- from {
-  -webkit-mask-position: 100% 0;
-  mask-position: 100% 0;
- }
-
- to {
-  -webkit-mask-position: 0 0;
-  mask-position: 0 0;
- }
-}
-
-@keyframes ani2 {
- from {
-  -webkit-mask-position: 100% 0;
-  mask-position: 100% 0;
- }
-
- to {
-  -webkit-mask-position: 0 0;
-  mask-position: 0 0;
- }
-}
-
-/* Add links style from Angular */
+/* Global link styling */
 a {
   color: #00ff95;
   text-decoration: none;
@@ -158,11 +189,11 @@ a:hover {
   text-decoration: underline;
 }
 
+/* Layout containers */
 .page {
   width: 100%;
 }
 
-/* Center and style containers */
 .container {
   max-width: 1200px;
   width: 100%;
@@ -171,27 +202,204 @@ a:hover {
   box-sizing: border-box;
 }
 
-/* Add responsive media queries */
+/* Form elements styling */
+.form-control {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+/* Button styling to match Angular */
+.button-container-1,
+.button-container-2,
+.button-container-3 {
+  position: relative;
+  width: 100px;
+  height: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  border: 1px solid #5b356c;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  transition: 0.5s;
+  letter-spacing: 1px;
+  border-radius: 8px;
+}
+
+.button-container-1 {
+  margin-top: 6vh;
+}
+
+.button-container-2 {
+  margin-top: 7vh;
+}
+
+.button-container-3 {
+  margin-top: 8vh;
+}
+
+.send {
+  width: 100%;
+  margin-top: 1rem;
+  background-color: #594363;
+  height: 38px;
+}
+
+.send:hover {
+  background-color: #6e01a0;
+}
+
+/* Typography */
+.header {
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 34px;
+  margin-top: 12vh;
+}
+
+.footer {
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+  margin-top: 15vh;
+}
+
+.numerologia {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.name {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.website {
+  font-size: 0.7rem;
+  text-align: right;
+  color: #666;
+}
+
+/* Image styling */
+.Lleft, .Lright {
+  width: 5rem;
+  max-width: 100%;
+}
+
+.Lleft {
+  float: left;
+  margin-top: 10px;
+}
+
+.Lright {
+  float: right;
+  margin-top: 10px;
+}
+
+.logo {
+  height: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flow;
+  margin-bottom: 1rem;
+}
+
+/* Card styling */
+.person {
+  text-align: center;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 5px solid #858585;
+  border-radius: 5px;
+}
+
+.resultado2 {
+  margin: 0 auto;
+}
+
+/* Match Angular purple color throughout */
+.purple-bg {
+  background-color: #5b356c;
+}
+
+.purple-text {
+  color: #5b356c;
+}
+
+/* Responsive media queries */
+@media (max-width: 992px) {
+  .col-4, .col-5, .col-6, .col-8 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  
+  .home-options-container {
+    gap: 20px;
+  }
+  
+  .option-card {
+    width: 220px;
+  }
+}
+
 @media (max-width: 768px) {
-  .container {
-    padding: 0 10px;
+  .col-2, .col-3, .col-4, .col-5, .col-6, .col-8 {
+    flex: 0 0 100%;
+    max-width: 100%;
   }
   
   .containerBox {
+    padding: 1rem;
+  }
+  
+  .person {
+    padding: 0.75rem;
+  }
+  
+  .logo {
+    height: 70px;
+  }
+  
+  .numerologia {
+    font-size: 1.3rem;
+  }
+  
+  .form-group {
+    margin-bottom: 0.75rem;
+  }
+  
+  .home-options-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .option-card {
     width: 100%;
-    box-sizing: border-box;
-  }
-  
-  .row {
-    margin: 0 -10px;
-  }
-  
-  .loading {
-    padding: 0 15px;
-  }
-  
-  .content {
-    margin-top: 1.5rem;
+    max-width: 280px;
+    height: 200px;
   }
 }
 
@@ -200,15 +408,31 @@ a:hover {
     padding: 0 5px;
   }
   
-  .row {
-    margin: 0 -5px;
+  .numerologia {
+    font-size: 1.2rem;
   }
   
-  .lds-ripple {
-    transform: scale(0.8);
+  .name {
+    font-size: 1.5rem;
   }
   
-  .content {
-    margin-top: 1rem;
+  .logo {
+    height: 60px;
+  }
+  
+  .option-card {
+    padding: 20px;
+    height: 180px;
+  }
+  
+  .option-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+  }
+  
+  .section-header {
+    font-size: 1.5rem;
+    margin-top: 30px;
   }
 } 
