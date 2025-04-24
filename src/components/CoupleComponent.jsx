@@ -1,78 +1,132 @@
 import React, { useState, useEffect, useRef } from 'react';
 import moment from 'moment';
-import calculosUtils from '../utils/calculosUtils';
-import PinaculoSvg from './PinaculoSvg';
-import YearSvg from './YearSvg';
-import MonthVisualizer from './MonthVisualizer';
-import DayTable from './DayTable';
-import './CoupleComponent.css';
+import Swal from 'sweetalert2';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
 
-// Import images directly
+// Import utility functions
+import { calculosUtils } from '../utils/calculosUtils';
+
+// Import Bootstrap icons
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
+// Import images
 import leftDecoration from '../assets/img/Lleft.png';
 import rightDecoration from '../assets/img/Lright.png';
 import logoImage from '../assets/img/logonumerana80.png';
+
+import './CoupleComponent.css';
 
 const CoupleComponent = () => {
   // State variables for person 1
   const [nombre, setNombre] = useState('');
   const [birthdate, setBirthdate] = useState('');
-  const [birthdateShow, setBirthdateShow] = useState('');
   
   // State variables for person 2
   const [nombre2, setNombre2] = useState('');
   const [birthdate2, setBirthdate2] = useState('');
-  const [birthdateShow2, setBirthdateShow2] = useState('');
   
-  // Shared state variables
+  // UI state variables
   const [loading, setLoading] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
   const [resultados, setResultados] = useState(false);
   const [smallLoading, setSmallLoading] = useState(false);
   
-  // Results for person 1
+  // Pinaculo data for both individuals
   const [rpinaculo, setRpinaculo] = useState([]);
-  const [pinYear, setPinYear] = useState([]);
-  
-  // Results for person 2
   const [rpinaculo2, setRpinaculo2] = useState([]);
+  const [rpinaculo3, setRpinaculo3] = useState([]);
+  
+  // Year data for both individuals
+  const [pinYear, setPinYear] = useState([]);
   const [pinYear2, setPinYear2] = useState([]);
   
-  // Couple combined results
-  const [rpinaculoCouple, setRpinaculoCouple] = useState([]);
+  // Sinastra data (couple compatibility)
+  const [sinastra, setSinastra] = useState([]);
   
-  // Screen width state for responsive display
+  // Monthly data
+  const [listMobileM, setListMobileM] = useState([]);
+  
+  // Swiper indices
+  const [index, setIndex] = useState(0);
+  const [indexMobil, setIndexMobil] = useState(0);
+  const [indexSina, setIndexSina] = useState(0);
+  
+  // Screen size detection
   const [getScreenWidth, setGetScreenWidth] = useState(true);
   
-  // Constants for years
+  // Constants for current year data
   const thisY = new Date();
   const year = thisY.getFullYear();
   const nxYear = thisY.getFullYear() + 1;
+  
+  // Month visibility state
+  const [monthsVisible, setMonthsVisible] = useState({
+    CYQ1: false,
+    CYQ2: false,
+    CYQ3: false,
+    NYQ: false,
+  });
   
   // Refs
   const contentRef = useRef(null);
   const birth1Ref = useRef(null);
   const birth2Ref = useRef(null);
   const myScrollContainerRef = useRef(null);
+  const swiperRef = useRef(null);
+  const swiperAnoRef = useRef(null);
+  const swiperSinaRef = useRef(null);
+  const swiperMbRef = useRef(null);
   
-  // Effects
+  // Swiper configurations
+  const swiperConfig = {
+    spaceBetween: 10,
+    navigation: true,
+    modules: [Navigation],
+  };
+  
+  const swiperConfigSina = {
+    spaceBetween: 5,
+    navigation: true,
+    modules: [Navigation],
+  };
+  
+  // Initialize the component
   useEffect(() => {
-    setGetScreenWidth(window.innerWidth > 600);
-    
+    // Set screen width detection
     const handleResize = () => {
       setGetScreenWidth(window.innerWidth > 600);
     };
     
     window.addEventListener('resize', handleResize);
+    handleResize();
     
-    // Load initial data
+    // Initial loading animation
     theLoading(1500).then(() => {
       setIsVisible(true);
     });
+    
+    // Determine current month and set visibility
+    getCurrentMonth();
     
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+  
+  // Update swiper indexes when they change
+  useEffect(() => {
+    if (resultados && swiperRef.current && swiperSinaRef.current && swiperMbRef.current) {
+      if (getScreenWidth) {
+        swiperRef.current.swiper.slideTo(index);
+        swiperSinaRef.current.swiper.slideTo(indexSina);
+      } else {
+        swiperMbRef.current.swiper.slideTo(indexMobil);
+      }
+    }
+  }, [resultados, index, indexMobil, indexSina, getScreenWidth]);
   
   // Loading animation function
   const theLoading = (loadingTime = 3500) => {
@@ -89,580 +143,753 @@ const CoupleComponent = () => {
     });
   };
   
+  // Get current month and set visibilities
+  const getCurrentMonth = async () => {
+    try {
+      const meshoy = await calculosUtils.getTodaysMonth();
+      if (meshoy === 1 || meshoy === 2) {
+        setMonthsVisible({
+          CYQ1: true,
+          CYQ2: true,
+          CYQ3: true,
+          NYQ: false,
+        });
+      } else if (meshoy === 3) {
+        setMonthsVisible({
+          CYQ1: false,
+          CYQ2: false,
+          CYQ3: true,
+          NYQ: true,
+        });
+      }
+    } catch (error) {
+      console.error('Error getting current month:', error);
+    }
+  };
+  
   // Form submission
-  const handleSubmit = () => {
-    if ((nombre.length <= 1 && nombre2.length <= 1) || (!birthdate && !birthdate2)) {
-      alert("At least one person's data must be complete.\nAl menos una persona debe tener datos completos.");
+  const subm = () => {
+    console.log('nombre', nombre);
+    console.log('birthdate', birthdate);
+    console.log('nombre2', nombre2);
+    console.log('birthdate2', birthdate2);
+    
+    if (!birthdate || !birthdate2) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Error",
+        html: "Both birthdates are required.<br>Ambas fechas de nacimiento son necesarias.",
+        showConfirmButton: false,
+        timer: 2500
+      });
       return;
     }
     
-    // Validate person 1
-    let validPerson1 = false;
-    let person1Data = null;
+    // Parse dates
+    const fixDate = birthdate.split('/');
+    const fixDate2 = birthdate2.split('/');
     
-    if (nombre.length > 1 && birthdate) {
-      const fixDate = birthdate.split('/');
-      if (fixDate.length < 3) {
-        alert("Check birthdate format for person 1.\nVerifica la fecha de la persona 1.");
-        return;
-      }
-      
-      const day = parseInt(fixDate[0]);
-      const month = parseInt(fixDate[1]);
-      const year = parseInt(fixDate[2]);
-      
-      if (isNaN(day) || isNaN(month) || isNaN(year) || 
-          day < 1 || day > 31 || month < 1 || month > 12 || year < 1000 || year > 9999) {
-        alert("Invalid date format for person 1. Please use DD/MM/YYYY format.");
-        return;
-      }
-      
-      const formattedDay = day < 10 ? `0${day}` : `${day}`;
-      const formattedMonth = month < 10 ? `0${month}` : `${month}`;
-      const formattedDate = `${formattedDay}/${formattedMonth}/${year}`;
-      
-      setBirthdateShow(formattedDate);
-      validPerson1 = true;
-      person1Data = formattedDate;
-    }
-    
-    // Validate person 2
-    let validPerson2 = false;
-    let person2Data = null;
-    
-    if (nombre2.length > 1 && birthdate2) {
-      const fixDate = birthdate2.split('/');
-      if (fixDate.length < 3) {
-        alert("Check birthdate format for person 2.\nVerifica la fecha de la persona 2.");
-        return;
-      }
-      
-      const day = parseInt(fixDate[0]);
-      const month = parseInt(fixDate[1]);
-      const year = parseInt(fixDate[2]);
-      
-      if (isNaN(day) || isNaN(month) || isNaN(year) || 
-          day < 1 || day > 31 || month < 1 || month > 12 || year < 1000 || year > 9999) {
-        alert("Invalid date format for person 2. Please use DD/MM/YYYY format.");
-        return;
-      }
-      
-      const formattedDay = day < 10 ? `0${day}` : `${day}`;
-      const formattedMonth = month < 10 ? `0${month}` : `${month}`;
-      const formattedDate = `${formattedDay}/${formattedMonth}/${year}`;
-      
-      setBirthdateShow2(formattedDate);
-      validPerson2 = true;
-      person2Data = formattedDate;
-    }
-    
-    if (!validPerson1 && !validPerson2) {
-      alert("At least one person's data must be valid.\nAl menos una persona debe tener datos válidos.");
+    if (fixDate.length < 3 || fixDate2.length < 3) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Error",
+        html: "Check birthdate format (DD/MM/YYYY).<br>Verifica el formato de fecha (DD/MM/AAAA).",
+        showConfirmButton: false,
+        timer: 2500
+      });
       return;
     }
     
+    // Validate dates
+    const dateString1 = `${fixDate[1]}-${fixDate[0]}-${fixDate[2]}`;
+    const dateString2 = `${fixDate2[1]}-${fixDate2[0]}-${fixDate2[2]}`;
+    
+    // Process calculations
     setLoading(true);
     setIsVisible(false);
     
-    // Calculate results
     try {
-      // Process person 1 data if valid
-      if (validPerson1) {
-        const pinaculo = calculosUtils.GetFirstLine(person1Data);
-        setRpinaculo([pinaculo]);
-        
-        const yearData = calculosUtils.GetYear(person1Data);
-        setPinYear([yearData]);
-      }
+      // Calculate for person 1
+      const pinaculo1 = calculosUtils.GetFirstLine(birthdate);
+      setRpinaculo([pinaculo1]);
       
-      // Process person 2 data if valid
-      if (validPerson2) {
-        const pinaculo2 = calculosUtils.GetFirstLine(person2Data);
-        setRpinaculo2([pinaculo2]);
-        
-        const yearData2 = calculosUtils.GetYear(person2Data);
-        setPinYear2([yearData2]);
-      }
+      // Calculate for person 2
+      const pinaculo2 = calculosUtils.GetFirstLine(birthdate2);
+      setRpinaculo2([pinaculo2]);
       
-      // Calculate couple compatibility if both are valid
-      if (validPerson1 && validPerson2) {
-        // For a real implementation, you would have a specific couple calculation function
-        // This is a simplified version that could be enhanced with actual compatibility logic
-        const combinedData = {
-          person1: validPerson1 ? rpinaculo[0] : null,
-          person2: validPerson2 ? rpinaculo2[0] : null,
-          compatibility: calculateCompatibility(
-            validPerson1 ? rpinaculo[0] : null, 
-            validPerson2 ? rpinaculo2[0] : null
-          )
-        };
-        
-        setRpinaculoCouple([combinedData]);
-      }
+      // Calculate couple compatibility
+      calculateCoupleCompatibility(pinaculo1, pinaculo2);
       
+      // Calculate year data
+      const yearData1 = calculosUtils.GetYear(birthdate);
+      setPinYear([yearData1]);
+      
+      const yearData2 = calculosUtils.GetYear(birthdate2);
+      setPinYear2([yearData2]);
+      
+      // List months
+      listMonths();
+      
+      // Show results
       setResultados(true);
       
-      // Scroll to results after rendering
+      // Scroll to results after a short delay
       setTimeout(() => {
         if (myScrollContainerRef.current) {
           myScrollContainerRef.current.scrollIntoView({ behavior: 'smooth' });
         }
-      }, 100);
+      }, 500);
     } catch (error) {
-      console.error('Error calculating results:', error);
-      alert(`Calculation error: ${error.message || 'Please try again with valid dates.'}`);
+      console.error('Error in calculations:', error);
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Calculation Error",
+        html: "An error occurred during calculations.<br>Ocurrió un error durante los cálculos.",
+        showConfirmButton: false,
+        timer: 2500
+      });
+    } finally {
       setLoading(false);
-      setIsVisible(true);
-      return;
     }
-    
-    setLoading(false);
   };
   
-  // Simple compatibility calculation - this is a placeholder and could be enhanced
-  const calculateCompatibility = (person1Data, person2Data) => {
-    // This is a simplified compatibility calculation
-    if (!person1Data || !person2Data) return {};
-    
-    return {
-      emotional: determineCompatibilityLevel(person1Data.P1, person2Data.P1),
-      mental: determineCompatibilityLevel(person1Data.P2, person2Data.P2),
-      spiritual: determineCompatibilityLevel(person1Data.P3, person2Data.P3),
-      overall: determineCompatibilityLevel(
-        parseInt(person1Data.P1) + parseInt(person1Data.P2) + parseInt(person1Data.P3),
-        parseInt(person2Data.P1) + parseInt(person2Data.P2) + parseInt(person2Data.P3)
-      )
-    };
-  };
-  
-  // Helper function for compatibility calculation
-  const determineCompatibilityLevel = (value1, value2) => {
-    const diff = Math.abs(parseInt(value1) - parseInt(value2));
-    if (diff === 0) return 'Excellent';
-    if (diff <= 2) return 'Good';
-    if (diff <= 4) return 'Average';
-    return 'Challenging';
-  };
-  
-  // Handle birthdate input with mask for person 1
-  const handleBirthdate1Change = (e) => {
-    let value = e.target.value.replace(/[^\d]/g, ''); // Remove non-digits
-    
-    // Format with slashes in correct positions
-    if (value.length > 0) {
-      if (value.length > 2) {
-        value = value.substring(0, 2) + '/' + value.substring(2);
-      }
-      
-      if (value.length > 5) {
-        value = value.substring(0, 5) + '/' + value.substring(5);
-      }
-      
-      if (value.length > 10) {
-        value = value.substring(0, 10);
-      }
-    }
-    
-    setBirthdate(value);
-  };
-  
-  // Handle birthdate input with mask for person 2
-  const handleBirthdate2Change = (e) => {
-    let value = e.target.value.replace(/[^\d]/g, ''); // Remove non-digits
-    
-    // Format with slashes in correct positions
-    if (value.length > 0) {
-      if (value.length > 2) {
-        value = value.substring(0, 2) + '/' + value.substring(2);
-      }
-      
-      if (value.length > 5) {
-        value = value.substring(0, 5) + '/' + value.substring(5);
-      }
-      
-      if (value.length > 10) {
-        value = value.substring(0, 10);
-      }
-    }
-    
-    setBirthdate2(value);
-  };
-  
-  // Reload function
-  const reload = () => {
-    setIsVisible(true);
-    setResultados(false);
-    setNombre('');
-    setBirthdate('');
-    setBirthdateShow('');
-    setNombre2('');
-    setBirthdate2('');
-    setBirthdateShow2('');
-    setRpinaculo([]);
-    setPinYear([]);
-    setRpinaculo2([]);
-    setPinYear2([]);
-    setRpinaculoCouple([]);
-  };
-  
-  // Print function
-  const downloadPdf = () => {
-    if (typeof window !== 'undefined' && window.html2pdf && contentRef.current) {
-      const content = contentRef.current;
-      
-      const opt = {
-        margin: [10, 10, 10, 10],
-        filename: 'CoupleCalculation.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  // Calculate couple compatibility
+  const calculateCoupleCompatibility = (person1, person2) => {
+    try {
+      // Enhanced implementation with proper algorithm
+      const combinedSinastra = {
+        A: calculosUtils.sum(parseInt(person1.A) || 0, parseInt(person2.A) || 0),
+        B: calculosUtils.sum(parseInt(person1.B) || 0, parseInt(person2.B) || 0),
+        C: calculosUtils.sum(parseInt(person1.C) || 0, parseInt(person2.C) || 0),
+        D: calculosUtils.sum(parseInt(person1.D) || 0, parseInt(person2.D) || 0),
+        E: calculosUtils.sum(parseInt(person1.top) || 0, parseInt(person2.top) || 0),
+        NA: person1.A,
+        NB: person1.B,
+        NC: person1.C,
+        ND: person1.D,
+        NE: person2.A,
+        NF: person2.B,
+        NG: person2.C,
+        NH: person2.D
       };
       
-      window.html2pdf().set(opt).from(content).save();
-    } else {
-      alert('PDF generation is not available. Please check if the html2pdf library is loaded.');
+      setSinastra([combinedSinastra]);
+      
+      // Third combined result
+      const combinedPinaculo = {
+        A: calculosUtils.sum(parseInt(person1.A) || 0, parseInt(person2.A) || 0),
+        B: calculosUtils.sum(parseInt(person1.B) || 0, parseInt(person2.B) || 0),
+        C: calculosUtils.sum(parseInt(person1.C) || 0, parseInt(person2.C) || 0),
+        D: calculosUtils.sum(parseInt(person1.D) || 0, parseInt(person2.D) || 0),
+        top: calculosUtils.sum(parseInt(person1.top) || 0, parseInt(person2.top) || 0),
+      };
+      
+      setRpinaculo3([combinedPinaculo]);
+    } catch (error) {
+      console.error('Error in compatibility calculation:', error);
     }
   };
   
-  // Render the input form
+  // List months data
+  const listMonths = () => {
+    setListMobileM([]);
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth() + 1; // JavaScript months are 0-based
+    
+    // Generate months for the current year and next year
+    const months = [];
+    
+    // Current year months
+    for (let m = 1; m <= 12; m++) {
+      if (m >= currentMonth - 1) { // Include one month before current month
+        months.push({
+          month: m,
+          year: currentYear,
+          name: getMonthName(m),
+          data: calculateMonthData(m, currentYear)
+        });
+      }
+    }
+    
+    // Next year months for the first quarter
+    for (let m = 1; m <= 3; m++) {
+      months.push({
+        month: m,
+        year: currentYear + 1,
+        name: getMonthName(m),
+        data: calculateMonthData(m, currentYear + 1)
+      });
+    }
+    
+    setListMobileM(months);
+  };
+  
+  // Get month name in English/Spanish
+  const getMonthName = (month) => {
+    const monthNames = [
+      'JAN/ENE', 'FEB', 'MAR', 'APR/ABR', 'MAY', 'JUN',
+      'JUL', 'AUG/AGO', 'SEP', 'OCT', 'NOV', 'DEC/DIC'
+    ];
+    
+    return monthNames[month - 1] || '';
+  };
+  
+  // Calculate numerological data for a specific month
+  const calculateMonthData = (month, year) => {
+    if (!birthdate || !birthdate2) return null;
+    
+    try {
+      // Simple placeholder calculation - this should be expanded with the actual algorithm
+      const monthNumber = calculosUtils.sum(month, year % 10);
+      
+      const data1 = calculosUtils.sum(
+        calculosUtils.cleanint(rpinaculo[0]?.top) || 0,
+        parseInt(monthNumber) || 0
+      );
+      
+      const data2 = calculosUtils.sum(
+        calculosUtils.cleanint(rpinaculo2[0]?.top) || 0,
+        parseInt(monthNumber) || 0
+      );
+      
+      return {
+        combined: calculosUtils.sum(data1, data2),
+        person1: data1,
+        person2: data2
+      };
+    } catch (error) {
+      console.error('Error in month calculation:', error);
+      return null;
+    }
+  };
+  
+  // Handle month selection in mobile view
+  const callMesMobil = (event) => {
+    console.log('Selected month:', event);
+    
+    try {
+      const selectedMonth = listMobileM[event] || null;
+      if (selectedMonth) {
+        // Implement month selection logic
+        setSmallLoading(true);
+        
+        // Process the data (placeholder)
+        setTimeout(() => {
+          setSmallLoading(false);
+        }, 500);
+      }
+    } catch (error) {
+      console.error('Error in month selection:', error);
+      setSmallLoading(false);
+    }
+  };
+  
+  // Reload page
+  const reload = () => {
+    setNombre('');
+    setNombre2('');
+    setBirthdate('');
+    setBirthdate2('');
+    setRpinaculo([]);
+    setRpinaculo2([]);
+    setRpinaculo3([]);
+    setPinYear([]);
+    setPinYear2([]);
+    setSinastra([]);
+    setListMobileM([]);
+    setResultados(false);
+    setIsVisible(true);
+    setIndex(0);
+    setIndexMobil(0);
+    setIndexSina(0);
+  };
+  
+  // Handle Swiper slide changes
+  const slideChange = (swiper) => {
+    setIndex(swiper.activeIndex);
+  };
+  
+  const slideChangeMobil = (swiper) => {
+    setIndexMobil(swiper.activeIndex);
+  };
+  
+  const slideChangeSina = (swiper) => {
+    setIndexSina(swiper.activeIndex);
+  };
+  
+  // Handle birthdate input with mask
+  const handleBirthdateChange = (e, setPerson) => {
+    let value = e.target.value.replace(/[^\d]/g, '');
+    
+    // Format with slashes
+    if (value.length > 0) {
+      if (value.length <= 2) {
+        setPerson(value);
+      } else if (value.length <= 4) {
+        setPerson(`${value.slice(0, 2)}/${value.slice(2)}`);
+      } else {
+        setPerson(`${value.slice(0, 2)}/${value.slice(2, 4)}/${value.slice(4, 8)}`);
+      }
+    } else {
+      setPerson('');
+    }
+  };
+  
+  // Render loading animation
+  const renderLoading = () => (
+    <div className="lds-ripple">
+      <div></div>
+      <div></div>
+    </div>
+  );
+  
+  // Render input form
   const renderForm = () => (
-    <div className={`containerBox ${isVisible ? 'visible' : 'hidden'}`} style={{display: !resultados ? 'block' : 'none', border: '1px solid #ccc', borderRadius: '8px'}}>
+    <div 
+      className="containerBox" 
+      style={{
+        border: '5px solid #858585', 
+        borderRadius: '5px',
+        opacity: isVisible ? 1 : 0,
+        transition: 'opacity 1s ease-in-out'
+      }}
+    >
       <div className="row person resultado2">
-        <div className="col-md-2 col-2">
+        <div className="col-2">
           <img src={leftDecoration} className="Lleft" alt="Left decoration" />
         </div>
-        <div className="col-md-8 col-8" style={{ textAlign: 'center' }}>
-          <img src={logoImage} alt="numeranamx" className="logo" />
-          <h1 className="titulom">Numerology | Numerología</h1>
+        <div className="col-8" style={{ textAlign: 'center' }}>
+          <img src={logoImage} alt="numeranamx" className="logo" style={{ height: '80px' }} />
+          <h1 className="titulo">Numerology | Numerología</h1>
         </div>
-        <div className="col-md-2 col-2">
+        <div className="col-2">
           <img src={rightDecoration} className="Lright" alt="Right decoration" />
         </div>
       </div>
       
       <div className="row">
-        <div className="col-md-6 col-6 text-center">
-          <div className="person-title">
-            <span className="number">1</span> <i className="bi bi-person-fill"></i>
-          </div>
+        <div className="col-2"></div>
+        <div className="col-3">
+          <h2 className="name bold titulo">{nombre}</h2>
         </div>
-        <div className="col-md-6 col-6 text-center">
-          <div className="person-title">
-            <span className="number">2</span> <i className="bi bi-person-fill"></i>
-          </div>
+        <div className="col-1"></div>
+        <div className="col-3">
+          <h2 className="name bold titulo">{nombre2}</h2>
         </div>
+        <div className="col-2"></div>
+      </div>
+      
+      <br />
+      
+      <div className="row">
+        <div className="col-2"></div>
+        <div className="col-3" style={{ textAlign: 'center' }}>
+          <span className="masc">
+            <b style={{ fontSize: '2.6rem', position: 'absolute', marginLeft: '-2rem', marginTop: '-7px' }}>1</b>
+            <i className="bi bi-person-fill iconin"></i>
+          </span>
+        </div>
+        <div className="col-2"></div>
+        <div className="col-3" style={{ textAlign: 'center' }}>
+          <span className="masc">
+            <b style={{ fontSize: '2.6rem', position: 'absolute', marginLeft: '-2rem', marginTop: '-7px' }}>2</b>
+            <i className="bi bi-person-fill iconin"></i>
+          </span>
+        </div>
+        <div className="col-2"></div>
       </div>
       
       <div className="row" id="name">
-        <div className="col-md-6 col-6">
+        <div className="col-2 telefono"></div>
+        <div className="col-3" style={{ textAlign: 'center' }}>
           <div className="form-group">
             <label htmlFor="Name"><b>Name/Nombre</b></label>
             <input 
               type="text" 
+              autoComplete="off" 
               className="form-control nombres" 
               name="Name" 
               value={nombre}
               onChange={(e) => setNombre(e.target.value)}
               placeholder="Name/Nombre" 
-              autoComplete="off"
             />
           </div>
         </div>
-        <div className="col-md-6 col-6">
-          <div className="form-group">
+        <div className="col-2"></div>
+        <div className="col-3">
+          <div className="form-group" style={{ textAlign: 'center' }}>
             <label htmlFor="Name2"><b>Name/Nombre</b></label>
             <input 
               type="text" 
+              autoComplete="off" 
               className="form-control nombres" 
               name="Name2" 
               value={nombre2}
               onChange={(e) => setNombre2(e.target.value)}
               placeholder="Name/Nombre" 
-              autoComplete="off"
             />
           </div>
         </div>
+        <div className="col-2"></div>
       </div>
       
-      <div className="row">
-        <div className="col-md-6 col-6">
+      <div className="row" style={{ textAlign: 'center' }}>
+        <div className="col-2 telefono"></div>
+        <div className="col-3">
           <div className="form-group">
             <label htmlFor="birth"><b>Birthdate/Cumple</b></label>
             <input
               className="form-control nombres"
+              autoComplete="off"
               placeholder="dd/mm/yyyy"
               type="text"
               value={birthdate}
-              onChange={handleBirthdate1Change}
+              onChange={(e) => handleBirthdateChange(e, setBirthdate)}
               ref={birth1Ref}
               name="birth"
-              autoComplete="off"
             />
           </div>
         </div>
-        <div className="col-md-6 col-6">
+        <div className="col-2"></div>
+        <div className="col-3">
           <div className="form-group">
             <label htmlFor="birth2"><b>Birthdate/Cumple</b></label>
             <input
               className="form-control nombres"
+              autoComplete="off"
               placeholder="dd/mm/yyyy"
               type="text"
               value={birthdate2}
-              onChange={handleBirthdate2Change}
+              onChange={(e) => handleBirthdateChange(e, setBirthdate2)}
               ref={birth2Ref}
               name="birth2"
-              autoComplete="off"
             />
           </div>
+        </div>
+        <div className="col-2"></div>
+      </div>
+      
+      <div className="row" style={{ marginBottom: '1rem' }}>
+        <div className="col-3"></div>
+        <div className="col-6">
+          <button 
+            style={{ marginTop: '1rem' }} 
+            type="button" 
+            onClick={subm} 
+            className="btn btn-primary btn-lg btn-block send"
+          >
+            <i className="bi bi-play-btn-fill" style={{ zoom: 2, lineHeight: 1 }}></i>
+          </button>
+        </div>
+        <div className="col-3">
+          <div className="row">
+            <div className="col-3"></div>
+            <div className="col-3"></div>
+            <div className="col-6"><h2 className="website" style={{ fontSize: '11px' }}>www.numerana.com</h2></div>
+          </div>
+          <div className="row">
+            <div className="col-2"></div>
+            <div className="col-2"></div>
+            <div className="col-8"><h2 className="website ana" style={{ fontSize: '11px' }}>By: Ana Dorotea</h2></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+  
+  // Render monthly chart for desktop view
+  const renderMonthlyChart = (month) => {
+    if (!month || !month.data) return null;
+    
+    return (
+      <div className="month-forecast">
+        <div className="month-detail">
+          <div className="row">
+            <div className="col-md-4">
+              <p className="month-person">{nombre}</p>
+              <div className="month-value">{month.data.person1}</div>
+            </div>
+            <div className="col-md-4">
+              <p className="month-combined">Combined</p>
+              <div className="month-value combined">{month.data.combined}</div>
+            </div>
+            <div className="col-md-4">
+              <p className="month-person">{nombre2}</p>
+              <div className="month-value">{month.data.person2}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+  
+  // Render small loading indicator
+  const renderSmallLoading = () => (
+    <div className="small-loading"></div>
+  );
+  
+  // Render results
+  const renderResults = () => (
+    <div 
+      className="containerBox" 
+      style={{
+        border: '5px solid #858585', 
+        borderRadius: '5px',
+        opacity: resultados ? 1 : 0,
+        transition: 'opacity 1s ease-in-out'
+      }}
+      ref={myScrollContainerRef}
+    >
+      <div className="row person resultado2">
+        <div className="col-2">
+          <img src={leftDecoration} className="Lleft" alt="Left decoration" />
+        </div>
+        <div className="col-8" style={{ textAlign: 'center' }}>
+          <img src={logoImage} alt="numeranamx" className="logo" style={{ height: '80px' }} />
+          <h1 className="titulo">Numerology | Numerología</h1>
+        </div>
+        <div className="col-2">
+          <img src={rightDecoration} className="Lright" alt="Right decoration" />
         </div>
       </div>
       
       <div className="row">
-        <div className="col-md-4 col-2"></div>
-        <div className="col-md-4 col-8">
+        <div className="col-2"></div>
+        <div className="col-3" style={{ textAlign: 'center' }}>
+          <span className="masc">
+            <b style={{ fontSize: '2.6rem', position: 'absolute', marginLeft: '-2rem', marginTop: '-7px' }}>1</b>
+            <i className="bi bi-person-fill iconin"></i>
+          </span>
+        </div>
+        <div className="col-2"></div>
+        <div className="col-3" style={{ textAlign: 'center' }}>
+          <span className="masc">
+            <b style={{ fontSize: '2.6rem', position: 'absolute', marginLeft: '-2rem', marginTop: '-7px' }}>2</b>
+            <i className="bi bi-person-fill iconin"></i>
+          </span>
+        </div>
+        <div className="col-2"></div>
+      </div>
+      
+      <div className="row">
+        <div className="col-2"></div>
+        <div className="col-3">
+          <h2 className="name bold titulo" style={{ textAlign: 'center' }}>{nombre}</h2>
+        </div>
+        <div className="col-1"></div>
+        <div className="col-3">
+          <h2 className="name bold titulo" style={{ textAlign: 'center' }}>{nombre2}</h2>
+        </div>
+        <div className="col-2"></div>
+      </div>
+      
+      <div className="row">
+        <div className="col-2"></div>
+        <div className="col-3">
+          <h2 className="name bold titulo" style={{ textAlign: 'center' }}>{birthdate}</h2>
+        </div>
+        <div className="col-1"></div>
+        <div className="col-3">
+          <h2 className="name bold titulo" style={{ textAlign: 'center' }}>{birthdate2}</h2>
+        </div>
+        <div className="col-2"></div>
+      </div>
+      
+      <div className="row" style={{ marginBottom: '1rem' }}>
+        <div className="col-3"></div>
+        <div className="col-6">
           <button 
             style={{ marginTop: '1rem' }} 
             type="button" 
-            onClick={handleSubmit} 
+            onClick={reload} 
             className="btn btn-primary btn-lg btn-block send"
           >
-            <i className="bi bi-play-btn-fill" style={{ marginRight: '5px' }}></i>
+            <i className="bi bi-arrow-clockwise" style={{ zoom: 2, lineHeight: 1 }}></i>
           </button>
         </div>
-        <div className="col-md-4 col-2"></div>
+        <div className="col-3">
+          <div className="row">
+            <div className="col-3"></div>
+            <div className="col-3"></div>
+            <div className="col-6"><h2 className="website" style={{ fontSize: '11px' }}>www.numerana.com</h2></div>
+          </div>
+          <div className="row">
+            <div className="col-2"></div>
+            <div className="col-2"></div>
+            <div className="col-8"><h2 className="website ana" style={{ fontSize: '11px' }}>By: Ana Dorotea</h2></div>
+          </div>
+        </div>
       </div>
       
-      <div className="row mt-3">
-        <div className="col-md-8 col-8 offset-md-4 offset-4">
-          <p className="website">www.numerana.com</p>
-          <p className="website">By: Ana Dorotea</p>
-        </div>
-      </div>
-    </div>
-  );
-  
-  // Render the results header with calculations visualization
-  const renderResults = () => (
-    <div className="results-container">
-      <div className={`containerBox ${resultados ? 'visible' : 'hidden'}`} style={{display: resultados ? 'block' : 'none', border: '1px solid #ccc', borderRadius: '8px'}}>
-        <div className="row person resultado2">
-          <div className="col-md-2 col-2">
-            <img src={leftDecoration} className="Lleft" alt="Left decoration" />
-          </div>
-          <div className="col-md-8 col-8" style={{ textAlign: 'center' }}>
-            <img src={logoImage} alt="numeranamx" className="logo" />
-            <h1 className="titulom">Numerology | Numerología</h1>
-          </div>
-          <div className="col-md-2 col-2">
-            <img src={rightDecoration} className="Lright" alt="Right decoration" />
-          </div>
-        </div>
-        
-        <div className="row">
-          <div className="col-md-6 col-6 text-center">
-            <div className="person-title">
-              <span className="number">1</span> <i className="bi bi-person-fill"></i>
-            </div>
-            <h3 className="name">{nombre}</h3>
-            <p>{birthdateShow}</p>
-          </div>
-          <div className="col-md-6 col-6 text-center">
-            <div className="person-title">
-              <span className="number">2</span> <i className="bi bi-person-fill"></i>
-            </div>
-            <h3 className="name">{nombre2}</h3>
-            <p>{birthdateShow2}</p>
-          </div>
-        </div>
-        
-        <div className="row">
-          <div className="col-md-4 col-2"></div>
-          <div className="col-md-4 col-8">
-            <button 
-              style={{ marginTop: '1rem' }} 
-              type="button" 
-              onClick={reload} 
-              className="btn btn-primary btn-lg btn-block send"
-            >
-              <i className="bi bi-arrow-clockwise" style={{ marginRight: '5px' }}></i>
-            </button>
-          </div>
-          <div className="col-md-4 col-2"></div>
-        </div>
-        
-        <div className="row mt-3">
-          <div className="col-md-8 col-8 offset-md-4 offset-4">
-            <p className="website">www.numerana.com</p>
-            <p className="website">By: Ana Dorotea</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Display the calculation results with SVG visualizations */}
-      <div className="container mt-4" style={{ display: resultados ? 'block' : 'none' }}>
-        <div className="section-divider"></div>
-        <h3 className="section-title">Individual Calculations</h3>
-        
-        {/* Person 1 Calculations */}
-        {rpinaculo.length > 0 && (
-          <div className="row mb-4">
-            <div className="col-md-6 col-12">
-              <h4 className="person-title">{nombre}</h4>
-              <div className="A">
-                <PinaculoSvg pinaculo={rpinaculo[0]} />
+      {/* This is where we would render the charts, graphs, and compatibility results */}
+      <div className="container">
+        {getScreenWidth ? (
+          // Desktop view
+          <div className="ResultadosDesktop">
+            <div className="row">
+              <div className="col-12">
+                <h3 className="titulom">Compatibility | Compatibilidad</h3>
               </div>
             </div>
-            <div className="col-md-6 col-12">
-              <div className="rside">
-                <div className="centerVertHoriz">
-                  <div style={{ margin: '0.5rem 0' }}>
-                    <YearSvg year={year} years={pinYear[0]} />
-                  </div>
-                  <div style={{ margin: '0.5rem 0' }}>
-                    <YearSvg year={nxYear} years={pinYear[0]} />
-                  </div>
-                </div>
-                <div className="centerVertHoriz" style={{ marginBottom: '1rem' }}>
-                  <MonthVisualizer birthdate={birthdate} year={year} />
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-        
-        {/* Person 2 Calculations */}
-        {rpinaculo2.length > 0 && (
-          <div className="row mb-4">
-            <div className="col-md-6 col-12">
-              <h4 className="person-title">{nombre2}</h4>
-              <div className="A">
-                <PinaculoSvg pinaculo={rpinaculo2[0]} />
-              </div>
-            </div>
-            <div className="col-md-6 col-12">
-              <div className="rside">
-                <div className="centerVertHoriz">
-                  <div style={{ margin: '0.5rem 0' }}>
-                    <YearSvg year={year} years={pinYear2[0]} />
-                  </div>
-                  <div style={{ margin: '0.5rem 0' }}>
-                    <YearSvg year={nxYear} years={pinYear2[0]} />
-                  </div>
-                </div>
-                <div className="centerVertHoriz" style={{ marginBottom: '1rem' }}>
-                  <MonthVisualizer birthdate={birthdate2} year={year} />
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-        
-        {/* Couple Compatibility Analysis */}
-        {rpinaculo.length > 0 && rpinaculo2.length > 0 && (
-          <>
-            <div className="section-divider"></div>
-            <h3 className="section-title">Compatibility Analysis</h3>
             
-            <div className="compatibility-container">
-              <div className="compatibility-chart">
-                <h4>Numerological Compatibility</h4>
-                <table className="compatibility-table">
-                  <thead>
-                    <tr>
-                      <th>Aspect</th>
-                      <th>{nombre}</th>
-                      <th>{nombre2}</th>
-                      <th>Compatibility</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Emotional (P1)</td>
-                      <td>{rpinaculo[0].P1}</td>
-                      <td>{rpinaculo2[0].P1}</td>
-                      <td className={`compatibility-${rpinaculo[0].P1 === rpinaculo2[0].P1 ? 'excellent' : Math.abs(rpinaculo[0].P1 - rpinaculo2[0].P1) <= 2 ? 'good' : Math.abs(rpinaculo[0].P1 - rpinaculo2[0].P1) <= 4 ? 'average' : 'challenging'}`}>
-                        {determineCompatibilityLevel(rpinaculo[0].P1, rpinaculo2[0].P1)}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Mental (P2)</td>
-                      <td>{rpinaculo[0].P2}</td>
-                      <td>{rpinaculo2[0].P2}</td>
-                      <td className={`compatibility-${rpinaculo[0].P2 === rpinaculo2[0].P2 ? 'excellent' : Math.abs(rpinaculo[0].P2 - rpinaculo2[0].P2) <= 2 ? 'good' : Math.abs(rpinaculo[0].P2 - rpinaculo2[0].P2) <= 4 ? 'average' : 'challenging'}`}>
-                        {determineCompatibilityLevel(rpinaculo[0].P2, rpinaculo2[0].P2)}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Spiritual (P3)</td>
-                      <td>{rpinaculo[0].P3}</td>
-                      <td>{rpinaculo2[0].P3}</td>
-                      <td className={`compatibility-${rpinaculo[0].P3 === rpinaculo2[0].P3 ? 'excellent' : Math.abs(rpinaculo[0].P3 - rpinaculo2[0].P3) <= 2 ? 'good' : Math.abs(rpinaculo[0].P3 - rpinaculo2[0].P3) <= 4 ? 'average' : 'challenging'}`}>
-                        {determineCompatibilityLevel(rpinaculo[0].P3, rpinaculo2[0].P3)}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><strong>Overall</strong></td>
-                      <td>{parseInt(rpinaculo[0].P1) + parseInt(rpinaculo[0].P2) + parseInt(rpinaculo[0].P3)}</td>
-                      <td>{parseInt(rpinaculo2[0].P1) + parseInt(rpinaculo2[0].P2) + parseInt(rpinaculo2[0].P3)}</td>
-                      <td className={`compatibility-${determineCompatibilityLevel(parseInt(rpinaculo[0].P1) + parseInt(rpinaculo[0].P2) + parseInt(rpinaculo[0].P3), parseInt(rpinaculo2[0].P1) + parseInt(rpinaculo2[0].P2) + parseInt(rpinaculo2[0].P3)).toLowerCase()}`}>
-                        {determineCompatibilityLevel(
-                          parseInt(rpinaculo[0].P1) + parseInt(rpinaculo[0].P2) + parseInt(rpinaculo[0].P3),
-                          parseInt(rpinaculo2[0].P1) + parseInt(rpinaculo2[0].P2) + parseInt(rpinaculo2[0].P3)
-                        )}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+            <div className="row">
+              <div className="col-4">
+                <h4 className="titulom">{nombre}</h4>
+                {rpinaculo.length > 0 && (
+                  <div className="pinaculo-chart">
+                    <div className="numerology-diagram">
+                      <div className="number-node top">{rpinaculo[0]?.top}</div>
+                      <div className="number-node left">{rpinaculo[0]?.A}</div>
+                      <div className="number-node right">{rpinaculo[0]?.B}</div>
+                      <div className="number-node bottom-left">{rpinaculo[0]?.C}</div>
+                      <div className="number-node bottom-right">{rpinaculo[0]?.D}</div>
+                    </div>
+                  </div>
+                )}
               </div>
               
-              <div className="compatibility-summary">
-                <h4>Summary</h4>
-                <p>
-                  This numerological analysis shows the compatibility between {nombre} and {nombre2} based on their birth dates. 
-                  The emotional, mental, and spiritual aspects of their relationship are represented by the numbers above, 
-                  with overall compatibility determined by the combination of these key factors.
-                </p>
+              <div className="col-4">
+                <h4 className="titulom">Couple | Pareja</h4>
+                {sinastra.length > 0 && (
+                  <div className="sinastra-chart">
+                    <div className="compatibility-diagram">
+                      <div className="comp-node top">{sinastra[0]?.E}</div>
+                      <div className="comp-node left">{sinastra[0]?.A}</div>
+                      <div className="comp-node right">{sinastra[0]?.B}</div>
+                      <div className="comp-node bottom-left">{sinastra[0]?.C}</div>
+                      <div className="comp-node bottom-right">{sinastra[0]?.D}</div>
+                    </div>
+                  </div>
+                )}
+              </div>
+              
+              <div className="col-4">
+                <h4 className="titulom">{nombre2}</h4>
+                {rpinaculo2.length > 0 && (
+                  <div className="pinaculo-chart">
+                    <div className="numerology-diagram">
+                      <div className="number-node top">{rpinaculo2[0]?.top}</div>
+                      <div className="number-node left">{rpinaculo2[0]?.A}</div>
+                      <div className="number-node right">{rpinaculo2[0]?.B}</div>
+                      <div className="number-node bottom-left">{rpinaculo2[0]?.C}</div>
+                      <div className="number-node bottom-right">{rpinaculo2[0]?.D}</div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
             
-            {/* Download PDF Button */}
             <div className="row mt-4">
-              <div className="col-12 text-center">
-                <button 
-                  type="button" 
-                  onClick={downloadPdf} 
-                  className="btn btn-primary btn-lg"
-                  style={{ margin: '20px auto' }}
-                >
-                  <i className="bi bi-printer-fill" style={{ marginRight: '5px' }}></i> Download PDF
-                </button>
+              <div className="col-12">
+                <h3 className="titulom">Monthly Forecast | Pronóstico Mensual {year}/{nxYear}</h3>
               </div>
             </div>
-          </>
+            
+            <div className="row">
+              <div className="col-12">
+                <Swiper
+                  ref={swiperRef}
+                  {...swiperConfig}
+                  className="swiper-container"
+                  onSlideChange={slideChange}
+                >
+                  {listMobileM.map((month, idx) => (
+                    <SwiperSlide key={idx} className="swiper-slide">
+                      <div className="month-card">
+                        <h3>{month.name}, {month.year}</h3>
+                        {smallLoading ? renderSmallLoading() : renderMonthlyChart(month)}
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+            </div>
+          </div>
+        ) : (
+          // Mobile view
+          <div className="ResultdosMobil">
+            <Swiper
+              ref={swiperMbRef}
+              {...swiperConfig}
+              className="swipercontainermobil"
+              onSlideChange={slideChangeMobil}
+            >
+              <SwiperSlide className="zoom">
+                <p><span style={{ fontWeight: 800, fontSize: '2rem' }}>{nombre}</span></p>
+                <div className="row">
+                  <div className="col-12">
+                    {rpinaculo.length > 0 && (
+                      <div className="pinaculo-chart">
+                        <div className="numerology-diagram">
+                          <div className="number-node top">{rpinaculo[0]?.top}</div>
+                          <div className="number-node left">{rpinaculo[0]?.A}</div>
+                          <div className="number-node right">{rpinaculo[0]?.B}</div>
+                          <div className="number-node bottom-left">{rpinaculo[0]?.C}</div>
+                          <div className="number-node bottom-right">{rpinaculo[0]?.D}</div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </SwiperSlide>
+              
+              <SwiperSlide className="zoom">
+                <p><span style={{ fontWeight: 800, fontSize: '2rem' }}>{nombre2}</span></p>
+                <div className="row">
+                  <div className="col-12">
+                    {rpinaculo2.length > 0 && (
+                      <div className="pinaculo-chart">
+                        <div className="numerology-diagram">
+                          <div className="number-node top">{rpinaculo2[0]?.top}</div>
+                          <div className="number-node left">{rpinaculo2[0]?.A}</div>
+                          <div className="number-node right">{rpinaculo2[0]?.B}</div>
+                          <div className="number-node bottom-left">{rpinaculo2[0]?.C}</div>
+                          <div className="number-node bottom-right">{rpinaculo2[0]?.D}</div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </SwiperSlide>
+              
+              <SwiperSlide className="zoom">
+                <p><span style={{ fontWeight: 800, fontSize: '2rem' }}>Compatibility</span></p>
+                <div className="row">
+                  <div className="col-12">
+                    {sinastra.length > 0 && (
+                      <div className="sinastra-chart">
+                        <div className="compatibility-diagram">
+                          <div className="comp-node top">{sinastra[0]?.E}</div>
+                          <div className="comp-node left">{sinastra[0]?.A}</div>
+                          <div className="comp-node right">{sinastra[0]?.B}</div>
+                          <div className="comp-node bottom-left">{sinastra[0]?.C}</div>
+                          <div className="comp-node bottom-right">{sinastra[0]?.D}</div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </SwiperSlide>
+            </Swiper>
+          </div>
         )}
       </div>
     </div>
   );
   
-  // Render loading spinner
-  const renderLoading = () => (
-    <div className="loading" style={{display: loading ? 'flex' : 'none'}}>
-      <div className="lds-ripple"><div></div><div></div></div>
-    </div>
-  );
-
   return (
-    <main className="main">
-      <div ref={contentRef} className="content" id="content">
-        {renderLoading()}
+    <div className="main">
+      <div ref={contentRef} className="content">
+        {loading && renderLoading()}
         
         {!resultados && renderForm()}
         
         {resultados && renderResults()}
-        
-        <div ref={myScrollContainerRef}></div>
       </div>
-    </main>
+    </div>
   );
 };
 

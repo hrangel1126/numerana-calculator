@@ -5,11 +5,10 @@
 }
 
 .content {
-  margin-top: 2rem;
-  padding: 0 25px;
   max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
 }
 
 /* Container styling to match Angular app */
@@ -437,4 +436,653 @@ h3.name {
   border-color: #6e01a0;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Enhanced Styling for Numerology Diagrams */
+.numerology-diagram,
+.compatibility-diagram {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+.number-node,
+.comp-node {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  border: 2px solid #6c757d;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.number-node:hover,
+.comp-node:hover {
+  transform: scale(1.1);
+  border-color: #007bff;
+  z-index: 10;
+}
+
+/* Positions for nodes */
+.top {
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #e3f2fd;
+}
+
+.left {
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  background-color: #fff3cd;
+}
+
+.right {
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background-color: #d1e7dd;
+}
+
+.bottom-left {
+  bottom: 10px;
+  left: 25%;
+  background-color: #f8d7da;
+}
+
+.bottom-right {
+  bottom: 10px;
+  right: 25%;
+  background-color: #e2e3e5;
+}
+
+/* Compatibility chart specific styles */
+.sinastra-chart .comp-node {
+  background-color: #f8f9fa;
+  border: 2px solid #6610f2;
+}
+
+.sinastra-chart .comp-node.top {
+  background-color: #cfe2ff;
+}
+
+.sinastra-chart .comp-node.left {
+  background-color: #fff3cd;
+}
+
+.sinastra-chart .comp-node.right {
+  background-color: #d1e7dd;
+}
+
+.sinastra-chart .comp-node.bottom-left {
+  background-color: #f8d7da;
+}
+
+.sinastra-chart .comp-node.bottom-right {
+  background-color: #e2e3e5;
+}
+
+/* Enhanced month card styling */
+.month-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.month-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.month-card h3 {
+  color: #343a40;
+  margin-bottom: 15px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Responsiveness improvements */
+@media (max-width: 768px) {
+  .numerology-diagram,
+  .compatibility-diagram {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .number-node,
+  .comp-node {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .numerology-diagram,
+  .compatibility-diagram {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .number-node,
+  .comp-node {
+    width: 30px;
+    height: 30px;
+    font-size: 0.9rem;
+  }
+  
+  .zoom p span {
+    font-size: 1.5rem !important;
+  }
+}
+
+/* Swiper container styling improvements */
+.swiper-container {
+  padding: 20px 40px;
+  margin-bottom: 30px;
+}
+
+.swiper-slide {
+  transition: transform 0.3s ease;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #007bff;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 50%;
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 20px !important;
+  font-weight: bold;
+}
+
+/* Responsive button improvements */
+.send {
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.send:hover {
+  background-color: #0069d9;
+  transform: translateY(-2px);
+}
+
+.send:active {
+  transform: translateY(0);
+}
+
+/* Refined input styling */
+.form-control.nombres {
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  padding: 10px 15px;
+}
+
+.form-control.nombres:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Title styling */
+.titulom {
+  position: relative;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  color: #343a40;
+  text-align: center;
+}
+
+.titulom:after {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 3px;
+  background-color: #007bff;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Calculator container styles */
+.calculator-container, .results-container {
+  border: 5px solid #858585;
+  border-radius: 5px;
+  background-color: #fff;
+  width: 100%;
+  max-width: 980px;
+  margin: 20px auto;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.calculator-content, .results-content {
+  width: 100%;
+}
+
+/* Logo and header styles */
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.corner-decoration {
+  width: 75px;
+}
+
+.corner-decoration img {
+  width: 100%;
+  height: auto;
+}
+
+.logo-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  height: 80px;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+/* People container styles */
+.people-container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+
+.person-column {
+  flex: 0 0 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.person-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.person-number {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-right: 10px;
+  color: #333;
+}
+
+.person-icon {
+  width: 50px;
+  height: 50px;
+  background-color: #594363;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.person-icon i {
+  font-size: 1.8rem;
+  color: #fff;
+}
+
+.person-name, .person-birthdate {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 1.1rem;
+}
+
+/* Form group styles */
+.form-group {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+/* Button styles */
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.submit-button, .reset-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #594363;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover, .reset-button:hover {
+  background-color: #7b5c95;
+}
+
+.submit-button i, .reset-button i {
+  font-size: 1.8rem;
+}
+
+/* Footer styles */
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 20px;
+}
+
+.website, .author {
+  font-size: 11px;
+  color: #666;
+}
+
+/* Numerology diagram styles */
+.numerology-diagram {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 20px auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+.diagram-node {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border: 2px solid #594363;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.diagram-node.top {
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.diagram-node.left {
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+}
+
+.diagram-node.right {
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+.diagram-node.bottom-left {
+  bottom: 10px;
+  left: 25%;
+  transform: translateX(-50%);
+}
+
+.diagram-node.bottom-right {
+  bottom: 10px;
+  right: 25%;
+  transform: translateX(50%);
+}
+
+/* Compatibility section styles */
+.compatibility-section {
+  margin: 30px 0;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #594363;
+}
+
+.compatibility-chart {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.compatibility-values {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.compat-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.compat-label {
+  font-weight: bold;
+  color: #333;
+}
+
+.compat-value {
+  font-weight: bold;
+  color: #594363;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .people-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .person-column {
+    flex: 0 0 100%;
+  }
+  
+  .calculator-container, .results-container {
+    padding: 15px;
+  }
+  
+  .corner-decoration {
+    width: 50px;
+  }
+  
+  .logo {
+    height: 60px;
+  }
+  
+  .title {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .corner-decoration {
+    width: 40px;
+  }
+  
+  .logo {
+    height: 50px;
+  }
+  
+  .title {
+    font-size: 1rem;
+  }
+  
+  .numerology-diagram {
+    width: 160px;
+    height: 160px;
+  }
+  
+  .diagram-node {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+}
+
+/* Month forecast styling */
+.month-forecast {
+  padding: 10px;
+  border-top: 1px solid #dee2e6;
+  margin-top: 15px;
+}
+
+.month-detail {
+  text-align: center;
+}
+
+.month-person, 
+.month-combined {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  color: #6c757d;
+}
+
+.month-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 8px;
+  margin: 0 auto;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+  border: 2px solid #dee2e6;
+  transition: all 0.3s ease;
+}
+
+.month-value:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.month-value.combined {
+  background-color: #e3f2fd;
+  border-color: #007bff;
+  font-size: 1.7rem;
+  width: 70px;
+  height: 70px;
+}
+
+/* Additional improvements for swiper navigation */
+.swiper-button-disabled {
+  opacity: 0.3 !important;
+}
+
+.swiper-container {
+  overflow: visible;
+}
+
+/* Small loading indicator */
+.small-loading {
+  width: 30px;
+  height: 30px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #3498db;
+  border-radius: 50%;
+  margin: 10px auto;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Improved mobile responsive layout */
+@media (max-width: 576px) {
+  .month-value {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+  
+  .month-value.combined {
+    width: 60px;
+    height: 60px;
+    font-size: 1.4rem;
+  }
+  
+  .month-person, 
+  .month-combined {
+    font-size: 0.8rem;
+  }
+}
+
+/* Smooth transitions for all interactive elements */
+.numerology-diagram, 
+.compatibility-diagram,
+.month-card,
+.month-value,
+.number-node,
+.comp-node,
+.send,
+.form-control.nombres {
+  transition: all 0.3s ease;
 } 

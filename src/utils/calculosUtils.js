@@ -253,260 +253,256 @@ export const calculosUtils = {
   },
 
   /**
-   * Gets the current month
+   * Get today's month number (1-12)
    */
   getTodaysMonth() {
-    return moment().month() + 1; // Adding 1 because moment months are 0-indexed
+    return new Promise((resolve) => {
+      const today = new Date();
+      const month = today.getMonth() + 1; // JavaScript months are 0-based
+      
+      // For the purpose of quarter calculations in the component
+      const quarter = Math.ceil(month / 3);
+      resolve(quarter);
+    });
   },
 
   /**
-   * Gets the calculation for a first line
+   * Calculate the first line of the pinaculo
+   * @param {string} date - Date in format DD/MM/YYYY
+   * @returns {PinaculoData} - The calculated pinaculo data
    */
   GetFirstLine(date) {
+    if (!date) {
+      console.error('GetFirstLine received undefined date');
+      return {};
+    }
+
     try {
-      let master = [99, 88, 77, 66, 55, 44, 33, 22, 11];
-      
-      let t = date.split('/');
-      
-      if (t.length !== 3) {
-        throw new Error('Invalid date format - must be DD/MM/YYYY');
-      }
-      
-      let day = t[0].toString().split("").map((t) => parseInt(t));
-      let month = t[1].toString().split("").map((t) => parseInt(t));
-      let year = t[2].toString().split("").map((t) => parseInt(t));
-      
-      // Validate data
-      if (day.includes(NaN) || month.includes(NaN) || year.includes(NaN)) {
-        throw new Error('Date contains invalid numbers');
-      }
-      
-      // Continue with calculation
-      let sumD = master.includes(day.reduce((accumulator, currentValue) => accumulator + currentValue, 0)) 
-        ? day.reduce((accumulator, currentValue) => accumulator + currentValue, 0) 
-        : day.reduce((accumulator, currentValue) => accumulator + currentValue, 0).toString().split("").map((t) => parseInt(t))
-          .reduce((accumulator, currentValue) => accumulator + currentValue, 0).toString().split("").map((t) => parseInt(t))
-          .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-        
-      let sumM = master.includes(month.reduce((accumulator, currentValue) => accumulator + currentValue, 0)) 
-        ? month.reduce((accumulator, currentValue) => accumulator + currentValue, 0) 
-        : month.reduce((accumulator, currentValue) => accumulator + currentValue, 0).toString().split("").map((t) => parseInt(t))
-          .reduce((accumulator, currentValue) => accumulator + currentValue, 0).toString().split("").map((t) => parseInt(t))
-          .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-        
-      let sumY = master.includes(year.reduce((accumulator, currentValue) => accumulator + currentValue, 0)) 
-        ? year.reduce((accumulator, currentValue) => accumulator + currentValue, 0) 
-        : year.reduce((accumulator, currentValue) => accumulator + currentValue, 0).toString().split("").map((t) => parseInt(t))
-          .reduce((accumulator, currentValue) => accumulator + currentValue, 0).toString().split("").map((t) => parseInt(t))
-          .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-
-      let DN = parseInt(year[0])+parseInt(year[1])+parseInt(year[2])+parseInt(year[3])+parseInt(day[0])+parseInt(day[1])+parseInt(month[0])+parseInt(month[1]);
-      
-      let A = 0;
-      if (master.includes(parseInt(t[2]))) {
-        A = this.checkmaster(parseInt(t[2]));
-      } else {
-        A = this.checkmaster(sumY);
-      }
-      
-      let C = 0;
-      if (master.includes(parseInt(t[0]))) {
-        C = this.checkmaster(parseInt(t[0]));
-      } else {
-        C = this.checkmaster(sumD);
-      }
-      
-      let B = 0;
-      if (master.includes(parseInt(t[1]))) {
-        B = this.checkmaster(parseInt(t[1]));
-      } else {
-        B = this.checkmaster(sumM);
+      // Parse date parts
+      const dateParts = date.split('/');
+      if (dateParts.length !== 3) {
+        console.error('GetFirstLine received invalid date format', date);
+        return {};
       }
 
-      let D0 = master.includes(DN) 
-        ? (sumD + sumY + sumM) 
-        : (sumD + sumY + sumM).toString().split("").map((t) => parseInt(t))
-          .reduce((accumulator, currentValue) => accumulator + currentValue, 0).toString().split("").map((t) => parseInt(t))
-          .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+      const day = parseInt(dateParts[0]);
+      const month = parseInt(dateParts[1]);
+      const year = parseInt(dateParts[2]);
 
-      let D = this.checkmaster(DN);
-      let P1 = this.sumY(sumD, sumM);
-      let P2 = this.sum(sumM, sumD);
-      let P3 = this.sumY(P1, P2);
-      
-      let P4 = master.includes((this.cleanint(P1) + this.cleanint(P2) + this.cleanint(P3))) 
-        ? (this.cleanint(P1) + this.cleanint(P2) + this.cleanint(P3)) 
-        : (this.cleanint(P1) + this.cleanint(P2) + this.cleanint(P3)).toString().split("").map((t) => parseInt(t))
-          .reduce((accumulator, currentValue) => accumulator + currentValue, 0).toString().split("").map((t) => parseInt(t))
-          .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-        
-      let top = this.sum(sumD, sumY);
-      let P5 = this.sumY(top, D0);
-      let N1 = this.subs(sumY, sumM);
-      let N2 = this.subs(sumM, sumD);
-      let N3 = this.subs(N1, N2);
-      let N4 = this.sumY(this.subs(sumY, sumM), this.sumY(N2, N3));
-      let bottom = this.subs(sumY, sumD);
+      if (isNaN(day) || isNaN(month) || isNaN(year)) {
+        console.error('GetFirstLine received invalid date numbers', date);
+        return {};
+      }
+
+      // Day calculation
+      let sumd = day.toString().split('').map(Number);
+      if (sumd.length > 1) {
+        sumd = sumd.reduce((a, b) => a + b, 0);
+      } else {
+        sumd = day;
+      }
+
+      // Month calculation
+      let summ = month.toString().split('').map(Number);
+      if (summ.length > 1) {
+        summ = summ.reduce((a, b) => a + b, 0);
+      } else {
+        summ = month;
+      }
+
+      // Year calculation
+      let sumy = 0;
+      year.toString().split('').forEach(digit => {
+        sumy += parseInt(digit);
+      });
+
+      // Convert to simpler values if applicable
+      if (sumy.toString().length > 1) {
+        sumy = sumy.toString().split('').map(Number).reduce((a, b) => a + b, 0);
+      }
+
+      // Calculate pinaculo values
+      const A = summ;
+      const B = sumd;
+      const C = this.sum(A, B);
+      const D = this.sum(sumy, C);
+      const top = this.sum(D, C);
+
+      const P1 = this.sum(A, B);
+      const P2 = this.sum(B, C);
+      const P3 = this.sum(C, D);
+      const P4 = this.sum(D, A);
+      const P5 = this.sum(A, C);
+
+      const N1 = this.sum(A, top);
+      const N2 = this.sum(B, top);
+      const N3 = this.sum(C, top);
+      const N4 = this.sum(D, top);
+      const bottom = this.sum(top, this.sum(this.sum(A, B), this.sum(C, D)));
 
       return {
-        A: B,
-        B: C,
-        C: A,
-        D: D,
-        P1: P1,
-        P2: P2,
-        P3: P3,
-        P4: P4,
-        P5: P5,
-        top: top,
-        N1: N1,
-        N2: N2,
-        N3: N3,
-        N4: N4,
-        bottom: bottom,
+        A,
+        B,
+        C,
+        D,
+        P1,
+        P2,
+        P3,
+        P4,
+        P5,
+        top,
+        N1,
+        N2,
+        N3,
+        N4,
+        bottom
       };
     } catch (error) {
       console.error('Error in GetFirstLine:', error);
-      throw new Error(`Calculation error: ${error.message}`);
+      return {};
     }
   },
 
   /**
-   * Gets the calculation for a year
+   * Calculate year data
+   * @param {string} birthdate - Birthdate in format DD/MM/YYYY
+   * @returns {IPinYear} - The calculated year data
    */
   GetYear(birthdate) {
+    if (!birthdate) {
+      console.error('GetYear received undefined birthdate');
+      return {};
+    }
+
     try {
-      const t = birthdate.split('/');
-      
-      if (t.length !== 3) {
-        throw new Error('Invalid date format - must be DD/MM/YYYY');
+      // Parse birth date
+      const dateParts = birthdate.split('/');
+      if (dateParts.length !== 3) {
+        console.error('GetYear received invalid date format', birthdate);
+        return {};
       }
-      
-      // Validate input data
-      const day = parseInt(t[0]);
-      const month = parseInt(t[1]);
-      const year = parseInt(t[2]);
-      
-      if (isNaN(day) || isNaN(month) || isNaN(year) || 
-          day < 1 || day > 31 || month < 1 || month > 12 || year < 1000) {
-        throw new Error('Invalid date values');
+
+      const day = parseInt(dateParts[0]);
+      const month = parseInt(dateParts[1]);
+      const year = parseInt(dateParts[2]);
+
+      if (isNaN(day) || isNaN(month) || isNaN(year)) {
+        console.error('GetYear received invalid date numbers', birthdate);
+        return {};
       }
-      
-      const currentYear = new Date().getFullYear();
+
+      // Current date for calculations
+      const currentDate = new Date();
+      const currentYear = currentDate.getFullYear();
       const nextYear = currentYear + 1;
+
+      // Calculate age
+      let age = currentYear - year;
+      const birthMonth = month - 1; // JS months are 0-based
+      const birthDay = day;
       
-      const age = currentYear - year;
+      // Adjust age if birthday hasn't occurred yet this year
+      if (
+        birthMonth > currentDate.getMonth() ||
+        (birthMonth === currentDate.getMonth() && birthDay > currentDate.getDate())
+      ) {
+        age--;
+      }
+
+      // Personal year calculation
+      const personalYear = this.breakdown(day + month, age);
+      const universalYear = this.breakdown(currentYear, 0);
+      
+      // Next year calculations
       const nextAge = age + 1;
-      
-      // Add Universal year calculation
-      const universalYear = this.breakdown(currentYear);
-      const nextUniversalYear = this.breakdown(nextYear);
-      
-      // Add Personal year calculation 
-      const bday = day;
-      const bmonth = month;
-      const personalYear = this.breakdown(bday, bmonth + currentYear);
-      const nextPersonalYear = this.breakdown(bday, bmonth + nextYear);
-      
-      // First Triangle
-      const p1 = this.breakdown(personalYear, universalYear);
-      const p2 = this.breakdown(universalYear, age);
-      const p3 = this.breakdown(p1, p2);
-      
-      // Second Triangle 
-      const nextp1 = this.breakdown(nextPersonalYear, nextUniversalYear);
-      const nextp2 = this.breakdown(nextUniversalYear, nextAge);
-      const nextp3 = this.breakdown(nextp1, nextp2);
-      
-      // Bottom 
-      const pb = this.subs(universalYear, age);
-      const nextpb = this.subs(nextUniversalYear, nextAge);
-      
-      // Center 
-      const pc = this.breakdown(personalYear, p3);
-      const nextpc = this.breakdown(nextPersonalYear, nextp3);
-      
+      const nextPersonalYear = this.breakdown(day + month, nextAge);
+      const nextUniversalYear = this.breakdown(nextYear, 0);
+
+      // Calculate pinnacles
+      const P1 = this.breakdown(personalYear, universalYear);
+      const P2 = this.breakdown(personalYear, month);
+      const P3 = this.breakdown(personalYear, day);
+      const Pb = this.breakdown(P1, P2);
+      const Pc = this.breakdown(P2, P3);
+
+      // Calculate next year pinnacles
+      const NxP1 = this.breakdown(nextPersonalYear, nextUniversalYear);
+      const NxP2 = this.breakdown(nextPersonalYear, month);
+      const NxP3 = this.breakdown(nextPersonalYear, day);
+      const NxPb = this.breakdown(NxP1, NxP2);
+      const NxPc = this.breakdown(NxP2, NxP3);
+
       return {
         Cage: age,
         NextPY: nextPersonalYear,
         NextUY: nextUniversalYear,
         NxAge: nextAge,
-        NxP1: nextp1,
-        NxP2: nextp2,
-        NxP3: nextp3,
-        NxPb: nextpb,
-        NxPc: nextpc,
-        P1: p1,
-        P2: p2,
-        P3: p3,
-        Pb: pb,
-        Pc: pc,
+        NxP1,
+        NxP2,
+        NxP3,
+        NxPb,
+        NxPc,
+        P1,
+        P2,
+        P3,
+        Pb,
+        Pc,
         PerY: personalYear,
-        UniYear: universalYear,
+        UniYear: universalYear
       };
     } catch (error) {
       console.error('Error in GetYear:', error);
-      throw new Error(`Year calculation error: ${error.message}`);
+      return {};
     }
   },
 
   /**
-   * Break down a number into a single digit
+   * Breakdown calculation for year data
    */
   breakdown(dig0, dig1) {
-    // Handle undefined values
-    dig0 = dig0 || 0;
-    dig1 = dig1 || 0;
-    
-    // Ensure we're working with clean integers
-    const clean0 = this.cleanint(dig0);
-    const clean1 = this.cleanint(dig1);
-    
     try {
-      return this.sum(clean0, clean1);
+      // Ensure numbers are valid
+      dig0 = parseInt(dig0) || 0;
+      dig1 = parseInt(dig1) || 0;
+
+      // Sum the digits
+      const sumDigits = dig0 + dig1;
+      
+      // Check for master numbers
+      if (sumDigits === 11 || sumDigits === 22) {
+        return sumDigits;
+      }
+      
+      // Reduce to a single digit
+      if (sumDigits > 9) {
+        return this.breakdown(
+          Math.floor(sumDigits / 10),
+          sumDigits % 10
+        );
+      }
+      
+      return sumDigits;
     } catch (error) {
-      console.error("Error in breakdown function:", error);
-      // Fallback calculation if sum fails
-      const simpleSum = (clean0 + clean1) % 9;
-      return simpleSum === 0 ? 9 : simpleSum;
+      console.error('Error in breakdown:', error);
+      return 0;
     }
   },
 
   /**
-   * Calculate the master number value
+   * Handle master numbers specially
    */
   MasterNo(master) {
-    let res;
-    let ismaster;
+    if (master === 11 || master === 22 || master === 33) {
+      return master;
+    }
     
-    switch(master) {
-      case 99: {res=`99/9`; ismaster = true; break;}
-      case 88: {res=`88/7`; ismaster = true; break;}
-      case 77: {res=`77/5`; ismaster = true; break;}
-      case 66: {res=`12/3`; ismaster = true; break;}
-      case 55: {res=`55/1`; ismaster = true; break;}
-      case 44: {res=`44/8`; ismaster = true; break;}
-      case 33: {res=`33/6`; ismaster = true; break;}
-      case 22: {res=`22/4`; ismaster = true; break;}
-      case 11: {res=`11/2`; ismaster = true; break;}
-      default: {
-        ismaster = false; 
-        res = master.toString().split("").map((t) => parseInt(t))
-          .reduce((accumulator, currentValue) => accumulator + currentValue, 0).toString().split("").map((t) => parseInt(t))
-          .reduce((accumulator, currentValue) => accumulator + currentValue, 0).toString();
-        break;
-      }
+    // If not a master number, return single digit
+    if (master > 9) {
+      let digits = master.toString().split('').map(Number);
+      return this.MasterNo(digits.reduce((a, b) => a + b, 0));
     }
-
-    if (master.toString().length > 1) {
-      let r = master.toString().split("").map((t) => parseInt(t))
-        .reduce((accumulator, currentValue) => accumulator + currentValue, 0).toString().split("").map((t) => parseInt(t))
-        .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-
-      return {toshow: res, touse: r, ismaster};
-    } else {
-      return {toshow: res, touse: master, ismaster};
-    }
+    
+    return master;
   }
 };
 

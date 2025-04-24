@@ -10,6 +10,9 @@ const Couple = ({ setShowMenu }) => {
   useEffect(() => {
     // Hide the default menu since we're using HeaderMenu
     setShowMenu(false);
+    
+    // Set page title
+    document.title = 'Numerology Couple Calculator';
   }, [setShowMenu]);
 
   return (
