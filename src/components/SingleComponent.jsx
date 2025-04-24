@@ -1,16 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import moment from 'moment';
 import calculosUtils from '../utils/calculosUtils';
-import PinaculoSvg from './PinaculoSvg';
-import YearSvg from './YearSvg';
-import MonthVisualizer from './MonthVisualizer';
-import DayTable from './DayTable';
 import './SingleComponent.css';
 
-// Import images directly
-import leftDecoration from '../assets/img/Lleft.png';
-import rightDecoration from '../assets/img/Lright.png';
-import logoImage from '../assets/img/logonumerana80.png';
+// Import modular components
+import NumerologyInputFormComponent from '../components/common/NumerologyInputFormComponent';
+import ResultsHeaderComponent from '../components/common/ResultsHeaderComponent';
+import PinaculoChartComponent from '../components/common/PinaculoChartComponent';
+import YearChartComponent from '../components/common/YearChartComponent';
+import MobileYearSliderComponent from '../components/common/MobileYearSliderComponent';
+import MobileMonthDayViewComponent from '../components/common/MobileMonthDayViewComponent';
+import DesktopMonthGridComponent from '../components/common/DesktopMonthGridComponent';
+import DesktopDayGridComponent from '../components/common/DesktopDayGridComponent';
+import LoadingComponent from '../components/common/LoadingComponent';
 
 const SingleComponent = () => {
   // State variables
@@ -228,208 +230,90 @@ const SingleComponent = () => {
     }
   };
   
-  // Render the input form
-  const renderForm = () => (
-    <div className={`containerBox ${isVisible ? 'visible' : 'hidden'}`} style={{display: !resultados ? 'flex' : 'none'}}>
-      <div className="row">
-        <div className="col-8 person resultado2" style={{ border: '5px solid #858585', borderRadius: '5px' }}>
-          <div className="row">
-            <div className="col-2">
-              <img src={leftDecoration} className="Lleft" alt="Left decoration" />
-            </div>
-            <div className="col-8">
-              <img src={logoImage} alt="numeranamx" className="logo" />
-              <h1 className="numerologia">Numerology | Numerología</h1>
-            </div>
-            <div className="col-2">
-              <img src={rightDecoration} className="Lright" alt="Right decoration" />
-            </div>
-          </div>
-          
-          <h2 className="name bold">{nombre}</h2>
-          <h2 className="bold footerbox">{birthdateShow}</h2>
-          <br />
-          
-          <div className="row" id="name">
-            <div className="col-2"></div>
-            <div className="col-8">
-              <div className="form-group">
-                <label htmlFor="Name"><b>Name/Nombre</b></label>
-                <input 
-                  type="text" 
-                  className="form-control textomv" 
-                  name="Name" 
-                  value={nombre}
-                  onChange={(e) => setNombre(e.target.value)}
-                  placeholder="Name/Nombre" 
-                  autoComplete="off"
-                />
-              </div>
-            </div>
-            <div className="col-2"></div>
-          </div>
-          
-          <div className="row">
-            <div className="col-2"></div>
-            <div className="col-8">
-              <div className="form-group">
-                <label htmlFor="birth"><b>Birthdate/Cumpleaños</b></label>
-                <input
-                  className="form-control textomv"
-                  placeholder="dd/mm/yyyy"
-                  type="text"
-                  value={birthdate}
-                  onChange={handleBirthdateChange}
-                  ref={birthRef}
-                  name="birth"
-                  autoComplete="off"
-                />
-              </div>
-            </div>
-            <div className="col-2"></div>
-          </div>
-          
-          <div className="row" style={{ marginBottom: '1rem' }}>
-            <div className="col-3"></div>
-            <div className="col-6">
-              <button 
-                style={{ marginTop: '1rem' }} 
-                type="button" 
-                onClick={handleSubmit} 
-                className="btn btn-primary btn-lg btn-block send"
-              >
-                <i className="bi bi-play-btn-fill" style={{ zoom: 2, lineHeight: 1 }}></i>
-              </button>
-            </div>
-            <div className="col-3">
-              <div className="row">
-                <div className="col-3"></div>
-                <div className="col-3"></div>
-                <div className="col-6"><h2 className="website www" style={{ fontSize: '11px', right: '30px' }}>www.numerana.com</h2></div>
-              </div>
-              <div className="row">
-                <div className="col-2"></div>
-                <div className="col-2"></div>
-                <div className="col-8"><h2 className="website ana" style={{ fontSize: '11px' }}>By: Ana Dorotea</h2></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
-  // Render the results header with calculations visualization
-  const renderResults = () => (
-    <div id="page1" className="page">
-      <div className={`containerBox ${resultados ? 'visible' : 'hidden'}`} style={{display: print ? 'block' : 'none'}}>
-        <div className="row">
-          <div className="col-8 person resultado2" style={{ border: '5px solid #858585', borderRadius: '5px' }}>
-            <div className="row">
-              <div className="col-2">
-                <img src={leftDecoration} className="Lleft" alt="Left decoration" />
-              </div>
-              <div className="col-8">
-                <img src={logoImage} alt="numeranamx" className="logo" />
-                <h1 className="numerologia">Numerology | Numerología</h1>
-              </div>
-              <div className="col-2">
-                <img src={rightDecoration} className="Lright" alt="Right decoration" />
-              </div>
-            </div>
-            
-            <h2 className="name bold">{nombre}</h2>
-            <h2 className="bold footerbox">{birthdateShow}</h2>
-            
-            <div className="row" style={{ marginBottom: '1rem' }}>
-              <div className="col-3"></div>
-              <div className="col-3">
-                <button type="button" onClick={reload} className="btn btn-primary btn-lg btn-block send">
-                  <i className="bi bi-arrow-clockwise" style={{ zoom: 2, lineHeight: 1 }}></i>
-                </button>
-              </div>
-              <div className="col-3">
-                <button type="button" onClick={downloadPdf} className="btn btn-primary btn-lg btn-block send">
-                  <i className="bi bi-printer-fill" style={{ zoom: 2, lineHeight: 1 }}></i>
-                </button>
-              </div>
-              <div className="col-3" style={{ display: getScreenWidth ? 'block' : 'none' }}>
-                <div className="row">
-                  <div className="col-3"></div>
-                  <div className="col-3"></div>
-                  <div className="col-6"><h2 className="website www" style={{ fontSize: '11px', right: '30px' }}>www.numerana.com</h2></div>
-                </div>
-                <div className="row">
-                  <div className="col-2"></div>
-                  <div className="col-2"></div>
-                  <div className="col-8"><h2 className="website ana" style={{ fontSize: '11px' }}>By: Ana Dorotea</h2></div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="row" style={{ display: !getScreenWidth ? 'flex' : 'none' }}>
-              <div className="col-3"></div>
-              <div className="col-5">
-                <h2 className="website www" style={{ fontSize: '11px', right: '30px' }}>www.numerana.com</h2><br />
-              </div>
-              <div className="col-4">
-                <h2 className="website ana" style={{ fontSize: '11px' }}>By: Ana Dorotea</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Display the calculation results with SVG visualizations */}
-      <div className="container" style={{ display: resultados ? 'block' : 'none' }}>
-        <div className="row">
-          <div className="col-8">
-            <div className="A">
-              {rpinaculo.length > 0 && <PinaculoSvg pinaculo={rpinaculo[0]} />}
-            </div>
-          </div>
-          <div className="col-4">
-            <div className="rside">
-              <div className="centerVertHoriz">
-                <p><span style={{ fontWeight: '800', fontSize: '2rem' }}>{year}</span></p>
-                {pinYear.length > 0 && <YearSvg year={year} data={pinYear[0]} isCurrentYear={true} />}
-              </div>
-              <div className="selected centerVertHoriz">
-                <p><span style={{ fontWeight: '800', fontSize: '2rem' }}>{nxYear}</span></p>
-                {pinYear.length > 0 && <YearSvg year={nxYear} data={pinYear[0]} isCurrentYear={false} />}
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        {/* Add the Monthly Calculations */}
-        <div className="section-divider"></div>
-        <h3 className="section-title">Monthly Calculations</h3>
-        {birthdate && <MonthVisualizer birthdate={birthdate} year={0} />}
-        
-        {/* Add the Day Calculations Table */}
-        <div className="section-divider"></div>
-        <h3 className="section-title">Daily Calculations</h3>
-        {birthdate && <DayTable birthdate={birthdate} />}
-      </div>
-    </div>
-  );
-
-  // Render loading spinner
-  const renderLoading = () => (
-    <div className="loading" style={{display: loading ? 'flex' : 'none'}}>
-      <div className="lds-ripple"><div></div><div></div></div>
-    </div>
-  );
+  // Handle mobile year selection
+  const handleYearSelect = (selectedYear) => {
+    setMobilMesSelect({ ...mobilMesSelect, year: selectedYear, Month: 0 });
+    setListMobileM([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+  };
 
   return (
     <main className="main">
       <div ref={contentRef} className="content">
-        {renderLoading()}
+        <LoadingComponent loading={loading} />
         
-        {!resultados && renderForm()}
+        <NumerologyInputFormComponent
+          isVisible={isVisible}
+          resultados={resultados}
+          nombre={nombre}
+          setNombre={setNombre}
+          birthdate={birthdate}
+          birthdateShow={birthdateShow}
+          handleBirthdateChange={handleBirthdateChange}
+          handleSubmit={handleSubmit}
+          birthRef={birthRef}
+        />
         
-        {resultados && renderResults()}
+        <div id="page1" className="page" style={{display: resultados ? 'block' : 'none'}}>
+          <ResultsHeaderComponent
+            resultados={resultados}
+            nombre={nombre}
+            birthdateShow={birthdateShow}
+            reload={reload}
+            downloadPdf={downloadPdf}
+            getScreenWidth={getScreenWidth}
+            print={print}
+          />
+
+          <div className="container">
+            <div className="row">
+              <div className="col-8">
+                <PinaculoChartComponent pinaculo={rpinaculo.length > 0 ? rpinaculo[0] : null} />
+              </div>
+              <div className="col-4">
+                <div className="rside">
+                  <YearChartComponent 
+                    year={year} 
+                    data={pinYear.length > 0 ? pinYear[0] : null} 
+                    isCurrentYear={true} 
+                  />
+                  <div className="selected">
+                    <YearChartComponent 
+                      year={nxYear} 
+                      data={pinYear.length > 0 ? pinYear[0] : null} 
+                      isCurrentYear={false} 
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {getScreenWidth ? (
+              // Desktop view
+              <>
+                <DesktopMonthGridComponent birthdate={birthdate} />
+                <DesktopDayGridComponent birthdate={birthdate} />
+              </>
+            ) : (
+              // Mobile view
+              <>
+                <div className="section-divider"></div>
+                <MobileYearSliderComponent
+                  currentYear={year}
+                  nextYear={nxYear}
+                  onYearSelect={handleYearSelect}
+                  listMobileM={listMobileM}
+                  mobilMesSelect={mobilMesSelect}
+                  setMobilMesSelect={setMobilMesSelect}
+                />
+                <MobileMonthDayViewComponent
+                  birthdate={birthdate}
+                  mobilMesSelect={mobilMesSelect}
+                  smallLoading={smallLoading}
+                />
+              </>
+            )}
+          </div>
+        </div>
         
         <div ref={myScrollContainerRef}></div>
       </div>

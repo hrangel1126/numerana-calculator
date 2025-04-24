@@ -449,152 +449,114 @@ const CoupleComponent = () => {
   // Render input form
   const renderForm = () => (
     <div 
-      className="containerBox" 
+      className="calculator-container" 
       style={{
-        border: '5px solid #858585', 
-        borderRadius: '5px',
         opacity: isVisible ? 1 : 0,
         transition: 'opacity 1s ease-in-out'
       }}
     >
-      <div className="row person resultado2">
-        <div className="col-2">
-          <img src={leftDecoration} className="Lleft" alt="Left decoration" />
-        </div>
-        <div className="col-8" style={{ textAlign: 'center' }}>
-          <img src={logoImage} alt="numeranamx" className="logo" style={{ height: '80px' }} />
-          <h1 className="titulo">Numerology | Numerología</h1>
-        </div>
-        <div className="col-2">
-          <img src={rightDecoration} className="Lright" alt="Right decoration" />
-        </div>
-      </div>
-      
-      <div className="row">
-        <div className="col-2"></div>
-        <div className="col-3">
-          <h2 className="name bold titulo">{nombre}</h2>
-        </div>
-        <div className="col-1"></div>
-        <div className="col-3">
-          <h2 className="name bold titulo">{nombre2}</h2>
-        </div>
-        <div className="col-2"></div>
-      </div>
-      
-      <br />
-      
-      <div className="row">
-        <div className="col-2"></div>
-        <div className="col-3" style={{ textAlign: 'center' }}>
-          <span className="masc">
-            <b style={{ fontSize: '2.6rem', position: 'absolute', marginLeft: '-2rem', marginTop: '-7px' }}>1</b>
-            <i className="bi bi-person-fill iconin"></i>
-          </span>
-        </div>
-        <div className="col-2"></div>
-        <div className="col-3" style={{ textAlign: 'center' }}>
-          <span className="masc">
-            <b style={{ fontSize: '2.6rem', position: 'absolute', marginLeft: '-2rem', marginTop: '-7px' }}>2</b>
-            <i className="bi bi-person-fill iconin"></i>
-          </span>
-        </div>
-        <div className="col-2"></div>
-      </div>
-      
-      <div className="row" id="name">
-        <div className="col-2 telefono"></div>
-        <div className="col-3" style={{ textAlign: 'center' }}>
-          <div className="form-group">
-            <label htmlFor="Name"><b>Name/Nombre</b></label>
-            <input 
-              type="text" 
-              autoComplete="off" 
-              className="form-control nombres" 
-              name="Name" 
-              value={nombre}
-              onChange={(e) => setNombre(e.target.value)}
-              placeholder="Name/Nombre" 
-            />
+      <div className="calculator-content">
+        <div className="logo-container">
+          <div className="corner-decoration">
+            <img src={leftDecoration} alt="Left decoration" />
+          </div>
+          <div className="logo-center">
+            <img src={logoImage} alt="numeranamx" className="logo" />
+            <h1 className="title">Numerology | Numerología</h1>
+          </div>
+          <div className="corner-decoration">
+            <img src={rightDecoration} alt="Right decoration" />
           </div>
         </div>
-        <div className="col-2"></div>
-        <div className="col-3">
-          <div className="form-group" style={{ textAlign: 'center' }}>
-            <label htmlFor="Name2"><b>Name/Nombre</b></label>
-            <input 
-              type="text" 
-              autoComplete="off" 
-              className="form-control nombres" 
-              name="Name2" 
-              value={nombre2}
-              onChange={(e) => setNombre2(e.target.value)}
-              placeholder="Name/Nombre" 
-            />
+        
+        <div className="form-row">
+          <div className="form-column">
+            <div className="person-icon-container">
+              <div className="person-number">1</div>
+              <div className="person-icon">
+                <i className="bi bi-person-fill"></i>
+              </div>
+            </div>
+            <h3 className="form-title">Person/Persona 1</h3>
+            
+            <div className="form-group">
+              <label htmlFor="name1">Name/Nombre</label>
+              <input 
+                type="text" 
+                id="name1"
+                autoComplete="off" 
+                className="form-control" 
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+                placeholder="Name/Nombre" 
+              />
+            </div>
+            
+            <div className="form-group">
+              <label htmlFor="birth1">Birthdate/Cumple</label>
+              <input
+                className="form-control"
+                id="birth1"
+                autoComplete="off"
+                placeholder="dd/mm/yyyy"
+                type="text"
+                value={birthdate}
+                onChange={(e) => handleBirthdateChange(e, setBirthdate)}
+                ref={birth1Ref}
+              />
+            </div>
+          </div>
+          
+          <div className="form-column">
+            <div className="person-icon-container">
+              <div className="person-number">2</div>
+              <div className="person-icon">
+                <i className="bi bi-person-fill"></i>
+              </div>
+            </div>
+            <h3 className="form-title">Person/Persona 2</h3>
+            
+            <div className="form-group">
+              <label htmlFor="name2">Name/Nombre</label>
+              <input 
+                type="text" 
+                id="name2"
+                autoComplete="off" 
+                className="form-control" 
+                value={nombre2}
+                onChange={(e) => setNombre2(e.target.value)}
+                placeholder="Name/Nombre" 
+              />
+            </div>
+            
+            <div className="form-group">
+              <label htmlFor="birth2">Birthdate/Cumple</label>
+              <input
+                className="form-control"
+                id="birth2"
+                autoComplete="off"
+                placeholder="dd/mm/yyyy"
+                type="text"
+                value={birthdate2}
+                onChange={(e) => handleBirthdateChange(e, setBirthdate2)}
+                ref={birth2Ref}
+              />
+            </div>
           </div>
         </div>
-        <div className="col-2"></div>
-      </div>
-      
-      <div className="row" style={{ textAlign: 'center' }}>
-        <div className="col-2 telefono"></div>
-        <div className="col-3">
-          <div className="form-group">
-            <label htmlFor="birth"><b>Birthdate/Cumple</b></label>
-            <input
-              className="form-control nombres"
-              autoComplete="off"
-              placeholder="dd/mm/yyyy"
-              type="text"
-              value={birthdate}
-              onChange={(e) => handleBirthdateChange(e, setBirthdate)}
-              ref={birth1Ref}
-              name="birth"
-            />
-          </div>
-        </div>
-        <div className="col-2"></div>
-        <div className="col-3">
-          <div className="form-group">
-            <label htmlFor="birth2"><b>Birthdate/Cumple</b></label>
-            <input
-              className="form-control nombres"
-              autoComplete="off"
-              placeholder="dd/mm/yyyy"
-              type="text"
-              value={birthdate2}
-              onChange={(e) => handleBirthdateChange(e, setBirthdate2)}
-              ref={birth2Ref}
-              name="birth2"
-            />
-          </div>
-        </div>
-        <div className="col-2"></div>
-      </div>
-      
-      <div className="row" style={{ marginBottom: '1rem' }}>
-        <div className="col-3"></div>
-        <div className="col-6">
-          <button 
-            style={{ marginTop: '1rem' }} 
-            type="button" 
-            onClick={subm} 
-            className="btn btn-primary btn-lg btn-block send"
-          >
-            <i className="bi bi-play-btn-fill" style={{ zoom: 2, lineHeight: 1 }}></i>
-          </button>
-        </div>
-        <div className="col-3">
-          <div className="row">
-            <div className="col-3"></div>
-            <div className="col-3"></div>
-            <div className="col-6"><h2 className="website" style={{ fontSize: '11px' }}>www.numerana.com</h2></div>
-          </div>
-          <div className="row">
-            <div className="col-2"></div>
-            <div className="col-2"></div>
-            <div className="col-8"><h2 className="website ana" style={{ fontSize: '11px' }}>By: Ana Dorotea</h2></div>
-          </div>
+        
+        <button 
+          type="button" 
+          onClick={subm} 
+          className="submit-button"
+        >
+          <i className="bi bi-play-fill"></i>
+          Calculate
+        </button>
+        
+        <div className="footer">
+          <div className="website">www.numerana.com</div>
+          <div className="author">By: Ana Dorotea</div>
         </div>
       </div>
     </div>
@@ -607,18 +569,24 @@ const CoupleComponent = () => {
     return (
       <div className="month-forecast">
         <div className="month-detail">
-          <div className="row">
-            <div className="col-md-4">
+          <div className="forecast-row">
+            <div className="forecast-column">
               <p className="month-person">{nombre}</p>
-              <div className="month-value">{month.data.person1}</div>
+              <div className="month-value">
+                {month.data.person1}
+              </div>
             </div>
-            <div className="col-md-4">
+            <div className="forecast-column center">
               <p className="month-combined">Combined</p>
-              <div className="month-value combined">{month.data.combined}</div>
+              <div className="month-value combined">
+                {month.data.combined}
+              </div>
             </div>
-            <div className="col-md-4">
+            <div className="forecast-column">
               <p className="month-person">{nombre2}</p>
-              <div className="month-value">{month.data.person2}</div>
+              <div className="month-value">
+                {month.data.person2}
+              </div>
             </div>
           </div>
         </div>
@@ -628,118 +596,77 @@ const CoupleComponent = () => {
   
   // Render small loading indicator
   const renderSmallLoading = () => (
-    <div className="small-loading"></div>
+    <div className="small-loading">
+      <div className="spinner-border spinner-border-sm" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
+    </div>
   );
   
   // Render results
   const renderResults = () => (
     <div 
-      className="containerBox" 
+      className="results-container" 
       style={{
-        border: '5px solid #858585', 
-        borderRadius: '5px',
         opacity: resultados ? 1 : 0,
         transition: 'opacity 1s ease-in-out'
       }}
       ref={myScrollContainerRef}
     >
-      <div className="row person resultado2">
-        <div className="col-2">
-          <img src={leftDecoration} className="Lleft" alt="Left decoration" />
+      <div className="logo-container">
+        <div className="corner-decoration">
+          <img src={leftDecoration} alt="Left decoration" />
         </div>
-        <div className="col-8" style={{ textAlign: 'center' }}>
-          <img src={logoImage} alt="numeranamx" className="logo" style={{ height: '80px' }} />
-          <h1 className="titulo">Numerology | Numerología</h1>
+        <div className="logo-center">
+          <img src={logoImage} alt="numeranamx" className="logo" />
+          <h1 className="title">Numerology | Numerología</h1>
         </div>
-        <div className="col-2">
-          <img src={rightDecoration} className="Lright" alt="Right decoration" />
+        <div className="corner-decoration">
+          <img src={rightDecoration} alt="Right decoration" />
         </div>
       </div>
       
-      <div className="row">
-        <div className="col-2"></div>
-        <div className="col-3" style={{ textAlign: 'center' }}>
-          <span className="masc">
-            <b style={{ fontSize: '2.6rem', position: 'absolute', marginLeft: '-2rem', marginTop: '-7px' }}>1</b>
-            <i className="bi bi-person-fill iconin"></i>
-          </span>
-        </div>
-        <div className="col-2"></div>
-        <div className="col-3" style={{ textAlign: 'center' }}>
-          <span className="masc">
-            <b style={{ fontSize: '2.6rem', position: 'absolute', marginLeft: '-2rem', marginTop: '-7px' }}>2</b>
-            <i className="bi bi-person-fill iconin"></i>
-          </span>
-        </div>
-        <div className="col-2"></div>
-      </div>
-      
-      <div className="row">
-        <div className="col-2"></div>
-        <div className="col-3">
-          <h2 className="name bold titulo" style={{ textAlign: 'center' }}>{nombre}</h2>
-        </div>
-        <div className="col-1"></div>
-        <div className="col-3">
-          <h2 className="name bold titulo" style={{ textAlign: 'center' }}>{nombre2}</h2>
-        </div>
-        <div className="col-2"></div>
-      </div>
-      
-      <div className="row">
-        <div className="col-2"></div>
-        <div className="col-3">
-          <h2 className="name bold titulo" style={{ textAlign: 'center' }}>{birthdate}</h2>
-        </div>
-        <div className="col-1"></div>
-        <div className="col-3">
-          <h2 className="name bold titulo" style={{ textAlign: 'center' }}>{birthdate2}</h2>
-        </div>
-        <div className="col-2"></div>
-      </div>
-      
-      <div className="row" style={{ marginBottom: '1rem' }}>
-        <div className="col-3"></div>
-        <div className="col-6">
-          <button 
-            style={{ marginTop: '1rem' }} 
-            type="button" 
-            onClick={reload} 
-            className="btn btn-primary btn-lg btn-block send"
-          >
-            <i className="bi bi-arrow-clockwise" style={{ zoom: 2, lineHeight: 1 }}></i>
-          </button>
-        </div>
-        <div className="col-3">
-          <div className="row">
-            <div className="col-3"></div>
-            <div className="col-3"></div>
-            <div className="col-6"><h2 className="website" style={{ fontSize: '11px' }}>www.numerana.com</h2></div>
+      <div className="people-container">
+        <div className="person-column">
+          <div className="person-header">
+            <div className="person-number">1</div>
           </div>
-          <div className="row">
-            <div className="col-2"></div>
-            <div className="col-2"></div>
-            <div className="col-8"><h2 className="website ana" style={{ fontSize: '11px' }}>By: Ana Dorotea</h2></div>
+          <h2 className="person-name">{nombre}</h2>
+          <h3 className="person-birthdate">{birthdate}</h3>
+        </div>
+        
+        <div className="person-column">
+          <div className="person-header">
+            <div className="person-number">2</div>
           </div>
+          <h2 className="person-name">{nombre2}</h2>
+          <h3 className="person-birthdate">{birthdate2}</h3>
         </div>
       </div>
       
-      {/* This is where we would render the charts, graphs, and compatibility results */}
-      <div className="container">
-        {getScreenWidth ? (
-          // Desktop view
-          <div className="ResultadosDesktop">
-            <div className="row">
-              <div className="col-12">
-                <h3 className="titulom">Compatibility | Compatibilidad</h3>
-              </div>
-            </div>
-            
-            <div className="row">
-              <div className="col-4">
-                <h4 className="titulom">{nombre}</h4>
-                {rpinaculo.length > 0 && (
-                  <div className="pinaculo-chart">
+      <div className="button-container">
+        <button 
+          type="button" 
+          onClick={reload} 
+          className="reset-button"
+          aria-label="Start over"
+        >
+          <i className="bi bi-arrow-clockwise"></i>
+        </button>
+      </div>
+      
+      {/* Compatibility Section */}
+      <div className="compatibility-section">
+        <h3 className="section-title">Compatibility | Compatibilidad</h3>
+        
+        <div className="compatibility-charts">
+          {getScreenWidth ? (
+            // Desktop view
+            <div className="charts-desktop">
+              <div className="chart-row">
+                <div className="chart-column">
+                  <h4 className="chart-title">{nombre}</h4>
+                  {rpinaculo.length > 0 && (
                     <div className="numerology-diagram">
                       <div className="number-node top">{rpinaculo[0]?.top}</div>
                       <div className="number-node left">{rpinaculo[0]?.A}</div>
@@ -747,14 +674,12 @@ const CoupleComponent = () => {
                       <div className="number-node bottom-left">{rpinaculo[0]?.C}</div>
                       <div className="number-node bottom-right">{rpinaculo[0]?.D}</div>
                     </div>
-                  </div>
-                )}
-              </div>
-              
-              <div className="col-4">
-                <h4 className="titulom">Couple | Pareja</h4>
-                {sinastra.length > 0 && (
-                  <div className="sinastra-chart">
+                  )}
+                </div>
+                
+                <div className="chart-column">
+                  <h4 className="chart-title">Couple | Pareja</h4>
+                  {sinastra.length > 0 && (
                     <div className="compatibility-diagram">
                       <div className="comp-node top">{sinastra[0]?.E}</div>
                       <div className="comp-node left">{sinastra[0]?.A}</div>
@@ -762,14 +687,12 @@ const CoupleComponent = () => {
                       <div className="comp-node bottom-left">{sinastra[0]?.C}</div>
                       <div className="comp-node bottom-right">{sinastra[0]?.D}</div>
                     </div>
-                  </div>
-                )}
-              </div>
-              
-              <div className="col-4">
-                <h4 className="titulom">{nombre2}</h4>
-                {rpinaculo2.length > 0 && (
-                  <div className="pinaculo-chart">
+                  )}
+                </div>
+                
+                <div className="chart-column">
+                  <h4 className="chart-title">{nombre2}</h4>
+                  {rpinaculo2.length > 0 && (
                     <div className="numerology-diagram">
                       <div className="number-node top">{rpinaculo2[0]?.top}</div>
                       <div className="number-node left">{rpinaculo2[0]?.A}</div>
@@ -777,105 +700,123 @@ const CoupleComponent = () => {
                       <div className="number-node bottom-left">{rpinaculo2[0]?.C}</div>
                       <div className="number-node bottom-right">{rpinaculo2[0]?.D}</div>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
-            
-            <div className="row mt-4">
-              <div className="col-12">
-                <h3 className="titulom">Monthly Forecast | Pronóstico Mensual {year}/{nxYear}</h3>
-              </div>
+          ) : (
+            // Mobile view
+            <div className="charts-mobile">
+              <Swiper
+                ref={swiperMbRef}
+                {...swiperConfig}
+                className="swiper-container-mobile"
+                onSlideChange={slideChangeMobil}
+              >
+                <SwiperSlide className="slide-chart">
+                  <h4 className="chart-title">{nombre}</h4>
+                  {rpinaculo.length > 0 && (
+                    <div className="numerology-diagram">
+                      <div className="number-node top">{rpinaculo[0]?.top}</div>
+                      <div className="number-node left">{rpinaculo[0]?.A}</div>
+                      <div className="number-node right">{rpinaculo[0]?.B}</div>
+                      <div className="number-node bottom-left">{rpinaculo[0]?.C}</div>
+                      <div className="number-node bottom-right">{rpinaculo[0]?.D}</div>
+                    </div>
+                  )}
+                </SwiperSlide>
+                
+                <SwiperSlide className="slide-chart">
+                  <h4 className="chart-title">{nombre2}</h4>
+                  {rpinaculo2.length > 0 && (
+                    <div className="numerology-diagram">
+                      <div className="number-node top">{rpinaculo2[0]?.top}</div>
+                      <div className="number-node left">{rpinaculo2[0]?.A}</div>
+                      <div className="number-node right">{rpinaculo2[0]?.B}</div>
+                      <div className="number-node bottom-left">{rpinaculo2[0]?.C}</div>
+                      <div className="number-node bottom-right">{rpinaculo2[0]?.D}</div>
+                    </div>
+                  )}
+                </SwiperSlide>
+                
+                <SwiperSlide className="slide-chart">
+                  <h4 className="chart-title">Compatibility</h4>
+                  {sinastra.length > 0 && (
+                    <div className="compatibility-diagram">
+                      <div className="comp-node top">{sinastra[0]?.E}</div>
+                      <div className="comp-node left">{sinastra[0]?.A}</div>
+                      <div className="comp-node right">{sinastra[0]?.B}</div>
+                      <div className="comp-node bottom-left">{sinastra[0]?.C}</div>
+                      <div className="comp-node bottom-right">{sinastra[0]?.D}</div>
+                    </div>
+                  )}
+                </SwiperSlide>
+              </Swiper>
             </div>
-            
-            <div className="row">
-              <div className="col-12">
+          )}
+        </div>
+      </div>
+      
+      {/* Monthly Forecast Section */}
+      <div className="monthly-forecast-section">
+        <h3 className="forecast-header">Monthly Forecast | Pronóstico Mensual {year}/{nxYear}</h3>
+        
+        {listMobileM.length > 0 && (
+          <div className="forecast-content">
+            {getScreenWidth ? (
+              // Desktop view
+              <div className="forecast-desktop">
                 <Swiper
                   ref={swiperRef}
                   {...swiperConfig}
-                  className="swiper-container"
+                  className="swiper-container-forecast"
                   onSlideChange={slideChange}
                 >
                   {listMobileM.map((month, idx) => (
                     <SwiperSlide key={idx} className="swiper-slide">
-                      <div className="month-card">
-                        <h3>{month.name}, {month.year}</h3>
+                      <div className="forecast-card">
+                        <div className="forecast-month-header">
+                          <h3 className="month-name">{month.name}, {month.year}</h3>
+                        </div>
                         {smallLoading ? renderSmallLoading() : renderMonthlyChart(month)}
                       </div>
                     </SwiperSlide>
                   ))}
                 </Swiper>
               </div>
-            </div>
-          </div>
-        ) : (
-          // Mobile view
-          <div className="ResultdosMobil">
-            <Swiper
-              ref={swiperMbRef}
-              {...swiperConfig}
-              className="swipercontainermobil"
-              onSlideChange={slideChangeMobil}
-            >
-              <SwiperSlide className="zoom">
-                <p><span style={{ fontWeight: 800, fontSize: '2rem' }}>{nombre}</span></p>
-                <div className="row">
-                  <div className="col-12">
-                    {rpinaculo.length > 0 && (
-                      <div className="pinaculo-chart">
-                        <div className="numerology-diagram">
-                          <div className="number-node top">{rpinaculo[0]?.top}</div>
-                          <div className="number-node left">{rpinaculo[0]?.A}</div>
-                          <div className="number-node right">{rpinaculo[0]?.B}</div>
-                          <div className="number-node bottom-left">{rpinaculo[0]?.C}</div>
-                          <div className="number-node bottom-right">{rpinaculo[0]?.D}</div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
+            ) : (
+              // Mobile view
+              <div className="forecast-mobile">
+                {listMobileM.length > 0 && (
+                  <select 
+                    className="month-select" 
+                    onChange={(e) => callMesMobil(parseInt(e.target.value))}
+                    aria-label="Select month"
+                  >
+                    {listMobileM.map((month, idx) => (
+                      <option key={idx} value={idx}>
+                        {month.name}, {month.year}
+                      </option>
+                    ))}
+                  </select>
+                )}
+                
+                <div className="forecast-card-mobile">
+                  {smallLoading ? (
+                    renderSmallLoading()
+                  ) : (
+                    listMobileM.length > 0 && renderMonthlyChart(listMobileM[indexMobil])
+                  )}
                 </div>
-              </SwiperSlide>
-              
-              <SwiperSlide className="zoom">
-                <p><span style={{ fontWeight: 800, fontSize: '2rem' }}>{nombre2}</span></p>
-                <div className="row">
-                  <div className="col-12">
-                    {rpinaculo2.length > 0 && (
-                      <div className="pinaculo-chart">
-                        <div className="numerology-diagram">
-                          <div className="number-node top">{rpinaculo2[0]?.top}</div>
-                          <div className="number-node left">{rpinaculo2[0]?.A}</div>
-                          <div className="number-node right">{rpinaculo2[0]?.B}</div>
-                          <div className="number-node bottom-left">{rpinaculo2[0]?.C}</div>
-                          <div className="number-node bottom-right">{rpinaculo2[0]?.D}</div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </SwiperSlide>
-              
-              <SwiperSlide className="zoom">
-                <p><span style={{ fontWeight: 800, fontSize: '2rem' }}>Compatibility</span></p>
-                <div className="row">
-                  <div className="col-12">
-                    {sinastra.length > 0 && (
-                      <div className="sinastra-chart">
-                        <div className="compatibility-diagram">
-                          <div className="comp-node top">{sinastra[0]?.E}</div>
-                          <div className="comp-node left">{sinastra[0]?.A}</div>
-                          <div className="comp-node right">{sinastra[0]?.B}</div>
-                          <div className="comp-node bottom-left">{sinastra[0]?.C}</div>
-                          <div className="comp-node bottom-right">{sinastra[0]?.D}</div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </SwiperSlide>
-            </Swiper>
+              </div>
+            )}
           </div>
         )}
+      </div>
+      
+      <div className="footer">
+        <div className="website">www.numerana.com</div>
+        <div className="author">By: Ana Dorotea</div>
       </div>
     </div>
   );
