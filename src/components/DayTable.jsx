@@ -1,60 +1,44 @@
 import React, { useMemo } from 'react';
-import moment from 'moment'; // Import moment
+import moment from 'moment';
 import './DayTable.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-// CORRECTED numerologySum function to handle master numbers
 const numerologySum = (number) => {
   let numStr = String(number);
-
-  // Loop only if the number string has more than one digit AND is NOT a master number
   while (numStr.length > 1 && !['11', '22', '33'].includes(numStr)) {
-    // Calculate the sum of digits
     const sumOfDigits = numStr.split('').reduce((acc, digit) => acc + parseInt(digit, 10), 0);
-    // Convert the sum back to a string for the next iteration or final check
     numStr = String(sumOfDigits);
   }
-
-  // Return the final number (which might be a single digit or a master number)
   return parseInt(numStr, 10);
 };
 
-// Helper function combining sum and reduction, matching sumY(a, b) pattern
 const calculateAndReduce = (val1, val2) => {
-    return numerologySum(val1 + val2);
+  const num1 = Number(val1) || 0;
+  const num2 = Number(val2) || 0;
+  return numerologySum(num1 + num2);
 };
 
-
-// 2. Adapt GetDays function
-// (Made into a standalone function, corrected birthdate parsing, uses calculateAndReduce)
 const getDayDataForYear = (birthdate, yearToCalculate, sumFunc) => {
   if (!birthdate || !/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(birthdate)) {
-      console.error("Invalid birthdate format provided to getDayDataForYear. Expected DD/MM/YYYY");
-      return []; // Return empty array if birthdate is invalid
+    console.error("Invalid birthdate format. Expected DD/MM/YYYY. Received:", birthdate);
+    return [];
   }
 
   const t = birthdate.split('/');
-  const birthDayDigits = t[0].toString().split("").map(d => parseInt(d, 10));
-  const birthMonthDigits = t[1].toString().split("").map(d => parseInt(d, 10));
-  // const birthYearDigits = t[2].toString().split("").map(d => parseInt(d, 10)); // Birth year not used directly in GetDays logic for MU/MP
+  const birthDayDigits = t[0].split("").map(d => parseInt(d, 10));
+  const birthMonthDigits = t[1].split("").map(d => parseInt(d, 10));
 
-  // Calculate sum of digits for birth day and month
   const sumD = numerologySum(birthDayDigits.reduce((a, c) => a + c, 0));
   const sumM = numerologySum(birthMonthDigits.reduce((a, c) => a + c, 0));
-  // Birth Day number for Personal Day calculation (as used in original component logic)
-  const birthDayForPersonal = parseInt(t[0], 10);
 
-
-  // Calculate Universal Year sum
   const uniYearSum = numerologySum(
-      yearToCalculate.toString().split("").map(d => parseInt(d, 10)).reduce((a, c) => a + c, 0)
+    yearToCalculate.toString().split("").map(d => parseInt(d, 10)).reduce((a, c) => a + c, 0)
   );
 
-  // Calculate Personal Year sum (using sumD, sumM as per GetDays logic)
-  // Note: Original GetDays formula: PerY = sum(sumD + sumM + UniYear)
   const perYearSum = numerologySum(sumD + sumM + uniYearSum);
 
-  const monthData = [];
   const monthNames = ["JAN/ENE", "FEB", "MAR", "APR/ABR", "MAY", "JUN", "JUL", "AUG/AGO", "SEP", "OCT", "NOV", "DEC/DIC"];
+  const monthData = [];
 
   for (let monthIndex = 0; monthIndex < 12; monthIndex++) {
     const currentMonth = monthIndex + 1;
@@ -62,114 +46,79 @@ const getDayDataForYear = (birthdate, yearToCalculate, sumFunc) => {
     const daysInMonth = moment(dateStr).daysInMonth();
     const daysArray = [];
 
-    // Universal Month sum: sum(UniYear + currentMonth)
     const uniMonthSum = numerologySum(uniYearSum + currentMonth);
-    // Personal Month sum: sum(PerY + currentMonth)
     const perMonthSum = numerologySum(perYearSum + currentMonth);
 
-
     for (let dayOfMonth = 1; dayOfMonth <= daysInMonth; dayOfMonth++) {
-       try {
-            // Universal Day: sum(UniversalMonth + dayOfMonth) -> sum(sum(UniYear + currentMonth) + dayOfMonth)
-            // Let's try the simpler version from the *original* DayTable for Universal Day first: sum(day, month, year)
-            const universalDayOriginal = numerologySum(dayOfMonth + currentMonth + yearToCalculate);
+      const universalDay = sumFunc(uniMonthSum, dayOfMonth);
+      const personalDay = sumFunc(perMonthSum, dayOfMonth);
 
-            // Personal Day: sum(PersonalMonth + dayOfMonth) -> sum(sum(PerY + currentMonth) + dayOfMonth)
-            // Let's try the simpler version from the *original* DayTable for Personal Day: sum(day, birthDay)
-            const personalDayOriginal = numerologySum(dayOfMonth + birthDayForPersonal);
-
-
-            // --- OR using the GetDays logic interpretation ---
-            // Universal Day (MU in GetDays): sumFunc(uniMonthSum, dayOfMonth)
-            const universalDayGetDays = sumFunc(uniMonthSum, dayOfMonth);
-            // Personal Day (MP in GetDays): sumFunc(perMonthSum, dayOfMonth)
-            const personalDayGetDays = sumFunc(perMonthSum, dayOfMonth);
-
-            // Choose which logic to use. Let's use the GetDays interpretation as requested.
-            daysArray.push({
-                day: dayOfMonth,
-                // universal: universalDayOriginal, // Original component logic
-                // personal: personalDayOriginal,   // Original component logic
-                universal: universalDayGetDays, // GetDays logic interpretation
-                personal: personalDayGetDays    // GetDays logic interpretation
-                // veinti2: (22 - (uniYearSum + currentMonth)) === dayOfMonth // 'veinti2' logic from GetDays
-            });
-        } catch (error) {
-           console.error(`Error calculating day ${dayOfMonth} of month ${monthIndex + 1}:`, error);
-        }
+      daysArray.push({
+        day: dayOfMonth,
+        universal: universalDay,
+        personal: personalDay
+      });
     }
 
     monthData.push({
       month: monthNames[monthIndex],
       year: yearToCalculate,
-      days: daysArray // Renamed MU to days for consistency
+      days: daysArray
     });
   }
 
-  return monthData; // Return data only for the specified year
+  return monthData;
 };
 
-
-// 3. Modify DayTable Component
-const DayTable = ({ birthdate }) => { // Expect birthdate in DD/MM/YYYY format
-
-  // Calculate data using useMemo based on the adapted GetDays logic
+function NumerologyCalendarGrid({ birthdate }) {
   const dayData = useMemo(() => {
     if (!birthdate) return [];
     const currentYear = new Date().getFullYear();
-    // Use the adapted function for the current year
     return getDayDataForYear(birthdate, currentYear, calculateAndReduce);
-  }, [birthdate]); // Recalculate only when birthdate changes
+  }, [birthdate]);
 
-  // Handle case where birthdate is invalid or calculation fails
-   if (!dayData || dayData.length === 0) {
-    // Optionally return null, a message, or a loading indicator
-    return <div className="day-table-container">Please provide a valid birthdate (DD/MM/YYYY).</div>;
-   }
+  if (!dayData.length) {
+    return <div className="container text-center mt-5">Please provide a valid birthdate (DD/MM/YYYY).</div>;
+  }
+
+  const isMasterNumber = (num) => [11, 22, 33].includes(num);
 
   return (
-    <div className="day-table-container">
-      {/* Header remains the same */}
-      <div className="day-table-header">
-        <div className="day-table-title">D DAY/DÍA</div>
-        <div className="day-table-title">U UNIVERSAL</div>
-        <div className="day-table-title">P PERSONAL</div>
-      </div>
+    <div className="container-fluid numerology-calendar-container">
+      <div className="relative shadow-md rounded-lg p-2">
+      <div className="numerology-row gx-0">          {dayData.map((monthInfo, index) => (
+            <div key={index} className="col mescuadro">
+              <div className={`numerology-row text-center ${monthInfo.month.length > 3 ? 'smalldias' : 'normaldias'}`}>
+                {monthInfo.month} {monthInfo.year}
+              </div>
 
-      {/* Rendering logic adapted for the new data structure */}
-      <div className="month-tables">
-        {dayData.map((monthData, monthIndex) => (
-          <div key={monthIndex} className="month-table">
-            {/* Use month name and year from the calculated data */}
-            <div className="month-header">{monthData.month} {monthData.year}</div>
-            <table>
-              <thead>
-                <tr>
-                  <th>D</th>
-                  <th>U</th>
-                  <th>P</th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* Iterate through the days array (previously MU) */}
-                {/* No need to filter placeholders as getDayDataForYear doesn't add them */}
-                {monthData.days.map((dayInfo, dayIndex) => (
-                  <tr key={dayIndex}>
-                    {/* Access properties using the new names */}
-                    <td>{dayInfo.day}</td>
-                    <td>{dayInfo.universal}</td>
-                    <td>{dayInfo.personal}</td>
-                    {/*<td>{dayInfo.veinti2 ? 'Yes' : 'No'}</td>*/} {/* Optional: Display veinti2 if needed */}
+              <div className="col fixprintcol">
+                <div className="numerology-row uppercase header-row">
+                  <div className="col-4 text-center cuadrito header-cell">D</div>
+                  <div className="col-4 text-center cuadrito header-cell">U</div>
+                  <div className="col-4 text-center cuadrito header-cell">P</div>
+                </div>
 
-                  </tr>
+                {monthInfo.days.map((dayInfo, diaIndex) => (
+                  <div key={diaIndex} className="numerology-row data-row">
+                    <div className={`col-4 text-center cuadrito minw day-cell ${dayInfo.personal === 22 ? 'vibra22' : ''}`}>
+                      {dayInfo.day}
+                    </div>
+                    <div className={`col-4 text-center cuadrito minw universal-cell ${isMasterNumber(dayInfo.universal) ? 'master-number' : ''}`}>
+                      {dayInfo.universal}
+                    </div>
+                    <div className={`col-4 text-center cuadrito minw personal-cell ${isMasterNumber(dayInfo.personal) ? 'master-number' : ''}`}>
+                      {dayInfo.personal}
+                    </div>
+                  </div>
                 ))}
-              </tbody>
-            </table>
-          </div>
-        ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
-};
+}
 
-export default DayTable;
+export default NumerologyCalendarGrid;

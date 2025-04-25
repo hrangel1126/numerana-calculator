@@ -1,3 +1,13 @@
+/* Add to the beginning of the file */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
 /* Base styling to match Angular app */
 .App {
   text-align: center;

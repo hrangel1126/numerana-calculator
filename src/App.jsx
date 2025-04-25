@@ -4,6 +4,7 @@ import Home from './pages/home/Home';
 import Single from './pages/single/Single';
 import Couple from './pages/couple/Couple';
 import { Team } from './pages/team/Team';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 function App() {
