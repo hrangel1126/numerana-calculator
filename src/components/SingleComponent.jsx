@@ -149,8 +149,8 @@ const SingleComponent = () => {
     try {
       console.log("Calculating with date:", formattedDate);
       const pinaculo = calculosUtils.GetFirstLine(formattedDate);
-      console.log("Pinaculo result:", pinaculo);
-      setRpinaculo([pinaculo]);
+      console.log("Pinaculo result...................", pinaculo);
+      setRpinaculo(pinaculo);
       
       const yearData = calculosUtils.GetYear(formattedDate);
       console.log("Year data result:", yearData);
