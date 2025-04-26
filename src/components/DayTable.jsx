@@ -2,91 +2,53 @@ import React, { useMemo } from 'react';
 import moment from 'moment';
 import './DayTable.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import CalculosService from '../utils/calculosUtils';
 
 const numerologySum = (number) => {
-  let numStr = String(number);
-  while (numStr.length > 1 && !['11', '22', '33'].includes(numStr)) {
-    const sumOfDigits = numStr.split('').reduce((acc, digit) => acc + parseInt(digit, 10), 0);
-    numStr = String(sumOfDigits);
+  while (number > 9 && ![11, 22, 33].includes(number)) {
+    number = number.toString().split('').reduce((acc, digit) => acc + parseInt(digit, 10), 0);
   }
-  return parseInt(numStr, 10);
-};
-
-const calculateAndReduce = (val1, val2) => {
-  const num1 = Number(val1) || 0;
-  const num2 = Number(val2) || 0;
-  return numerologySum(num1 + num2);
-};
-
-const getDayDataForYear = (birthdate, yearToCalculate, sumFunc) => {
-  if (!birthdate || !/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(birthdate)) {
-    console.error("Invalid birthdate format. Expected DD/MM/YYYY. Received:", birthdate);
-    return [];
-  }
-
-  const t = birthdate.split('/');
-  const birthDayDigits = t[0].split("").map(d => parseInt(d, 10));
-  const birthMonthDigits = t[1].split("").map(d => parseInt(d, 10));
-
-  const sumD = numerologySum(birthDayDigits.reduce((a, c) => a + c, 0));
-  const sumM = numerologySum(birthMonthDigits.reduce((a, c) => a + c, 0));
-
-  const uniYearSum = numerologySum(
-    yearToCalculate.toString().split("").map(d => parseInt(d, 10)).reduce((a, c) => a + c, 0)
-  );
-
-  const perYearSum = numerologySum(sumD + sumM + uniYearSum);
-
-  const monthNames = ["JAN/ENE", "FEB", "MAR", "APR/ABR", "MAY", "JUN", "JUL", "AUG/AGO", "SEP", "OCT", "NOV", "DEC/DIC"];
-  const monthData = [];
-
-  for (let monthIndex = 0; monthIndex < 12; monthIndex++) {
-    const currentMonth = monthIndex + 1;
-    const dateStr = `${yearToCalculate}-${String(currentMonth).padStart(2, '0')}`;
-    const daysInMonth = moment(dateStr).daysInMonth();
-    const daysArray = [];
-
-    const uniMonthSum = numerologySum(uniYearSum + currentMonth);
-    const perMonthSum = numerologySum(perYearSum + currentMonth);
-
-    for (let dayOfMonth = 1; dayOfMonth <= daysInMonth; dayOfMonth++) {
-      const universalDay = sumFunc(uniMonthSum, dayOfMonth);
-      const personalDay = sumFunc(perMonthSum, dayOfMonth);
-
-      daysArray.push({
-        day: dayOfMonth,
-        universal: universalDay,
-        personal: personalDay
-      });
-    }
-
-    monthData.push({
-      month: monthNames[monthIndex],
-      year: yearToCalculate,
-      days: daysArray
-    });
-  }
-
-  return monthData;
+  return number;
 };
 
 function NumerologyCalendarGrid({ birthdate }) {
   const dayData = useMemo(() => {
-    if (!birthdate) return [];
-    const currentYear = new Date().getFullYear();
-    return getDayDataForYear(birthdate, currentYear, calculateAndReduce);
+    // Only fetch data if we have a complete birthdate (DD/MM/YYYY)
+    if (!birthdate || !/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(birthdate)) {
+      return [];
+    }
+    
+    try {
+      // Validate parts of the date are complete
+      const dateParts = birthdate.split('/');
+      if (dateParts.length !== 3 || 
+          !dateParts[0] || dateParts[0].length < 1 || 
+          !dateParts[1] || dateParts[1].length < 1 || 
+          !dateParts[2] || dateParts[2].length < 4) {
+        return [];
+      }
+      
+      return CalculosService.GetDays(birthdate);
+    } catch (error) {
+      console.error("Error calculating days:", error);
+      return [];
+    }
   }, [birthdate]);
+
+  const isMasterNumber = (num) => [11, 22, 33].includes(num);
 
   if (!dayData.length) {
     return <div className="container text-center mt-5">Please provide a valid birthdate (DD/MM/YYYY).</div>;
   }
 
-  const isMasterNumber = (num) => [11, 22, 33].includes(num);
+  // Get only current year data (index 0)
+  const currentYearData = dayData[0] || [];
 
   return (
     <div className="container-fluid numerology-calendar-container">
       <div className="relative shadow-md rounded-lg p-2">
-      <div className="numerology-row gx-0">          {dayData.map((monthInfo, index) => (
+        <div className="numerology-row gx-0">
+          {currentYearData.map((monthInfo, index) => (
             <div key={index} className="col mescuadro">
               <div className={`numerology-row text-center ${monthInfo.month.length > 3 ? 'smalldias' : 'normaldias'}`}>
                 {monthInfo.month} {monthInfo.year}
@@ -101,7 +63,7 @@ function NumerologyCalendarGrid({ birthdate }) {
 
                 {monthInfo.days.map((dayInfo, diaIndex) => (
                   <div key={diaIndex} className="numerology-row data-row">
-                    <div className={`col-4 text-center cuadrito minw day-cell ${dayInfo.personal === 22 ? 'vibra22' : ''}`}>
+                    <div className={`col-4 text-center cuadrito minw day-cell ${dayInfo.vibra22 ? 'vibra22' : ''}`}>
                       {dayInfo.day}
                     </div>
                     <div className={`col-4 text-center cuadrito minw universal-cell ${isMasterNumber(dayInfo.universal) ? 'master-number' : ''}`}>

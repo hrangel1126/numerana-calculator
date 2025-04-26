@@ -935,111 +935,125 @@ GetMonth(birthdate) {
 // console.log("Next Year Data (11/11/1984):", JSON.stringify(monthlyData[1], null, 2));
 
   GetDays(birthdate) {
-    let thisY = new Date();
-    let t = birthdate.split('/');
-    let resultado = [[0], [1]];
-    
-    let day = t[1].toString().split("").map((t) => parseInt(t));
-    let year = t[2].toString().split("").map((t) => parseInt(t));
-    let month = t[0].toString().split("").map((t) => parseInt(t));
-    
-    let UniYear = thisY.getFullYear().toString().split("").map((t) => parseInt(t))
-      .reduce((a, c) => a + c, 0).toString().split("").map((t) => parseInt(t))
-      .reduce((a, c) => a + c, 0);
-      
-    let sumD = day.reduce((a, c) => a + c, 0).toString().split("").map((t) => parseInt(t))
-      .reduce((a, c) => a + c, 0);
-    let sumM = month.reduce((a, c) => a + c, 0).toString().split("").map((t) => parseInt(t))
-      .reduce((a, c) => a + c, 0);
-    let sumY = year.reduce((a, c) => a + c, 0).toString().split("").map((t) => parseInt(t))
-      .reduce((a, c) => a + c, 0);
-      
-    let PerY = (sumD + sumM + UniYear).toString().split("").map((t) => parseInt(t))
-      .reduce((a, c) => a + c, 0).toString().split("").map((t) => parseInt(t))
-      .reduce((a, c) => a + c, 0);
-      
-    let NextUY = (thisY.getFullYear() + 1).toString().split("").map((t) => parseInt(t))
-      .reduce((a, c) => a + c, 0).toString().split("").map((t) => parseInt(t))
-      .reduce((a, c) => a + c, 0);
-      
-    let NextPY = (sumD + sumM + NextUY).toString().split("").map((t) => parseInt(t))
-      .reduce((a, c) => a + c, 0).toString().split("").map((t) => parseInt(t))
-      .reduce((a, c) => a + c, 0);
-    
-    for (let index = 0; index < 12; index++) {
-      let mesindex = index + 1;
-      let normalizomes = mesindex < 10 ? `0${mesindex}` : mesindex;
-      let elmes = '';
-      
-      switch(index) {
-        case 0: {elmes = "JAN/ENE"; break;}
-        case 1: {elmes = "FEB"; break;}
-        case 2: {elmes = "MAR"; break;}
-        case 3: {elmes = "APR/ABR"; break;}
-        case 4: {elmes = "MAY"; break;}
-        case 5: {elmes = "JUN"; break;}
-        case 6: {elmes = "JUL"; break;}
-        case 7: {elmes = "AUG/AGO"; break;}
-        case 8: {elmes = "SEP"; break;}
-        case 9: {elmes = "OCT"; break;}
-        case 10: {elmes = "NOV"; break;}
-        case 11: {elmes = "DEC/DIC"; break;}
-        default: {elmes = 'error.'; break;}
-      }
-      
-      let cm = `${thisY.getFullYear()}-${normalizomes}`;
-      let nm = `${(thisY.getFullYear() + 1)}-${normalizomes}`;
-      
-      const daysInMonth = moment(cm).daysInMonth();
-      const daysInnxMonth = moment(nm).daysInMonth();
-      
-      let mes = Array.from({length: daysInMonth}, (v, k) => k + 1);
-      let nxmes = Array.from({length: daysInnxMonth}, (v, k) => k + 1);
-      let MU = [];
-      let NXMU = [];
-      
-      mes.forEach(diames => {
-        let chkvibra22 = 22 - (UniYear + mesindex);
-        let vivbra22 = chkvibra22 == diames ? true : false;
-        
-        MU.push({
-          dia: diames, 
-          MU: this.sumY((UniYear + mesindex), diames), 
-          MP: this.sumY((PerY + mesindex), diames),
-          veinti2: vivbra22
-        });
-      });
-      
-      if (MU.length < 31) {
-        let fix = 31 - MU.length;
-        for (let ind = 0; ind < fix; ind++) {
-          MU.push({dia: '  ', MU: '  ', MP: '  '});
-        }
-      }
-      
-      nxmes.forEach(diames => {
-        NXMU.push({
-          dia: diames, 
-          MU: this.sumY((NextUY + mesindex), diames), 
-          MP: this.sumY((NextPY + mesindex), diames)
-        });
-      });
-      
-      if (NXMU.length < 32) {
-        let fix = 30 - NXMU.length;
-        for (let ind = 0; ind < fix; ind++) {
-          NXMU.push({dia: '', MU: '', MP: ''});
-        }
-      }
-      
-      resultado[0].push({Year: thisY.getFullYear(), Month: elmes, MU: MU});
-      resultado[1].push({Year: (thisY.getFullYear() + 1), Month: elmes, MU: NXMU});
+    // Validate birthdate format first
+    if (!birthdate || !/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(birthdate)) {
+      console.error("Invalid birthdate format in GetDays. Expected DD/MM/YYYY");
+      return [];
     }
     
-    resultado[0].splice(0, 1);
-    resultado[1].splice(0, 1);
-    
-    return resultado;
+    try {
+      let thisY = new Date();
+      let t = birthdate.split('/');
+      
+      // Ensure we have all parts of the date
+      if (t.length !== 3 || !t[0] || !t[1] || !t[2]) {
+        console.error("Invalid birthdate parts in GetDays");
+        return [];
+      }
+      
+      let resultado = [[0], [1]];
+      
+      let day = t[0].toString().split("").map((t) => parseInt(t));
+      let month = t[1].toString().split("").map((t) => parseInt(t));
+      let year = t[2].toString().split("").map((t) => parseInt(t));
+      
+      let UniYear = thisY.getFullYear().toString().split("").map((t) => parseInt(t))
+        .reduce((a, c) => a + c, 0).toString().split("").map((t) => parseInt(t))
+        .reduce((a, c) => a + c, 0);
+        
+      let sumD = day.reduce((a, c) => a + c, 0).toString().split("").map((t) => parseInt(t))
+        .reduce((a, c) => a + c, 0);
+      let sumM = month.reduce((a, c) => a + c, 0).toString().split("").map((t) => parseInt(t))
+        .reduce((a, c) => a + c, 0);
+      let sumY = year.reduce((a, c) => a + c, 0).toString().split("").map((t) => parseInt(t))
+        .reduce((a, c) => a + c, 0);
+        
+      let PerY = (sumD + sumM + UniYear).toString().split("").map((t) => parseInt(t))
+        .reduce((a, c) => a + c, 0).toString().split("").map((t) => parseInt(t))
+        .reduce((a, c) => a + c, 0);
+        
+      let NextUY = (thisY.getFullYear() + 1).toString().split("").map((t) => parseInt(t))
+        .reduce((a, c) => a + c, 0).toString().split("").map((t) => parseInt(t))
+        .reduce((a, c) => a + c, 0);
+        
+      let NextPY = (sumD + sumM + NextUY).toString().split("").map((t) => parseInt(t))
+        .reduce((a, c) => a + c, 0).toString().split("").map((t) => parseInt(t))
+        .reduce((a, c) => a + c, 0);
+      
+      // Get month data for current year and next year
+      for (let index = 0; index < 12; index++) {
+        let mesindex = index + 1;
+        let normalizomes = mesindex < 10 ? `0${mesindex}` : mesindex;
+        let elmes = '';
+        
+        switch(index) {
+          case 0: {elmes = "JAN/ENE"; break;}
+          case 1: {elmes = "FEB"; break;}
+          case 2: {elmes = "MAR"; break;}
+          case 3: {elmes = "APR/ABR"; break;}
+          case 4: {elmes = "MAY"; break;}
+          case 5: {elmes = "JUN"; break;}
+          case 6: {elmes = "JUL"; break;}
+          case 7: {elmes = "AUG/AGO"; break;}
+          case 8: {elmes = "SEP"; break;}
+          case 9: {elmes = "OCT"; break;}
+          case 10: {elmes = "NOV"; break;}
+          case 11: {elmes = "DEC/DIC"; break;}
+          default: {elmes = 'error.'; break;}
+        }
+        
+        let cm = `${thisY.getFullYear()}-${normalizomes}`;
+        let nm = `${(thisY.getFullYear() + 1)}-${normalizomes}`;
+        
+        const daysInMonth = moment(cm).daysInMonth();
+        const daysInnxMonth = moment(nm).daysInMonth();
+        
+        // Process days for current month
+        let currentMonthData = [];
+        for (let day = 1; day <= daysInMonth; day++) {
+          let chkvibra22 = 22 - (UniYear + mesindex);
+          let vibra22 = chkvibra22 === day;
+          
+          currentMonthData.push({
+            day,
+            universal: this.sumY((UniYear + mesindex), day),
+            personal: this.sumY((PerY + mesindex), day),
+            vibra22
+          });
+        }
+        
+        // Process days for next year's month
+        let nextYearMonthData = [];
+        for (let day = 1; day <= daysInnxMonth; day++) {
+          nextYearMonthData.push({
+            day,
+            universal: this.sumY((NextUY + mesindex), day),
+            personal: this.sumY((NextPY + mesindex), day)
+          });
+        }
+        
+        resultado[0].push({
+          year: thisY.getFullYear(),
+          month: elmes,
+          days: currentMonthData
+        });
+        
+        resultado[1].push({
+          year: thisY.getFullYear() + 1,
+          month: elmes,
+          days: nextYearMonthData
+        });
+      }
+      
+      // Remove placeholder first items
+      resultado[0].splice(0, 1);
+      resultado[1].splice(0, 1);
+      
+      return resultado;
+    } catch (error) {
+      console.error("Error in GetDays calculation:", error);
+      return [];
+    }
   },
 
   /**
