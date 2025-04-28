@@ -8,6 +8,7 @@ import 'swiper/css/navigation';
 import PinaculoChartComponent from './common/PinaculoChartComponent';
 import DesktopMonthGridComponent from './common/DesktopMonthGridComponent';
 import DesktopDayGridComponent from './common/DesktopDayGridComponent';
+import YearChartComponent from './common/YearChartComponent';
 
 // Import utility functions
 import { calculosUtils } from '../utils/calculosUtils';
@@ -723,6 +724,26 @@ const CoupleComponent = () => {
           )}
         </div>
       </div>
+
+      <div className="monthly-forecast-section">
+
+      <div className="col-4">
+                <div className="rside">
+                  <YearChartComponent 
+                    year={year} 
+                    data={pinYear.length > 0 ? pinYear[0] : null} 
+                    isCurrentYear={true} 
+                  />
+                  <div className="selected">
+                    <YearChartComponent 
+                      year={nxYear} 
+                      data={pinYear.length > 0 ? pinYear[0] : null} 
+                      isCurrentYear={false} 
+                    />
+                  </div>
+                </div>
+              </div>
+              </div>
       
       {/* Monthly Forecast Section */}
       <div className="monthly-forecast-section">
