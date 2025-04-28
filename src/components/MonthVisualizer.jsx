@@ -9,7 +9,7 @@ const monthNamesFallback = [
     "SEP", "OCT", "NOV", "DEC/DIC"
 ];
 
-const MonthVisualizer = ({ birthdate, year = 0 }) => {
+const MonthVisualizer = ({ birthdate, year = 0, isCouple = false, birthdate2 }) => {
   const [monthsData, setMonthsData] = useState([]);
   const [targetYear, setTargetYear] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -44,7 +44,12 @@ const MonthVisualizer = ({ birthdate, year = 0 }) => {
     try {
       // Call the GetMonth function
       // It returns [[current year months], [next year months]]
-      const result = calculosUtils.GetMonth(birthdate);
+      let result;
+      if (isCouple) {
+        result = calculosUtils.GetMonthCouple(birthdate, birthdate2);
+      } else {
+        result = calculosUtils.GetMonth(birthdate);
+      }
 
       // Basic validation of the returned structure
       if (!Array.isArray(result) || result.length !== 2 || !Array.isArray(result[0]) || !Array.isArray(result[1])) {

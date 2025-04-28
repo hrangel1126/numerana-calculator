@@ -11,7 +11,7 @@ const numerologySum = (number) => {
   return number;
 };
 
-function NumerologyCalendarGrid({ birthdate }) {
+function NumerologyCalendarGrid({ birthdate, isCouple, birthdate2 }) {
   const dayData = useMemo(() => {
     // Only fetch data if we have a complete birthdate (DD/MM/YYYY)
     if (!birthdate || !/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(birthdate)) {

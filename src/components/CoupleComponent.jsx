@@ -5,6 +5,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import PinaculoChartComponent from './common/PinaculoChartComponent';
+import DesktopMonthGridComponent from './common/DesktopMonthGridComponent';
+import DesktopDayGridComponent from './common/DesktopDayGridComponent';
 
 // Import utility functions
 import { calculosUtils } from '../utils/calculosUtils';
@@ -21,12 +24,12 @@ import './CoupleComponent.css';
 
 const CoupleComponent = () => {
   // State variables for person 1
-  const [nombre, setNombre] = useState('');
-  const [birthdate, setBirthdate] = useState('');
+  const [nombre, setNombre] = useState('saurav');
+  const [birthdate, setBirthdate] = useState('11/11/1984');
   
   // State variables for person 2
-  const [nombre2, setNombre2] = useState('');
-  const [birthdate2, setBirthdate2] = useState('');
+  const [nombre2, setNombre2] = useState('kumar');
+  const [birthdate2, setBirthdate2] = useState('11/01/1999');
   
   // UI state variables
   const [loading, setLoading] = useState(true);
@@ -213,11 +216,13 @@ const CoupleComponent = () => {
     try {
       // Calculate for person 1
       const pinaculo1 = calculosUtils.GetFirstLine(birthdate);
-      setRpinaculo([pinaculo1]);
+      console.log('.....bitrhdat .......', birthdate, '..................', pinaculo1);
+      setRpinaculo(pinaculo1);
       
       // Calculate for person 2
       const pinaculo2 = calculosUtils.GetFirstLine(birthdate2);
-      setRpinaculo2([pinaculo2]);
+      console.log('.....bitrhdat2 .......', birthdate2, '..................', pinaculo2);
+      setRpinaculo2(pinaculo2);
       
       // Calculate couple compatibility
       calculateCoupleCompatibility(pinaculo1, pinaculo2);
@@ -644,17 +649,6 @@ const CoupleComponent = () => {
         </div>
       </div>
       
-      <div className="button-container">
-        <button 
-          type="button" 
-          onClick={reload} 
-          className="reset-button"
-          aria-label="Start over"
-        >
-          <i className="bi bi-arrow-clockwise"></i>
-        </button>
-      </div>
-      
       {/* Compatibility Section */}
       <div className="compatibility-section">
         <h3 className="section-title">Compatibility | Compatibilidad</h3>
@@ -663,45 +657,18 @@ const CoupleComponent = () => {
           {getScreenWidth ? (
             // Desktop view
             <div className="charts-desktop">
-              <div className="chart-row">
-                <div className="chart-column">
-                  <h4 className="chart-title">{nombre}</h4>
-                  {rpinaculo.length > 0 && (
-                    <div className="numerology-diagram">
-                      <div className="number-node top">{rpinaculo[0]?.top}</div>
-                      <div className="number-node left">{rpinaculo[0]?.A}</div>
-                      <div className="number-node right">{rpinaculo[0]?.B}</div>
-                      <div className="number-node bottom-left">{rpinaculo[0]?.C}</div>
-                      <div className="number-node bottom-right">{rpinaculo[0]?.D}</div>
-                    </div>
-                  )}
-                </div>
-                
-                <div className="chart-column">
-                  <h4 className="chart-title">Couple | Pareja</h4>
-                  {sinastra.length > 0 && (
-                    <div className="compatibility-diagram">
-                      <div className="comp-node top">{sinastra[0]?.E}</div>
-                      <div className="comp-node left">{sinastra[0]?.A}</div>
-                      <div className="comp-node right">{sinastra[0]?.B}</div>
-                      <div className="comp-node bottom-left">{sinastra[0]?.C}</div>
-                      <div className="comp-node bottom-right">{sinastra[0]?.D}</div>
-                    </div>
-                  )}
-                </div>
-                
-                <div className="chart-column">
-                  <h4 className="chart-title">{nombre2}</h4>
-                  {rpinaculo2.length > 0 && (
-                    <div className="numerology-diagram">
-                      <div className="number-node top">{rpinaculo2[0]?.top}</div>
-                      <div className="number-node left">{rpinaculo2[0]?.A}</div>
-                      <div className="number-node right">{rpinaculo2[0]?.B}</div>
-                      <div className="number-node bottom-left">{rpinaculo2[0]?.C}</div>
-                      <div className="number-node bottom-right">{rpinaculo2[0]?.D}</div>
-                    </div>
-                  )}
-                </div>
+            <div className="col-8">
+                <PinaculoChartComponent pinaculo={rpinaculo.length > 0 ? rpinaculo[0] : null} />
+              </div>
+
+             
+
+              <div className="col-8">
+                <PinaculoChartComponent pinaculo={rpinaculo2.length > 0 ? rpinaculo2[0] : null} />
+              </div>
+
+              <div className="col-8">
+                <PinaculoChartComponent pinaculo={sinastra.length > 0 ? sinastra[0] : null} />
               </div>
             </div>
           ) : (
@@ -765,24 +732,8 @@ const CoupleComponent = () => {
           <div className="forecast-content">
             {getScreenWidth ? (
               // Desktop view
-              <div className="forecast-desktop">
-                <Swiper
-                  ref={swiperRef}
-                  {...swiperConfig}
-                  className="swiper-container-forecast"
-                  onSlideChange={slideChange}
-                >
-                  {listMobileM.map((month, idx) => (
-                    <SwiperSlide key={idx} className="swiper-slide">
-                      <div className="forecast-card">
-                        <div className="forecast-month-header">
-                          <h3 className="month-name">{month.name}, {month.year}</h3>
-                        </div>
-                        {smallLoading ? renderSmallLoading() : renderMonthlyChart(month)}
-                      </div>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+                <div className="forecast-desktop">
+                  <DesktopMonthGridComponent birthdate={birthdate} birthdate2={birthdate2} isCouple={true}/>
               </div>
             ) : (
               // Mobile view
@@ -814,6 +765,45 @@ const CoupleComponent = () => {
         )}
       </div>
       
+      <div className="monthly-forecast-section">
+        <h3 className="forecast-header">Monthly Forecast | Pronóstico Mensual {year}/{nxYear}</h3>
+        
+        {listMobileM.length > 0 && (
+          <div className="forecast-content">
+            {getScreenWidth ? (
+              // Desktop view
+                <div className="forecast-desktop">
+                  <DesktopDayGridComponent birthdate={birthdate} birthdate2={birthdate2} isCouple={true}/>
+              </div>
+            ) : (
+              // Mobile view
+              <div className="forecast-mobile">
+                {listMobileM.length > 0 && (
+                  <select 
+                    className="month-select" 
+                    onChange={(e) => callMesMobil(parseInt(e.target.value))}
+                    aria-label="Select month"
+                  >
+                    {listMobileM.map((month, idx) => (
+                      <option key={idx} value={idx}>
+                        {month.name}, {month.year}
+                      </option>
+                    ))}
+                  </select>
+                )}
+                
+                <div className="forecast-card-mobile">
+                  {smallLoading ? (
+                    renderSmallLoading()
+                  ) : (
+                    listMobileM.length > 0 && renderMonthlyChart(listMobileM[indexMobil])
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
       <div className="footer">
         <div className="website">www.numerana.com</div>
         <div className="author">By: Ana Dorotea</div>

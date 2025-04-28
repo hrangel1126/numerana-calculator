@@ -539,9 +539,9 @@ h3.name {
   border-radius: 12px;
   border: 1px solid #e0e0e0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  padding: 30px;
-  margin: 0 auto 40px;
-  max-width: 800px;
+  /* padding: 10px; */
+  /* margin: 0 auto 10px; */
+  max-width: 1200px;
   text-align: center;
 }
 
@@ -779,10 +779,8 @@ h3.name {
   border: 5px solid #858585;
   border-radius: 5px;
   background-color: #fff;
-  width: 100%;
-  max-width: 980px;
-  margin: 20px auto;
-  padding: 20px;
+  /* margin: 10px auto; */
+  /* padding: 10px; */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
