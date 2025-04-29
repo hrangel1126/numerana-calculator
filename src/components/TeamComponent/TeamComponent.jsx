@@ -137,7 +137,9 @@ const TeamComponent = () => {
         
         try {
           // Calculate numerology values
-          const mainLine = calculosUtils.GetFirstLine(birthdate);
+          const mainLine = calculosUtils.GetFirstLine(birthdate)[0];
+
+          console.log('...mainLine....this one ........',mainLine);
           
           tempTeam.push({
             id: i,
@@ -200,7 +202,7 @@ const TeamComponent = () => {
     newCalculo.bl = determineLetterSize(newCalculo.FB);
     newCalculo.cl = determineLetterSize(newCalculo.FC);
     newCalculo.dl = determineLetterSize(newCalculo.FD);
-    
+    console.log('...tempTeam.',tempTeam);
     setSinastraE(tempTeam);
     setTeamCalculo(newCalculo);
     
