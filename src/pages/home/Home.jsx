@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
 import HeaderMenu from '../../components/HeaderMenu/HeaderMenu';
+import { useTranslation } from '../../utils/i18n/LanguageContext';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 // Import logo for navbar
 import logoImage from '../../assets/img/logon.webp';
 import spanishFlag from '../../assets/img/span.png';
 
-
 const Home = () => {
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1500);
@@ -26,7 +27,7 @@ const Home = () => {
         ) : (
           <div className="bntcontain">
             <div className="row">
-              <div className="col-12 title">Personal Pináculo</div>
+              <div className="col-12 title">{t('home.personal')}</div>
             </div>
             <div className="row">
               <div className="col-12">
@@ -44,7 +45,7 @@ const Home = () => {
             </div>
 
             <div className="row" style={{ marginTop: '1.5rem' }}>
-              <div className="col-12 title">Couple/Pareja Pináculo</div>
+              <div className="col-12 title">{t('home.couple')}</div>
             </div>
             <div className="row">
               <div className="col-12">
@@ -62,7 +63,7 @@ const Home = () => {
             </div>
 
             <div className="row" style={{ marginTop: '1.5rem' }}>
-              <div className="col-12 title">Team/Equipo Pináculo</div>
+              <div className="col-12 title">{t('home.team')}</div>
             </div>
             <div className="row">
               <div className="col-12">

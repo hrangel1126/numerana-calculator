@@ -1,0 +1,18 @@
+{
+  "language": "English",
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "learn": "Learn",
+    "faq": "FAQ"
+  },
+  "home": {
+    "personal": "Personal Pináculo",
+    "couple": "Couple Pináculo",
+    "team": "Team Pináculo"
+  },
+  "language_selector": {
+    "en": "ENG",
+    "es": "ESP"
+  }
+} 

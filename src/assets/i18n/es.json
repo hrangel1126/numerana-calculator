@@ -1,0 +1,18 @@
+{
+  "language": "Español",
+  "nav": {
+    "home": "Inicio",
+    "about": "Sobre Nosotras",
+    "learn": "Aprender",
+    "faq": "Preguntas Frecuentes"
+  },
+  "home": {
+    "personal": "Personal Pináculo",
+    "couple": "Pareja Pináculo",
+    "team": "Equipo Pináculo"
+  },
+  "language_selector": {
+    "en": "ING",
+    "es": "ESP"
+  }
+} 

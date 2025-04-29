@@ -6,25 +6,28 @@ import Couple from './pages/couple/Couple';
 import { Team } from './pages/team/Team';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import { LanguageProvider } from './utils/i18n/LanguageContext';
 
 function App() {
   const [showMenu, setShowMenu] = useState(true);
   
   return (
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<Navigate to="/home" replace />} />
-          <Route path="/home" element={<Home setShowMenu={setShowMenu} />} />
-          <Route path="/single" element={<Single setShowMenu={setShowMenu} />} />
-          <Route path="/reload" element={<Single setShowMenu={setShowMenu} />} />
-          <Route path="/couple" element={<Couple setShowMenu={setShowMenu} />} />
-          <Route path="/team" element={<Team setShowMenu={setShowMenu} />} />
-          <Route path="/reloadc" element={<Single setShowMenu={setShowMenu} />} />
-          <Route path="/reloadt" element={<Team setShowMenu={setShowMenu} />} />
-        </Routes>
-      </div>
-    </Router>
+    <LanguageProvider>
+      <Router>
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<Navigate to="/home" replace />} />
+            <Route path="/home" element={<Home setShowMenu={setShowMenu} />} />
+            <Route path="/single" element={<Single setShowMenu={setShowMenu} />} />
+            <Route path="/reload" element={<Single setShowMenu={setShowMenu} />} />
+            <Route path="/couple" element={<Couple setShowMenu={setShowMenu} />} />
+            <Route path="/team" element={<Team setShowMenu={setShowMenu} />} />
+            <Route path="/reloadc" element={<Single setShowMenu={setShowMenu} />} />
+            <Route path="/reloadt" element={<Team setShowMenu={setShowMenu} />} />
+          </Routes>
+        </div>
+      </Router>
+    </LanguageProvider>
   );
 }
 
