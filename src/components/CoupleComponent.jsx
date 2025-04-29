@@ -38,6 +38,12 @@ const CoupleComponent = () => {
   const [resultados, setResultados] = useState(false);
   const [smallLoading, setSmallLoading] = useState(false);
   
+  // Mobile month/year selection state
+  const [mobilMesSelect, setMobilMesSelect] = useState({
+    year: 0,
+    Month: 0,
+  });
+  
   // Pinaculo data for both individuals
   const [rpinaculo, setRpinaculo] = useState([]);
   const [rpinaculo2, setRpinaculo2] = useState([]);
@@ -131,6 +137,17 @@ const CoupleComponent = () => {
       }
     }
   }, [resultados, index, indexMobil, indexSina, getScreenWidth]);
+  
+  // Update mobilMesSelect when listMobileM changes
+  useEffect(() => {
+    if (listMobileM.length > 1 && mobilMesSelect.year === 0) {
+      // Initialize with the first valid month
+      setMobilMesSelect({
+        year: listMobileM[1].year,
+        Month: listMobileM[1].month
+      });
+    }
+  }, [listMobileM, mobilMesSelect.year]);
   
   // Loading animation function
   const theLoading = (loadingTime = 3500) => {
@@ -308,6 +325,14 @@ const CoupleComponent = () => {
     // Generate months for the current year and next year
     const months = [];
     
+    // Add a placeholder option
+    months.push({
+      month: 0,
+      year: 0,
+      name: "Month/Mes",
+      data: null
+    });
+    
     // Current year months
     for (let m = 1; m <= 12; m++) {
       if (m >= currentMonth - 1) { // Include one month before current month
@@ -331,6 +356,14 @@ const CoupleComponent = () => {
     }
     
     setListMobileM(months);
+    
+    // Initialize mobilMesSelect with first valid month if not already set
+    if (mobilMesSelect.year === 0 && months.length > 1) {
+      setMobilMesSelect({
+        year: months[1].year,
+        Month: months[1].month
+      });
+    }
   };
   
   // Get month name in English/Spanish
@@ -379,8 +412,14 @@ const CoupleComponent = () => {
     try {
       const selectedMonth = listMobileM[event] || null;
       if (selectedMonth) {
-        // Implement month selection logic
+        // Set loading state
         setSmallLoading(true);
+        
+        // Update mobile month selection state
+        setMobilMesSelect({
+          year: selectedMonth.year || 0,
+          Month: selectedMonth.month || 0
+        });
         
         // Process the data (placeholder)
         setTimeout(() => {
@@ -658,19 +697,74 @@ const CoupleComponent = () => {
           {getScreenWidth ? (
             // Desktop view
             <div className="charts-desktop">
-            <div className="col-8">
-                <PinaculoChartComponent pinaculo={rpinaculo.length > 0 ? rpinaculo[0] : null} />
-              </div>
+              <div className="chart-row">
+                <div className="chart-column">
+                  <h4 className="chart-title">{nombre}</h4>
+                  <PinaculoChartComponent pinaculo={rpinaculo.length > 0 ? rpinaculo[0] : null} />
+                </div>
 
-             
+                <div className="chart-column">
+                  <h4 className="chart-title">{nombre2}</h4>
+                  <PinaculoChartComponent pinaculo={rpinaculo2.length > 0 ? rpinaculo2[0] : null} />
+                </div>
 
-              <div className="col-8">
-                <PinaculoChartComponent pinaculo={rpinaculo2.length > 0 ? rpinaculo2[0] : null} />
+                <div className="chart-column">
+                  <h4 className="chart-title">Combined | Combinado</h4>
+                  <PinaculoChartComponent pinaculo={rpinaculo3.length > 0 ? rpinaculo3[0] : null} />
+                </div>
               </div>
-
-              <div className="col-8">
-                <PinaculoChartComponent pinaculo={sinastra.length > 0 ? sinastra[0] : null} />
-              </div>
+              
+              {/* <div className="compatibility-summary">
+                <h4>Compatibility Analysis | Análisis de Compatibilidad</h4>
+                {sinastra.length > 0 && (
+                  <div className="compatibility-table-container">
+                    <table className="compatibility-table">
+                      <thead>
+                        <tr>
+                          <th>Area | Área</th>
+                          <th>{nombre}</th>
+                          <th>{nombre2}</th>
+                          <th>Combined | Combinado</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Emotional | Emocional</td>
+                          <td>{sinastra[0]?.NA}</td>
+                          <td>{sinastra[0]?.NE}</td>
+                          <td className={parseInt(sinastra[0]?.A) > 7 ? 'compatibility-excellent' : 'compatibility-average'}>
+                            {sinastra[0]?.A}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Mental | Mental</td>
+                          <td>{sinastra[0]?.NB}</td>
+                          <td>{sinastra[0]?.NF}</td>
+                          <td className={parseInt(sinastra[0]?.B) > 7 ? 'compatibility-excellent' : 'compatibility-average'}>
+                            {sinastra[0]?.B}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Physical | Físico</td>
+                          <td>{sinastra[0]?.NC}</td>
+                          <td>{sinastra[0]?.NG}</td>
+                          <td className={parseInt(sinastra[0]?.C) > 7 ? 'compatibility-excellent' : 'compatibility-average'}>
+                            {sinastra[0]?.C}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Spiritual | Espiritual</td>
+                          <td>{sinastra[0]?.ND}</td>
+                          <td>{sinastra[0]?.NH}</td>
+                          <td className={parseInt(sinastra[0]?.D) > 7 ? 'compatibility-excellent' : 'compatibility-average'}>
+                            {sinastra[0]?.D}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div> */}
             </div>
           ) : (
             // Mobile view
@@ -708,14 +802,56 @@ const CoupleComponent = () => {
                 </SwiperSlide>
                 
                 <SwiperSlide className="slide-chart">
-                  <h4 className="chart-title">Compatibility</h4>
+                  <h4 className="chart-title">Combined | Combinado</h4>
+                  {rpinaculo3.length > 0 && (
+                    <div className="numerology-diagram">
+                      <div className="number-node top">{rpinaculo3[0]?.top}</div>
+                      <div className="number-node left">{rpinaculo3[0]?.A}</div>
+                      <div className="number-node right">{rpinaculo3[0]?.B}</div>
+                      <div className="number-node bottom-left">{rpinaculo3[0]?.C}</div>
+                      <div className="number-node bottom-right">{rpinaculo3[0]?.D}</div>
+                    </div>
+                  )}
+                </SwiperSlide>
+                
+                <SwiperSlide className="slide-chart">
+                  <h4 className="chart-title">Compatibility | Compatibilidad</h4>
                   {sinastra.length > 0 && (
-                    <div className="compatibility-diagram">
-                      <div className="comp-node top">{sinastra[0]?.E}</div>
-                      <div className="comp-node left">{sinastra[0]?.A}</div>
-                      <div className="comp-node right">{sinastra[0]?.B}</div>
-                      <div className="comp-node bottom-left">{sinastra[0]?.C}</div>
-                      <div className="comp-node bottom-right">{sinastra[0]?.D}</div>
+                    <div className="compatibility-table-container mobile">
+                      <table className="compatibility-table">
+                        <thead>
+                          <tr>
+                            <th>Area</th>
+                            <th>Value</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Emotional</td>
+                            <td className={parseInt(sinastra[0]?.A) > 7 ? 'compatibility-excellent' : 'compatibility-average'}>
+                              {sinastra[0]?.A}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Mental</td>
+                            <td className={parseInt(sinastra[0]?.B) > 7 ? 'compatibility-excellent' : 'compatibility-average'}>
+                              {sinastra[0]?.B}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Physical</td>
+                            <td className={parseInt(sinastra[0]?.C) > 7 ? 'compatibility-excellent' : 'compatibility-average'}>
+                              {sinastra[0]?.C}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Spiritual</td>
+                            <td className={parseInt(sinastra[0]?.D) > 7 ? 'compatibility-excellent' : 'compatibility-average'}>
+                              {sinastra[0]?.D}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   )}
                 </SwiperSlide>
@@ -725,27 +861,47 @@ const CoupleComponent = () => {
         </div>
       </div>
 
-      <div className="monthly-forecast-section">
+      {/* Year Chart Section */}
+      <div className="year-charts-section">
+        <h3 className="section-title">Year Charts | Gráficos Anuales</h3>
+        
+        <div className="year-charts-container">
+          <div className="year-charts-row">
+            <div className="person-year-charts">
+              <h4 className="chart-title">{nombre}</h4>
+              <div className="year-chart-pair">
+                <YearChartComponent 
+                  year={year} 
+                  data={pinYear.length > 0 ? pinYear[0] : null} 
+                  isCurrentYear={true} 
+                />
+                <YearChartComponent 
+                  year={nxYear} 
+                  data={pinYear.length > 0 ? pinYear[0] : null} 
+                  isCurrentYear={false} 
+                />
+              </div>
+            </div>
+            
+            <div className="person-year-charts">
+              <h4 className="chart-title">{nombre2}</h4>
+              <div className="year-chart-pair">
+                <YearChartComponent 
+                  year={year} 
+                  data={pinYear2.length > 0 ? pinYear2[0] : null} 
+                  isCurrentYear={true} 
+                />
+                <YearChartComponent 
+                  year={nxYear} 
+                  data={pinYear2.length > 0 ? pinYear2[0] : null} 
+                  isCurrentYear={false} 
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <div className="col-4">
-                <div className="rside">
-                  <YearChartComponent 
-                    year={year} 
-                    data={pinYear.length > 0 ? pinYear[0] : null} 
-                    isCurrentYear={true} 
-                  />
-                  <div className="selected">
-                    <YearChartComponent 
-                      year={nxYear} 
-                      data={pinYear.length > 0 ? pinYear[0] : null} 
-                      isCurrentYear={false} 
-                    />
-                  </div>
-                </div>
-              </div>
-              </div>
-      
-      {/* Monthly Forecast Section */}
       <div className="monthly-forecast-section">
         <h3 className="forecast-header">Monthly Forecast | Pronóstico Mensual {year}/{nxYear}</h3>
         
@@ -760,24 +916,92 @@ const CoupleComponent = () => {
               // Mobile view
               <div className="forecast-mobile">
                 {listMobileM.length > 0 && (
-                  <select 
-                    className="month-select" 
-                    onChange={(e) => callMesMobil(parseInt(e.target.value))}
-                    aria-label="Select month"
-                  >
-                    {listMobileM.map((month, idx) => (
-                      <option key={idx} value={idx}>
-                        {month.name}, {month.year}
-                      </option>
-                    ))}
-                  </select>
+                  <div className="mobile-year-month-selector">
+                    <div className="year-selector">
+                      <button 
+                        className={`year-btn ${mobilMesSelect?.year === year ? 'active' : ''}`}
+                        onClick={() => setMobilMesSelect(prev => ({ ...prev, year: year }))}
+                      >
+                        {year}
+                      </button>
+                      <button 
+                        className={`year-btn ${mobilMesSelect?.year === nxYear ? 'active' : ''}`}
+                        onClick={() => setMobilMesSelect(prev => ({ ...prev, year: nxYear }))}
+                      >
+                        {nxYear}
+                      </button>
+                    </div>
+                    
+                    <select 
+                      className="month-select" 
+                      onChange={(e) => callMesMobil(parseInt(e.target.value))}
+                      value={indexMobil}
+                      aria-label="Select month"
+                    >
+                      {listMobileM.map((month, idx) => (
+                        <option key={idx} value={idx}>
+                          {month.name}, {month.year || ''}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 )}
                 
                 <div className="forecast-card-mobile">
                   {smallLoading ? (
                     renderSmallLoading()
                   ) : (
-                    listMobileM.length > 0 && renderMonthlyChart(listMobileM[indexMobil])
+                    listMobileM.length > 0 && (
+                      <div className="mobile-month-details">
+                        <h4 className="mobile-month-title">
+                          {listMobileM[indexMobil]?.name || ''} {listMobileM[indexMobil]?.year || ''}
+                        </h4>
+                        
+                        {renderMonthlyChart(listMobileM[indexMobil])}
+                        
+                        <div className="mobile-day-forecast">
+                          <h5 className="mobile-day-title">Daily Forecast | Pronóstico Diario</h5>
+                          {listMobileM[indexMobil] && (
+                            <div className="day-forecast-container">
+                              <table className="day-table">
+                                <thead>
+                                  <tr>
+                                    <th>Day | Día</th>
+                                    <th>{nombre}</th>
+                                    <th>{nombre2}</th>
+                                    <th>Combined</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {Array.from({ length: 5 }, (_, i) => (
+                                    <tr key={i}>
+                                      <td>{i + 1}</td>
+                                      <td>{calculosUtils.sum(parseInt(rpinaculo[0]?.top) || 0, i + 1)}</td>
+                                      <td>{calculosUtils.sum(parseInt(rpinaculo2[0]?.top) || 0, i + 1)}</td>
+                                      <td>{calculosUtils.sum(
+                                        calculosUtils.sum(parseInt(rpinaculo[0]?.top) || 0, i + 1),
+                                        calculosUtils.sum(parseInt(rpinaculo2[0]?.top) || 0, i + 1)
+                                      )}</td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                              <div className="see-more-days">
+                                <button 
+                                  className="see-more-btn" 
+                                  onClick={() => {
+                                    // Handle showing full day view - placeholder
+                                    console.log("Show full day view");
+                                  }}
+                                >
+                                  See All Days
+                                </button>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )
                   )}
                 </div>
               </div>
@@ -797,27 +1021,95 @@ const CoupleComponent = () => {
                   <DesktopDayGridComponent birthdate={birthdate} birthdate2={birthdate2} isCouple={true}/>
               </div>
             ) : (
-              // Mobile view
+              // Mobile view - second instance
               <div className="forecast-mobile">
                 {listMobileM.length > 0 && (
-                  <select 
-                    className="month-select" 
-                    onChange={(e) => callMesMobil(parseInt(e.target.value))}
-                    aria-label="Select month"
-                  >
-                    {listMobileM.map((month, idx) => (
-                      <option key={idx} value={idx}>
-                        {month.name}, {month.year}
-                      </option>
-                    ))}
-                  </select>
+                  <div className="mobile-year-month-selector">
+                    <div className="year-selector">
+                      <button 
+                        className={`year-btn ${mobilMesSelect?.year === year ? 'active' : ''}`}
+                        onClick={() => setMobilMesSelect(prev => ({ ...prev, year: year }))}
+                      >
+                        {year}
+                      </button>
+                      <button 
+                        className={`year-btn ${mobilMesSelect?.year === nxYear ? 'active' : ''}`}
+                        onClick={() => setMobilMesSelect(prev => ({ ...prev, year: nxYear }))}
+                      >
+                        {nxYear}
+                      </button>
+                    </div>
+                    
+                    <select 
+                      className="month-select" 
+                      onChange={(e) => callMesMobil(parseInt(e.target.value))}
+                      value={indexMobil}
+                      aria-label="Select month"
+                    >
+                      {listMobileM.map((month, idx) => (
+                        <option key={idx} value={idx}>
+                          {month.name}, {month.year || ''}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 )}
                 
                 <div className="forecast-card-mobile">
                   {smallLoading ? (
                     renderSmallLoading()
                   ) : (
-                    listMobileM.length > 0 && renderMonthlyChart(listMobileM[indexMobil])
+                    listMobileM.length > 0 && (
+                      <div className="mobile-month-details">
+                        <h4 className="mobile-month-title">
+                          {listMobileM[indexMobil]?.name || ''} {listMobileM[indexMobil]?.year || ''}
+                        </h4>
+                        
+                        {renderMonthlyChart(listMobileM[indexMobil])}
+                        
+                        <div className="mobile-day-forecast">
+                          <h5 className="mobile-day-title">Daily Forecast | Pronóstico Diario</h5>
+                          {listMobileM[indexMobil] && (
+                            <div className="day-forecast-container">
+                              <table className="day-table">
+                                <thead>
+                                  <tr>
+                                    <th>Day | Día</th>
+                                    <th>{nombre}</th>
+                                    <th>{nombre2}</th>
+                                    <th>Combined</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {Array.from({ length: 5 }, (_, i) => (
+                                    <tr key={i}>
+                                      <td>{i + 1}</td>
+                                      <td>{calculosUtils.sum(parseInt(rpinaculo[0]?.top) || 0, i + 1)}</td>
+                                      <td>{calculosUtils.sum(parseInt(rpinaculo2[0]?.top) || 0, i + 1)}</td>
+                                      <td>{calculosUtils.sum(
+                                        calculosUtils.sum(parseInt(rpinaculo[0]?.top) || 0, i + 1),
+                                        calculosUtils.sum(parseInt(rpinaculo2[0]?.top) || 0, i + 1)
+                                      )}</td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                              <div className="see-more-days">
+                                <button 
+                                  className="see-more-btn" 
+                                  onClick={() => {
+                                    // Handle showing full day view - placeholder
+                                    console.log("Show full day view");
+                                  }}
+                                >
+                                  See All Days
+                                </button>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )
                   )}
                 </div>
               </div>
