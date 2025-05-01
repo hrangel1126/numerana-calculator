@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import calculosUtils from '../../utils/calculosUtils';
 import './TeamComponent.css';
+import { useTranslation } from '../../utils/i18n/LanguageContext';
 
 // Import images directly
 import leftDecoration from '../../assets/img/Lleft.png';
@@ -11,12 +12,16 @@ import logoImage from '../../assets/img/logonumerana80.png';
 
 const TeamComponent = () => {
   const navigate = useNavigate();
+  const { t, language } = useTranslation();
   
-  // State for team members
+  // Initialize with 6 team members as shown in the screenshot
   const [teamMembers, setTeamMembers] = useState([
     { id: 0, name: '', birthdate: '' },
     { id: 1, name: '', birthdate: '' },
-    { id: 2, name: '', birthdate: '' }
+    { id: 2, name: '', birthdate: '' },
+    { id: 3, name: '', birthdate: '' },
+    { id: 4, name: '', birthdate: '' },
+    { id: 5, name: '', birthdate: '' }
   ]);
   
   // UI states
@@ -138,8 +143,6 @@ const TeamComponent = () => {
         try {
           // Calculate numerology values
           const mainLine = calculosUtils.GetFirstLine(birthdate)[0];
-
-          console.log('...mainLine....this one ........',mainLine);
           
           tempTeam.push({
             id: i,
@@ -202,7 +205,7 @@ const TeamComponent = () => {
     newCalculo.bl = determineLetterSize(newCalculo.FB);
     newCalculo.cl = determineLetterSize(newCalculo.FC);
     newCalculo.dl = determineLetterSize(newCalculo.FD);
-    console.log('...tempTeam.',tempTeam);
+    
     setSinastraE(tempTeam);
     setTeamCalculo(newCalculo);
     
@@ -240,25 +243,25 @@ const TeamComponent = () => {
       {teamMembers.map((member, index) => (
         <div className="row text-center" key={member.id}>
           <div className="col-md-2 text-center" style={{ marginTop: 'auto', marginBottom: 'auto', fontWeight: 700 }}>
-            #{index + 1}
+            {t('team.member').replace('{number}', index + 1)}
           </div>
           <div className="col-md-4">
-            <label htmlFor={`Name_${member.id}`}><b>Name/Nombre</b></label>
+            <label htmlFor={`Name_${member.id}`}><b>{t('team.name_label')}</b></label>
             <input 
               type="text" 
               style={{ display: 'inline-table' }} 
               autoComplete="off" 
               className="form-control" 
-              placeholder="Name/Nombre" 
+              placeholder={t('team.placeholder.name')} 
               id={`Name_${member.id}`}
             />
           </div>
           <div className="col-md-4">
-            <label htmlFor={`Birthdate_${member.id}`}><b>Birthdate/Cumpleaños</b></label>
+            <label htmlFor={`Birthdate_${member.id}`}><b>{t('team.birthdate_label')}</b></label>
             <input
               className="form-control"
               style={{ display: 'inline-table' }}
-              placeholder="dd/mm/yyyy"
+              placeholder={t('team.placeholder.birthdate')}
               type="text"
               id={`Birthdate_${member.id}`}
             />
@@ -305,12 +308,12 @@ const TeamComponent = () => {
       <div className="row">
         <div className="col-2"></div>
         <div className="col-2"></div>
-        <div className="col-8"><h2 className="website" style={{ fontSize: '11px' }}>www.numerana.com</h2></div>
+        <div className="col-8"><h2 className="website" style={{ fontSize: '11px' }}>{t('team.website_info')}</h2></div>
       </div>
       <div className="row">
         <div className="col-2"></div>
         <div className="col-2"></div>
-        <div className="col-8"><h2 className="website" style={{ fontSize: '11px' }}>By: Ana Dorotea</h2></div>
+        <div className="col-8"><h2 className="website" style={{ fontSize: '11px' }}>{t('team.by_author')}</h2></div>
       </div>
     </div>
   );
@@ -353,12 +356,12 @@ const TeamComponent = () => {
         <div className="row">
           <div className="col-2"></div>
           <div className="col-2"></div>
-          <div className="col-8"><h2 className="website" style={{ fontSize: '11px' }}>www.numerana.com</h2></div>
+          <div className="col-8"><h2 className="website" style={{ fontSize: '11px' }}>{t('team.website_info')}</h2></div>
         </div>
         <div className="row">
           <div className="col-2"></div>
           <div className="col-2"></div>
-          <div className="col-8"><h2 className="website" style={{ fontSize: '11px' }}>By: Ana Dorotea</h2></div>
+          <div className="col-8"><h2 className="website" style={{ fontSize: '11px' }}>{t('team.by_author')}</h2></div>
         </div>
       </div>
       
@@ -461,8 +464,8 @@ const TeamComponent = () => {
         <div className="row">
           <div className="col-1"></div>
           <div className="col-5">
-            <p style={{ marginBottom: 0, fontWeight: 600 }}>Team Sinestry</p>
-            <p style={{ fontWeight: 600 }}>Sinestria de Equipo</p>
+            <p style={{ marginBottom: 0, fontWeight: 600 }}>{t('team.team_synastry')}</p>
+            <p style={{ fontWeight: 600 }}>{t('team.team_synastry_es')}</p>
           </div>
           <div className="col-6" style={{ marginTop: 'auto', marginBottom: 'auto' }}>
             <svg width="200" height="50" xmlns="http://www.w3.org/2000/svg">
@@ -558,7 +561,7 @@ const TeamComponent = () => {
               className="btn btn-primary btn-lg"
               style={{ margin: '20px auto' }}
             >
-              <i className="bi bi-printer-fill" style={{ marginRight: '5px' }}></i> Download PDF
+              <i className="bi bi-printer-fill" style={{ marginRight: '5px' }}></i> {t('team.download_pdf')}
             </button>
           </div>
         </div>

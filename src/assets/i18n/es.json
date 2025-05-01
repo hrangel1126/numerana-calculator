@@ -14,5 +14,20 @@
   "language_selector": {
     "en": "ING",
     "es": "ESP"
+  },
+  "team": {
+    "title": "Numerología",
+    "name_label": "Nombre/Name",
+    "birthdate_label": "Cumpleaños/Birthdate",
+    "member": "#{number}",
+    "placeholder": {
+      "name": "Nombre/Name",
+      "birthdate": "dd/mm/aaaa"
+    },
+    "download_pdf": "Descargar PDF",
+    "team_synastry": "Sinestria de Equipo",
+    "team_synastry_es": "Team Synastry",
+    "website_info": "www.numerana.com",
+    "by_author": "Por: Ana Dorotea"
   }
 } 
