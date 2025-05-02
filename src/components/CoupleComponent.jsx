@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import PinaculoChartComponent from './common/PinaculoChartComponent';
+import PinaculoChartComponent from './couple/PinaculoChartComponent';
 import DesktopMonthGridComponent from './common/DesktopMonthGridComponent';
 import DesktopDayGridComponent from './common/DesktopDayGridComponent';
 import YearChartComponent from './common/YearChartComponent';
@@ -494,119 +494,159 @@ const CoupleComponent = () => {
   // Render input form
   const renderForm = () => (
     <div 
-      className="calculator-container" 
+      className="couple-container" 
       style={{
         opacity: isVisible ? 1 : 0,
-        transition: 'opacity 1s ease-in-out'
+        transition: 'opacity 1s ease-in-out',
+        border: '5px solid #858585', 
+        borderRadius: '5px'
       }}
     >
-      <div className="calculator-content">
-        <div className="logo-container">
-          <div className="corner-decoration">
-            <img src={leftDecoration} alt="Left decoration" />
+      <div className="couple-content">
+        <div className="couple-row couple-resultado2">
+          <div className="couple-col-2">
+            <img src={leftDecoration} alt="Left decoration" className="couple-lleft" />
           </div>
-          <div className="logo-center">
-            <img src={logoImage} alt="numeranamx" className="logo" />
-            <h1 className="title">Numerology | Numerología</h1>
+          <div className="couple-col-8" style={{ textAlign: 'center' }}>
+            <img src={logoImage} alt="numeranamx" className="couple-logo" style={{ height: '80px' }} />
+            <h1 className="couple-titulo">Numerology | Numerología</h1>
           </div>
-          <div className="corner-decoration">
-            <img src={rightDecoration} alt="Right decoration" />
+          <div className="couple-col-2">
+            <img src={rightDecoration} alt="Right decoration" className="couple-lright" />
           </div>
         </div>
         
-        <div className="form-row">
-          <div className="form-column">
-            <div className="person-icon-container">
-              <div className="person-number">1</div>
-              <div className="person-icon">
-                <i className="bi bi-person-fill"></i>
-              </div>
-            </div>
-            <h3 className="form-title">Person/Persona 1</h3>
-            
-            <div className="form-group">
-              <label htmlFor="name1">Name/Nombre</label>
+        <div className="couple-row">
+          <div className="couple-col-2"></div>
+          <div className="couple-col-3">
+            <h2 className="couple-name couple-bold couple-titulo">{nombre}</h2>
+          </div>
+          <div className="couple-col-1"></div>
+          <div className="couple-col-3">
+            <h2 className="couple-name couple-bold couple-titulo">{nombre2}</h2>
+          </div>
+          <div className="couple-col-2"></div>
+        </div>
+        
+        <br />
+        
+        <div className="couple-row">
+          <div className="couple-col-2"></div>
+          <div className="couple-col-3" style={{ textAlign: 'center' }}>
+            <span className="couple-masc">
+              <b style={{ fontSize: '2.6rem', position: 'absolute', marginLeft: '-2rem', marginTop: '-7px' }}>1</b>
+              <i className="bi bi-person-fill couple-iconin"></i>
+            </span>
+          </div>
+          <div className="couple-col-2"></div>
+          <div className="couple-col-3" style={{ textAlign: 'center' }}>
+            <span className="couple-masc">
+              <b style={{ fontSize: '2.6rem', position: 'absolute', marginLeft: '-2rem', marginTop: '-7px' }}>2</b>
+              <i className="bi bi-person-fill couple-iconin"></i>
+            </span>
+          </div>
+          <div className="couple-col-2"></div>
+        </div>
+        
+        <div className="couple-row" id="name">
+          <div className="couple-col-2 couple-telefono"></div>
+          <div className="couple-col-3" style={{ textAlign: 'center' }}>
+            <div className="couple-form-group">
+              <label htmlFor="name1"><b>Name/Nombre</b></label>
               <input 
                 type="text" 
                 id="name1"
                 autoComplete="off" 
-                className="form-control" 
+                className="couple-form-control couple-nombres" 
                 value={nombre}
                 onChange={(e) => setNombre(e.target.value)}
                 placeholder="Name/Nombre" 
               />
             </div>
-            
-            <div className="form-group">
-              <label htmlFor="birth1">Birthdate/Cumple</label>
+          </div>
+          <div className="couple-col-2"></div>
+          <div className="couple-col-3">
+            <div className="couple-form-group" style={{ textAlign: 'center' }}>
+              <label htmlFor="name2"><b>Name/Nombre</b></label>
+              <input 
+                type="text" 
+                id="name2"
+                autoComplete="off" 
+                className="couple-form-control couple-nombres" 
+                value={nombre2}
+                onChange={(e) => setNombre2(e.target.value)}
+                placeholder="Name/Nombre" 
+              />
+            </div>
+          </div>
+          <div className="couple-col-2"></div>
+        </div>
+        
+        <div className="couple-row" style={{ textAlign: 'center' }}>
+          <div className="couple-col-2 couple-telefono"></div>
+          <div className="couple-col-3">
+            <div className="couple-form-group">
+              <label htmlFor="birth1"><b>Birthdate/Cumple</b></label>
               <input
-                className="form-control"
+                className="couple-form-control couple-nombres"
                 id="birth1"
                 autoComplete="off"
                 placeholder="dd/mm/yyyy"
-                type="text"
+                type="tel"
                 value={birthdate}
                 onChange={(e) => handleBirthdateChange(e, setBirthdate)}
                 ref={birth1Ref}
               />
             </div>
           </div>
-          
-          <div className="form-column">
-            <div className="person-icon-container">
-              <div className="person-number">2</div>
-              <div className="person-icon">
-                <i className="bi bi-person-fill"></i>
-              </div>
-            </div>
-            <h3 className="form-title">Person/Persona 2</h3>
-            
-            <div className="form-group">
-              <label htmlFor="name2">Name/Nombre</label>
-              <input 
-                type="text" 
-                id="name2"
-                autoComplete="off" 
-                className="form-control" 
-                value={nombre2}
-                onChange={(e) => setNombre2(e.target.value)}
-                placeholder="Name/Nombre" 
-              />
-            </div>
-            
-            <div className="form-group">
-              <label htmlFor="birth2">Birthdate/Cumple</label>
+          <div className="couple-col-2"></div>
+          <div className="couple-col-3">
+            <div className="couple-form-group">
+              <label htmlFor="birth2"><b>Birthdate/Cumple</b></label>
               <input
-                className="form-control"
+                className="couple-form-control couple-nombres"
                 id="birth2"
                 autoComplete="off"
                 placeholder="dd/mm/yyyy"
-                type="text"
+                type="tel"
                 value={birthdate2}
                 onChange={(e) => handleBirthdateChange(e, setBirthdate2)}
                 ref={birth2Ref}
               />
             </div>
           </div>
+          <div className="couple-col-2"></div>
         </div>
         
-        <button 
-          type="button" 
-          onClick={subm} 
-          className="submit-button"
-        >
-          <i className="bi bi-play-fill"></i>
-          Calculate
-        </button>
-        
-        <div className="footer">
-          <div className="website">www.numerana.com</div>
-          <div className="author">By: Ana Dorotea</div>
+        <div className="couple-row" style={{ marginBottom: '1rem' }}>
+          <div className="couple-col-3"></div>
+          <div className="couple-col-6">
+            <button 
+              style={{ marginTop: '1rem' }} 
+              type="button" 
+              onClick={subm} 
+              className="couple-btn couple-btn-primary couple-btn-lg couple-btn-block couple-send"
+            >
+              <i className="bi bi-play-btn-fill" style={{ zoom: 2, lineHeight: 1 }}></i>
+            </button>
+          </div>
+          <div className="couple-col-3">
+            <div className="couple-row">
+              <div className="couple-col-3"></div>
+              <div className="couple-col-3"></div>
+              <div className="couple-col-6"><h2 className="couple-website" style={{ fontSize: '11px' }}>www.numerana.com</h2></div>
+            </div>
+            <div className="couple-row">
+              <div className="couple-col-2"></div>
+              <div className="couple-col-2"></div>
+              <div className="couple-col-8"><h2 className="couple-website couple-ana" style={{ fontSize: '11px' }}>By: Ana Dorotea</h2></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
-  
+
   // Render monthly chart for desktop view
   const renderMonthlyChart = (month) => {
     if (!month || !month.data) return null;
@@ -650,175 +690,181 @@ const CoupleComponent = () => {
   
   // Render results
   const renderResults = () => (
+    <>
     <div 
-      className="results-container" 
+      className="couple-container" 
       style={{
         opacity: resultados ? 1 : 0,
-        transition: 'opacity 1s ease-in-out'
+        transition: 'opacity 1s ease-in-out',
+        border: '5px solid #858585', 
+        borderRadius: '5px'
       }}
       ref={myScrollContainerRef}
     >
-      <div className="logo-container">
-        <div className="corner-decoration">
-          <img src={leftDecoration} alt="Left decoration" />
+      <div className="couple-row couple-resultado2">
+        <div className="couple-col-2">
+          <img src={leftDecoration} alt="Left decoration" className="couple-lleft" />
         </div>
-        <div className="logo-center">
-          <img src={logoImage} alt="numeranamx" className="logo" />
-          <h1 className="title">Numerology | Numerología</h1>
+        <div className="couple-col-8" style={{ textAlign: 'center' }}>
+          <img src={logoImage} alt="numeranamx" className="couple-logo" style={{ height: '80px' }} />
+          <h1 className="couple-titulo">Numerology | Numerología</h1>
         </div>
-        <div className="corner-decoration">
-          <img src={rightDecoration} alt="Right decoration" />
+        <div className="couple-col-2">
+          <img src={rightDecoration} alt="Right decoration" className="couple-lright" />
         </div>
       </div>
       
-      <div className="people-container">
-        <div className="person-column">
-          <div className="person-header">
-            <div className="person-number">1</div>
-          </div>
-          <h2 className="person-name">{nombre}</h2>
-          <h3 className="person-birthdate">{birthdate}</h3>
+      <div className="couple-row">
+        <div className="couple-col-2"></div>
+        <div className="couple-col-3" style={{ textAlign: 'center' }}>
+          <span className="couple-masc">
+            <b style={{ fontSize: '2.6rem', position: 'absolute', marginLeft: '-2rem', marginTop: '-7px' }}>1</b>
+            <i className="bi bi-person-fill couple-iconin"></i>
+          </span>
         </div>
-        
-        <div className="person-column">
-          <div className="person-header">
-            <div className="person-number">2</div>
+        <div className="couple-col-2"></div>
+        <div className="couple-col-3" style={{ textAlign: 'center' }}>
+          <span className="couple-masc">
+            <b style={{ fontSize: '2.6rem', position: 'absolute', marginLeft: '-2rem', marginTop: '-7px' }}>2</b>
+            <i className="bi bi-person-fill couple-iconin"></i>
+          </span>
+        </div>
+        <div className="couple-col-2"></div>
+      </div>
+      
+      <div className="couple-row">
+        <div className="couple-col-2"></div>
+        <div className="couple-col-3">
+          <h2 className="couple-name couple-bold couple-titulo" style={{ textAlign: 'center' }}>{nombre}</h2>
+        </div>
+        <div className="couple-col-1"></div>
+        <div className="couple-col-3">
+          <h2 className="couple-name couple-bold couple-titulo" style={{ textAlign: 'center' }}>{nombre2}</h2>
+        </div>
+        <div className="couple-col-2"></div>
+      </div>
+      
+      <div className="couple-row">
+        <div className="couple-col-2"></div>
+        <div className="couple-col-3">
+          <h2 className="couple-name couple-bold couple-titulo" style={{ textAlign: 'center' }}>{birthdate}</h2>
+        </div>
+        <div className="couple-col-1"></div>
+        <div className="couple-col-3">
+          <h2 className="couple-name couple-bold couple-titulo" style={{ textAlign: 'center' }}>{birthdate2}</h2>
+        </div>
+        <div className="couple-col-2"></div>
+      </div>
+      
+      <div className="couple-row" style={{ marginBottom: '1rem' }}>
+        <div className="couple-col-3"></div>
+        <div className="couple-col-6">
+          <button 
+            style={{ marginTop: '1rem' }} 
+            type="button" 
+            onClick={reload} 
+            className="couple-btn couple-btn-primary couple-btn-lg couple-btn-block couple-send"
+          >
+            <i className="bi bi-play-btn-fill" style={{ zoom: 2, lineHeight: 1 }}></i>
+          </button>
+        </div>
+        <div className="couple-col-3">
+          <div className="couple-row">
+            <div className="couple-col-3"></div>
+            <div className="couple-col-3"></div>
+            <div className="couple-col-6"><h2 className="couple-website" style={{ fontSize: '11px' }}>www.numerana.com</h2></div>
           </div>
-          <h2 className="person-name">{nombre2}</h2>
-          <h3 className="person-birthdate">{birthdate2}</h3>
+          <div className="couple-row">
+            <div className="couple-col-2"></div>
+            <div className="couple-col-2"></div>
+            <div className="couple-col-8"><h2 className="couple-website couple-ana" style={{ fontSize: '11px' }}>By: Ana Dorotea</h2></div>
+          </div>
         </div>
       </div>
+
+      </div>
+     
+      <div>
       
       {/* Compatibility Section */}
-      <div className="compatibility-section">
-        <h3 className="section-title">Compatibility | Compatibilidad</h3>
+      <div className="couple-compatibility-section">
+        <h3 className="couple-section-title">Compatibility | Compatibilidad</h3>
         
-        <div className="compatibility-charts">
+        <div className="couple-compatibility-charts">
           {getScreenWidth ? (
             // Desktop view
-            <div className="charts-desktop">
-              <div className="chart-row">
-                <div className="chart-column">
-                  <h4 className="chart-title">{nombre}</h4>
+            <div className="couple-charts-desktop">
+              <div className="couple-chart-row">
+                <div className="couple-chart-column">
+                  <h4 className="couple-chart-title">{nombre}</h4>
                   <PinaculoChartComponent pinaculo={rpinaculo.length > 0 ? rpinaculo[0] : null} />
                 </div>
 
-                <div className="chart-column">
-                  <h4 className="chart-title">{nombre2}</h4>
+                <div className="couple-chart-column">
+                  <h4 className="couple-chart-title">{nombre2}</h4>
                   <PinaculoChartComponent pinaculo={rpinaculo2.length > 0 ? rpinaculo2[0] : null} />
                 </div>
 
-                <div className="chart-column">
-                  <h4 className="chart-title">Combined | Combinado</h4>
+                <div className="couple-chart-column">
+                  <h4 className="couple-chart-title">Combined | Combinado</h4>
                   <PinaculoChartComponent pinaculo={rpinaculo3.length > 0 ? rpinaculo3[0] : null} />
                 </div>
               </div>
               
-              {/* <div className="compatibility-summary">
-                <h4>Compatibility Analysis | Análisis de Compatibilidad</h4>
-                {sinastra.length > 0 && (
-                  <div className="compatibility-table-container">
-                    <table className="compatibility-table">
-                      <thead>
-                        <tr>
-                          <th>Area | Área</th>
-                          <th>{nombre}</th>
-                          <th>{nombre2}</th>
-                          <th>Combined | Combinado</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>Emotional | Emocional</td>
-                          <td>{sinastra[0]?.NA}</td>
-                          <td>{sinastra[0]?.NE}</td>
-                          <td className={parseInt(sinastra[0]?.A) > 7 ? 'compatibility-excellent' : 'compatibility-average'}>
-                            {sinastra[0]?.A}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Mental | Mental</td>
-                          <td>{sinastra[0]?.NB}</td>
-                          <td>{sinastra[0]?.NF}</td>
-                          <td className={parseInt(sinastra[0]?.B) > 7 ? 'compatibility-excellent' : 'compatibility-average'}>
-                            {sinastra[0]?.B}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Physical | Físico</td>
-                          <td>{sinastra[0]?.NC}</td>
-                          <td>{sinastra[0]?.NG}</td>
-                          <td className={parseInt(sinastra[0]?.C) > 7 ? 'compatibility-excellent' : 'compatibility-average'}>
-                            {sinastra[0]?.C}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Spiritual | Espiritual</td>
-                          <td>{sinastra[0]?.ND}</td>
-                          <td>{sinastra[0]?.NH}</td>
-                          <td className={parseInt(sinastra[0]?.D) > 7 ? 'compatibility-excellent' : 'compatibility-average'}>
-                            {sinastra[0]?.D}
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                )}
-              </div> */}
             </div>
           ) : (
             // Mobile view
-            <div className="charts-mobile">
+            <div className="couple-charts-mobile">
               <Swiper
                 ref={swiperMbRef}
                 {...swiperConfig}
-                className="swiper-container-mobile"
+                className="couple-swiper-container-mobile"
                 onSlideChange={slideChangeMobil}
               >
-                <SwiperSlide className="slide-chart">
-                  <h4 className="chart-title">{nombre}</h4>
+                <SwiperSlide className="couple-slide-chart">
+                  <h4 className="couple-chart-title">{nombre}</h4>
                   {rpinaculo.length > 0 && (
-                    <div className="numerology-diagram">
-                      <div className="number-node top">{rpinaculo[0]?.top}</div>
-                      <div className="number-node left">{rpinaculo[0]?.A}</div>
-                      <div className="number-node right">{rpinaculo[0]?.B}</div>
-                      <div className="number-node bottom-left">{rpinaculo[0]?.C}</div>
-                      <div className="number-node bottom-right">{rpinaculo[0]?.D}</div>
+                    <div className="couple-numerology-diagram">
+                      <div className="couple-number-node couple-top">{rpinaculo[0]?.top}</div>
+                      <div className="couple-number-node couple-left">{rpinaculo[0]?.A}</div>
+                      <div className="couple-number-node couple-right">{rpinaculo[0]?.B}</div>
+                      <div className="couple-number-node couple-bottom-left">{rpinaculo[0]?.C}</div>
+                      <div className="couple-number-node couple-bottom-right">{rpinaculo[0]?.D}</div>
                     </div>
                   )}
                 </SwiperSlide>
                 
-                <SwiperSlide className="slide-chart">
-                  <h4 className="chart-title">{nombre2}</h4>
+                <SwiperSlide className="couple-slide-chart">
+                  <h4 className="couple-chart-title">{nombre2}</h4>
                   {rpinaculo2.length > 0 && (
-                    <div className="numerology-diagram">
-                      <div className="number-node top">{rpinaculo2[0]?.top}</div>
-                      <div className="number-node left">{rpinaculo2[0]?.A}</div>
-                      <div className="number-node right">{rpinaculo2[0]?.B}</div>
-                      <div className="number-node bottom-left">{rpinaculo2[0]?.C}</div>
-                      <div className="number-node bottom-right">{rpinaculo2[0]?.D}</div>
+                    <div className="couple-numerology-diagram">
+                      <div className="couple-number-node couple-top">{rpinaculo2[0]?.top}</div>
+                      <div className="couple-number-node couple-left">{rpinaculo2[0]?.A}</div>
+                      <div className="couple-number-node couple-right">{rpinaculo2[0]?.B}</div>
+                      <div className="couple-number-node couple-bottom-left">{rpinaculo2[0]?.C}</div>
+                      <div className="couple-number-node couple-bottom-right">{rpinaculo2[0]?.D}</div>
                     </div>
                   )}
                 </SwiperSlide>
                 
-                <SwiperSlide className="slide-chart">
-                  <h4 className="chart-title">Combined | Combinado</h4>
+                <SwiperSlide className="couple-slide-chart">
+                  <h4 className="couple-chart-title">Combined | Combinado</h4>
                   {rpinaculo3.length > 0 && (
-                    <div className="numerology-diagram">
-                      <div className="number-node top">{rpinaculo3[0]?.top}</div>
-                      <div className="number-node left">{rpinaculo3[0]?.A}</div>
-                      <div className="number-node right">{rpinaculo3[0]?.B}</div>
-                      <div className="number-node bottom-left">{rpinaculo3[0]?.C}</div>
-                      <div className="number-node bottom-right">{rpinaculo3[0]?.D}</div>
+                    <div className="couple-numerology-diagram">
+                      <div className="couple-number-node couple-top">{rpinaculo3[0]?.top}</div>
+                      <div className="couple-number-node couple-left">{rpinaculo3[0]?.A}</div>
+                      <div className="couple-number-node couple-right">{rpinaculo3[0]?.B}</div>
+                      <div className="couple-number-node couple-bottom-left">{rpinaculo3[0]?.C}</div>
+                      <div className="couple-number-node couple-bottom-right">{rpinaculo3[0]?.D}</div>
                     </div>
                   )}
                 </SwiperSlide>
                 
-                <SwiperSlide className="slide-chart">
-                  <h4 className="chart-title">Compatibility | Compatibilidad</h4>
+                <SwiperSlide className="couple-slide-chart">
+                  <h4 className="couple-chart-title">Compatibility | Compatibilidad</h4>
                   {sinastra.length > 0 && (
-                    <div className="compatibility-table-container mobile">
-                      <table className="compatibility-table">
+                    <div className="couple-compatibility-table-container couple-mobile">
+                      <table className="couple-compatibility-table">
                         <thead>
                           <tr>
                             <th>Area</th>
@@ -828,25 +874,25 @@ const CoupleComponent = () => {
                         <tbody>
                           <tr>
                             <td>Emotional</td>
-                            <td className={parseInt(sinastra[0]?.A) > 7 ? 'compatibility-excellent' : 'compatibility-average'}>
+                            <td className={parseInt(sinastra[0]?.A) > 7 ? 'couple-compatibility-excellent' : 'couple-compatibility-average'}>
                               {sinastra[0]?.A}
                             </td>
                           </tr>
                           <tr>
                             <td>Mental</td>
-                            <td className={parseInt(sinastra[0]?.B) > 7 ? 'compatibility-excellent' : 'compatibility-average'}>
+                            <td className={parseInt(sinastra[0]?.B) > 7 ? 'couple-compatibility-excellent' : 'couple-compatibility-average'}>
                               {sinastra[0]?.B}
                             </td>
                           </tr>
                           <tr>
                             <td>Physical</td>
-                            <td className={parseInt(sinastra[0]?.C) > 7 ? 'compatibility-excellent' : 'compatibility-average'}>
+                            <td className={parseInt(sinastra[0]?.C) > 7 ? 'couple-compatibility-excellent' : 'couple-compatibility-average'}>
                               {sinastra[0]?.C}
                             </td>
                           </tr>
                           <tr>
                             <td>Spiritual</td>
-                            <td className={parseInt(sinastra[0]?.D) > 7 ? 'compatibility-excellent' : 'compatibility-average'}>
+                            <td className={parseInt(sinastra[0]?.D) > 7 ? 'couple-compatibility-excellent' : 'couple-compatibility-average'}>
                               {sinastra[0]?.D}
                             </td>
                           </tr>
@@ -862,14 +908,14 @@ const CoupleComponent = () => {
       </div>
 
       {/* Year Chart Section */}
-      <div className="year-charts-section">
-        <h3 className="section-title">Year Charts | Gráficos Anuales</h3>
+      <div className="couple-year-charts-section">
+        <h3 className="couple-section-title">Year Charts | Gráficos Anuales</h3>
         
-        <div className="year-charts-container">
-          <div className="year-charts-row">
-            <div className="person-year-charts">
-              <h4 className="chart-title">{nombre}</h4>
-              <div className="year-chart-pair">
+        <div className="couple-year-charts-container">
+          <div className="couple-year-charts-row">
+            <div className="couple-person-year-charts">
+              <h4 className="couple-chart-title">{nombre}</h4>
+              <div className="couple-year-chart-pair">
                 <YearChartComponent 
                   year={year} 
                   data={pinYear.length > 0 ? pinYear[0] : null} 
@@ -883,9 +929,9 @@ const CoupleComponent = () => {
               </div>
             </div>
             
-            <div className="person-year-charts">
-              <h4 className="chart-title">{nombre2}</h4>
-              <div className="year-chart-pair">
+            <div className="couple-person-year-charts">
+              <h4 className="couple-chart-title">{nombre2}</h4>
+              <div className="couple-year-chart-pair">
                 <YearChartComponent 
                   year={year} 
                   data={pinYear2.length > 0 ? pinYear2[0] : null} 
@@ -902,30 +948,30 @@ const CoupleComponent = () => {
         </div>
       </div>
 
-      <div className="monthly-forecast-section">
-        <h3 className="forecast-header">Monthly Forecast | Pronóstico Mensual {year}/{nxYear}</h3>
+      <div className="couple-monthly-forecast-section">
+        <h3 className="couple-forecast-header">Monthly Forecast | Pronóstico Mensual {year}/{nxYear}</h3>
         
         {listMobileM.length > 0 && (
-          <div className="forecast-content">
+          <div className="couple-forecast-content">
             {getScreenWidth ? (
               // Desktop view
-                <div className="forecast-desktop">
-                  <DesktopMonthGridComponent birthdate={birthdate} birthdate2={birthdate2} isCouple={true}/>
+              <div className="couple-forecast-desktop">
+                <DesktopMonthGridComponent birthdate={birthdate} birthdate2={birthdate2} isCouple={true}/>
               </div>
             ) : (
               // Mobile view
-              <div className="forecast-mobile">
+              <div className="couple-forecast-mobile">
                 {listMobileM.length > 0 && (
-                  <div className="mobile-year-month-selector">
-                    <div className="year-selector">
+                  <div className="couple-mobile-year-month-selector">
+                    <div className="couple-year-selector">
                       <button 
-                        className={`year-btn ${mobilMesSelect?.year === year ? 'active' : ''}`}
+                        className={`couple-year-btn ${mobilMesSelect?.year === year ? 'couple-active' : ''}`}
                         onClick={() => setMobilMesSelect(prev => ({ ...prev, year: year }))}
                       >
                         {year}
                       </button>
                       <button 
-                        className={`year-btn ${mobilMesSelect?.year === nxYear ? 'active' : ''}`}
+                        className={`couple-year-btn ${mobilMesSelect?.year === nxYear ? 'couple-active' : ''}`}
                         onClick={() => setMobilMesSelect(prev => ({ ...prev, year: nxYear }))}
                       >
                         {nxYear}
@@ -933,7 +979,7 @@ const CoupleComponent = () => {
                     </div>
                     
                     <select 
-                      className="month-select" 
+                      className="couple-month-select" 
                       onChange={(e) => callMesMobil(parseInt(e.target.value))}
                       value={indexMobil}
                       aria-label="Select month"
@@ -947,23 +993,23 @@ const CoupleComponent = () => {
                   </div>
                 )}
                 
-                <div className="forecast-card-mobile">
+                <div className="couple-forecast-card-mobile">
                   {smallLoading ? (
                     renderSmallLoading()
                   ) : (
                     listMobileM.length > 0 && (
-                      <div className="mobile-month-details">
-                        <h4 className="mobile-month-title">
+                      <div className="couple-mobile-month-details">
+                        <h4 className="couple-mobile-month-title">
                           {listMobileM[indexMobil]?.name || ''} {listMobileM[indexMobil]?.year || ''}
                         </h4>
                         
                         {renderMonthlyChart(listMobileM[indexMobil])}
                         
-                        <div className="mobile-day-forecast">
-                          <h5 className="mobile-day-title">Daily Forecast | Pronóstico Diario</h5>
+                        <div className="couple-mobile-day-forecast">
+                          <h5 className="couple-mobile-day-title">Daily Forecast | Pronóstico Diario</h5>
                           {listMobileM[indexMobil] && (
-                            <div className="day-forecast-container">
-                              <table className="day-table">
+                            <div className="couple-day-forecast-container">
+                              <table className="couple-day-table">
                                 <thead>
                                   <tr>
                                     <th>Day | Día</th>
@@ -986,9 +1032,9 @@ const CoupleComponent = () => {
                                   ))}
                                 </tbody>
                               </table>
-                              <div className="see-more-days">
+                              <div className="couple-see-more-days">
                                 <button 
-                                  className="see-more-btn" 
+                                  className="couple-see-more-btn" 
                                   onClick={() => {
                                     // Handle showing full day view - placeholder
                                     console.log("Show full day view");
@@ -1010,128 +1056,47 @@ const CoupleComponent = () => {
         )}
       </div>
       
-      <div className="monthly-forecast-section">
-        <h3 className="forecast-header">Monthly Forecast | Pronóstico Mensual {year}/{nxYear}</h3>
+      <div className="couple-monthly-forecast-section">
+        <h3 className="couple-forecast-header">Daily Forecast | Pronóstico Diario {year}/{nxYear}</h3>
         
         {listMobileM.length > 0 && (
-          <div className="forecast-content">
+          <div className="couple-forecast-content">
             {getScreenWidth ? (
               // Desktop view
-                <div className="forecast-desktop">
-                  <DesktopDayGridComponent birthdate={birthdate} birthdate2={birthdate2} isCouple={true}/>
+              <div className="couple-forecast-desktop">
+                <DesktopDayGridComponent birthdate={birthdate} birthdate2={birthdate2} isCouple={true}/>
               </div>
             ) : (
               // Mobile view - second instance
-              <div className="forecast-mobile">
-                {listMobileM.length > 0 && (
-                  <div className="mobile-year-month-selector">
-                    <div className="year-selector">
-                      <button 
-                        className={`year-btn ${mobilMesSelect?.year === year ? 'active' : ''}`}
-                        onClick={() => setMobilMesSelect(prev => ({ ...prev, year: year }))}
-                      >
-                        {year}
-                      </button>
-                      <button 
-                        className={`year-btn ${mobilMesSelect?.year === nxYear ? 'active' : ''}`}
-                        onClick={() => setMobilMesSelect(prev => ({ ...prev, year: nxYear }))}
-                      >
-                        {nxYear}
-                      </button>
-                    </div>
-                    
-                    <select 
-                      className="month-select" 
-                      onChange={(e) => callMesMobil(parseInt(e.target.value))}
-                      value={indexMobil}
-                      aria-label="Select month"
-                    >
-                      {listMobileM.map((month, idx) => (
-                        <option key={idx} value={idx}>
-                          {month.name}, {month.year || ''}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                )}
-                
-                <div className="forecast-card-mobile">
-                  {smallLoading ? (
-                    renderSmallLoading()
-                  ) : (
-                    listMobileM.length > 0 && (
-                      <div className="mobile-month-details">
-                        <h4 className="mobile-month-title">
-                          {listMobileM[indexMobil]?.name || ''} {listMobileM[indexMobil]?.year || ''}
-                        </h4>
-                        
-                        {renderMonthlyChart(listMobileM[indexMobil])}
-                        
-                        <div className="mobile-day-forecast">
-                          <h5 className="mobile-day-title">Daily Forecast | Pronóstico Diario</h5>
-                          {listMobileM[indexMobil] && (
-                            <div className="day-forecast-container">
-                              <table className="day-table">
-                                <thead>
-                                  <tr>
-                                    <th>Day | Día</th>
-                                    <th>{nombre}</th>
-                                    <th>{nombre2}</th>
-                                    <th>Combined</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {Array.from({ length: 5 }, (_, i) => (
-                                    <tr key={i}>
-                                      <td>{i + 1}</td>
-                                      <td>{calculosUtils.sum(parseInt(rpinaculo[0]?.top) || 0, i + 1)}</td>
-                                      <td>{calculosUtils.sum(parseInt(rpinaculo2[0]?.top) || 0, i + 1)}</td>
-                                      <td>{calculosUtils.sum(
-                                        calculosUtils.sum(parseInt(rpinaculo[0]?.top) || 0, i + 1),
-                                        calculosUtils.sum(parseInt(rpinaculo2[0]?.top) || 0, i + 1)
-                                      )}</td>
-                                    </tr>
-                                  ))}
-                                </tbody>
-                              </table>
-                              <div className="see-more-days">
-                                <button 
-                                  className="see-more-btn" 
-                                  onClick={() => {
-                                    // Handle showing full day view - placeholder
-                                    console.log("Show full day view");
-                                  }}
-                                >
-                                  See All Days
-                                </button>
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    )
-                  )}
-                </div>
+              <div className="couple-forecast-mobile">
+                {/* Mobile view content for daily forecast */}
+                {/* This content is similar to the monthly forecast mobile view */}
               </div>
             )}
           </div>
         )}
       </div>
-      <div className="footer">
-        <div className="website">www.numerana.com</div>
-        <div className="author">By: Ana Dorotea</div>
+      
+      <div className="couple-footer">
+        <div className="couple-website">www.numerana.com</div>
+        <div className="couple-author">By: Ana Dorotea</div>
       </div>
     </div>
+    </>
   );
   
   return (
-    <div className="main">
-      <div ref={contentRef} className="content">
-        {loading && renderLoading()}
+    <div className="couple-main">
+      <div ref={contentRef} className="couple-content">
+        {loading && <div className="couple-lds-ripple"><div></div><div></div></div>}
         
         {!resultados && renderForm()}
         
-        {resultados && renderResults()}
+        {resultados && (
+          <>
+            {renderResults()}
+          </>
+        )}
       </div>
     </div>
   );
