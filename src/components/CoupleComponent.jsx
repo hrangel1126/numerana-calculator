@@ -102,6 +102,15 @@ const CoupleComponent = () => {
     navigation: true,
     modules: [Navigation],
   };
+
+  const yearSliderSettings = {
+    modules: [Navigation], // Add Pagination if you want dots: import { Navigation, Pagination } from 'swiper/modules';
+    spaceBetween: 10,
+    slidesPerView: 1,
+    navigation: true, // Shows arrows
+    // pagination: { clickable: true }, // Uncomment and import Pagination + CSS if you want dots
+    loop: false, // Set to true if you want it to loop
+  };
   
   // Initialize the component
   useEffect(() => {
@@ -909,47 +918,105 @@ const CoupleComponent = () => {
 
       {/* Year Chart Section */}
       <div className="couple-year-charts-section">
-        <h3 className="couple-section-title">Year Charts | Gráficos Anuales</h3>
-        
+
         <div className="couple-year-charts-container">
-          <div className="couple-year-charts-row">
+          <div className="couple-year-charts-row"> {/* Ensure this row has flex display in CSS */}
+
+            {/* --- Person 1 Year Chart Slider --- */}
             <div className="couple-person-year-charts">
-              <h4 className="couple-chart-title">{nombre}</h4>
-              <div className="couple-year-chart-pair">
-                <YearChartComponent 
-                  year={year} 
-                  data={pinYear.length > 0 ? pinYear[0] : null} 
-                  isCurrentYear={true} 
-                />
-                <YearChartComponent 
-                  year={nxYear} 
-                  data={pinYear.length > 0 ? pinYear[0] : null} 
-                  isCurrentYear={false} 
-                />
-              </div>
+              {pinYear.length > 0 ? (
+                <Swiper {...yearSliderSettings} className="person-year-swiper">
+                  {/*
+                    IMPORTANT DATA STRUCTURE ASSUMPTION:
+                    calculosUtils.GetYear() currently seems to return ONE object (stored in pinYear[0]).
+                    For a multi-year slider, you ideally need data for EACH year separately.
+                    The example below simulates sliding between the current year (year) and next year (nxYear)
+                    using the SAME data (pinYear[0]) as per your original setup.
+                    You SHOULD modify calculosUtils.GetYear or data fetching
+                    to provide distinct data for each year if they differ numerically.
+
+                    Example of desired data structure for pinYear:
+                    [
+                      { year: 2025, data: { ...data specifically calculated for 2025... } },
+                      { year: 2026, data: { ...data specifically calculated for 2026... } },
+                      // Potentially more years
+                    ]
+                    If pinYear[0] ALREADY contains all info and YearChartComponent uses the 'year' prop
+                    to extract the relevant part, then this structure is fine.
+                  */}
+                  {[
+                    { yearValue: year, dataValue: pinYear[0], isCurrent: true },
+                    { yearValue: nxYear, dataValue: pinYear[0], isCurrent: false },
+                    // Add more year objects here if calculosUtils.GetYear provides more data
+                  ].map((yearData, index) => (
+                    <SwiperSlide key={`${nombre}-year-${yearData.yearValue}-${index}`} className="year-chart-slide">
+                      <YearChartComponent
+                        year={yearData.yearValue}
+                        data={yearData.dataValue} // Use the data corresponding to the year
+                        isCurrentYear={yearData.isCurrent} // Or better: yearData.yearValue === new Date().getFullYear()
+                      />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              ) : (
+                <div className="no-data-placeholder">No year data for {nombre}.</div>
+              )}
             </div>
-            
+
+            {/* --- Person 2 Year Chart Slider --- */}
             <div className="couple-person-year-charts">
-              <h4 className="couple-chart-title">{nombre2}</h4>
-              <div className="couple-year-chart-pair">
-                <YearChartComponent 
-                  year={year} 
-                  data={pinYear2.length > 0 ? pinYear2[0] : null} 
-                  isCurrentYear={true} 
-                />
-                <YearChartComponent 
-                  year={nxYear} 
-                  data={pinYear2.length > 0 ? pinYear2[0] : null} 
-                  isCurrentYear={false} 
-                />
-              </div>
+               {pinYear2.length > 0 ? (
+                <Swiper {...yearSliderSettings} className="person-year-swiper">
+                   {/* Same data structure assumption applies to pinYear2 */}
+                  {[
+                    { yearValue: year, dataValue: pinYear2[0], isCurrent: true },
+                    { yearValue: nxYear, dataValue: pinYear2[0], isCurrent: false },
+                    // Add more year objects here if calculosUtils.GetYear provides more data
+                  ].map((yearData, index) => (
+                    <SwiperSlide key={`${nombre2}-year-${yearData.yearValue}-${index}`} className="year-chart-slide">
+                      <YearChartComponent
+                        year={yearData.yearValue}
+                        data={yearData.dataValue} // Use the data corresponding to the year
+                        isCurrentYear={yearData.isCurrent} // Or better: yearData.yearValue === new Date().getFullYear()
+                      />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              ) : (
+                <div className="no-data-placeholder">No year data for {nombre2}.</div>
+              )}
             </div>
-          </div>
-        </div>
-      </div>
+
+
+             {/* --- Person 2 Year Chart Slider --- */}
+             <div className="couple-person-year-charts">
+               {pinYear2.length > 0 ? (
+                <Swiper {...yearSliderSettings} className="person-year-swiper">
+                   {/* Same data structure assumption applies to pinYear2 */}
+                  {[
+                    { yearValue: year, dataValue: pinYear2[0], isCurrent: true },
+                    { yearValue: nxYear, dataValue: pinYear2[0], isCurrent: false },
+                    // Add more year objects here if calculosUtils.GetYear provides more data
+                  ].map((yearData, index) => (
+                    <SwiperSlide key={`${nombre2}-year-${yearData.yearValue}-${index}`} className="year-chart-slide">
+                      <YearChartComponent
+                        year={yearData.yearValue}
+                        data={yearData.dataValue} // Use the data corresponding to the year
+                        isCurrentYear={yearData.isCurrent} // Or better: yearData.yearValue === new Date().getFullYear()
+                      />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              ) : (
+                <div className="no-data-placeholder">No year data for {nombre2}.</div>
+              )}
+            </div>
+
+          </div> {/* End of couple-year-charts-row */}
+        </div> {/* End of couple-year-charts-container */}
+      </div> {/* End of couple-year-charts-section */}
 
       <div className="couple-monthly-forecast-section">
-        <h3 className="couple-forecast-header">Monthly Forecast | Pronóstico Mensual {year}/{nxYear}</h3>
         
         {listMobileM.length > 0 && (
           <div className="couple-forecast-content">
@@ -1057,7 +1124,6 @@ const CoupleComponent = () => {
       </div>
       
       <div className="couple-monthly-forecast-section">
-        <h3 className="couple-forecast-header">Daily Forecast | Pronóstico Diario {year}/{nxYear}</h3>
         
         {listMobileM.length > 0 && (
           <div className="couple-forecast-content">

@@ -25,6 +25,85 @@
   box-sizing: border-box;
 }
 
+/* Add to your CoupleComponent.css or a relevant stylesheet */
+
+.couple-year-charts-section {
+  /* Add padding/margin as needed */
+  margin-top: 30px;
+  padding: 15px;
+  border-top: 1px solid #eee; /* Optional separator */
+}
+
+.couple-section-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.5rem; /* Adjust as needed */
+  font-weight: bold;
+}
+
+.couple-year-charts-container {
+  /* Container styles if needed */
+}
+
+.couple-year-charts-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px; /* Adjust gap between person charts */
+}
+
+.couple-person-year-charts {
+  flex: 1; /* Each person's chart area takes up equal space */
+  min-width: 280px; /* Minimum width before wrapping */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center title and swiper */
+  padding: 10px;
+  box-sizing: border-box;
+  /* Add border or background if desired */
+  /* border: 1px solid #ddd; */
+}
+
+.couple-chart-title {
+  margin-bottom: 15px;
+  font-size: 1.1rem; /* Adjust */
+  font-weight: bold;
+}
+
+.person-year-swiper {
+  width: 100%; /* Make swiper take full width of its container */
+  max-width: 400px; /* Optional: constrain max width of the chart slider */
+  /* height: 350px; */ /* Optional: Set a fixed height */
+  --swiper-navigation-color: #007aff; /* Example arrow color */
+  --swiper-pagination-color: #007aff; /* Example dot color */
+  --swiper-navigation-size: 30px; /* Example arrow size */
+  padding-bottom: 30px; /* Space for pagination dots if enabled */
+}
+
+.year-chart-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+.no-data-placeholder {
+    text-align: center;
+    padding: 20px;
+    color: #888;
+    min-height: 100px; /* Ensure it takes some space */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ensure the YearChartComponent itself fits well */
+.year-chart-slide > div { /* Assuming YearChartComponent's root is a div */
+    width: 100%;
+    height: 100%;
+}
+
 /* --- Chart Section Adjustments --- */
 
 .couple-charts-desktop {
@@ -913,8 +992,7 @@ h3.name {
 .couple-compatibility-section {
   width: 100%;
   margin: 40px 0;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #f0f0f0;
+
 }
 
 .couple-section-title, 
@@ -1031,9 +1109,9 @@ h3.name {
   max-width: 500px;
   margin: 0 15px 30px;
   padding: 15px;
-  border-radius: 8px;
+  /* border-radius: 8px;
   background-color: #f9f9f9;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); */
 }
 
 .couple-year-chart-pair {
