@@ -1,100 +1,165 @@
-.main {
+/* General Styles */
+/* Renamed: .main -> .Home-main */
+.Home-main {
   font-family: 'Lato', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.title {
+/* Renamed: .content -> .Home-content */
+.Home-content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  padding-bottom: 5vh;
+  /* margin-top: 11vh; Applied inline, kept here for reference */
+}
+
+/* Renamed: .loader-container -> .Home-loaderContainer */
+.Home-loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+
+/* Renamed: .title -> .Home-title */
+.Home-title {
   text-align: center;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 18px;
+  margin-bottom: 0.4rem;
+  color: #333;
 }
 
-.bntcontain {
-  margin-top: 3rem;
-  zoom: 1.5;
+/* Renamed: .bntcontain -> .Home-btnContain */
+.Home-btnContain {
+  zoom: 1.3;
+  width: 100%;
+  max-width: 400px;
+  padding: 1rem;
 }
 
-.button-container {
+/* Renamed layout classes (remove if using global Bootstrap) */
+/* Renamed: .row -> .Home-row */
+.Home-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  margin-bottom: 0.5rem; /* Add some default spacing between rows */
+}
+/* Renamed: .col-12 -> .Home-col12 */
+.Home-col12 {
   position: relative;
-  width: 100px;
-  height: 50px;
-  margin: 0 auto;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+/* Renamed: .d-flex -> .Home-dFlex */
+.Home-dFlex { display: flex !important; }
+/* Renamed: .justify-content-center -> .Home-justifyCenter */
+.Home-justifyCenter { justify-content: center !important; }
+
+
+/* Button Styles */
+/* Renamed: .button-container -> .Home-buttonContainer */
+.Home-buttonContainer {
+  position: relative;
+  width: 90px;
+  height: 45px;
   overflow: hidden;
   border: 1px solid #5b356c;
-  transition: 0.5s;
-  border-radius: 8px;
+  transition: box-shadow 0.3s ease;
+  border-radius: 7px;
+  background-color: #5b356c;
 }
 
-.button-container button {
-  width: 101%;
+.Home-buttonContainer:hover {
+   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Link takes full container size */
+.Home-buttonContainer a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+}
+
+
+/* Renamed: .button-content -> .Home-buttonContent */
+.Home-buttonContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   height: 100%;
   font-family: 'Lato', sans-serif;
   font-weight: bold;
-  font-size: 11px;
-  letter-spacing: 1px;
+  font-size: 10px;
+  letter-spacing: 0.8px;
   cursor: pointer;
   color: #fff;
   border: none;
-  background-color: #5b356c;
+  background-color: transparent;
+  /* Mask properties */
   mask-repeat: no-repeat;
   mask-position: 0 0;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: 0 0;
 }
 
-.button-container .mas {
+/* Renamed: .mas -> .Home-buttonHoverContent */
+.Home-buttonContainer .Home-buttonHoverContent { /* Adjusted selector */
   position: absolute;
-  text-align: center;
-  width: 101%;
-  font-size: 11px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
   font-weight: bold;
   color: #5b356c;
+  pointer-events: none;
+  z-index: 1;
 }
 
-.icon {
-  zoom: 4;
-  position: relative;
-  top: -2px;
+/* Renamed: .icon -> .Home-icon, .iconin -> .Home-iconHover */
+.Home-icon, .Home-iconHover {
+  zoom: 3.5;
+  line-height: 1;
+  vertical-align: middle;
 }
 
-.iconin {
-  zoom: 4;
-  position: relative;
-  top: -2px;
+/* Specific adjustments for Button 3 icons (Team) */
+/* Renamed: .button-3 -> .Home-button3 */
+.Home-button3 .Home-buttonContent,
+.Home-button3 .Home-buttonHoverContent {
+  gap: 4px;
 }
 
-.flipped {
-  transform: scaleX(-1);
-  position: absolute;
-  left: 9.5px;
-  top: -2px;
-}
 
-/* Animations */
+/* Mask Animations (keyframes names unchanged) */
 @keyframes ani {
-  from {
-    -webkit-mask-position: 0 0;
-    mask-position: 0 0;
-  }
-  to {
-    -webkit-mask-position: 100% 0;
-    mask-position: 100% 0;
-  }
+  from { -webkit-mask-position: 0 0; mask-position: 0 0; }
+  to { -webkit-mask-position: 100% 0; mask-position: 100% 0; }
 }
-
 @keyframes ani2 {
-  from {
-    -webkit-mask-position: 100% 0;
-    mask-position: 100% 0;
-  }
-  to {
-    -webkit-mask-position: 0 0;
-    mask-position: 0 0;
-  }
+  from { -webkit-mask-position: 100% 0; mask-position: 100% 0; }
+  to { -webkit-mask-position: 0 0; mask-position: 0 0; }
 }
 
-/* Specific button masks and animations */
+/* --- Specific button masks and animations --- */
+/* Apply mask to the .Home-buttonContent span now */
+/* Renamed button modifier classes: .button-1 -> .Home-button1 etc. */
 
-.button-1 button {
+/* Button 1 (Personal) */
+.Home-button1 .Home-buttonContent {
   -webkit-mask-image: url('../../assets/img/nature-sprite.png');
   mask-image: url('../../assets/img/nature-sprite.png');
   -webkit-mask-size: 2300% 100%;
@@ -102,13 +167,13 @@
   -webkit-animation: ani2 0.7s steps(22) forwards;
   animation: ani2 0.7s steps(22) forwards;
 }
-
-.button-1 button:hover {
+.Home-button1 .Home-buttonContent:hover {
   -webkit-animation: ani 0.7s steps(22) forwards;
   animation: ani 0.7s steps(22) forwards;
 }
 
-.button-2 button {
+/* Button 2 (Couple) */
+.Home-button2 .Home-buttonContent {
   -webkit-mask-image: url('../../assets/img/urban-sprite.png');
   mask-image: url('../../assets/img/urban-sprite.png');
   -webkit-mask-size: 3000% 100%;
@@ -116,13 +181,13 @@
   -webkit-animation: ani2 0.7s steps(29) forwards;
   animation: ani2 0.7s steps(29) forwards;
 }
-
-.button-2 button:hover {
+.Home-button2 .Home-buttonContent:hover {
   -webkit-animation: ani 0.7s steps(29) forwards;
   animation: ani 0.7s steps(29) forwards;
 }
 
-.button-3 button {
+/* Button 3 (Team) */
+.Home-button3 .Home-buttonContent {
   -webkit-mask-image: url('../../assets/img/natureSmaller.png');
   mask-image: url('../../assets/img/natureSmaller.png');
   -webkit-mask-size: 7100% 100%;
@@ -130,22 +195,22 @@
   -webkit-animation: ani2 0.7s steps(70) forwards;
   animation: ani2 0.7s steps(70) forwards;
 }
-
-.button-3 button:hover {
+.Home-button3 .Home-buttonContent:hover {
   -webkit-animation: ani 0.7s steps(70) forwards;
   animation: ani 0.7s steps(70) forwards;
 }
 
-/* Loader animation (ripple loader) */
+
+/* Loader animation (ripple loader) (unchanged class name) */
 .lds-ripple {
   display: inline-block;
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
 }
 .lds-ripple div {
   position: absolute;
-  border: 4px solid #5b356c;
+  border: 3px solid #5b356c;
   opacity: 1;
   border-radius: 50%;
   animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
@@ -153,25 +218,43 @@
 .lds-ripple div:nth-child(2) {
   animation-delay: -0.5s;
 }
-@keyframes lds-ripple {
-  0% {
-    top: 36px;
-    left: 36px;
-    width: 0;
-    height: 0;
-    opacity: 1;
+@keyframes lds-ripple { /* Keyframes unchanged */
+  0% { top: 31.5px; left: 31.5px; width: 0; height: 0; opacity: 1; }
+  100% { top: -1px; left: -1px; width: 66px; height: 66px; opacity: 0; }
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 964px) {
+  /* Selectors updated */
+  .Home-btnContain {
+    zoom: 1.1;
   }
-  100% {
-    top: 0px;
-    left: 0px;
-    width: 72px;
-    height: 72px;
-    opacity: 0;
+  .Home-title {
+     font-size: 17px;
   }
 }
 
-@media only screen and (max-width: 964px) {
-  .bntcontain {
-    margin-top: 1rem;
+@media only screen and (max-width: 480px) {
+   /* Selectors updated */
+  .Home-btnContain {
+    zoom: 1;
   }
+   .Home-buttonContainer {
+    width: 80px;
+    height: 40px;
+  }
+  .Home-title {
+     font-size: 15px;
+  }
+  .Home-icon, .Home-iconHover {
+      zoom: 3;
+  }
+   /* Loader unchanged */
+   .lds-ripple {
+      width: 60px;
+      height: 60px;
+    }
+    /* Keyframes declaration inside media query needs to be repeated if changed */
+    /* @keyframes lds-ripple { ... } */
+    .lds-ripple div { border-width: 3px; }
 }

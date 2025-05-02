@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Home.css';
-import HeaderMenu from '../../components/HeaderMenu/HeaderMenu';
-import { useTranslation } from '../../utils/i18n/LanguageContext';
+import './Home.css'; // Ensure this path is correct
+import HeaderMenu from '../../components/HeaderMenu/HeaderMenu'; // Assuming path is correct
+import { useTranslation } from '../../utils/i18n/LanguageContext'; // Assuming path is correct
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-// Import logo for navbar
-import logoImage from '../../assets/img/logon.webp';
-import spanishFlag from '../../assets/img/span.png';
+// Unused imports commented out for clarity
+// import logoImage from '../../assets/img/logon.webp';
+// import spanishFlag from '../../assets/img/span.png';
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -19,64 +19,106 @@ const Home = () => {
   }, []);
 
   return (
-    <main className="main">
+    // Renamed: main -> Home-main
+    <main className="Home-main">
       <HeaderMenu />
-      <div className="content" style={{ marginTop: '11vh' }}>
+      {/* Renamed: content -> Home-content */}
+      <div className="Home-content" style={{ marginTop: '11vh' }}>
         {loading ? (
-          <div className="lds-ripple"><div></div><div></div></div>
+          // Renamed: loader-container -> Home-loaderContainer
+          <div className="Home-loaderContainer">
+            {/* Kept lds-ripple as it's specific */}
+            <div className="lds-ripple"><div></div><div></div></div>
+          </div>
         ) : (
-          <div className="bntcontain">
-            <div className="row">
-              <div className="col-12 title">{t('home.personal')}</div>
+          // Renamed: bntcontain -> Home-btnContain
+          <div className="Home-btnContain">
+            {/* --- Personal Button --- */}
+             {/* Renamed: row -> Home-row */}
+
+             <div className="Home-row" style={{ marginTop: '1rem' }}>
+              <div className="Home-col12 Home-title">Single Basic</div>
             </div>
-            <div className="row">
-              <div className="col-12">
-                <div className="button-container button-1">
-                  <span className="mas">
-                    <i className="bi bi-person-fill iconin"></i>
+            <div className="Home-row">
+              <div className="Home-col12 Home-dFlex Home-justifyCenter">
+                <div className="Home-buttonContainer Home-button1">
+                  <span className="Home-buttonHoverContent">
+                    <i className="bi bi-person-fill Home-iconHover"></i>
+                  </span>
+                  <Link to="/singlebasic">
+                    <span className="Home-buttonContent" aria-label="Single Basic">
+                      <i className="bi bi-person Home-icon"></i>
+                    </span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+            
+            <div className="Home-row">
+               {/* Renamed: col-12 -> Home-col12, title -> Home-title */}
+              <div className="Home-col12 Home-title">{t('home.personal')}</div>
+            </div>
+            <div className="Home-row">
+               {/* Renamed: col-12 -> Home-col12, d-flex -> Home-dFlex, justify-content-center -> Home-justifyCenter */}
+              <div className="Home-col12 Home-dFlex Home-justifyCenter">
+                 {/* Renamed: button-container -> Home-buttonContainer, button-1 -> Home-button1 */}
+                <div className="Home-buttonContainer Home-button1">
+                  {/* Renamed: mas -> Home-buttonHoverContent */}
+                  <span className="Home-buttonHoverContent">
+                     {/* Renamed: iconin -> Home-iconHover */}
+                    <i className="bi bi-person-fill Home-iconHover"></i>
                   </span>
                   <Link to="/single">
-                    <button type="button" name="Hover">
-                      <i className="bi bi-person icon"></i>
-                    </button>
+                     {/* Renamed: button-content -> Home-buttonContent */}
+                    <span className="Home-buttonContent" aria-label={t('home.personal')}>
+                       {/* Renamed: icon -> Home-icon */}
+                      <i className="bi bi-person Home-icon"></i>
+                    </span>
                   </Link>
                 </div>
               </div>
             </div>
 
-            <div className="row" style={{ marginTop: '1.5rem' }}>
-              <div className="col-12 title">{t('home.couple')}</div>
+            {/* --- Single Basic Button --- */}
+         
+
+            {/* --- Couple/Pareja Button --- */}
+            <div className="Home-row" style={{ marginTop: '1.5rem' }}>
+              <div className="Home-col12 Home-title">{t('home.couple')}</div>
             </div>
-            <div className="row">
-              <div className="col-12">
-                <div className="button-container button-2">
-                  <span className="mas">
-                    <i className="bi bi-people-fill iconin"></i>
+            <div className="Home-row">
+              <div className="Home-col12 Home-dFlex Home-justifyCenter">
+                 {/* Renamed: button-container -> Home-buttonContainer, button-2 -> Home-button2 */}
+                <div className="Home-buttonContainer Home-button2">
+                  <span className="Home-buttonHoverContent">
+                    <i className="bi bi-people-fill Home-iconHover"></i>
                   </span>
                   <Link to="/couple">
-                    <button type="button" name="Hover">
-                      <i className="bi bi-people icon"></i>
-                    </button>
+                    <span className="Home-buttonContent" aria-label={t('home.couple')}>
+                      <i className="bi bi-people Home-icon"></i>
+                    </span>
                   </Link>
                 </div>
               </div>
             </div>
 
-            <div className="row" style={{ marginTop: '1.5rem' }}>
-              <div className="col-12 title">{t('home.team')}</div>
+            {/* --- Team/Equipo Button --- */}
+            <div className="Home-row" style={{ marginTop: '1.5rem' }}>
+              <div className="Home-col12 Home-title">{t('home.team')}</div>
             </div>
-            <div className="row">
-              <div className="col-12">
-                <div className="button-container button-3">
-                  <span className="mas">
-                    <i className="bi bi-people-fill iconin"></i>
-                    <i className="bi bi-people-fill iconin flipped"></i>
+            <div className="Home-row">
+              <div className="Home-col12 Home-dFlex Home-justifyCenter">
+                 {/* Renamed: button-container -> Home-buttonContainer, button-3 -> Home-button3 */}
+                <div className="Home-buttonContainer Home-button3">
+                  <span className="Home-buttonHoverContent">
+                    <i className="bi bi-people-fill Home-iconHover"></i>
+                    <i className="bi bi-person-fill Home-iconHover"></i>
                   </span>
                   <Link to="/team">
-                    <button type="button" name="Hover">
-                      <i className="bi bi-people icon"></i>
-                      <i className="bi bi-people icon flipped"></i>
-                    </button>
+                    <span className="Home-buttonContent" aria-label={t('home.team')}>
+                      <i className="bi bi-people Home-icon"></i>
+                      <i className="bi bi-person Home-icon"></i>
+                    </span>
                   </Link>
                 </div>
               </div>
