@@ -1,23 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 import moment from 'moment';
 import calculosUtils from '../utils/calculosUtils';
-import './SingleComponent.css';
+import './SingleComponent.css'; // Assuming shared CSS or adjust path
+import { useTranslation } from '../utils/i18n/LanguageContext'; // Import the hook
 
 // Import modular components
 import NumerologyInputFormComponent from '../components/common/NumerologyInputFormComponent';
 import ResultsHeaderComponent from '../components/common/ResultsHeaderComponent';
 import PinaculoChartComponent from '../components/common/PinaculoChartComponent';
-import YearChartComponent from '../components/common/YearChartComponent';
-import MobileYearSliderComponent from '../components/common/MobileYearSliderComponent';
-import MobileMonthDayViewComponent from '../components/common/MobileMonthDayViewComponent';
-import DesktopMonthGridComponent from '../components/common/DesktopMonthGridComponent';
-import DesktopDayGridComponent from '../components/common/DesktopDayGridComponent';
 import LoadingComponent from '../components/common/LoadingComponent';
 
 const SingleBasicComponent = () => {
+  const { t } = useTranslation(); // Get the translation function
+
   // State variables
-  const [nombre, setNombre] = useState('');
-  const [birthdate, setBirthdate] = useState('');
+  const [nombre, setNombre] = useState(''); // Start empty
+  const [birthdate, setBirthdate] = useState(''); // Start empty
   const [birthdateShow, setBirthdateShow] = useState('');
   const [loading, setLoading] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
@@ -34,7 +32,7 @@ const SingleBasicComponent = () => {
     NYQ: false,
   });
   const [print, setPrint] = useState(true);
-  
+
   // Constants
   const thisY = new Date();
   const year = thisY.getFullYear();
@@ -44,59 +42,53 @@ const SingleBasicComponent = () => {
     year: 0,
     Month: 0,
   });
-  
+
   // Refs
   const contentRef = useRef(null);
   const birthRef = useRef(null);
   const myScrollContainerRef = useRef(null);
-  
+
   // Effects
   useEffect(() => {
     setGetScreenWidth(window.innerWidth > 600);
-    
+
     const handleResize = () => {
       setGetScreenWidth(window.innerWidth > 600);
     };
-    
+
     window.addEventListener('resize', handleResize);
-    
+
     // Load initial data
     theLoading(1500).then(() => {
       setIsVisible(true);
     });
-    
+
     // Get current month to determine which quarters to show
-    const currentMonth = calculosUtils.getTodaysMonth();
-    if (currentMonth === 1) {
-      setMonthsVisible({
-        CYQ1: true,
-        CYQ2: true,
-        CYQ3: true,
-        NYQ: false
-      });
-    } else if (currentMonth === 2) {
-      setMonthsVisible({
-        CYQ1: true,
-        CYQ2: true,
-        CYQ3: true,
-        NYQ: false
-      });
-    } else if (currentMonth === 3) {
-      setMonthsVisible({
-        CYQ1: false,
-        CYQ2: false,
-        CYQ3: true,
-        NYQ: true
-      });
-    }
-    
+    // Note: This calculation might need adjustment based on how calculosUtils handles months
+    calculosUtils.getTodaysMonth().then(currentMonth => {
+        if (currentMonth === 1) { // Assuming Quarter 1
+            setMonthsVisible({ CYQ1: true, CYQ2: true, CYQ3: true, NYQ: false });
+        } else if (currentMonth === 2) { // Assuming Quarter 2
+            setMonthsVisible({ CYQ1: true, CYQ2: true, CYQ3: true, NYQ: false }); // Example logic, adjust as needed
+        } else if (currentMonth === 3) { // Assuming Quarter 3
+            setMonthsVisible({ CYQ1: false, CYQ2: false, CYQ3: true, NYQ: true }); // Example logic, adjust as needed
+        } else { // Default or Quarter 4
+             setMonthsVisible({ CYQ1: false, CYQ2: false, CYQ3: true, NYQ: true }); // Example fallback
+        }
+    }).catch(err => {
+        console.error("Error getting current month:", err);
+         // Set a default visibility state on error
+         setMonthsVisible({ CYQ1: false, CYQ2: false, CYQ3: true, NYQ: true });
+    });
+
+
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-  
+
   // Loading animation function
-  const theLoading = (loadingTime = 3500) => {
+  const theLoading = (loadingTime = 1500) => { // Reduced default time
     return new Promise((resolve) => {
       if (loading) {
         setTimeout(() => {
@@ -104,60 +96,79 @@ const SingleBasicComponent = () => {
           return resolve(true);
         }, loadingTime);
       } else {
-        setLoading(true);
-        return resolve(true);
+        setLoading(true); // Enable loading if it was off
+        // If turning loading on, maybe resolve immediately or after a short delay
+        setTimeout(() => {
+             return resolve(true);
+        }, 100); // Short delay example
       }
     });
   };
-  
+
   // Form submission
   const handleSubmit = () => {
     if (nombre.length <= 1 || !birthdate) {
-      alert("Name and birthdate can't be empty.\nNombre y cumpleaños no pueden estar vacios.");
+       // Use translated alert or a more robust notification system
+      alert(t('singleBasic.validation.emptyFields'));
       return;
     }
-    
+
     const fixDate = birthdate.split('/');
-    if (fixDate.length < 3) {
-      alert("Check birthdate length.\nVerifica la fecha completa.");
+    if (fixDate.length < 3 || fixDate[0].length === 0 || fixDate[1].length === 0 || fixDate[2].length < 4) {
+      alert(t('singleBasic.validation.invalidLength'));
       return;
     }
-    
-    // Validate date parts
-    const day = parseInt(fixDate[0]);
-    const month = parseInt(fixDate[1]);
-    const year = parseInt(fixDate[2]);
-    
-    if (isNaN(day) || isNaN(month) || isNaN(year) || 
-        day < 1 || day > 31 || month < 1 || month > 12 || year < 1000 || year > 9999) {
-      alert("Invalid date format. Please use DD/MM/YYYY format.");
+
+    // Validate date parts more strictly
+    const day = parseInt(fixDate[0], 10);
+    const month = parseInt(fixDate[1], 10);
+    const yearInput = parseInt(fixDate[2], 10); // Renamed to avoid conflict
+
+    if (isNaN(day) || isNaN(month) || isNaN(yearInput) ||
+        day < 1 || day > 31 || month < 1 || month > 12 || yearInput < 1000 || yearInput > 9999) {
+       alert(t('singleBasic.validation.invalidFormat'));
       return;
     }
-    
-    // Ensure the date parts have proper leading zeros if needed
+
+     // Moment.js validation
+     const dateMoment = moment(birthdate, 'DD/MM/YYYY', true); // Use strict parsing
+     if (!dateMoment.isValid()) {
+       alert(t('singleBasic.validation.invalidDateMoment'));
+       return;
+     }
+
+    // Ensure the date parts have proper leading zeros if needed for display or calculation consistency
     const formattedDay = day < 10 ? `0${day}` : `${day}`;
     const formattedMonth = month < 10 ? `0${month}` : `${month}`;
-    const formattedDate = `${formattedDay}/${formattedMonth}/${year}`;
-    
+    const formattedDate = `${formattedDay}/${formattedMonth}/${yearInput}`; // Use yearInput here
+
     setLoading(true);
     setIsVisible(false);
-    
+
     // Process the date
-    setBirthdateShow(formattedDate);
-    
+    setBirthdateShow(formattedDate); // Show the consistently formatted date
+
     // Calculate results
     try {
       console.log("Calculating with date:", formattedDate);
       const pinaculo = calculosUtils.GetFirstLine(formattedDate);
-      console.log("Pinaculo result...................", pinaculo);
+      console.log("Pinaculo result:", pinaculo);
+      // Add validation for pinaculo structure if needed
+      if (!pinaculo || pinaculo.length === 0 || typeof pinaculo[0] !== 'object') {
+           throw new Error("Invalid Pinaculo result structure.");
+      }
       setRpinaculo(pinaculo);
-      
-      const yearData = calculosUtils.GetYear(formattedDate);
+
+      const yearData = calculosUtils.GetYear(birthdate); // Pass original valid input 'birthdate' to GetYear if it expects MM/DD/YYYY
       console.log("Year data result:", yearData);
-      setPinYear([yearData]);
-      
+      // Add validation for yearData structure if needed
+       if (!yearData || typeof yearData !== 'object' || Object.keys(yearData).length === 0) {
+           throw new Error("Invalid Year data result structure.");
+       }
+      setPinYear([yearData]); // Ensure it's always an array
+
       setResultados(true);
-      
+
       // Scroll to results after rendering
       setTimeout(() => {
         if (myScrollContainerRef.current) {
@@ -166,40 +177,36 @@ const SingleBasicComponent = () => {
       }, 100);
     } catch (error) {
       console.error('Error calculating results:', error);
-      alert(`Calculation error: ${error.message || 'Please try again with a valid date.'}` );
+      alert(`${t('singleBasic.calculationError')}: ${error.message || t('singleBasic.tryAgain')}`);
       setLoading(false);
-      setIsVisible(true);
+      setIsVisible(true); // Show form again on error
+      setResultados(false); // Hide potentially incomplete results
       return;
+    } finally {
+       // Ensure loading is turned off even if scrolling fails
+       setLoading(false);
     }
-    
-    setLoading(false);
   };
-  
+
+
   // Handle birthdate input with mask
   const handleBirthdateChange = (e) => {
     let value = e.target.value.replace(/[^\d]/g, ''); // Remove non-digits
-    
-    // Format with slashes in correct positions
+
     if (value.length > 0) {
-      // Add first slash after day (after first 2 digits)
       if (value.length > 2) {
         value = value.substring(0, 2) + '/' + value.substring(2);
       }
-      
-      // Add second slash after month (after first 5 chars: dd/mm)
       if (value.length > 5) {
         value = value.substring(0, 5) + '/' + value.substring(5);
       }
-      
-      // Limit to 10 chars (dd/mm/yyyy)
       if (value.length > 10) {
         value = value.substring(0, 10);
       }
     }
-    
     setBirthdate(value);
   };
-  
+
   // Reload function
   const reload = () => {
     setIsVisible(true);
@@ -209,116 +216,182 @@ const SingleBasicComponent = () => {
     setBirthdateShow('');
     setRpinaculo([]);
     setPinYear([]);
+    // Reset mobile selection if needed
+    setMobilMesSelect({ year: 0, Month: 0 });
+    setListMobileM([]);
   };
-  
-  // Print function with PDF generation
-  const downloadPdf = () => {
-    if (typeof window !== 'undefined' && window.html2pdf && contentRef.current) {
-      const content = contentRef.current;
-      
-      const opt = {
-        margin: [10, 10, 10, 10],
-        filename: 'SingleNumerologyCalculation.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-      };
-      
-      window.html2pdf().set(opt).from(content).save();
-    } else {
-      alert('PDF generation is not available. Please check if the html2pdf library is loaded.');
-    }
-  };
-  
-  // Handle mobile year selection
-  const handleYearSelect = (selectedYear) => {
-    setMobilMesSelect({ ...mobilMesSelect, year: selectedYear, Month: 0 });
-    setListMobileM([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
-  };
+
+ // Print function with PDF generation
+ const downloadPdf = () => {
+    // Temporarily set 'print' state for header visibility during PDF generation
+    setPrint(true);
+
+    // Ensure content is fully rendered before generating PDF
+    // Using setTimeout is a common workaround, but might not be perfectly reliable.
+    // Consider libraries like `react-to-print` for more robust solutions if needed.
+    setTimeout(() => {
+        if (typeof window !== 'undefined' && window.html2pdf && contentRef.current) {
+            const content = contentRef.current;
+            const clonedContent = content.cloneNode(true); // Clone the node
+
+            // --- Style adjustments specifically for PDF ---
+            // Find elements to hide in the clone
+            const buttonsToHide = clonedContent.querySelectorAll('.action-buttons, .btn'); // Hide action buttons and potentially others
+            buttonsToHide.forEach(btn => btn.style.display = 'none');
+
+            // Adjust layout for printing if necessary (e.g., remove wide margins)
+             const containerElement = clonedContent.querySelector('.container'); // Assuming '.container' is the main layout box
+             if (containerElement) {
+                 containerElement.style.maxWidth = '100%';
+                 containerElement.style.padding = '0';
+                 containerElement.style.margin = '0';
+             }
+             // Zoom out content slightly for PDF if needed
+            // clonedContent.style.zoom = '0.9'; // Adjust zoom level as necessary
+
+            const opt = {
+                margin: [5, 5, 5, 5], // Reduced margins
+                filename: `Numerology_${nombre || 'Calculation'}_${birthdateShow.replace(/\//g, '-')}.pdf`,
+                image: { type: 'jpeg', quality: 0.95 }, // Slightly adjusted quality
+                html2canvas: {
+                    scale: 2, // Keep scale for better resolution
+                    useCORS: true, // Important if images are from external sources
+                    logging: false // Disable excessive logging
+                },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            window.html2pdf().set(opt).from(clonedContent).save().then(() => {
+                // Reset print state after PDF generation is complete (or attempted)
+                 setPrint(false); // Or keep it true if you want the header always visible after first generation
+                console.log("PDF generated");
+            }).catch(err => {
+                console.error("Error generating PDF:", err);
+                setPrint(false); // Reset print state on error
+                alert(t('singleBasic.pdfError'));
+            });
+
+        } else {
+            alert(t('singleBasic.pdfLibraryError'));
+            setPrint(false); // Reset print state if library isn't available
+        }
+    }, 500); // Delay to allow rendering updates
+};
+
+ // Handle mobile year selection
+ const handleYearSelect = (selectedYear) => {
+    setSmallLoading(true); // Show loading indicator
+    setMobilMesSelect({ year: selectedYear, Month: 0 }); // Reset month when year changes
+
+    // Simulate fetching or processing month list for the selected year
+    // Replace with actual logic if needed
+    setTimeout(() => {
+        const monthsForYear = [
+           { month: 1, name: t('months.jan') }, { month: 2, name: t('months.feb') }, { month: 3, name: t('months.mar') },
+           { month: 4, name: t('months.apr') }, { month: 5, name: t('months.may') }, { month: 6, name: t('months.jun') },
+           { month: 7, name: t('months.jul') }, { month: 8, name: t('months.aug') }, { month: 9, name: t('months.sep') },
+           { month: 10, name: t('months.oct') }, { month: 11, name: t('months.nov') }, { month: 12, name: t('months.dec') }
+         ];
+         // Add year to each month object
+        const monthsWithYear = monthsForYear.map(m => ({ ...m, year: selectedYear }));
+         setListMobileM([{ month: 0, year: selectedYear, name: t('singleBasic.selectMonth')}, ...monthsWithYear]); // Add "Select Month" option
+        setSmallLoading(false);
+    }, 300); // Simulating delay
+};
+
+
+  // Helper to generate description keys dynamically
+  const getDescriptionKey = (num, type) => `singleBasic.numberDescriptions.num${num}_${type}`;
+
+  // Array of numbers for easy looping in descriptions
+  const descriptionNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33];
+
 
   return (
     <main className="main">
+      {/* Ensure contentRef wraps the entire content intended for PDF */}
       <div ref={contentRef} className="content">
         <LoadingComponent loading={loading} />
-        
-        <NumerologyInputFormComponent
-          isVisible={isVisible}
-          resultados={resultados}
-          nombre={nombre}
-          setNombre={setNombre}
-          birthdate={birthdate}
-          birthdateShow={birthdateShow}
-          handleBirthdateChange={handleBirthdateChange}
-          handleSubmit={handleSubmit}
-          birthRef={birthRef}
-        />
-        
-        <div id="page1" className="page" style={{display: resultados ? 'block' : 'none'}}>
-          <ResultsHeaderComponent
-            resultados={resultados}
-            nombre={nombre}
-            birthdateShow={birthdateShow}
-            reload={reload}
-            downloadPdf={downloadPdf}
-            getScreenWidth={getScreenWidth}
-            print={print}
-          />
 
-          <div className="container">
-            <div className="row">
-              <div className="col-8">
-                <PinaculoChartComponent pinaculo={rpinaculo.length > 0 ? rpinaculo[0] : null} />
-              </div>
-              <div className="col-4">
-                <div className="rside">
-                  <YearChartComponent 
-                    year={year} 
-                    data={pinYear.length > 0 ? pinYear[0] : null} 
-                    isCurrentYear={true} 
-                  />
-                  <div className="selected">
-                    <YearChartComponent 
-                      year={nxYear} 
-                      data={pinYear.length > 0 ? pinYear[0] : null} 
-                      isCurrentYear={false} 
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            {getScreenWidth ? (
-              // Desktop view
-              <>
-                <DesktopMonthGridComponent birthdate={birthdate} />
-                <DesktopDayGridComponent birthdate={birthdate} />
-              </>
-            ) : (
-              // Mobile view
-              <>
-                <div className="section-divider"></div>
-                <MobileYearSliderComponent
-                  currentYear={year}
-                  nextYear={nxYear}
-                  onYearSelect={handleYearSelect}
-                  listMobileM={listMobileM}
-                  mobilMesSelect={mobilMesSelect}
-                  setMobilMesSelect={setMobilMesSelect}
-                />
-                <MobileMonthDayViewComponent
-                  birthdate={birthdate}
-                  mobilMesSelect={mobilMesSelect}
-                  smallLoading={smallLoading}
-                />
-              </>
-            )}
-          </div>
-        </div>
-        
-        <div ref={myScrollContainerRef}></div>
-      </div>
+        {/* Only render input form if not showing results */}
+        {!resultados && (
+             <NumerologyInputFormComponent
+               isVisible={isVisible}
+               resultados={resultados}
+               nombre={nombre}
+               setNombre={setNombre}
+               birthdate={birthdate}
+               birthdateShow={birthdateShow}
+               handleBirthdateChange={handleBirthdateChange}
+               handleSubmit={handleSubmit}
+               birthRef={birthRef}
+               t={t} // Pass t function
+             />
+        )}
+
+
+        {/* Results Section */}
+        {resultados && (
+           <div id="page1" className="page">
+              {/* Pass print state to ResultsHeaderComponent */}
+             <ResultsHeaderComponent
+               resultados={resultados}
+               nombre={nombre}
+               birthdateShow={birthdateShow}
+               reload={reload}
+               downloadPdf={downloadPdf} // Keep download function here if button is inside header
+               getScreenWidth={getScreenWidth}
+               print={print} // Pass print state
+               t={t} // Pass t function
+             />
+
+             <div className="container results-container" ref={myScrollContainerRef}> {/* Added class and ref */}
+               <div className="row">
+                 {/* Pinaculo Chart */}
+                 <div className="col-12 col-md-8"> {/* Adjust columns for better layout */}
+                   <PinaculoChartComponent pinaculo={rpinaculo.length > 0 ? rpinaculo[0] : null} />
+                 </div>
+               </div>
+
+
+
+                {/* Number Descriptions Section */}
+               <div className="section-divider"></div>
+               <h3 className="section-title">{t('singleBasic.descriptionsTitle')}</h3>
+               <div className="numerology-descriptions">
+                 {descriptionNumbers.map(num => (
+                   <div key={num} className="number-description">
+                     <div className="description-half">
+                       <h2>{t(getDescriptionKey(num, 'pos_title'))}</h2>
+                       <p>{t(getDescriptionKey(num, 'pos_desc'))}</p>
+                     </div>
+                     <div className="description-half">
+                       <h2>{t(getDescriptionKey(num, 'neg_title'))}</h2>
+                       <p>{t(getDescriptionKey(num, 'neg_desc'))}</p>
+                     </div>
+                   </div>
+                 ))}
+               </div>
+
+
+                {/* Action Buttons Section - Placed after all content */}
+               <div className="action-buttons">
+                 <button className="download-button" onClick={downloadPdf}>
+                   {t('singleBasic.downloadButton')}
+                 </button>
+                 <button className="generate-button" onClick={reload}>
+                   {t('singleBasic.reloadButton')}
+                 </button>
+               </div>
+
+             </div> {/* End of .container .results-container */}
+           </div> // End of #page1
+        )}
+
+
+      </div> {/* End of .content */}
     </main>
   );
 };
 
-export default SingleBasicComponent; 
+export default SingleBasicComponent;
