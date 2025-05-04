@@ -227,8 +227,6 @@ const SingleBasicComponent = () => {
     setPrint(true);
 
     // Ensure content is fully rendered before generating PDF
-    // Using setTimeout is a common workaround, but might not be perfectly reliable.
-    // Consider libraries like `react-to-print` for more robust solutions if needed.
     setTimeout(() => {
         if (typeof window !== 'undefined' && window.html2pdf && contentRef.current) {
             const content = contentRef.current;
@@ -236,46 +234,64 @@ const SingleBasicComponent = () => {
 
             // --- Style adjustments specifically for PDF ---
             // Find elements to hide in the clone
-            const buttonsToHide = clonedContent.querySelectorAll('.action-buttons, .btn'); // Hide action buttons and potentially others
+            const buttonsToHide = clonedContent.querySelectorAll('.action-buttons, .btn, button'); 
             buttonsToHide.forEach(btn => btn.style.display = 'none');
 
-            // Adjust layout for printing if necessary (e.g., remove wide margins)
-             const containerElement = clonedContent.querySelector('.container'); // Assuming '.container' is the main layout box
-             if (containerElement) {
-                 containerElement.style.maxWidth = '100%';
-                 containerElement.style.padding = '0';
-                 containerElement.style.margin = '0';
-             }
-             // Zoom out content slightly for PDF if needed
-            // clonedContent.style.zoom = '0.9'; // Adjust zoom level as necessary
+            // Apply print-specific styles to the clone
+            const styleElement = document.createElement('style');
+            styleElement.textContent = `
+                .container { 
+                    max-width: 100% !important;
+                    padding: 10px !important;
+                    margin: 0 !important;
+                }
+                .content {
+                    margin-top: 0.5rem !important;
+                    padding: 0 10px !important;
+                    zoom: 1 !important;
+                }
+                .number-description {
+                    page-break-inside: avoid;
+                }
+                .section-divider {
+                    margin: 20px 0;
+                    border-top: 1px solid #ccc;
+                }
+            `;
+            clonedContent.appendChild(styleElement);
 
             const opt = {
-                margin: [5, 5, 5, 5], // Reduced margins
+                margin: [10, 10, 10, 10], // Slightly increased margins
                 filename: `Numerology_${nombre || 'Calculation'}_${birthdateShow.replace(/\//g, '-')}.pdf`,
-                image: { type: 'jpeg', quality: 0.95 }, // Slightly adjusted quality
+                image: { type: 'jpeg', quality: 0.98 }, // Higher quality
                 html2canvas: {
-                    scale: 2, // Keep scale for better resolution
-                    useCORS: true, // Important if images are from external sources
-                    logging: false // Disable excessive logging
+                    scale: 2, 
+                    useCORS: true,
+                    logging: false,
+                    letterRendering: true // Improve text rendering
                 },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                jsPDF: { 
+                    unit: 'mm', 
+                    format: 'a4', 
+                    orientation: 'portrait',
+                    compress: true // Better compression
+                }
             };
 
             window.html2pdf().set(opt).from(clonedContent).save().then(() => {
-                // Reset print state after PDF generation is complete (or attempted)
-                 setPrint(false); // Or keep it true if you want the header always visible after first generation
+                setPrint(false);
                 console.log("PDF generated");
             }).catch(err => {
                 console.error("Error generating PDF:", err);
-                setPrint(false); // Reset print state on error
+                setPrint(false);
                 alert(t('singleBasic.pdfError'));
             });
 
         } else {
             alert(t('singleBasic.pdfLibraryError'));
-            setPrint(false); // Reset print state if library isn't available
+            setPrint(false);
         }
-    }, 500); // Delay to allow rendering updates
+    }, 800); // Increased delay to ensure complete rendering
 };
 
  // Handle mobile year selection

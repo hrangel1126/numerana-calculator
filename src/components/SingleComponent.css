@@ -47,7 +47,8 @@
 .textomv {
   padding: 0.5rem;
   font-size: 1rem;
-  width: 300px;
+  max-width: 300px; /* Changed from width to max-width */
+  width: 100%; /* Allow it to take full width up to the max */
   margin-bottom: 1rem;
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
@@ -386,7 +387,8 @@ svg text {
   }
   
   .download-button, .generate-button {
-    width: 80%;
+    width: 90%; /* Adjusted width */
+    max-width: 300px; /* Added max-width */
   }
   
   .number-description {
@@ -455,7 +457,7 @@ svg text {
 /* Styles for the inner (+) and (-) halves */
 .description-half {
   flex: 1;               /* Allows both halves to grow/shrink equally */
-  min-width: 250px;      /* Minimum width before wrapping (adjust as needed) */
+  min-width: 220px;      /* Reduced minimum width before wrapping */
   box-sizing: border-box;/* Ensures padding/border are included in width calculation */
 }
 
@@ -501,4 +503,4 @@ svg text {
 
 .download-button:hover, .generate-button:hover {
   background-color: #5c8eaf;
-} 
+}

@@ -256,12 +256,123 @@ margin-right: auto;
 }
 
 @media print {
-  app-menu {
-  visibility: hidden;
-  }
+  /* Hide elements not needed for print */
+  app-menu,
+  .btn-block,
+  .movil,
+  .mesesmovil,
+  .send,
+  .cal,
+  .action-buttons,
+  button {
+    display: none !important;
+    visibility: hidden !important;
   }
 
-  .btn-block{display:none !important;} .container{ max-width: 90% !important;zoom: .7 !important; margin-top: 1rem;}
+  /* Reset problematic styles */
+  * {
+    text-shadow: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Force background images and colors to print */
+  body, html, .pinaa1, .pinaa2, .pina1, select {
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background-color: white !important;
+  }
+
+  /* Page layout setup */
+  @page {
+    size: A4 portrait;
+    margin: 0.5cm;
+  }
+
+  /* Simplify zoom and layout */
+  body {
+    zoom: 0.85 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    min-width: 100% !important;
+  }
+
+  .content {
+    margin-top: 0.5rem !important;
+    padding: 0 10px !important;
+    zoom: none !important;
+  }
+
+  .container {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 10px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Results container */
+  .results-container {
+    page-break-before: avoid;
+    page-break-after: avoid;
+  }
+
+  /* Ensure headers start on new pages when needed */
+  h2, h3 {
+    page-break-after: avoid;
+  }
+
+  /* Prevent unwanted breaks in descriptions */
+  .number-description {
+    page-break-inside: avoid;
+  }
+
+  /* Fix visibility for important components */
+  .pina1, .pinaa1, .pinaa2 {
+    background-position: center !important;
+    display: block !important;
+    overflow: visible !important;
+  }
+
+  /* Reset potentially problematic styles */
+  .rside {
+    display: block !important;
+    width: 100% !important;
+    zoom: none !important;
+  }
+
+  .rside div {
+    padding: 5px !important;
+    min-height: auto !important;
+    zoom: none !important;
+  }
+
+  app-mes {
+    zoom: none !important;
+  }
+
+  /* Ensure layout flows correctly */
+  .Anual {
+    display: block !important;
+  }
+
+  /* Image handling */
+  img, svg {
+    max-width: 100% !important;
+  }
+
+  /* Pinaculo Chart specific fixes */
+  .pinaculo-chart {
+    page-break-inside: avoid;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+  }
+} /* End @media print */
+
+  /* Styles outside @media print remain unchanged below */
+  /* .btn-block{display:none !important;} */ /* Moved inside @media print */
+  /* .container{ max-width: 90% !important;zoom: .7 !important; margin-top: 1rem;} */ /* Moved inside @media print */
   .rside {
     display: flex;
     flex-direction: column;
