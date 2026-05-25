@@ -1,23 +1,25 @@
+/* ============================================
+   NEW UI UPDATE 2026 - Home Page Styling
+   ============================================ */
+
 /* General Styles */
-/* Renamed: .main -> .Home-main */
 .Home-main {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: linear-gradient(135deg, #faf8f3 0%, #f5f1eb 100%);
 }
 
-/* Renamed: .content -> .Home-content */
 .Home-content {
   flex-grow: 1;
   display: flex;
   justify-content: center;
-  /* align-items: center; */
-  padding-bottom: 5vh;
-  /* margin-top: 11vh; Applied inline, kept here for reference */
+  align-items: center;
+  padding: 2rem 1rem;
+  margin-top: 6vh;
 }
 
-/* Renamed: .loader-container -> .Home-loaderContainer */
 .Home-loaderContainer {
   display: flex;
   justify-content: center;
@@ -25,236 +27,360 @@
   height: 50vh;
 }
 
-/* Renamed: .title -> .Home-title */
-.Home-title {
-  text-align: center;
-  font-weight: 500;
-  font-size: 18px;
-  margin-bottom: 0.4rem;
-  color: #333;
-}
-
-/* Renamed: .bntcontain -> .Home-btnContain */
-.Home-btnContain {
-  zoom: 1.3;
-  width: 100%;
-  max-width: 400px;
-  padding: 1rem;
-}
-
-/* Renamed layout classes (remove if using global Bootstrap) */
-/* Renamed: .row -> .Home-row */
-.Home-row {
-  display: flex;
-  flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
-  margin-bottom: 0.5rem; /* Add some default spacing between rows */
-}
-/* Renamed: .col-12 -> .Home-col12 */
-.Home-col12 {
-  position: relative;
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-}
-/* Renamed: .d-flex -> .Home-dFlex */
-.Home-dFlex { display: flex !important; }
-/* Renamed: .justify-content-center -> .Home-justifyCenter */
-.Home-justifyCenter { justify-content: center !important; }
-
-
-/* Button Styles */
-/* Renamed: .button-container -> .Home-buttonContainer */
-.Home-buttonContainer {
-  position: relative;
-  width: 90px;
-  height: 45px;
-  overflow: hidden;
-  border: 1px solid #5b356c;
-  transition: box-shadow 0.3s ease;
-  border-radius: 7px;
-  background-color: #5b356c;
-}
-
-.Home-buttonContainer:hover {
-   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-}
-
-/* Link takes full container size */
-.Home-buttonContainer a {
-    display: block;
-    width: 100%;
-    height: 100%;
-    text-decoration: none;
-}
-
-
-/* Renamed: .button-content -> .Home-buttonContent */
-.Home-buttonContent {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  font-family: 'Lato', sans-serif;
-  font-weight: bold;
-  font-size: 10px;
-  letter-spacing: 0.8px;
-  cursor: pointer;
-  color: #fff;
-  border: none;
-  background-color: transparent;
-  /* Mask properties */
-  mask-repeat: no-repeat;
-  mask-position: 0 0;
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: 0 0;
-}
-
-/* Renamed: .mas -> .Home-buttonHoverContent */
-.Home-buttonContainer .Home-buttonHoverContent { /* Adjusted selector */
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 10px;
-  font-weight: bold;
-  color: #5b356c;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Renamed: .icon -> .Home-icon, .iconin -> .Home-iconHover */
-.Home-icon, .Home-iconHover {
-  zoom: 3.5;
-  line-height: 1;
-  vertical-align: middle;
-}
-
-/* Specific adjustments for Button 3 icons (Team) */
-/* Renamed: .button-3 -> .Home-button3 */
-.Home-button3 .Home-buttonContent,
-.Home-button3 .Home-buttonHoverContent {
-  gap: 4px;
-}
-
-
-/* Mask Animations (keyframes names unchanged) */
-@keyframes ani {
-  from { -webkit-mask-position: 0 0; mask-position: 0 0; }
-  to { -webkit-mask-position: 100% 0; mask-position: 100% 0; }
-}
-@keyframes ani2 {
-  from { -webkit-mask-position: 100% 0; mask-position: 100% 0; }
-  to { -webkit-mask-position: 0 0; mask-position: 0 0; }
-}
-
-/* --- Specific button masks and animations --- */
-/* Apply mask to the .Home-buttonContent span now */
-/* Renamed button modifier classes: .button-1 -> .Home-button1 etc. */
-
-/* Button 1 (Personal) */
-.Home-button1 .Home-buttonContent {
-  -webkit-mask-image: url('../../assets/img/nature-sprite.png');
-  mask-image: url('../../assets/img/nature-sprite.png');
-  -webkit-mask-size: 2300% 100%;
-  mask-size: 2300% 100%;
-  -webkit-animation: ani2 0.7s steps(22) forwards;
-  animation: ani2 0.7s steps(22) forwards;
-}
-.Home-button1 .Home-buttonContent:hover {
-  -webkit-animation: ani 0.7s steps(22) forwards;
-  animation: ani 0.7s steps(22) forwards;
-}
-
-/* Button 2 (Couple) */
-.Home-button2 .Home-buttonContent {
-  -webkit-mask-image: url('../../assets/img/urban-sprite.png');
-  mask-image: url('../../assets/img/urban-sprite.png');
-  -webkit-mask-size: 3000% 100%;
-  mask-size: 3000% 100%;
-  -webkit-animation: ani2 0.7s steps(29) forwards;
-  animation: ani2 0.7s steps(29) forwards;
-}
-.Home-button2 .Home-buttonContent:hover {
-  -webkit-animation: ani 0.7s steps(29) forwards;
-  animation: ani 0.7s steps(29) forwards;
-}
-
-/* Button 3 (Team) */
-.Home-button3 .Home-buttonContent {
-  -webkit-mask-image: url('../../assets/img/natureSmaller.png');
-  mask-image: url('../../assets/img/natureSmaller.png');
-  -webkit-mask-size: 7100% 100%;
-  mask-size: 7100% 100%;
-  -webkit-animation: ani2 0.7s steps(70) forwards;
-  animation: ani2 0.7s steps(70) forwards;
-}
-.Home-button3 .Home-buttonContent:hover {
-  -webkit-animation: ani 0.7s steps(70) forwards;
-  animation: ani 0.7s steps(70) forwards;
-}
-
-
-/* Loader animation (ripple loader) (unchanged class name) */
+/* Ripple Loader Animation */
 .lds-ripple {
   display: inline-block;
   position: relative;
   width: 70px;
   height: 70px;
 }
+
 .lds-ripple div {
   position: absolute;
-  border: 3px solid #5b356c;
+  border: 3px solid #d4af37;
   opacity: 1;
   border-radius: 50%;
   animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
+
 .lds-ripple div:nth-child(2) {
   animation-delay: -0.5s;
 }
-@keyframes lds-ripple { /* Keyframes unchanged */
-  0% { top: 31.5px; left: 31.5px; width: 0; height: 0; opacity: 1; }
-  100% { top: -1px; left: -1px; width: 66px; height: 66px; opacity: 0; }
+
+@keyframes lds-ripple {
+  0% {
+    top: 31.5px;
+    left: 31.5px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: -1px;
+    left: -1px;
+    width: 66px;
+    height: 66px;
+    opacity: 0;
+  }
 }
 
-/* Responsive adjustments */
-@media only screen and (max-width: 964px) {
-  /* Selectors updated */
-  .Home-btnContain {
-    zoom: 1.1;
+/* ============================================
+   MAIN LAYOUT - Two Column (Desktop)
+   ============================================ */
+
+.Home-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  max-width: 1200px;
+  width: 100%;
+  align-items: center;
+}
+
+/* Left Section - Form */
+.Home-leftSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.Home-logo-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  background-color: rgba(212, 175, 55, 0.1);
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #d4af37;
+}
+
+.Home-logo-badge i {
+  font-size: 14px;
+}
+
+.Home-mainTitle {
+  font-size: 42px;
+  font-weight: 700;
+  color: #1a3a52;
+  line-height: 1.2;
+  margin: 0;
+  
+  /* Underline styling */
+  position: relative;
+  display: inline-block;
+}
+
+.Home-mainTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #d4af37;
+  border-radius: 2px;
+}
+
+.Home-subtitle {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 400px;
+}
+
+/* Form Section */
+.Home-formSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.Home-formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.Home-formGroup label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.Home-formInput {
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background-color: #fff;
+}
+
+.Home-formInput:focus {
+  outline: none;
+  border-color: #d4af37;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+.Home-formInput::placeholder {
+  color: #999;
+}
+
+.Home-calculateBtn {
+  padding: 14px 24px;
+  background-color: #1a3a52;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.Home-calculateBtn:hover {
+  background-color: #0f2843;
+  box-shadow: 0 4px 12px rgba(26, 58, 82, 0.3);
+  transform: translateY(-2px);
+}
+
+.Home-calculateBtn i {
+  font-size: 18px;
+}
+
+/* Right Section - Hero Image */
+.Home-rightSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  gap: 2rem;
+}
+
+.Home-heroImage {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.08));
+  animation: float 3s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+.Home-heroDecoration {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  text-align: center;
+}
+
+.Home-heroText {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a3a52;
+  margin: 0;
+  font-style: italic;
+  letter-spacing: 0.5px;
+}
+
+.Home-heroTextBottom {
+  font-size: 18px;
+  font-weight: 500;
+  color: #666;
+  margin: 0;
+  font-style: italic;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
   }
-  .Home-title {
-     font-size: 17px;
+  50% {
+    transform: translateY(-10px);
   }
 }
 
-@media only screen and (max-width: 480px) {
-   /* Selectors updated */
-  .Home-btnContain {
-    zoom: 1;
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* Tablet - 768px and below */
+@media (max-width: 768px) {
+  .Home-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
-   .Home-buttonContainer {
-    width: 80px;
-    height: 40px;
+
+  .Home-mainTitle {
+    font-size: 32px;
   }
-  .Home-title {
-     font-size: 15px;
+
+  .Home-subtitle {
+    font-size: 14px;
   }
-  .Home-icon, .Home-iconHover {
-      zoom: 3;
+
+  .Home-formSection {
+    gap: 1.2rem;
   }
-   /* Loader unchanged */
-   .lds-ripple {
-      width: 60px;
-      height: 60px;
-    }
-    /* Keyframes declaration inside media query needs to be repeated if changed */
-    /* @keyframes lds-ripple { ... } */
-    .lds-ripple div { border-width: 3px; }
+
+  .Home-heroImage {
+    max-width: 90%;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Mobile - 600px and below */
+@media (max-width: 600px) {
+  .Home-content {
+    padding: 1rem 0.5rem;
+    margin-top: 4vh;
+  }
+
+  .Home-container {
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  .Home-leftSection {
+    gap: 1.2rem;
+  }
+
+  .Home-logo-badge {
+    font-size: 11px;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .Home-mainTitle {
+    font-size: 24px;
+    margin-bottom: 0.5rem;
+  }
+
+  .Home-mainTitle::after {
+    bottom: -5px;
+    height: 2px;
+  }
+
+  .Home-subtitle {
+    font-size: 13px;
+  }
+
+  .Home-formSection {
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .Home-formGroup label {
+    font-size: 13px;
+  }
+
+  .Home-formInput {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .Home-calculateBtn {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  .Home-calculateBtn i {
+    font-size: 16px;
+  }
+
+  .Home-heroImage {
+    max-width: 100%;
+    margin-top: 1rem;
+  }
+
+  .lds-ripple {
+    width: 60px;
+    height: 60px;
+  }
+
+  .lds-ripple div {
+    border-width: 3px;
+  }
+}
+
+/* Small Mobile - 400px and below */
+@media (max-width: 400px) {
+  .Home-container {
+    padding: 0 0.5rem;
+  }
+
+  .Home-mainTitle {
+    font-size: 20px;
+  }
+
+  .Home-subtitle {
+    font-size: 12px;
+  }
+
+  .Home-formGroup label {
+    font-size: 12px;
+  }
+
+  .Home-formInput {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .Home-calculateBtn {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
 }

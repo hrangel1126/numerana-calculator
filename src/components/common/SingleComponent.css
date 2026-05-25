@@ -409,4 +409,244 @@ svg text {
   .A svg {
     zoom: 0.7;
   }
+}
+
+/* ============================================
+   RESULTS PAGE - New UI Update 2026
+   ============================================ */
+
+.Results-header {
+  background: linear-gradient(135deg, #faf8f3 0%, #f5f1eb 100%);
+  padding: 2rem 2rem 3rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.Results-headerContent {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.Results-backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background-color: rgba(212, 175, 55, 0.1);
+  border: 1px solid #d4af37;
+  border-radius: 6px;
+  color: #1a3a52;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+}
+
+.Results-backBtn:hover {
+  background-color: #d4af37;
+  color: #fff;
+}
+
+.Results-backBtn i {
+  font-size: 16px;
+}
+
+.Results-personInfo {
+  margin-bottom: 2rem;
+}
+
+.Results-personName {
+  font-size: 42px;
+  font-weight: 700;
+  color: #1a3a52;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+}
+
+.Results-birthdate {
+  font-size: 18px;
+  color: #d4af37;
+  font-weight: 600;
+  margin: 0 0 1.5rem 0;
+}
+
+.Results-descriptionText {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.7;
+  margin: 0 0 1.5rem 0;
+  max-width: 600px;
+}
+
+.Results-ctaText {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0 0 2rem 0;
+  max-width: 600px;
+}
+
+.Results-actions {
+  display: flex;
+  gap: 1rem;
+  max-width: fit-content;
+}
+
+.Results-btnPrimary {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.Results-btnPrimary {
+  background-color: #1a3a52;
+  color: #fff;
+}
+
+.Results-btnPrimary:hover {
+  background-color: #0f2843;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 58, 82, 0.3);
+}
+
+.Results-btnSecondary {
+  background-color: #fff;
+  color: #d4af37;
+  border: 2px solid #d4af37;
+}
+
+.Results-btnSecondary:hover {
+  background-color: #f5f1eb;
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+}
+
+/* Results Grid Layout (Two columns: pinaculo left, info right) */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.page .row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.page .col-8 {
+  grid-column: 1;
+  flex: none;
+  width: auto;
+}
+
+.page .col-4 {
+  grid-column: 2;
+  flex: none;
+  width: auto;
+}
+
+.rside {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.rside div {
+  border-left: none;
+  padding: 0;
+  min-height: auto;
+}
+
+/* Responsive adjustments for results page */
+@media (max-width: 768px) {
+  .Results-header {
+    padding: 1.5rem 1rem 2rem 1rem;
+  }
+  
+  .Results-personName {
+    font-size: 32px;
+  }
+  
+  .Results-birthdate {
+    font-size: 16px;
+  }
+  
+  .Results-descriptionText {
+    font-size: 13px;
+  }
+  
+  .Results-ctaText {
+    font-size: 13px;
+  }
+  
+  .Results-actions {
+    flex-direction: column;
+  }
+  
+  .Results-btnPrimary {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Switch to single column on tablet */
+  .page .row {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .page .col-4 {
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .Results-header {
+    padding: 1rem 0.75rem 1.5rem 0.75rem;
+  }
+  
+  .Results-personName {
+    font-size: 24px;
+    margin-bottom: 0.3rem;
+  }
+  
+  .Results-birthdate {
+    font-size: 14px;
+    margin-bottom: 1rem;
+  }
+  
+  .Results-descriptionText {
+    font-size: 12px;
+    margin-bottom: 1rem;
+  }
+  
+  .Results-ctaText {
+    font-size: 12px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .Results-backBtn {
+    padding: 0.5rem 1rem;
+    font-size: 12px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .container {
+    padding: 0 0.5rem;
+  }
+  
+  .page .row {
+    gap: 1rem;
+  }
+  
+  .rside {
+    gap: 1rem;
+  }
 } 

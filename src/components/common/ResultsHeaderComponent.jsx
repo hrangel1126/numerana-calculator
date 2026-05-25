@@ -1,8 +1,6 @@
 import React from 'react';
-import leftDecoration from '../../assets/img/Lleft.png';
-import rightDecoration from '../../assets/img/Lright.png';
-import logoImage from '../../assets/img/logonumerana80.png';
 import './SingleComponent.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const ResultsHeaderComponent = ({ 
   resultados, 
@@ -14,61 +12,54 @@ const ResultsHeaderComponent = ({
   print 
 }) => {
   return (
-    <div className={`containerBox ${resultados ? 'visible' : 'hidden'}`} style={{display: print ? 'block' : 'none'}}>
-      <div className="row">
-        <div className="col-8 person resultado2" style={{ border: '5px solid #858585', borderRadius: '5px' }}>
-          <div className="row">
-            <div className="col-2">
-              <img src={leftDecoration} className="Lleft" alt="Left decoration" />
-            </div>
-            <div className="col-8">
-              <img src={logoImage} alt="numeranamx" className="logo" />
-              <h1 className="numerologia">Numerology | Numerología</h1>
-            </div>
-            <div className="col-2">
-              <img src={rightDecoration} className="Lright" alt="Right decoration" />
-            </div>
-          </div>
+    <div className="Results-header">
+      <div className="Results-headerContent">
+        {/* Back button */}
+        <button 
+          className="Results-backBtn" 
+          onClick={reload}
+          aria-label="Go back"
+        >
+          <i className="bi bi-arrow-left"></i>
+          <span>{typeof resultados === 'object' && resultados.back ? resultados.back : 'Back'}</span>
+        </button>
+        
+        {/* Name and Date Section */}
+        <div className="Results-personInfo">
+          <h1 className="Results-personName">{nombre}</h1>
+          <p className="Results-birthdate">{birthdateShow}</p>
           
-          <h2 className="name bold">{nombre}</h2>
-          <h2 className="bold footerbox">{birthdateShow}</h2>
+          {/* Info Text */}
+          <p className="Results-descriptionText">
+            This map is generated from your birthdate and forms a structured pattern of your energy.<br />
+            Each number is placed with intention, revealing how different aspects of your personality connect and influence one another.<br />
+            The outer points reflect visible traits, while the inner connections represent deeper patterns.
+          </p>
           
-          <div className="row" style={{ marginBottom: '1rem' }}>
-            <div className="col-3"></div>
-            <div className="col-3">
-              <button type="button" onClick={reload} className="btn btn-primary btn-lg btn-block send">
-                <i className="bi bi-arrow-clockwise" style={{ zoom: 2, lineHeight: 1 }}></i>
-              </button>
-            </div>
-            <div className="col-3">
-              <button type="button" onClick={downloadPdf} className="btn btn-primary btn-lg btn-block send">
-                <i className="bi bi-printer-fill" style={{ zoom: 2, lineHeight: 1 }}></i>
-              </button>
-            </div>
-            <div className="col-3" style={{ display: getScreenWidth ? 'block' : 'none' }}>
-              <div className="row">
-                <div className="col-3"></div>
-                <div className="col-3"></div>
-                <div className="col-6"><h2 className="website www" style={{ fontSize: '11px', right: '30px' }}>www.numerana.com</h2></div>
-              </div>
-              <div className="row">
-                <div className="col-2"></div>
-                <div className="col-2"></div>
-                <div className="col-8"><h2 className="website ana" style={{ fontSize: '11px' }}>By: Ana Dorotea</h2></div>
-              </div>
-            </div>
-          </div>
-          
-          <div className="row" style={{ display: !getScreenWidth ? 'flex' : 'none' }}>
-            <div className="col-3"></div>
-            <div className="col-5">
-              <h2 className="website www" style={{ fontSize: '11px', right: '30px' }}>www.numerana.com</h2><br />
-            </div>
-            <div className="col-4">
-              <h2 className="website ana" style={{ fontSize: '11px' }}>By: Ana Dorotea</h2>
-            </div>
-          </div>
+          {/* Call to Action */}
+          <p className="Results-ctaText">
+            Download the result and if you're interested in learning more, we highly recommend taking a Numerology Courses and/or a personal session with our consultants.
+          </p>
         </div>
+      </div>
+      
+      {/* Action Buttons */}
+      <div className="Results-actions">
+        <button 
+          type="button" 
+          onClick={downloadPdf} 
+          className="Results-btnPrimary Results-btnSecondary"
+        >
+          <i className="bi bi-download"></i>
+          Download PDF
+        </button>
+        <button 
+          type="button" 
+          onClick={reload} 
+          className="Results-btnPrimary"
+        >
+          Learn Numerology ↓
+        </button>
       </div>
     </div>
   );
