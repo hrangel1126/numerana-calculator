@@ -5,7 +5,7 @@ import HeaderMenu from '../../components/HeaderMenu/HeaderMenu';
 import { useTranslation } from '../../utils/i18n/LanguageContext';
 import NumerologyInputFormComponent from '../../components/common/NumerologyInputFormComponent';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import p3Image from '../../assets/img/p3.png';
+import heroImage from '../../assets/img/hero-numerology.png';
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -112,7 +112,7 @@ const Home = () => {
 
             {/* Right side - Hero image section (desktop only) */}
             <div className="Home-rightSection">
-              <img src={p3Image} alt="Numerology" className="Home-heroImage" />
+              <img src={heroImage} alt="Numerology Calculator - Books, Numbers, Guidance" className="Home-heroImage" />
               <div className="Home-heroDecoration">
                 <p className="Home-heroText">Clarity & Guidance</p>
                 <p className="Home-heroTextBottom">Your Numbers Hold Meaning</p>
