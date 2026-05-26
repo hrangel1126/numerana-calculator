@@ -411,15 +411,46 @@ svg text {
   }
 }
 
-/* ============================================
-   RESULTS PAGE - New UI Update 2026
-   Color Palette: Warm cream, soft gold, navy
-   ============================================ */
+/*  ============================================
+    RESULTS PAGE - New UI Update 2026
+    Color Palette: Warm cream, soft gold, navy
+    ============================================ */
+
+/* 2-Column Results Header Layout */
+.results-header-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  background: #f5f0e8;
+  padding: 2rem;
+  align-items: start;
+}
+
+.results-header-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.results-header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.pinaculo-caption {
+  font-size: 16px;
+  color: #2c3e50;
+  margin-top: 2rem;
+  text-align: center;
+  font-weight: 500;
+}
 
 .Results-header {
-  background: linear-gradient(135deg, #f5ede0 0%, #ebe3d5 100%);
-  padding: 2rem 2rem 3rem 2rem;
-  margin-bottom: 2rem;
+  background: transparent;
+  padding: 0;
+  margin-bottom: 0;
 }
 
 .Results-headerContent {
@@ -568,8 +599,16 @@ svg text {
 
 /* Responsive adjustments for results page */
 @media (max-width: 768px) {
+  /* Stack columns vertically on tablet */
+  .results-header-wrapper {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 1.5rem 1rem;
+  }
+
   .Results-header {
-    padding: 1.5rem 1rem 2rem 1rem;
+    padding: 0;
+    margin-bottom: 0;
   }
   
   .Results-personName {
@@ -596,6 +635,11 @@ svg text {
     width: 100%;
     justify-content: center;
   }
+
+  .pinaculo-caption {
+    font-size: 14px;
+    margin-top: 1.5rem;
+  }
   
   /* Switch to single column on tablet */
   .page .row {
@@ -609,8 +653,14 @@ svg text {
 }
 
 @media (max-width: 600px) {
+  .results-header-wrapper {
+    padding: 1rem 0.75rem;
+    gap: 1.5rem;
+  }
+
   .Results-header {
-    padding: 1rem 0.75rem 1.5rem 0.75rem;
+    padding: 0;
+    margin-bottom: 0;
   }
   
   .Results-personName {
@@ -637,6 +687,11 @@ svg text {
     padding: 0.5rem 1rem;
     font-size: 12px;
     margin-bottom: 1.5rem;
+  }
+
+  .pinaculo-caption {
+    font-size: 13px;
+    margin-top: 1rem;
   }
   
   .container {

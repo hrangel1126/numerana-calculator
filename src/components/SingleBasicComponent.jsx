@@ -395,25 +395,33 @@ const SingleBasicComponent = () => {
         {/* Results Section */}
         {resultados && (
            <div id="page1" className="page">
-              {/* Pass print state to ResultsHeaderComponent */}
-             <ResultsHeaderComponent
-               resultados={resultados}
-               nombre={nombre}
-               birthdateShow={birthdateShow}
-               reload={reload}
-               downloadPdf={downloadPdf} // Keep download function here if button is inside header
-               getScreenWidth={getScreenWidth}
-               print={print} // Pass print state
-               t={t} // Pass t function
-             />
+              {/* 2-Column Results Header Layout */}
+              <div className="results-header-wrapper">
+                {/* Left Column - Info */}
+                <div className="results-header-left">
+                  <ResultsHeaderComponent
+                    resultados={resultados}
+                    nombre={nombre}
+                    birthdateShow={birthdateShow}
+                    reload={reload}
+                    downloadPdf={downloadPdf}
+                    getScreenWidth={getScreenWidth}
+                    print={print}
+                    t={t}
+                  />
+                </div>
 
-             <div className="container results-container" ref={myScrollContainerRef}> {/* Added class and ref */}
-               <div className="row">
-                 {/* Pinaculo Chart */}
-                 <div className="col-12 col-md-8"> {/* Adjust columns for better layout */}
-                   <PinaculoChartComponent pinaculo={rpinaculo.length > 0 ? rpinaculo[0] : null} />
-                 </div>
-               </div>
+                {/* Right Column - Pinaculo Chart */}
+                <div className="results-header-right">
+                  <PinaculoChartComponent pinaculo={rpinaculo.length > 0 ? rpinaculo[0] : null} />
+                  <p className="pinaculo-caption">{t('singleBasic.seeWhatYourNumbersReveal')}</p>
+                </div>
+              </div>
+
+              <div className="container results-container" ref={myScrollContainerRef}> {/* Added class and ref */}
+                <div className="row">
+                  {/* Core Energetic Numbers Section - Will be added here */}
+                </div>
 
 
 
