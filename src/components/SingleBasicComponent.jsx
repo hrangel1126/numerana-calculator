@@ -9,6 +9,7 @@ import heroNumerology from '../assets/img/hero-numerology.png';
 import titleHead from '../assets/img/title-head.png';
 import caracol from '../assets/img/caracol.png';
 import coreengImg from '../assets/img/coreeng.png';
+import divideImg from '../assets/img/divide.png';
 
 // Import modular components
 import NumerologyInputFormComponent from '../components/common/NumerologyInputFormComponent';
@@ -457,6 +458,8 @@ const SingleBasicComponent = () => {
                             <h4>{archetype.pos_title}</h4>
                             <p>{archetype.pos_desc}</p>
                           </div>
+                          
+                          <img src={divideImg} alt="divider" className="core-aspect-divider" />
                           
                           <div className="core-aspect negative">
                             <h4>{archetype.neg_title}</h4>

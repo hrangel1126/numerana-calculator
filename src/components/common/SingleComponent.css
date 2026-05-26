@@ -630,7 +630,7 @@ svg text {
 }
 
 .core-number-card {
-  background-color: #fafaf8;
+  background-color: #f5f0e8;
   border: 1px solid #e8dcc4;
   border-radius: 12px;
   padding: 2rem;
@@ -700,6 +700,13 @@ svg text {
   line-height: 1.6;
   margin: 0;
   text-align: left;
+}
+
+.core-aspect-divider {
+  width: 100%;
+  height: auto;
+  margin: 1.5rem 0;
+  display: block;
 }
 
 .learn-more-btn {
