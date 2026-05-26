@@ -1,6 +1,7 @@
 import React from 'react';
 import './SingleComponent.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import caracolIcon from '../../assets/img/caracol.png';
 
 const ResultsHeaderComponent = ({ 
   resultados, 
@@ -30,7 +31,7 @@ const ResultsHeaderComponent = ({
           <p className="Results-birthdate">{birthdateShow}</p>
           
           {/* Info Text */}
-          <p className="Results-descriptionText">
+          <p className="Results-descriptionText Results-descriptionText--right">
             This map is generated from your birthdate and forms a structured pattern of your energy.<br />
             Each number is placed with intention, revealing how different aspects of your personality connect and influence one another.<br />
             The outer points reflect visible traits, while the inner connections represent deeper patterns.
@@ -43,16 +44,16 @@ const ResultsHeaderComponent = ({
         </div>
       </div>
       
-      {/* Action Buttons */}
-      <div className="Results-actions">
-        <button 
-          type="button" 
-          onClick={downloadPdf} 
-          className="Results-btnPrimary Results-btnSecondary"
-        >
-          <i className="bi bi-download"></i>
-          Download PDF
-        </button>
+       {/* Action Buttons */}
+       <div className="Results-actions">
+         <button 
+           type="button" 
+           onClick={downloadPdf} 
+           className="Results-btnPrimary Results-btnSecondary"
+         >
+           <img src={caracolIcon} alt="caracol" className="Results-caracolIcon" />
+           Download PDF
+         </button>
         <button 
           type="button" 
           onClick={reload} 

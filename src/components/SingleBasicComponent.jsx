@@ -8,6 +8,7 @@ import { useTranslation } from '../utils/i18n/LanguageContext'; // Import the ho
 import heroNumerology from '../assets/img/hero-numerology.png';
 import titleHead from '../assets/img/title-head.png';
 import caracol from '../assets/img/caracol.png';
+import coreengImg from '../assets/img/coreeng.png';
 
 // Import modular components
 import NumerologyInputFormComponent from '../components/common/NumerologyInputFormComponent';
@@ -422,9 +423,7 @@ const SingleBasicComponent = () => {
                 {/* Core Energetic Numbers Section */}
                 <div className="core-numbers-section">
                   <div className="core-numbers-header">
-                    <span className="core-label">{t('singleBasic.coreNumbersTitle')}</span>
-                    <h2 className="core-title">{t('singleBasic.coreNumbersTitle')}</h2>
-                    <p className="core-subtitle">{t('singleBasic.coreNumbersSubtitle')}</p>
+                    <img src={coreengImg} alt="Core Energetic Numbers" className="core-numbers-image" />
                   </div>
 
                   <div className="core-numbers-grid">
