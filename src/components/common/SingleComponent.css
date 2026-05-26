@@ -511,7 +511,7 @@ svg text {
 }
 
 .Results-descriptionText--right {
-  text-align: right;
+  text-align: left;
 }
 
 .Results-ctaText {
