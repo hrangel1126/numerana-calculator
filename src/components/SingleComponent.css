@@ -642,11 +642,22 @@ svg text {
   justify-content: center;
 }
 
+/* Bouncing animation for hero image */
+@keyframes slowBounce {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
 .singleBasic-hero-img {
-  max-width: 100%;
+  max-width: 120%;
   height: auto;
   object-fit: contain;
   filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.1));
+  animation: slowBounce 4s ease-in-out infinite;
 }
 
 /* ==================== Responsive Design ==================== */
