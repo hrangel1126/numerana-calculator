@@ -339,22 +339,11 @@ const SingleBasicComponent = () => {
           <div className={`singleBasic-form-wrapper ${isVisible ? 'visible' : 'hidden'}`} style={{display: !resultados ? 'block' : 'none'}}>
             {/* Hero Section with Title and Form */}
             <div className="singleBasic-hero-container">
-              {/* Left Side - Form */}
+              {/* Left Side - Title Image and Form */}
               <div className="singleBasic-left-column">
-                {/* Hero Image Section (replaces text heading) */}
-                <div className="singleBasic-hero-image-section">
-                  <img src={heroNumerology} alt="numerology" className="singleBasic-hero-image-heading" />
-                </div>
-
-                {/* Title Head Image */}
+                {/* Title Head Image (replaces text - already contains heading text) */}
                 <div className="singleBasic-title-section">
                   <img src={titleHead} alt="title" className="singleBasic-title-img" />
-                </div>
-
-                {/* Text Content */}
-                <div className="singleBasic-text-content">
-                  <h1 className="singleBasic-main-heading">Find What Your Numbers Say About You.</h1>
-                  <p className="singleBasic-subtitle">Enter your details and discover what your numbers reveal.</p>
                 </div>
 
                 {/* Form Fields */}
@@ -411,7 +400,7 @@ const SingleBasicComponent = () => {
                 </div>
               </div>
 
-              {/* Right Side - Hero Image (Desktop Only) */}
+              {/* Right Side - Hero Image */}
               <div className="singleBasic-right-column">
                 <img src={heroNumerology} alt="numerology" className="singleBasic-hero-img" />
               </div>
