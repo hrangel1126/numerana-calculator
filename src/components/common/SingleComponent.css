@@ -636,6 +636,8 @@ svg text {
   padding: 2rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .core-number-card:hover {
@@ -643,24 +645,32 @@ svg text {
   border-color: #c9a961;
 }
 
+.core-number-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
 .core-number-value {
-  font-size: 3rem;
+  font-size: 3.5rem;
   font-weight: 800;
   color: #1a3a52;
-  margin-bottom: 0.5rem;
   line-height: 1;
+  flex-shrink: 0;
 }
 
 .core-number-name {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: #1a3a52;
   font-weight: 700;
-  margin-bottom: 1.5rem;
   font-style: italic;
+  text-align: right;
 }
 
 .core-aspect {
   margin-bottom: 1.5rem;
+  text-align: left;
 }
 
 .core-aspect:last-child {
@@ -689,6 +699,7 @@ svg text {
   color: #555;
   line-height: 1.6;
   margin: 0;
+  text-align: left;
 }
 
 .learn-more-btn {

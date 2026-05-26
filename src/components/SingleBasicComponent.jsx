@@ -448,8 +448,10 @@ const SingleBasicComponent = () => {
 
                       return (
                         <div key={position} className="core-number-card">
-                          <div className="core-number-value">{numberValue}</div>
-                          <h3 className="core-number-name">{archetype.name}</h3>
+                          <div className="core-number-header">
+                            <div className="core-number-value">{numberValue}</div>
+                            <h3 className="core-number-name">{archetype.name}</h3>
+                          </div>
                           
                           <div className="core-aspect positive">
                             <h4>{archetype.pos_title}</h4>
