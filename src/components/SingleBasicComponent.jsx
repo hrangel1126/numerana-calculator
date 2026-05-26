@@ -4,6 +4,11 @@ import calculosUtils from '../utils/calculosUtils';
 import './SingleComponent.css'; // Assuming shared CSS or adjust path
 import { useTranslation } from '../utils/i18n/LanguageContext'; // Import the hook
 
+// Import images
+import heroNumerology from '../assets/img/hero-numerology.png';
+import titleHead from '../assets/img/title-head.png';
+import caracol from '../assets/img/caracol.png';
+
 // Import modular components
 import NumerologyInputFormComponent from '../components/common/NumerologyInputFormComponent';
 import ResultsHeaderComponent from '../components/common/ResultsHeaderComponent';
@@ -331,18 +336,79 @@ const SingleBasicComponent = () => {
 
         {/* Only render input form if not showing results */}
         {!resultados && (
-             <NumerologyInputFormComponent
-               isVisible={isVisible}
-               resultados={resultados}
-               nombre={nombre}
-               setNombre={setNombre}
-               birthdate={birthdate}
-               birthdateShow={birthdateShow}
-               handleBirthdateChange={handleBirthdateChange}
-               handleSubmit={handleSubmit}
-               birthRef={birthRef}
-               t={t} // Pass t function
-             />
+          <div className={`singleBasic-form-wrapper ${isVisible ? 'visible' : 'hidden'}`} style={{display: !resultados ? 'block' : 'none'}}>
+            {/* Hero Section with Title and Form */}
+            <div className="singleBasic-hero-container">
+              {/* Left Side - Form */}
+              <div className="singleBasic-left-column">
+                {/* Title Head Image */}
+                <div className="singleBasic-title-section">
+                  <img src={titleHead} alt="title" className="singleBasic-title-img" />
+                </div>
+
+                {/* Form Fields */}
+                <div className="singleBasic-form-content">
+                  <h1 className="singleBasic-main-heading">Find What Your Numbers Say About You.</h1>
+                  <p className="singleBasic-subtitle">Enter your details and discover what your numbers reveal.</p>
+
+                  {/* Name Field */}
+                  <div className="singleBasic-form-group">
+                    <label htmlFor="name-input">What name were you given at birth?</label>
+                    <input 
+                      id="name-input"
+                      type="text" 
+                      className="singleBasic-form-control" 
+                      value={nombre}
+                      onChange={(e) => setNombre(e.target.value)}
+                      placeholder="John Doe" 
+                      autoComplete="off"
+                    />
+                  </div>
+
+                  {/* Birthdate Field */}
+                  <div className="singleBasic-form-group">
+                    <label htmlFor="birthdate-input">When did you soul enter this world?</label>
+                    <input
+                      id="birthdate-input"
+                      className="singleBasic-form-control" 
+                      placeholder="dd/mm/yyyy"
+                      type="text"
+                      value={birthdate}
+                      onChange={handleBirthdateChange}
+                      ref={birthRef}
+                      autoComplete="off"
+                    />
+                  </div>
+
+                  {/* Email Field */}
+                  <div className="singleBasic-form-group">
+                    <label htmlFor="email-input">What is Your Email?</label>
+                    <input
+                      id="email-input"
+                      className="singleBasic-form-control" 
+                      placeholder="ava.wright@gmail.com"
+                      type="email"
+                      autoComplete="off"
+                    />
+                  </div>
+
+                  {/* Submit Button */}
+                  <button 
+                    onClick={handleSubmit}
+                    className="singleBasic-submit-btn"
+                  >
+                    <img src={caracol} alt="caracol" className="singleBasic-btn-icon" />
+                    Calculate Now
+                  </button>
+                </div>
+              </div>
+
+              {/* Right Side - Hero Image */}
+              <div className="singleBasic-right-column">
+                <img src={heroNumerology} alt="numerology" className="singleBasic-hero-img" />
+              </div>
+            </div>
+          </div>
         )}
 
 

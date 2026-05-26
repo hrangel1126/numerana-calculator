@@ -504,3 +504,296 @@ svg text {
 .download-button:hover, .generate-button:hover {
   background-color: #5c8eaf;
 }
+
+/* ==================== SingleBasic Component Styles ==================== */
+
+/* Main wrapper for SingleBasic form */
+.singleBasic-form-wrapper {
+  background-color: #f5f0e8;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  display: block;
+}
+
+.singleBasic-form-wrapper.hidden {
+  display: none !important;
+}
+
+/* Hero Container - Two Column Layout */
+.singleBasic-hero-container {
+  display: flex;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: flex-start;
+  background-color: #f5f0e8;
+  position: relative;
+}
+
+/* Left Column - Form */
+.singleBasic-left-column {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Title Section */
+.singleBasic-title-section {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
+}
+
+.singleBasic-title-img {
+  max-width: 200px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Form Content */
+.singleBasic-form-content {
+  background-color: transparent;
+  padding: 0;
+}
+
+/* Main Heading */
+.singleBasic-main-heading {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1a3a52;
+  margin: 1.5rem 0 0.5rem 0;
+  line-height: 1.2;
+  font-family: 'Merriweather', 'Georgia', serif;
+}
+
+/* Subtitle */
+.singleBasic-subtitle {
+  font-size: 1rem;
+  color: #4a5568;
+  margin-bottom: 2rem;
+  font-weight: 400;
+}
+
+/* Form Groups */
+.singleBasic-form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.singleBasic-form-group label {
+  font-size: 0.95rem;
+  color: #1a3a52;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+/* Form Control Input */
+.singleBasic-form-control {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #d1c9bd;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  color: #333;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.singleBasic-form-control:focus {
+  outline: none;
+  border-color: #8b6f47;
+  box-shadow: 0 0 0 3px rgba(139, 111, 71, 0.1);
+}
+
+.singleBasic-form-control::placeholder {
+  color: #999;
+}
+
+/* Submit Button */
+.singleBasic-submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.9rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: #1a3a52;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.singleBasic-submit-btn:hover {
+  background-color: #0f1f2e;
+  transform: translateY(-2px);
+}
+
+.singleBasic-submit-btn:active {
+  transform: translateY(0);
+}
+
+/* Button Icon */
+.singleBasic-btn-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+/* Right Column - Hero Image */
+.singleBasic-right-column {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.singleBasic-hero-img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.1));
+}
+
+/* ==================== Responsive Design ==================== */
+
+/* Tablet and smaller desktops */
+@media (max-width: 992px) {
+  .singleBasic-hero-container {
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .singleBasic-left-column {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .singleBasic-right-column {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .singleBasic-main-heading {
+    font-size: 2rem;
+  }
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+  .singleBasic-form-wrapper {
+    padding: 1.5rem 1rem;
+  }
+
+  .singleBasic-hero-container {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .singleBasic-left-column {
+    width: 100%;
+  }
+
+  .singleBasic-right-column {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .singleBasic-title-img {
+    max-width: 150px;
+  }
+
+  .singleBasic-main-heading {
+    font-size: 1.75rem;
+    margin-top: 1rem;
+  }
+
+  .singleBasic-subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .singleBasic-form-group {
+    margin-bottom: 1.25rem;
+  }
+
+  .singleBasic-form-control {
+    padding: 0.7rem 0.9rem;
+    font-size: 0.95rem;
+  }
+
+  .singleBasic-submit-btn {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.95rem;
+  }
+
+  .singleBasic-btn-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .singleBasic-hero-img {
+    max-width: 90%;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .singleBasic-form-wrapper {
+    padding: 1rem 0.75rem;
+  }
+
+  .singleBasic-hero-container {
+    gap: 1rem;
+  }
+
+  .singleBasic-title-img {
+    max-width: 120px;
+  }
+
+  .singleBasic-main-heading {
+    font-size: 1.5rem;
+    margin-top: 0.75rem;
+  }
+
+  .singleBasic-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .singleBasic-form-group {
+    margin-bottom: 1rem;
+  }
+
+  .singleBasic-form-group label {
+    font-size: 0.9rem;
+  }
+
+  .singleBasic-form-control {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .singleBasic-submit-btn {
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+    gap: 0.5rem;
+  }
+
+  .singleBasic-btn-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
