@@ -9,6 +9,9 @@ const PinaculoSvg = ({ pinaculo }) => {
           <stop offset="50%" stopColor="#c9a961" stopOpacity="1" />
           <stop offset="100%" stopColor="#8b7355" stopOpacity="1" />
         </linearGradient>
+        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+          <feDropShadow dx="2" dy="2" stdDeviation="3" floodOpacity="0.3" />
+        </filter>
       </defs>
       <g id="Layer_1">
         <title>Pinaculo</title>
@@ -27,26 +30,26 @@ const PinaculoSvg = ({ pinaculo }) => {
           <line stroke="url(#goldGradient)" strokeLinecap="undefined" strokeLinejoin="undefined" id="svg_13" y2="363.92342" x2="235.35723" y1="357.39748" x1="232.13045" strokeWidth="4" fill="none"/>
           <line stroke="url(#goldGradient)" strokeLinecap="undefined" strokeLinejoin="undefined" id="svg_14" y2="563.29089" x2="169.20819" y1="358.26762" x1="58.95981" strokeWidth="4" fill="none"/>
           <line stroke="url(#goldGradient)" strokeLinecap="undefined" strokeLinejoin="undefined" id="svg_15" y2="563.83471" x2="220.29891" y1="358.26762" x1="326.78271" strokeWidth="4" fill="none"/>
-          <ellipse id="E0" stroke="url(#goldGradient)" ry="33.17353" rx="31.99892" cy="43.17351" cx="195.50648" strokeWidth="4" fill="none"/>
-          <ellipse id="E1" stroke="url(#goldGradient)" ry="33.17353" rx="31.99892" cy="117.13415" cx="372.44169" strokeWidth="4" fill="none"/>
-          <ellipse id="E2" stroke="url(#goldGradient)" ry="33.17353" rx="31.99892" cy="119.8533" cx="193.89309" strokeWidth="4" fill="none"/>
-          <ellipse id="E3" stroke="url(#goldGradient)" ry="33.17353" rx="31.99892" cy="197.62074" cx="194.43089" strokeWidth="4" fill="none"/>
-          <ellipse id="E4" stroke="url(#goldGradient)" ry="33.17353" rx="31.99892" cy="237.3202" cx="254.12636" strokeWidth="4" fill="none"/>
-          <ellipse id="E5" stroke="url(#goldGradient)" ry="33.17353" rx="31.99892" cy="393.39892" cx="135.81102" strokeWidth="4" fill="none"/>
-          <ellipse id="E6" stroke="url(#goldGradient)" ry="33.17353" rx="31.99892" cy="390.67978" cx="251.97517" strokeWidth="4" fill="none"/>
-          <ellipse id="E7" stroke="url(#goldGradient)" ry="33.17353" rx="31.99892" cy="431.4669" cx="194.96869" strokeWidth="4" fill="none"/>
-          <ellipse id="E8" stroke="url(#goldGradient)" ry="33.17353" rx="31.99892" cy="508.69052" cx="193.3553" strokeWidth="4" fill="none"/>
-          <ellipse id="E9" stroke="url(#goldGradient)" ry="33.17353" rx="31.99892" cy="584.82647" cx="194.43089" strokeWidth="4" fill="none"/>
-          <ellipse id="E10" stroke="url(#goldGradient)" ry="33.17353" rx="31.99892" cy="236.77638" cx="135.81102" strokeWidth="4" fill="none"/>
+           <ellipse id="E0" stroke="url(#goldGradient)" ry="33.17353" rx="31.99892" cy="43.17351" cx="195.50648" strokeWidth="4" fill="#f5f0e8" filter="url(#shadow)"/>
+           <ellipse id="E1" stroke="url(#goldGradient)" ry="33.17353" rx="31.99892" cy="117.13415" cx="372.44169" strokeWidth="4" fill="#f5f0e8" filter="url(#shadow)"/>
+           <ellipse id="E2" stroke="url(#goldGradient)" ry="33.17353" rx="31.99892" cy="119.8533" cx="193.89309" strokeWidth="4" fill="#f5f0e8" filter="url(#shadow)"/>
+           <ellipse id="E3" stroke="url(#goldGradient)" ry="33.17353" rx="31.99892" cy="197.62074" cx="194.43089" strokeWidth="4" fill="#f5f0e8" filter="url(#shadow)"/>
+           <ellipse id="E4" stroke="url(#goldGradient)" ry="33.17353" rx="31.99892" cy="237.3202" cx="254.12636" strokeWidth="4" fill="#f5f0e8" filter="url(#shadow)"/>
+           <ellipse id="E5" stroke="url(#goldGradient)" ry="33.17353" rx="31.99892" cy="393.39892" cx="135.81102" strokeWidth="4" fill="#f5f0e8" filter="url(#shadow)"/>
+           <ellipse id="E6" stroke="url(#goldGradient)" ry="33.17353" rx="31.99892" cy="390.67978" cx="251.97517" strokeWidth="4" fill="#f5f0e8" filter="url(#shadow)"/>
+           <ellipse id="E7" stroke="url(#goldGradient)" ry="33.17353" rx="31.99892" cy="431.4669" cx="194.96869" strokeWidth="4" fill="#f5f0e8" filter="url(#shadow)"/>
+           <ellipse id="E8" stroke="url(#goldGradient)" ry="33.17353" rx="31.99892" cy="508.69052" cx="193.3553" strokeWidth="4" fill="#f5f0e8" filter="url(#shadow)"/>
+           <ellipse id="E9" stroke="url(#goldGradient)" ry="33.17353" rx="31.99892" cy="584.82647" cx="194.43089" strokeWidth="4" fill="#f5f0e8" filter="url(#shadow)"/>
+           <ellipse id="E10" stroke="url(#goldGradient)" ry="33.17353" rx="31.99892" cy="236.77638" cx="135.81102" strokeWidth="4" fill="#f5f0e8" filter="url(#shadow)"/>
           <line stroke="url(#goldGradient)" strokeLinecap="undefined" strokeLinejoin="undefined" id="svg_28" y2="274.30053" x2="95.74514" y1="256.89802" x1="109.72786" strokeWidth="4" fill="none"/>
           <line stroke="url(#goldGradient)" id="svg_29" y2="274.30053" x2="296.34342" y1="254.17888" x1="281.8229" strokeWidth="4" fill="none"/>
           <line stroke="url(#goldGradient)" strokeLinecap="undefined" strokeLinejoin="undefined" id="svg_30" y2="375.6701" x2="108.11447" y1="359.35525" x1="94.66955" strokeWidth="4" fill="none"/>
           <line stroke="url(#goldGradient)" id="svg_31" y2="359.89908" x2="298.49461" y1="378.93307" x1="282.89849" strokeWidth="4" fill="none"/>
-          <rect stroke="url(#goldGradient)" rx="12" id="svg_32" height="84.83721" width="86.04752" y="273.7567" x="14" strokeWidth="4" fill="none"/>
-          <rect stroke="url(#goldGradient)" id="svg_33" height="0" width="10.21814" y="330.85867" x="73.15767" strokeWidth="4" fill="none"/>
-          <rect stroke="url(#goldGradient)" rx="12" id="svg_34" height="84.83721" width="86.04752" y="274.30053" x="147.37365" strokeWidth="4" fill="none"/>
-          <rect stroke="url(#goldGradient)" rx="12" id="svg_35" height="84.83721" width="86.04752" y="274.30053" x="291.50325" strokeWidth="4" fill="none"/>
-          <rect stroke="url(#goldGradient)" rx="12" id="svg_36" height="84.83721" width="86.04752" y="274.30053" x="425.95249" strokeWidth="4" fill="none"/>
+           <rect stroke="url(#goldGradient)" rx="12" id="svg_32" height="84.83721" width="86.04752" y="273.7567" x="14" strokeWidth="4" fill="#f5f0e8" filter="url(#shadow)"/>
+           <rect stroke="url(#goldGradient)" id="svg_33" height="0" width="10.21814" y="330.85867" x="73.15767" strokeWidth="4" fill="#f5f0e8" filter="url(#shadow)"/>
+           <rect stroke="url(#goldGradient)" rx="12" id="svg_34" height="84.83721" width="86.04752" y="274.30053" x="147.37365" strokeWidth="4" fill="#f5f0e8" filter="url(#shadow)"/>
+           <rect stroke="url(#goldGradient)" rx="12" id="svg_35" height="84.83721" width="86.04752" y="274.30053" x="291.50325" strokeWidth="4" fill="#f5f0e8" filter="url(#shadow)"/>
+           <rect stroke="url(#goldGradient)" rx="12" id="svg_36" height="84.83721" width="86.04752" y="274.30053" x="425.95249" strokeWidth="4" fill="#f5f0e8" filter="url(#shadow)"/>
           <text stroke="#000000" fill="#000000" strokeWidth="0" x="75" y="-319.00585" id="svg_1" fontSize="25" fontFamily="'Roboto Mono'" textAnchor="start" xmlSpace="preserve" transform="matrix(0.723885 0 0 0.448795 -6.2735 495.282)">A</text>
           <text stroke="#000000" fill="#000000" strokeWidth="0" x="265" y="-316.4548" id="svg_27" fontSize="25" fontFamily="'Roboto Mono'" textAnchor="start" xmlSpace="preserve" transform="matrix(0.723885 0 0 0.448795 -6.2735 495.282)">B</text>
           <text stroke="#000000" fill="#000000" strokeWidth="0" x="460" y="-312.62822" id="svg_37" fontSize="25" fontFamily="'Roboto Mono'" textAnchor="start" xmlSpace="preserve" transform="matrix(0.723885 0 0 0.448795 -6.2735 495.282)">C</text>
