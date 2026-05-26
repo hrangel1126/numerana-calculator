@@ -13,9 +13,9 @@
 
 /* Apply similar changes if .results-container is also a parent */
 .results-container {
-  background-color: white;
+  background-color: transparent;
   border-radius: 12px; /* Consider removing border-radius if it looks odd at full width */
-  border: 1px solid #e0e0e0; /* Consider removing borders */
+  border: none; /* Consider removing borders */
   /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); */ /* Consider removing shadow */
   /* max-width: 1200px; */ /* REMOVED this line */
   width: 100%;           /* Ensure it spans the full width of its parent */
