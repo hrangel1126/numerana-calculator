@@ -554,13 +554,14 @@ svg text {
 
 .Results-btnSecondary {
   background-color: transparent;
-  color: #0066cc;
-  border: none;
+  color: #d4a574;
+  border: 2px solid #d4a574;
 }
 
 .Results-btnSecondary:hover {
-  color: #0052a3;
-  opacity: 0.8;
+  background-color: #ebe3d5;
+  border-color: #c9a961;
+  color: #c9a961;
 }
 
 .Results-caracolIcon {
