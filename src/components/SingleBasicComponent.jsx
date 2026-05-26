@@ -341,16 +341,24 @@ const SingleBasicComponent = () => {
             <div className="singleBasic-hero-container">
               {/* Left Side - Form */}
               <div className="singleBasic-left-column">
+                {/* Hero Image Section (replaces text heading) */}
+                <div className="singleBasic-hero-image-section">
+                  <img src={heroNumerology} alt="numerology" className="singleBasic-hero-image-heading" />
+                </div>
+
                 {/* Title Head Image */}
                 <div className="singleBasic-title-section">
                   <img src={titleHead} alt="title" className="singleBasic-title-img" />
                 </div>
 
-                {/* Form Fields */}
-                <div className="singleBasic-form-content">
+                {/* Text Content */}
+                <div className="singleBasic-text-content">
                   <h1 className="singleBasic-main-heading">Find What Your Numbers Say About You.</h1>
                   <p className="singleBasic-subtitle">Enter your details and discover what your numbers reveal.</p>
+                </div>
 
+                {/* Form Fields */}
+                <div className="singleBasic-form-content">
                   {/* Name Field */}
                   <div className="singleBasic-form-group">
                     <label htmlFor="name-input">What name were you given at birth?</label>
@@ -403,7 +411,7 @@ const SingleBasicComponent = () => {
                 </div>
               </div>
 
-              {/* Right Side - Hero Image */}
+              {/* Right Side - Hero Image (Desktop Only) */}
               <div className="singleBasic-right-column">
                 <img src={heroNumerology} alt="numerology" className="singleBasic-hero-img" />
               </div>
