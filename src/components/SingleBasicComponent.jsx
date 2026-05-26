@@ -63,10 +63,11 @@ const SingleBasicComponent = () => {
 
     window.addEventListener('resize', handleResize);
 
-    // Load initial data
-    theLoading(1500).then(() => {
+    // Load initial data - hide loading spinner and show form
+    const loadingTimeout = setTimeout(() => {
+      setLoading(false);
       setIsVisible(true);
-    });
+    }, 1500);
 
     // Get current month to determine which quarters to show
     // Note: This calculation might need adjustment based on how calculosUtils handles months
@@ -86,30 +87,12 @@ const SingleBasicComponent = () => {
          setMonthsVisible({ CYQ1: false, CYQ2: false, CYQ3: true, NYQ: true });
     });
 
-
+    // Cleanup function
     return () => {
+      clearTimeout(loadingTimeout);
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-
-  // Loading animation function
-  const theLoading = (loadingTime = 1500) => { // Reduced default time
-    return new Promise((resolve) => {
-      if (loading) {
-        setTimeout(() => {
-          setLoading(false);
-          return resolve(true);
-        }, loadingTime);
-      } else {
-        setLoading(true); // Enable loading if it was off
-        // If turning loading on, maybe resolve immediately or after a short delay
-        setTimeout(() => {
-             return resolve(true);
-        }, 100); // Short delay example
-      }
-    });
-  };
-
   // Form submission
   const handleSubmit = () => {
     if (nombre.length <= 1 || !birthdate) {
