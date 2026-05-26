@@ -418,30 +418,58 @@ const SingleBasicComponent = () => {
                 </div>
               </div>
 
-              <div className="container results-container" ref={myScrollContainerRef}> {/* Added class and ref */}
-                <div className="row">
-                  {/* Core Energetic Numbers Section - Will be added here */}
+              <div className="container results-container" ref={myScrollContainerRef}>
+                {/* Core Energetic Numbers Section */}
+                <div className="core-numbers-section">
+                  <div className="core-numbers-header">
+                    <span className="core-label">{t('singleBasic.coreNumbersTitle')}</span>
+                    <h2 className="core-title">{t('singleBasic.coreNumbersTitle')}</h2>
+                    <p className="core-subtitle">{t('singleBasic.coreNumbersSubtitle')}</p>
+                  </div>
+
+                  <div className="core-numbers-grid">
+                    {/* Map over A, B, C, D from pinaculo */}
+                    {rpinaculo.length > 0 && ['A', 'B', 'C', 'D'].map((position, idx) => {
+                      const pinaculoData = rpinaculo[0];
+                      const numberValue = pinaculoData?.[position];
+                      const archetypeKey = String(numberValue);
+                      const archetype = archetypeKey && t(`singleBasic.archetypes.${archetypeKey}.name`) ? {
+                        name: t(`singleBasic.archetypes.${archetypeKey}.name`),
+                        pos_title: t(`singleBasic.archetypes.${archetypeKey}.pos_title`),
+                        pos_desc: t(`singleBasic.archetypes.${archetypeKey}.pos_desc`),
+                        neg_title: t(`singleBasic.archetypes.${archetypeKey}.neg_title`),
+                        neg_desc: t(`singleBasic.archetypes.${archetypeKey}.neg_desc`)
+                      } : {
+                        name: `Archetype Number ${numberValue}`,
+                        pos_title: 'Positive (+)',
+                        pos_desc: 'Archetype information coming soon.',
+                        neg_title: 'Negative (-)',
+                        neg_desc: 'Archetype information coming soon.'
+                      };
+
+                      return (
+                        <div key={position} className="core-number-card">
+                          <div className="core-number-value">{numberValue}</div>
+                          <h3 className="core-number-name">{archetype.name}</h3>
+                          
+                          <div className="core-aspect positive">
+                            <h4>{archetype.pos_title}</h4>
+                            <p>{archetype.pos_desc}</p>
+                          </div>
+                          
+                          <div className="core-aspect negative">
+                            <h4>{archetype.neg_title}</h4>
+                            <p>{archetype.neg_desc}</p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  <button className="learn-more-btn" onClick={reload}>
+                    {t('singleBasic.learnMoreButton')} ↓
+                  </button>
                 </div>
-
-
-
-                {/* Number Descriptions Section */}
-               <div className="section-divider"></div>
-               <h3 className="section-title">{t('singleBasic.descriptionsTitle')}</h3>
-               <div className="numerology-descriptions">
-                 {descriptionNumbers.map(num => (
-                   <div key={num} className="number-description">
-                     <div className="description-half">
-                       <h2>{t(getDescriptionKey(num, 'pos_title'))}</h2>
-                       <p>{t(getDescriptionKey(num, 'pos_desc'))}</p>
-                     </div>
-                     <div className="description-half">
-                       <h2>{t(getDescriptionKey(num, 'neg_title'))}</h2>
-                       <p>{t(getDescriptionKey(num, 'neg_desc'))}</p>
-                     </div>
-                   </div>
-                 ))}
-               </div>
 
 
                 {/* Action Buttons Section - Placed after all content */}

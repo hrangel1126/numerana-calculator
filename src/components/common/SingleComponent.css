@@ -559,6 +559,141 @@ svg text {
   box-shadow: 0 4px 12px rgba(201, 169, 97, 0.2);
 }
 
+/* ============================================
+   Core Energetic Numbers Section
+   ============================================ */
+
+.core-numbers-section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid #d4af37;
+}
+
+.core-numbers-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.core-label {
+  display: inline-block;
+  background-color: rgba(201, 169, 97, 0.15);
+  color: #c9a961;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.core-title {
+  font-size: 2.2rem;
+  color: #1a3a52;
+  font-weight: 700;
+  margin: 1rem 0;
+  line-height: 1.3;
+}
+
+.core-subtitle {
+  font-size: 1rem;
+  color: #4a5568;
+  max-width: 700px;
+  margin: 1rem auto 0;
+  line-height: 1.6;
+}
+
+.core-numbers-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.core-number-card {
+  background-color: #fafaf8;
+  border: 1px solid #e8dcc4;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.core-number-card:hover {
+  box-shadow: 0 4px 16px rgba(201, 169, 97, 0.15);
+  border-color: #c9a961;
+}
+
+.core-number-value {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #1a3a52;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.core-number-name {
+  font-size: 1.5rem;
+  color: #1a3a52;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.core-aspect {
+  margin-bottom: 1.5rem;
+}
+
+.core-aspect:last-child {
+  margin-bottom: 0;
+}
+
+.core-aspect h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1a3a52;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.core-aspect.positive h4 {
+  color: #2d7a4a;
+}
+
+.core-aspect.negative h4 {
+  color: #a85252;
+}
+
+.core-aspect p {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.learn-more-btn {
+  display: block;
+  margin: 2rem auto 0;
+  padding: 0.9rem 2rem;
+  background-color: #1a3a52;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.learn-more-btn:hover {
+  background-color: #0f1f2e;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 58, 82, 0.3);
+}
+
 /* Results Grid Layout (Two columns: pinaculo left, info right) */
 .container {
   max-width: 1200px;
@@ -640,6 +775,20 @@ svg text {
     font-size: 14px;
     margin-top: 1.5rem;
   }
+
+  /* Core Numbers responsive */
+  .core-numbers-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .core-title {
+    font-size: 1.8rem;
+  }
+
+  .core-subtitle {
+    font-size: 0.95rem;
+  }
   
   /* Switch to single column on tablet */
   .page .row {
@@ -692,6 +841,36 @@ svg text {
   .pinaculo-caption {
     font-size: 13px;
     margin-top: 1rem;
+  }
+
+  /* Core Numbers mobile */
+  .core-numbers-grid {
+    gap: 1rem;
+  }
+
+  .core-number-card {
+    padding: 1.5rem;
+  }
+
+  .core-number-value {
+    font-size: 2.5rem;
+  }
+
+  .core-number-name {
+    font-size: 1.2rem;
+  }
+
+  .core-title {
+    font-size: 1.5rem;
+  }
+
+  .core-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .learn-more-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.85rem;
   }
   
   .container {
