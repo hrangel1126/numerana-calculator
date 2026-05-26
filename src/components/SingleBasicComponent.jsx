@@ -350,25 +350,25 @@ const SingleBasicComponent = () => {
                 <div className="singleBasic-form-content">
                   {/* Name Field */}
                   <div className="singleBasic-form-group">
-                    <label htmlFor="name-input">What name were you given at birth?</label>
+                    <label htmlFor="name-input">{t('singleBasic.nameLabel')}</label>
                     <input 
                       id="name-input"
                       type="text" 
                       className="singleBasic-form-control" 
                       value={nombre}
                       onChange={(e) => setNombre(e.target.value)}
-                      placeholder="John Doe" 
+                      placeholder={t('singleBasic.namePlaceholder')} 
                       autoComplete="off"
                     />
                   </div>
 
                   {/* Birthdate Field */}
                   <div className="singleBasic-form-group">
-                    <label htmlFor="birthdate-input">When did you soul enter this world?</label>
+                    <label htmlFor="birthdate-input">{t('singleBasic.birthdateLabel')}</label>
                     <input
                       id="birthdate-input"
                       className="singleBasic-form-control" 
-                      placeholder="dd/mm/yyyy"
+                      placeholder={t('singleBasic.birthdatePlaceholder')}
                       type="text"
                       value={birthdate}
                       onChange={handleBirthdateChange}
@@ -379,11 +379,11 @@ const SingleBasicComponent = () => {
 
                   {/* Email Field */}
                   <div className="singleBasic-form-group">
-                    <label htmlFor="email-input">What is Your Email?</label>
+                    <label htmlFor="email-input">{t('singleBasic.emailLabel')}</label>
                     <input
                       id="email-input"
                       className="singleBasic-form-control" 
-                      placeholder="ava.wright@gmail.com"
+                      placeholder={t('singleBasic.emailPlaceholder')}
                       type="email"
                       autoComplete="off"
                     />
@@ -395,7 +395,7 @@ const SingleBasicComponent = () => {
                     className="singleBasic-submit-btn"
                   >
                     <img src={caracol} alt="caracol" className="singleBasic-btn-icon" />
-                    Calculate Now
+                    {t('singleBasic.submitButton')}
                   </button>
                 </div>
               </div>
