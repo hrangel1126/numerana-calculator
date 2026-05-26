@@ -105,9 +105,98 @@
         "num33_pos_desc": "Maestro Crístico. Tienen un gran impacto en su comunidad. Su mente observa detalles mínimos. Sensibilidad artística. No suelen buscar puestos de mando, pero están calificados para organizar y dirigir. Absorben información rápidamente. Gran sentido común. Nunca les faltará nada. Luchan por ofrecer comodidad y seguridad a su tribu. Ahorran dinero; no dudarán en ayudar. Prefieren vivir acompañados. Suelen dar en exceso. Atraídos por personas con inteligencia y fuertes convicciones o principios morales. La espiritualidad es necesaria.",
         "num33_neg_title": "33 (-)",
         "num33_neg_desc": "Grandes inseguridades emocionales. Compran amor para sentirse indispensables. Pueden caer en obsesiones emocionales. Dan y aman pero de forma condicionada: te di, así que me \"debes\". Tendencia a ser posesivos, egoístas y celosos. Dominan a quienes los rodean. Supersticiosos. Constantemente cansados. Se preocupan demasiado por aquellos que dependen de ellos. Hipersensibles. La vida en soledad es muy difícil para un 6 (33), por lo que toleran más de lo que deberían para permanecer en comunidad. Manipuladores y dominantes. Desconectados espiritualmente."
-    }
-  },
-  "months": {
+     },
+     "coreNumbersTitle": "Números Energéticos Centrales",
+     "coreNumbersSubtitle": "Aquí hay solo algunos puntos clave de tu Línea Central, tanto positivos como negativos. Explora más a través de nuestros cursos o una sesión personal.",
+     "learnMoreButton": "Aprende Más Sobre Tus Números",
+     "archetypes": {
+       "1": {
+         "name": "El Líder",
+         "pos_title": "Positivo (+)",
+         "pos_desc": "Eres confiado, automotivado y proactivo. Tiendes a tomar el control, iniciar nuevas ideas y confiar en tu propia dirección.",
+         "neg_title": "Negativo (-)",
+         "neg_desc": "Puedes volverse impaciente o demasiado controlador a veces. Una fuerte necesidad de independencia puede dificultar la colaboración o el compromiso."
+       },
+       "2": {
+         "name": "El Pacificador",
+         "pos_title": "Positivo (+)",
+         "pos_desc": "Eres diplomático, cooperativo y profundamente sintonizado con las necesidades de otros. Destacas en traer armonía y comprensión a cualquier situación.",
+         "neg_title": "Negativo (-)",
+         "neg_desc": "Puedes luchar con la indecisión o volverse demasiado dependiente de la aprobación de otros. La sensibilidad a la crítica puede llevar a la duda de ti mismo."
+       },
+       "3": {
+         "name": "El Creador",
+         "pos_title": "Positivo (+)",
+         "pos_desc": "Eres expresivo, creativo y naturalmente optimista. Traes alegría e inspiración a quienes te rodean con tu energía vibrante.",
+         "neg_title": "Negativo (-)",
+         "neg_desc": "Puedes dispersar tu energía en demasiados proyectos o evitar conversaciones difíciles. Una tendencia a la superficialidad puede socavar conexiones más profundas."
+       },
+       "4": {
+         "name": "El Constructor",
+         "pos_title": "Positivo (+)",
+         "pos_desc": "Arraigado y disciplinado, te enfocas en crear estabilidad a través de estructura, consistencia y trabajo duro.",
+         "neg_title": "Negativo (-)",
+         "neg_desc": "Puedes volverse rígido en tu pensamiento o demasiado enfocado en el control y la rutina. Una resistencia al cambio puede dificultar la adaptación."
+       },
+       "5": {
+         "name": "El Explorador",
+         "pos_title": "Positivo (+)",
+         "pos_desc": "Eres adaptable, aventurero y de mente abierta. Abrazas el cambio y prosperas en entornos dinámicos, a menudo trayendo curiosidad a todo lo que haces.",
+         "neg_title": "Negativo (-)",
+         "neg_desc": "Puedes volverse inquieto o luchar con la consistencia. Un fuerte deseo de libertad puede llevar a la impulsividad o dificultad para mantenerse comprometido."
+       },
+       "6": {
+         "name": "El Nutritor",
+         "pos_title": "Positivo (+)",
+         "pos_desc": "Eres cuidadoso, responsable y profundamente conectado con tu comunidad. Encuentras satisfacción en apoyar y proteger a quienes amas.",
+         "neg_title": "Negativo (-)",
+         "neg_desc": "Puedes invertir demasiado en los problemas de otros o luchar cuando estás solo. Una tendencia al posesivismo puede tensar las relaciones."
+       },
+       "7": {
+         "name": "El Buscador",
+         "pos_title": "Positivo (+)",
+         "pos_desc": "Eres analítico, intuitivo e inclinado espiritualmente. Buscas la verdad y el entendimiento, trayendo sabiduría e insight a tus búsquedas.",
+         "neg_title": "Negativo (-)",
+         "neg_desc": "Puedes pensar demasiado las situaciones o volverteRetraído. La dificultad para expresar emociones puede crear distancia en las relaciones o llevar al aislamiento."
+       },
+       "8": {
+         "name": "El Humanitario",
+         "pos_title": "Positivo (+)",
+         "pos_desc": "Eres empático, generoso y profundamente comprensivo con otros. A menudo llevas un fuerte sentido de propósito e inspiras a través de tu sabiduría y perspectiva.",
+         "neg_title": "Negativo (-)",
+         "neg_desc": "Puedes sentirte emocionalmente abrumado o demasiado autosacrificado. Altas expectativas y dificultad para soltar pueden llevar a la decepción o el agotamiento."
+       },
+       "9": {
+         "name": "El Visionario",
+         "pos_title": "Positivo (+)",
+         "pos_desc": "Eres compasivo, versátil y espiritualmente consciente. Ves el panorama general y sientes el llamado a hacer un impacto significativo en el mundo.",
+         "neg_title": "Negativo (-)",
+         "neg_desc": "Puedes luchar con el enfoque o volverteexcesivamente idealista. Una tendencia al drama o dificultad con los límites puede socavar tu efectividad."
+       },
+       "11": {
+         "name": "El Maestro Espiritual",
+         "pos_title": "Positivo (+)",
+         "pos_desc": "Eres intuitivo, idealista y espiritualmente dotado. Tienes el potencial de inspirar y enseñar a otros a través de tu insight y visión.",
+         "neg_title": "Negativo (-)",
+         "neg_desc": "Puedes experimentar emociones intensas o luchar cuando la realidad no coincide con tus ideales. La desconexión de la espiritualidad puede llevar a la depresión."
+       },
+       "22": {
+         "name": "El Maestro Constructor",
+         "pos_title": "Positivo (+)",
+         "pos_desc": "Posees una fuerza excepcional y la capacidad de manifestar logros significativos. Estás destinado a crear un impacto duradero y dejar tu marca.",
+         "neg_title": "Negativo (-)",
+         "neg_desc": "Puedes carecer de la energía o el enfoque para realizar tu potencial. Los sentimientos de fracaso o injusticia pueden llevar al cinismo o comportamiento manipulador."
+       },
+       "33": {
+         "name": "El Maestro Sanador",
+         "pos_title": "Positivo (+)",
+         "pos_desc": "Tienes una compasión profunda y la capacidad de traer consuelo y sanación a tu comunidad. Eres naturalmente dotado en la organización y la guía de otros.",
+         "neg_title": "Negativo (-)",
+         "neg_desc": "Puedes luchar con la inseguridad emocional o volverteexcesivamente dependiente de la aprobación de otros. Una tendencia a la manipulación puede socavar la confianza."
+       }
+     }
+   },
+   "months": {
     "jan": "ENE",
     "feb": "FEB",
     "mar": "MAR",

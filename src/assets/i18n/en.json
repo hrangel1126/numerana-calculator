@@ -105,9 +105,98 @@
         "num33_pos_desc": "Christic Master. They have a large impact in their community. Their mind observes minimal details. Artistic sensitivity. They do not usually look for command positions, but are qualified to organize and direct. They absorb information quickly. Great common sense. Will never lack anything. Fights to offer comfort and safety to their tribe. Saves money; will not hesitate to help. Prefers to live accompanied. They usually over-give. Attracted to people with intelligence and strong convictions or moral principles. Spirituality is necessary.",
         "num33_neg_title": "33 (-)",
         "num33_neg_desc": "Great emotional insecurities. They buy love to feel indispensable. They can fall into emotional obsessions. They give and love but in a conditioned way: I gave to you so you \"owe\" me. Tendency to be possessive, selfish and jealous. They dominate those around them. Superstitious. Constantly tired. They care too much for those who depend on them. Hypersensitive. Life in solitude is very difficult for a 6, so they tolerate more than they should, in order to remain in community. Manipulative and dominant. Spiritually disconnected."
-    }
-  },
-   "months": { 
+     },
+     "coreNumbersTitle": "Core Energetic Numbers",
+     "coreNumbersSubtitle": "Here are just a few key points of your Center Line, both positive and negative. Explore more through our courses or a personal session.",
+     "learnMoreButton": "Learn More About Your Numbers",
+     "archetypes": {
+       "1": {
+         "name": "The Leader",
+         "pos_title": "Positive (+)",
+         "pos_desc": "You are confident, self-motivated, and proactive. You tend to take charge, start new ideas, and trust your own direction.",
+         "neg_title": "Negative (-)",
+         "neg_desc": "You may become impatient or overly controlling at times. A strong need for independence can make collaboration or compromise difficult."
+       },
+       "2": {
+         "name": "The Peacemaker",
+         "pos_title": "Positive (+)",
+         "pos_desc": "You are diplomatic, cooperative, and deeply attuned to others' needs. You excel at bringing harmony and understanding to any situation.",
+         "neg_title": "Negative (-)",
+         "neg_desc": "You may struggle with indecision or become too dependent on others' approval. Sensitivity to criticism can lead to self-doubt."
+       },
+       "3": {
+         "name": "The Creator",
+         "pos_title": "Positive (+)",
+         "pos_desc": "You are expressive, creative, and naturally optimistic. You bring joy and inspiration to those around you with your vibrant energy.",
+         "neg_title": "Negative (-)",
+         "neg_desc": "You may scatter your energy across too many projects or avoid difficult conversations. A tendency to superficiality can undermine deeper connections."
+       },
+       "4": {
+         "name": "The Builder",
+         "pos_title": "Positive (+)",
+         "pos_desc": "Grounded and disciplined, you focus on creating stability through structure, consistency, and hard work.",
+         "neg_title": "Negative (-)",
+         "neg_desc": "You may become rigid in your thinking or overly focused on control and routine. A resistance to change can make it difficult to adapt."
+       },
+       "5": {
+         "name": "The Explorer",
+         "pos_title": "Positive (+)",
+         "pos_desc": "You are adaptable, adventurous, open-minded. You embrace change and thrive in dynamic environments, often bringing curiosity into everything you do.",
+         "neg_title": "Negative (-)",
+         "neg_desc": "You may become restless or struggle with consistency. A strong desire for freedom can lead to impulsiveness or difficulty staying committed over time."
+       },
+       "6": {
+         "name": "The Nurturer",
+         "pos_title": "Positive (+)",
+         "pos_desc": "You are caring, responsible, and deeply connected to your community. You find fulfillment in supporting and protecting those you love.",
+         "neg_title": "Negative (-)",
+         "neg_desc": "You may become overly invested in others' problems or struggle when alone. A tendency toward possessiveness can strain relationships."
+       },
+       "7": {
+         "name": "The Seeker",
+         "pos_title": "Positive (+)",
+         "pos_desc": "You are analytical, intuitive, and spiritually inclined. You seek truth and understanding, bringing wisdom and insight to your pursuits.",
+         "neg_title": "Negative (-)",
+         "neg_desc": "You may overthink situations or become withdrawn. Difficulty expressing emotions can create distance in relationships or lead to isolation."
+       },
+       "8": {
+         "name": "The Humanitarian",
+         "pos_title": "Positive (+)",
+         "pos_desc": "You are empathetic, generous, and deeply understanding of others. You often carry a strong sense of purpose and inspire through your wisdom and perspective.",
+         "neg_title": "Negative (-)",
+         "neg_desc": "You may become emotionally overwhelmed or overly self-sacrificing. High expectations and difficulty letting go can lead to disappointment or exhaustion."
+       },
+       "9": {
+         "name": "The Visionary",
+         "pos_title": "Positive (+)",
+         "pos_desc": "You are compassionate, versatile, and spiritually aware. You see the bigger picture and feel called to make a meaningful impact on the world.",
+         "neg_title": "Negative (-)",
+         "neg_desc": "You may struggle with focus or become overly idealistic. A tendency toward drama or difficulty with boundaries can undermine your effectiveness."
+       },
+       "11": {
+         "name": "The Spiritual Master",
+         "pos_title": "Positive (+)",
+         "pos_desc": "You are intuitive, idealistic, and spiritually gifted. You have the potential to inspire and teach others through your insight and vision.",
+         "neg_title": "Negative (-)",
+         "neg_desc": "You may experience intense emotions or struggle when reality doesn't match your ideals. Disconnection from spirituality can lead to depression."
+       },
+       "22": {
+         "name": "The Master Builder",
+         "pos_title": "Positive (+)",
+         "pos_desc": "You possess exceptional strength and the ability to manifest significant achievements. You are destined to create lasting impact and leave your mark.",
+         "neg_title": "Negative (-)",
+         "neg_desc": "You may lack the energy or focus to realize your potential. Feelings of failure or unfairness can lead to cynicism or manipulative behavior."
+       },
+       "33": {
+         "name": "The Master Healer",
+         "pos_title": "Positive (+)",
+         "pos_desc": "You have profound compassion and the ability to bring comfort and healing to your community. You are naturally gifted at organizing and guiding others.",
+         "neg_title": "Negative (-)",
+         "neg_desc": "You may struggle with emotional insecurity or become overly dependent on others' approval. A tendency toward manipulation can undermine trust."
+       }
+     }
+   },
+    "months": {
     "jan": "JAN",
     "feb": "FEB",
     "mar": "MAR",
