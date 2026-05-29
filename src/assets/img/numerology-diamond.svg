@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="460" height="580"
+  viewBox="0 0 460 580"
+  role="img"
+  id="numerology-diamond"
+>
+  <title>Numerology diamond chart</title>
+  <desc>Diamond-shaped numerology chart with gold-styled nodes on a warm cream background, matching the reference image aesthetic.</desc>
+
+  <defs>
+    <!-- warm cream background -->
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="70%">
+      <stop offset="0%"   stop-color="#FDF6E3"/>
+      <stop offset="100%" stop-color="#F0E2C0"/>
+    </radialGradient>
+
+    <!-- gold fill for nodes -->
+    <linearGradient id="nodeGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#FDF6E3"/>
+      <stop offset="50%"  stop-color="#F5E9C8"/>
+      <stop offset="100%" stop-color="#EDD89A"/>
+    </linearGradient>
+
+    <!-- gold fill for square boxes -->
+    <linearGradient id="boxGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#FDF6E3"/>
+      <stop offset="40%"  stop-color="#F7EDD5"/>
+      <stop offset="100%" stop-color="#E8D08A"/>
+    </linearGradient>
+
+    <!-- drop shadow filter -->
+    <filter id="nodeShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#9A7020" flood-opacity="0.35"/>
+    </filter>
+    <filter id="boxShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#7A5A10" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- page background -->
+  <rect x="0" y="0" width="460" height="580" fill="url(#bgGrad)" rx="16"/>
+
+  <!-- ═══════════════════════════════════
+       CONNECTOR LINES
+  ═══════════════════════════════════ -->
+  <g stroke="#C8A030" stroke-width="2.2" fill="none" opacity="0.85">
+    <!-- outer diamond -->
+    <line x1="230" y1="50"  x2="72"  y2="292"/>
+    <line x1="230" y1="50"  x2="388" y2="292"/>
+    <line x1="72"  y1="292" x2="230" y2="534"/>
+    <line x1="388" y1="292" x2="230" y2="534"/>
+
+    <!-- inner top-left web -->
+    <line x1="230" y1="50"  x2="148" y2="152"/>
+    <line x1="148" y1="152" x2="72"  y2="292"/>
+    <line x1="148" y1="152" x2="178" y2="222"/>
+    <line x1="178" y1="222" x2="72"  y2="292"/>
+    <line x1="230" y1="50"  x2="178" y2="222"/>
+
+    <!-- inner top-right web -->
+    <line x1="230" y1="50"  x2="312" y2="152"/>
+    <line x1="312" y1="152" x2="388" y2="292"/>
+    <line x1="312" y1="152" x2="282" y2="222"/>
+    <line x1="282" y1="222" x2="388" y2="292"/>
+    <line x1="230" y1="50"  x2="282" y2="222"/>
+
+    <!-- inner bottom-left web -->
+    <line x1="72"  y1="292" x2="148" y2="432"/>
+    <line x1="148" y1="432" x2="230" y2="534"/>
+    <line x1="148" y1="432" x2="178" y2="362"/>
+    <line x1="178" y1="362" x2="230" y2="534"/>
+    <line x1="178" y1="362" x2="72"  y2="292"/>
+
+    <!-- inner bottom-right web -->
+    <line x1="388" y1="292" x2="312" y2="432"/>
+    <line x1="312" y1="432" x2="230" y2="534"/>
+    <line x1="312" y1="432" x2="282" y2="362"/>
+    <line x1="282" y1="362" x2="230" y2="534"/>
+    <line x1="282" y1="362" x2="388" y2="292"/>
+
+    <!-- horizontal bands -->
+    <line x1="148" y1="152" x2="312" y2="152"/>
+    <line x1="178" y1="222" x2="282" y2="222"/>
+    <line x1="148" y1="432" x2="312" y2="432"/>
+    <line x1="178" y1="362" x2="282" y2="362"/>
+
+    <!-- D node connectors -->
+    <line x1="388" y1="292" x2="420" y2="268"/>
+    <line x1="388" y1="292" x2="420" y2="316"/>
+  </g>
+
+  <!-- ═══════════════════════════════════
+       CIRCLE NODES  (double ring)
+  ═══════════════════════════════════ -->
+
+  <!-- Macro to draw a double-ring circle node:
+       outer ring (stroke only), inner filled circle, text -->
+
+  <!-- top apex r=32 -->
+  <g filter="url(#nodeShadow)">
+    <circle cx="230" cy="50"  r="34" fill="none"             stroke="#B8922A" stroke-width="2"/>
+    <circle cx="230" cy="50"  r="28" fill="url(#nodeGold)"   stroke="#D4A830" stroke-width="2.5"/>
+    <text x="230" y="50" text-anchor="middle" dominant-baseline="central"
+          font-family="Georgia,serif" font-size="22" font-weight="700" fill="#2C1800" data-key="top">9</text>
+  </g>
+
+  <!-- top-left r=26 -->
+  <g filter="url(#nodeShadow)">
+    <circle cx="148" cy="152" r="29" fill="none"           stroke="#B8922A" stroke-width="1.8"/>
+    <circle cx="148" cy="152" r="23" fill="url(#nodeGold)" stroke="#D4A830" stroke-width="2.2"/>
+    <text x="148" y="152" text-anchor="middle" dominant-baseline="central"
+          font-family="Georgia,serif" font-size="20" font-weight="700" fill="#2C1800" data-key="tl">2</text>
+  </g>
+
+  <!-- top-right r=26 -->
+  <g filter="url(#nodeShadow)">
+    <circle cx="312" cy="152" r="29" fill="none"           stroke="#B8922A" stroke-width="1.8"/>
+    <circle cx="312" cy="152" r="23" fill="url(#nodeGold)" stroke="#D4A830" stroke-width="2.2"/>
+    <text x="312" y="152" text-anchor="middle" dominant-baseline="central"
+          font-family="Georgia,serif" font-size="20" font-weight="700" fill="#2C1800" data-key="tr">4</text>
+  </g>
+
+  <!-- mid-left-upper r=21 -->
+  <g filter="url(#nodeShadow)">
+    <circle cx="178" cy="222" r="24" fill="none"           stroke="#B8922A" stroke-width="1.6"/>
+    <circle cx="178" cy="222" r="18" fill="url(#nodeGold)" stroke="#D4A830" stroke-width="2"/>
+    <text x="178" y="222" text-anchor="middle" dominant-baseline="central"
+          font-family="Georgia,serif" font-size="18" font-weight="700" fill="#2C1800" data-key="mlu">1</text>
+  </g>
+
+  <!-- mid-right-upper r=21 -->
+  <g filter="url(#nodeShadow)">
+    <circle cx="282" cy="222" r="24" fill="none"           stroke="#B8922A" stroke-width="1.6"/>
+    <circle cx="282" cy="222" r="18" fill="url(#nodeGold)" stroke="#D4A830" stroke-width="2"/>
+    <text x="282" y="222" text-anchor="middle" dominant-baseline="central"
+          font-family="Georgia,serif" font-size="18" font-weight="700" fill="#2C1800" data-key="mru">1</text>
+  </g>
+
+  <!-- mid-left-lower r=21 -->
+  <g filter="url(#nodeShadow)">
+    <circle cx="178" cy="362" r="24" fill="none"           stroke="#B8922A" stroke-width="1.6"/>
+    <circle cx="178" cy="362" r="18" fill="url(#nodeGold)" stroke="#D4A830" stroke-width="2"/>
+    <text x="178" y="362" text-anchor="middle" dominant-baseline="central"
+          font-family="Georgia,serif" font-size="18" font-weight="700" fill="#2C1800" data-key="mll">8</text>
+  </g>
+
+  <!-- mid-right-lower r=21 -->
+  <g filter="url(#nodeShadow)">
+    <circle cx="282" cy="362" r="24" fill="none"           stroke="#B8922A" stroke-width="1.6"/>
+    <circle cx="282" cy="362" r="18" fill="url(#nodeGold)" stroke="#D4A830" stroke-width="2"/>
+    <text x="282" y="362" text-anchor="middle" dominant-baseline="central"
+          font-family="Georgia,serif" font-size="18" font-weight="700" fill="#2C1800" data-key="mlr">8</text>
+  </g>
+
+  <!-- lower-left r=26 -->
+  <g filter="url(#nodeShadow)">
+    <circle cx="148" cy="432" r="29" fill="none"           stroke="#B8922A" stroke-width="1.8"/>
+    <circle cx="148" cy="432" r="23" fill="url(#nodeGold)" stroke="#D4A830" stroke-width="2.2"/>
+    <text x="148" y="432" text-anchor="middle" dominant-baseline="central"
+          font-family="Georgia,serif" font-size="20" font-weight="700" fill="#2C1800" data-key="bl">7</text>
+  </g>
+
+  <!-- lower-right r=26 -->
+  <g filter="url(#nodeShadow)">
+    <circle cx="312" cy="432" r="29" fill="none"           stroke="#B8922A" stroke-width="1.8"/>
+    <circle cx="312" cy="432" r="23" fill="url(#nodeGold)" stroke="#D4A830" stroke-width="2.2"/>
+    <text x="312" y="432" text-anchor="middle" dominant-baseline="central"
+          font-family="Georgia,serif" font-size="20" font-weight="700" fill="#2C1800" data-key="br">0</text>
+  </g>
+
+  <!-- bottom apex r=32 -->
+  <g filter="url(#nodeShadow)">
+    <circle cx="230" cy="534" r="34" fill="none"           stroke="#B8922A" stroke-width="2"/>
+    <circle cx="230" cy="534" r="28" fill="url(#nodeGold)" stroke="#D4A830" stroke-width="2.5"/>
+    <text x="230" y="534" text-anchor="middle" dominant-baseline="central"
+          font-family="Georgia,serif" font-size="22" font-weight="700" fill="#2C1800" data-key="bot">0</text>
+  </g>
+
+  <!-- ═══════════════════════════════════
+       SQUARE NODES  A B C D
+  ═══════════════════════════════════ -->
+
+  <!-- A — far left -->
+  <g filter="url(#boxShadow)">
+    <rect x="38"  y="260" width="68" height="64" rx="12" fill="none"          stroke="#B8922A" stroke-width="1.8"/>
+    <rect x="42"  y="264" width="60" height="56" rx="9"  fill="url(#boxGold)" stroke="#D4A830" stroke-width="2.5"/>
+    <text x="72"  y="289" text-anchor="middle" dominant-baseline="central"
+          font-family="Georgia,serif" font-size="26" font-weight="700" fill="#2C1800" data-key="A">9</text>
+    <text x="72"  y="312" text-anchor="middle"
+          font-family="Georgia,serif" font-size="12" font-weight="700" fill="#A07828">A</text>
+  </g>
+
+  <!-- B — center-left -->
+  <g filter="url(#boxShadow)">
+    <rect x="167" y="260" width="68" height="64" rx="12" fill="none"          stroke="#B8922A" stroke-width="1.8"/>
+    <rect x="171" y="264" width="60" height="56" rx="9"  fill="url(#boxGold)" stroke="#D4A830" stroke-width="2.5"/>
+    <text x="201" y="289" text-anchor="middle" dominant-baseline="central"
+          font-family="Georgia,serif" font-size="26" font-weight="700" fill="#2C1800" data-key="B">1</text>
+    <text x="201" y="312" text-anchor="middle"
+          font-family="Georgia,serif" font-size="12" font-weight="700" fill="#A07828">B</text>
+  </g>
+
+  <!-- C — center-right -->
+  <g filter="url(#boxShadow)">
+    <rect x="297" y="260" width="68" height="64" rx="12" fill="none"          stroke="#B8922A" stroke-width="1.8"/>
+    <rect x="301" y="264" width="60" height="56" rx="9"  fill="url(#boxGold)" stroke="#D4A830" stroke-width="2.5"/>
+    <text x="331" y="289" text-anchor="middle" dominant-baseline="central"
+          font-family="Georgia,serif" font-size="26" font-weight="700" fill="#2C1800" data-key="C">9</text>
+    <text x="331" y="312" text-anchor="middle"
+          font-family="Georgia,serif" font-size="12" font-weight="700" fill="#A07828">C</text>
+  </g>
+
+  <!-- D — far right -->
+  <g filter="url(#boxShadow)">
+    <rect x="390" y="260" width="68" height="64" rx="12" fill="none"          stroke="#B8922A" stroke-width="1.8"/>
+    <rect x="394" y="264" width="60" height="56" rx="9"  fill="url(#boxGold)" stroke="#D4A830" stroke-width="2.5"/>
+    <text x="424" y="289" text-anchor="middle" dominant-baseline="central"
+          font-family="Georgia,serif" font-size="26" font-weight="700" fill="#2C1800" data-key="D">1</text>
+    <text x="424" y="312" text-anchor="middle"
+          font-family="Georgia,serif" font-size="12" font-weight="700" fill="#A07828">D</text>
+  </g>
+
+</svg>

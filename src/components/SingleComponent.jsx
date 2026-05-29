@@ -2,9 +2,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import moment from 'moment';
 import calculosUtils from '../utils/calculosUtils';
 import './SingleComponent.css';
+import { useTranslation } from '../utils/i18n/LanguageContext';
+
+// Import images
+import heroNumerology from '../assets/img/hero-numerology.png';
+import titleHead from '../assets/img/title-head.png';
+import caracol from '../assets/img/caracol.png';
 
 // Import modular components
-import NumerologyInputFormComponent from '../components/common/NumerologyInputFormComponent';
 import ResultsHeaderComponent from '../components/common/ResultsHeaderComponent';
 import PinaculoChartComponent from '../components/common/PinaculoChartComponent';
 import YearChartComponent from '../components/common/YearChartComponent';
@@ -15,6 +20,7 @@ import DesktopDayGridComponent from '../components/common/DesktopDayGridComponen
 import LoadingComponent from '../components/common/LoadingComponent';
 
 const SingleComponent = () => {
+  const { t } = useTranslation();
   // State variables
   const [nombre, setNombre] = useState('');
   const [birthdate, setBirthdate] = useState('');
@@ -241,17 +247,61 @@ const SingleComponent = () => {
       <div ref={contentRef} className="content">
         <LoadingComponent loading={loading} />
         
-        <NumerologyInputFormComponent
-          isVisible={isVisible}
-          resultados={resultados}
-          nombre={nombre}
-          setNombre={setNombre}
-          birthdate={birthdate}
-          birthdateShow={birthdateShow}
-          handleBirthdateChange={handleBirthdateChange}
-          handleSubmit={handleSubmit}
-          birthRef={birthRef}
-        />
+        {!resultados && (
+          <div className={`singleBasic-form-wrapper ${isVisible ? 'visible' : 'hidden'}`}>
+            <div className="singleBasic-hero-container">
+              <div className="singleBasic-left-column">
+                <div className="singleBasic-title-section">
+                  <img src={titleHead} alt="title" className="singleBasic-title-img" />
+                </div>
+                <div className="singleBasic-form-content">
+                  <div className="singleBasic-form-group">
+                    <label htmlFor="name-input">{t('singleBasic.nameLabel')}</label>
+                    <input
+                      id="name-input"
+                      type="text"
+                      className="singleBasic-form-control"
+                      value={nombre}
+                      onChange={(e) => setNombre(e.target.value)}
+                      placeholder={t('singleBasic.namePlaceholder')}
+                      autoComplete="off"
+                    />
+                  </div>
+                  <div className="singleBasic-form-group">
+                    <label htmlFor="birthdate-input">{t('singleBasic.birthdateLabel')}</label>
+                    <input
+                      id="birthdate-input"
+                      className="singleBasic-form-control"
+                      placeholder={t('singleBasic.birthdatePlaceholder')}
+                      type="text"
+                      value={birthdate}
+                      onChange={handleBirthdateChange}
+                      ref={birthRef}
+                      autoComplete="off"
+                    />
+                  </div>
+                  <div className="singleBasic-form-group">
+                    <label htmlFor="email-input">{t('singleBasic.emailLabel')}</label>
+                    <input
+                      id="email-input"
+                      className="singleBasic-form-control"
+                      placeholder={t('singleBasic.emailPlaceholder')}
+                      type="email"
+                      autoComplete="off"
+                    />
+                  </div>
+                  <button onClick={handleSubmit} className="singleBasic-submit-btn">
+                    <img src={caracol} alt="caracol" className="singleBasic-btn-icon" />
+                    {t('singleBasic.submitButton')}
+                  </button>
+                </div>
+              </div>
+              <div className="singleBasic-right-column">
+                <img src={heroNumerology} alt="numerology" className="singleBasic-hero-img" />
+              </div>
+            </div>
+          </div>
+        )}
         
         <div id="page1" className="page" style={{display: resultados ? 'block' : 'none'}}>
           <ResultsHeaderComponent
