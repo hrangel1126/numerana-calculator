@@ -1,12 +1,11 @@
 import React from 'react';
-import PinaculoSvg from '../PinaculoSvg';
+import ExampleChart from './ExampleChart';
 import './SingleComponent.css';
 
 const PinaculoChartComponent = ({ pinaculo }) => {
-  console.log('...pinaculo...', pinaculo);
   return (
     <div className="A">
-      {pinaculo && <PinaculoSvg pinaculo={pinaculo} />}
+      {pinaculo && <ExampleChart pinaculo={pinaculo} />}
     </div>
   );
 };
