@@ -7,11 +7,33 @@
    height="557"
    preserveAspectRatio="none"
    id="svg253"
-  
-  
-  
-   
-   xmlns="http://www.w3.org/2000/svg">
+   sodipodi:docname="example.svg"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   inkscape:export-filename="example.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview253"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.3877917"
+     inkscape:cx="244.99353"
+     inkscape:cy="278.5"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg253" />
   <defs
      id="defs48">
     <linearGradient
@@ -1634,7 +1656,7 @@
      y="294.64539"
      id="text253"
      transform="scale(0.83768631,1.1937643)"><tspan
-      
+       sodipodi:role="line"
        id="tspan253"
        style="stroke-width:6.01061"
        x="958.50775"
@@ -1646,7 +1668,7 @@
      y="551.43719"
      id="text254"
      transform="scale(0.96012199,1.0415343)"><tspan
-      
+       sodipodi:role="line"
        id="tspan254"
        style="stroke-width:6.61119"
        x="846.81909"
@@ -1658,7 +1680,7 @@
      y="836.29474"
      id="text255"
      transform="scale(0.93112764,1.0739666)"><tspan
-      
+       sodipodi:role="line"
        id="tspan255"
        style="stroke-width:6.24173"
        x="697.41431"
@@ -1670,7 +1692,7 @@
      y="1273.7848"
      id="text255-5"
      transform="scale(0.93112765,1.0739666)"><tspan
-      
+       sodipodi:role="line"
        id="tspan255-5"
        style="stroke-width:6.24173"
        x="669.4563"
@@ -1682,7 +1704,7 @@
      y="1376.0988"
      id="text255-52"
      transform="scale(0.93112765,1.0739666)"><tspan
-      
+       sodipodi:role="line"
        id="tspan255-7"
        style="stroke-width:6.24173"
        x="875.98853"
@@ -1694,7 +1716,7 @@
      y="1580.9084"
      id="text255-1"
      transform="scale(0.93112765,1.0739666)"><tspan
-      
+       sodipodi:role="line"
        id="tspan255-42"
        style="stroke-width:6.24173"
        x="868.67694"
@@ -1706,7 +1728,7 @@
      y="1781.2405"
      id="text255-2"
      transform="scale(0.93112765,1.0739666)"><tspan
-      
+       sodipodi:role="line"
        id="tspan255-21"
        style="stroke-width:6.24173"
        x="869.48938"
@@ -1718,7 +1740,7 @@
      y="1275.3704"
      id="text255-85"
      transform="scale(0.93112765,1.0739666)"><tspan
-      
+       sodipodi:role="line"
        id="tspan255-76"
        style="stroke-width:6.24173"
        x="1075.5004"
@@ -1730,7 +1752,7 @@
      y="508.53983"
      id="text255-7"
      transform="scale(0.93112765,1.0739666)"><tspan
-      
+       sodipodi:role="line"
        id="tspan255-1"
        style="stroke-width:6.24173"
        x="1391.3943"
@@ -1742,7 +1764,7 @@
      y="727.07935"
      id="text255-9"
      transform="scale(0.93112765,1.0739666)"><tspan
-      
+       sodipodi:role="line"
        id="tspan255-4"
        style="stroke-width:6.24173"
        x="874.36371"
@@ -1754,7 +1776,7 @@
      y="837.08209"
      id="text255-8"
      transform="scale(0.93112765,1.0739666)"><tspan
-      
+       sodipodi:role="line"
        id="tspan255-2"
        style="stroke-width:6.24173"
        x="1065.2203"
@@ -1766,7 +1788,7 @@
      y="1026.6339"
      id="text256"
      transform="scale(0.89079118,1.1225976)"><tspan
-      
+       sodipodi:role="line"
        id="tspan256"
        style="stroke-width:11.6611"
        x="395.74619"
@@ -1778,7 +1800,7 @@
      y="1025.228"
      id="text256-7"
      transform="scale(0.89079115,1.1225976)"><tspan
-      
+       sodipodi:role="line"
        id="tspan256-9"
        style="stroke-width:11.6611"
        x="876.78412"
@@ -1790,7 +1812,7 @@
      y="1028.2618"
      id="text256-4"
      transform="scale(0.89079115,1.1225976)"><tspan
-      
+       sodipodi:role="line"
        id="tspan256-3"
        style="stroke-width:11.6611"
        x="1323.1384"
@@ -1802,7 +1824,7 @@
      y="1029.5625"
      id="text256-2"
      transform="scale(0.89079115,1.1225976)"><tspan
-      
+       sodipodi:role="line"
        id="tspan256-33"
        style="stroke-width:11.6611"
        x="1715.7646"

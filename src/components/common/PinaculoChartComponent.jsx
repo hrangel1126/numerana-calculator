@@ -1,11 +1,12 @@
 import React from 'react';
 import ExampleChart from './ExampleChart';
+import AlignCheck from './AlignCheck';
 import './SingleComponent.css';
 
 const PinaculoChartComponent = ({ pinaculo }) => {
   return (
     <div className="A">
-      {pinaculo && <ExampleChart pinaculo={pinaculo} />}
+      {pinaculo && <AlignCheck pinaculo={pinaculo} />}
     </div>
   );
 };
