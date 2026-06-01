@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/home/Home';
 import Single from './pages/single/Single';
 import Couple from './pages/couple/Couple';
 import { Team } from './pages/team/Team';
 import SingleBasic from './pages/singlebasic/SingleBasic';
 // import 'bootstrap/dist/css/bootstrap.min.css';
+// BrowserRouter
 import './App.css';
 import { LanguageProvider } from './utils/i18n/LanguageContext';
 

@@ -22,7 +22,14 @@ const positions = [
 ];
 
 const AlignCheck = ({ pinaculo }) => {
-  return (
+    console.log("User object data:", pinaculo); 
+Object.entries(pinaculo).forEach(([key, value]) => {
+  console.log(
+    'Key:', key,
+    'Value:', value,
+    'Length:', String(value).length
+  );
+});  return (
     <div style={{ position: 'relative', width: 490, margin: '0 auto' }}>
 <svg
    version="1.1"
@@ -1617,180 +1624,181 @@ const AlignCheck = ({ pinaculo }) => {
      x="958.50775"
      y="294.64539"
      id="text253"
-     transform="scale(0.83768631,1.1937643)"><tspan
+     transform={`scale(${String(pinaculo?.top).length == 1 ? .88 : String(pinaculo?.top).length >= 2 ? 0.84 : 0.86},1.1937643)`}><tspan
        
        id="tspan253"
        style={{ strokeWidth:6.01061 }}
        x="958.50775"
-       y="294.64539">TOP</tspan></text>
+       y="294.64539">{ pinaculo?.top }</tspan></text>
   <text
      xmlSpace="preserve"
      style={{ fontSize:'79.3341px', textAlign:'start', writingMode:'lr-tb', direction:'ltr', textAnchor:'start', fill:'#000000', strokeWidth:6.61119 }}
      x="846.81909"
      y="551.43719"
      id="text254"
-     transform="scale(0.96012199,1.0415343)"><tspan
+     transform={`scale(${String(pinaculo?.P1).length == 1 ? .99 : String(pinaculo?.P1).length >= 2 ? 0.92 : 0.94},1.0415343)`}><tspan
        
        id="tspan254"
        style={{ strokeWidth:6.61119 }}
        x="846.81909"
-       y="551.43719">P0</tspan></text>
+       y="551.43719">{ pinaculo?.P1 }</tspan></text>
   <text
      xmlSpace="preserve"
      style={{ fontSize:'74.9006px', textAlign:'start', writingMode:'lr-tb', direction:'ltr', textAnchor:'start', fill:'#000000', strokeWidth:6.24173 }}
      x="697.41431"
      y="836.29474"
      id="text255"
-     transform="scale(0.93112764,1.0739666)"><tspan
+     transform={`scale(${String(pinaculo?.P2).length == 1 ? 0.96 : String(pinaculo?.P2).length >= 2 ? 0.89 : 0.92},1.0739666)`}><tspan
        
        id="tspan255"
        style={{ strokeWidth:6.24173 }}
        x="697.41431"
-       y="836.29474">P1</tspan></text>
+       y="836.29474">{ pinaculo?.P2 }</tspan></text>
   <text
      xmlSpace="preserve"
      style={{ fontSize:'74.9006px', textAlign:'start', writingMode:'lr-tb', direction:'ltr', textAnchor:'start', fill:'#000000', strokeWidth:6.24173 }}
      x="669.4563"
      y="1273.7848"
      id="text255-5"
-     transform="scale(0.93112765,1.0739666)"><tspan
+     transform={`scale(${String(pinaculo?.N1).length == 1 ? 0.96 : String(pinaculo?.N1).length >= 2 ? 0.94 : 0.93},1.0739666)`}><tspan
        
        id="tspan255-5"
        style={{ strokeWidth:6.24173 }}
        x="669.4563"
-       y="1273.7848">N0</tspan></text>
+       y="1273.7848">{ pinaculo?.N1 }</tspan></text>
   <text
      xmlSpace="preserve"
      style={{ fontSize:'74.9006px', textAlign:'start', writingMode:'lr-tb', direction:'ltr', textAnchor:'start', fill:'#000000', strokeWidth:6.24173 }}
      x="875.98853"
      y="1376.0988"
      id="text255-52"
-     transform="scale(0.93112765,1.0739666)"><tspan
-       
+     transform={`scale(${String(pinaculo?.N3).length == 1 ? 0.96 : String(pinaculo?.N3).length >= 2 ? 0.93 : 0.94},1.0739666)`}><tspan
        id="tspan255-7"
        style={{ strokeWidth:6.24173 }}
        x="875.98853"
-       y="1376.0988">N2</tspan></text>
+       y="1376.0988">{ pinaculo?.N3 }</tspan></text>
   <text
      xmlSpace="preserve"
      style={{ fontSize:'74.9006px', textAlign:'start', writingMode:'lr-tb', direction:'ltr', textAnchor:'start', fill:'#000000', strokeWidth:6.24173 }}
      x="868.67694"
      y="1580.9084"
      id="text255-1"
-     transform="scale(0.93112765,1.0739666)"><tspan
+     transform={`scale(${String(pinaculo?.N4).length == 1 ? 0.96 : String(pinaculo?.N4).length >= 2 ? 0.94 : 0.93},1.0739666)`}><tspan
        
        id="tspan255-42"
        style={{ strokeWidth:6.24173 }}
        x="868.67694"
-       y="1580.9084">N3</tspan></text>
+       y="1580.9084">{ pinaculo?.N4 }</tspan></text>
   <text
      xmlSpace="preserve"
      style={{ fontSize:'74.9006px', textAlign:'start', writingMode:'lr-tb', direction:'ltr', textAnchor:'start', fill:'#000000', strokeWidth:6.24173 }}
      x="869.48938"
      y="1781.2405"
      id="text255-2"
-     transform="scale(0.93112765,1.0739666)"><tspan
+     transform={`scale(${String(pinaculo?.bottom).length == 1 ? 0.93 : String(pinaculo?.bottom).length >= 2 ? 0.94 : 0.95},1.0739666)`}><tspan
        
        id="tspan255-21"
        style={{ strokeWidth:6.24173 }}
        x="869.48938"
-       y="1781.2405">B0</tspan></text>
+       y="1781.2405">{ pinaculo?.bottom }</tspan></text>
   <text
      xmlSpace="preserve"
      style={{ fontSize:'74.9006px', textAlign:'start', writingMode:'lr-tb', direction:'ltr', textAnchor:'start', fill:'#000000', strokeWidth:6.24173 }}
      x="1075.5004"
      y="1275.3704"
      id="text255-85"
-     transform="scale(0.93112765,1.0739666)"><tspan
+     transform={`scale(${String(pinaculo?.N2).length == 1 ? 0.93 : String(pinaculo?.N2).length >= 2 ? 0.89 : 0.92},1.0739666)`}><tspan
        
        id="tspan255-76"
        style={{ strokeWidth:6.24173 }}
        x="1075.5004"
-       y="1275.3704">N1</tspan></text>
+       y="1275.3704">{ pinaculo?.N2 }</tspan></text>
   <text
      xmlSpace="preserve"
      style={{ fontSize:'74.9006px', textAlign:'start', writingMode:'lr-tb', direction:'ltr', textAnchor:'start', fill:'#000000', strokeWidth:6.24173 }}
      x="1391.3943"
      y="508.53983"
      id="text255-7"
-     transform="scale(0.93112765,1.0739666)"><tspan
+     transform={`scale(${String(pinaculo?.P2).length == 1 ? 0.94 : String(pinaculo?.P2).length >= 2 ? 0.905 : 0.93},1.0739666)`}><tspan
        
        id="tspan255-1"
        style={{ strokeWidth:6.24173 }}
        x="1391.3943"
-       y="508.53983">PD</tspan></text>
+       y="508.53983">{ pinaculo?.P2 }</tspan></text>
   <text
      xmlSpace="preserve"
      style={{ fontSize:'74.9006px', textAlign:'start', writingMode:'lr-tb', direction:'ltr', textAnchor:'start', fill:'#000000', strokeWidth:6.24173 }}
      x="874.36371"
      y="727.07935"
      id="text255-9"
-     transform="scale(0.93112765,1.0739666)"><tspan
+     transform={`scale(${String(pinaculo?.P4).length == 1 ? .96 : String(pinaculo?.P4).length >= 2 ? 0.90 : 0.93},1.07)`}><tspan
        
        id="tspan255-4"
        style={{ strokeWidth:6.24173 }}
        x="874.36371"
-       y="727.07935">P3</tspan></text>
+       y="727.07935">{ pinaculo?.P4 }</tspan></text>
   <text
      xmlSpace="preserve"
      style={{ fontSize:'74.9006px', textAlign:'start', writingMode:'lr-tb', direction:'ltr', textAnchor:'start', fill:'#000000', strokeWidth:6.24173 }}
      x="1065.2203"
      y="837.08209"
      id="text255-8"
-     transform="scale(0.93112765,1.0739666)"><tspan
+     transform={`scale(${String(pinaculo?.P3).length == 1 ? 0.95 : String(pinaculo?.P3).length >= 2 ? 0.89079118 : 0.93},1.07)`}><tspan
        
        id="tspan255-2"
        style={{ strokeWidth:6.24173 }}
        x="1065.2203"
-       y="837.08209">P2</tspan></text>
+       y="837.08209">{ pinaculo?.P3 }</tspan></text>
   <text
      xmlSpace="preserve"
-     style={{ fontSize:'139.933px', textAlign:'start', writingMode:'lr-tb', direction:'ltr', textAnchor:'start', fill:'#000000', strokeWidth:11.6611 }}
+     style={{ fontSize:`${String(pinaculo?.A).length > 2 ? 125.933 : String(pinaculo?.A).length > 1 ? 139.933 : 153.933}px`, writingMode:'lr-tb', direction:'ltr', textAnchor:'start', fill:'#000000', strokeWidth:11.6611 }}
      x="395.74619"
      y="1026.6339"
+      textAnchor="middle"
+      dominantBaseline="base"
      id="text256"
-     transform="scale(0.89079118,1.1225976)"><tspan
+     transform={`scale(${String(pinaculo?.A).length == 1 ? 1 : String(pinaculo?.A).length >= 2 ? 0.82 : 0.89},1.1225976)`}><tspan
        
        id="tspan256"
        style={{ strokeWidth:11.6611 }}
        x="395.74619"
-       y="1026.6339">PA</tspan></text>
+       y="1026.6339">{ pinaculo?.A }</tspan></text>
   <text
      xmlSpace="preserve"
-     style={{ fontSize:'139.933px', textAlign:'start', writingMode:'lr-tb', direction:'ltr', textAnchor:'start', fill:'#000000', strokeWidth:11.6611 }}
+     style={{ fontSize:`${String(pinaculo?.B).length > 2 ? 125.933 : String(pinaculo?.B).length > 1 ? 139.933 : 153.933}px`, textAlign:'start', writingMode:'lr-tb', direction:'ltr', textAnchor:'start', fill:'#000000', strokeWidth:11.6611 }}
      x="876.78412"
      y="1025.228"
      id="text256-7"
-     transform="scale(0.89079115,1.1225976)"><tspan
+     transform={`scale(${String(pinaculo?.B).length == 1 ? 0.93 : String(pinaculo?.B).length >= 2 ? 0.836 : 0.89},1.1225976)`}><tspan
        
        id="tspan256-9"
        style={{ strokeWidth:11.6611 }}
        x="876.78412"
-       y="1025.228">PB</tspan></text>
+       y="1025.228">{ pinaculo?.B }</tspan></text>
   <text
      xmlSpace="preserve"
-     style={{ fontSize:'139.933px', textAlign:'start', writingMode:'lr-tb', direction:'ltr', textAnchor:'start', fill:'#000000', strokeWidth:11.6611 }}
+     style={{ fontSize:`${String(pinaculo?.C).length > 2 ? 125.933 : String(pinaculo?.C).length > 1 ? 139.933 : 153.933}px`, textAlign:'start', writingMode:'lr-tb', direction:'ltr', textAnchor:'start', fill:'#000000', strokeWidth:11.6611 }}
      x="1323.1384"
      y="1028.2618"
      id="text256-4"
-     transform="scale(0.89079115,1.1225976)"><tspan
+     transform={`scale(${String(pinaculo?.C).length == 1 ? 0.92 : String(pinaculo?.C).length >= 2 ? 0.86 : 0.89},1.1225976)`}><tspan
        
        id="tspan256-3"
        style={{ strokeWidth:11.6611 }}
        x="1323.1384"
-       y="1028.2618">PC</tspan></text>
+       y="1028.2618">{ pinaculo?.C }</tspan></text>
   <text
      xmlSpace="preserve"
-     style={{ fontSize:'139.933px', textAlign:'start', writingMode:'lr-tb', direction:'ltr', textAnchor:'start', fill:'#000000', strokeWidth:11.6611 }}
+     style={{ fontSize:`${String(pinaculo?.D).length > 2 ? 125.933 : String(pinaculo?.D).length > 1 ? 139.933 : 153.933}px`, textAlign:'start', writingMode:'lr-tb', direction:'ltr', textAnchor:'start', fill:'#000000', strokeWidth:11.6611 }}
      x="1715.7646"
      y="1029.5625"
      id="text256-2"
-     transform="scale(0.89079115,1.1225976)"><tspan
+     transform={`scale(${String(pinaculo?.D).length == 1 ? 0.915 : String(pinaculo?.D).length >= 2 ? 0.82 : 0.89},1.1225976)`}><tspan
        
        id="tspan256-33"
        style={{ strokeWidth:11.6611 }}
        x="1715.7646"
-       y="1029.5625">PD</tspan></text>
+       y="1029.5625">{ pinaculo?.D }</tspan></text>
 </svg>
 
     </div>
