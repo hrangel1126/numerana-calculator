@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/numerana-calculator/static/css/main.3813d4cc.css",
+    "main.js": "/numerana-calculator/static/js/main.2122c447.js",
+    "static/media/urban-sprite.png": "/numerana-calculator/static/media/urban-sprite.cdecf8f93039c2ff79c1.png",
+    "static/media/natureSmaller.png": "/numerana-calculator/static/media/natureSmaller.4dbf15959f88ffd8cabb.png",
+    "static/media/hero-numerology.png": "/numerana-calculator/static/media/hero-numerology.6ec3701d0d22d744a2f3.png",
+    "static/media/Lright.png": "/numerana-calculator/static/media/Lright.849218fb26af8a535260.png",
+    "static/media/Lleft.png": "/numerana-calculator/static/media/Lleft.59c643da27e8f411c8d1.png",
+    "static/media/bootstrap-icons.woff?": "/numerana-calculator/static/media/bootstrap-icons.39795c0b4513de014cf8.woff",
+    "static/media/bootstrap-icons.woff2?": "/numerana-calculator/static/media/bootstrap-icons.b7bcc075b395c14ce8c2.woff2",
+    "static/media/nature-sprite.png": "/numerana-calculator/static/media/nature-sprite.d49281ab63d2c034e5c5.png",
+    "static/media/span.png": "/numerana-calculator/static/media/span.56468312791bd54403a2.png",
+    "static/media/coreeng.png": "/numerana-calculator/static/media/coreeng.836643045968ea5da103.png",
+    "static/media/title-head.png": "/numerana-calculator/static/media/title-head.bd6a7714249679c37324.png",
+    "static/media/logonumerana80.png": "/numerana-calculator/static/media/logonumerana80.b4ac50ab310bde289346.png",
+    "static/media/logon.webp": "/numerana-calculator/static/media/logon.37718d62552604790f91.webp",
+    "index.html": "/numerana-calculator/index.html",
+    "main.3813d4cc.css.map": "/numerana-calculator/static/css/main.3813d4cc.css.map",
+    "main.2122c447.js.map": "/numerana-calculator/static/js/main.2122c447.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3813d4cc.css",
+    "static/js/main.2122c447.js"
+  ]
+}
