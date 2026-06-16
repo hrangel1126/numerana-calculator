@@ -4,11 +4,13 @@ import './Menu.css';
 import logoImage from '../assets/img/logon.webp';
 import spanishFlag from '../assets/img/span.png';
 import englishFlag from '../assets/img/eng.png';
+import { useMenuVisibility } from '../utils/i18n/MenuVisibilityContext';
 
 const Menu = () => {
   const [language, setLanguage] = useState(true); // true for English, false for Spanish
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
   const navigate = useNavigate();
+  const { showMenu } = useMenuVisibility();
 
   const toggleLanguage = () => {
     setLanguage(!language);
@@ -21,6 +23,11 @@ const Menu = () => {
   const handleNavCollapse = () => {
     setIsNavCollapsed(!isNavCollapsed);
   };
+
+  // Hide menu if showMenu is false
+  if (!showMenu) {
+    return null;
+  }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light">

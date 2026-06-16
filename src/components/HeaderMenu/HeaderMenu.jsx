@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './HeaderMenu.css';
 import { useTranslation } from '../../utils/i18n/LanguageContext';
+import { useMenuVisibility } from '../../utils/i18n/MenuVisibilityContext';
 
 // Import logo for navbar
 import logoImage from '../../assets/img/logon.webp';
@@ -11,6 +12,7 @@ import englishFlag from '../../assets/img/eng.png'; // Assuming you have an Engl
 const HeaderMenu = ({ isHomePage = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { t, language, setLanguage } = useTranslation();
+  const { showMenu } = useMenuVisibility();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -25,6 +27,11 @@ const HeaderMenu = ({ isHomePage = false }) => {
   const currentFlag = language === 'en' ? englishFlag : spanishFlag;
   const flagAlt = language === 'en' ? 'English' : 'Spanish';
   const languageText = t(`language_selector.${language}`);
+
+  // Hide menu if showMenu is false
+  if (!showMenu) {
+    return null;
+  }
 
   return (
     <nav className="navbar" style={{ backgroundColor: '#5b356c' }}>

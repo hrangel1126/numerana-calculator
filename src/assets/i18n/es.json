@@ -15,21 +15,29 @@
     "en": "ING",
     "es": "ESP"
   },
-  "team": {
-    "title": "Numerología",
-    "name_label": "Nombre/Name",
-    "birthdate_label": "Cumpleaños/Birthdate",
-    "member": "#{number}",
-    "placeholder": {
-      "name": "Nombre/Name",
-      "birthdate": "dd/mm/aaaa"
+    "team": {
+      "title": "Numerología",
+      "name_label": "Nombre/Name",
+      "birthdate_label": "Cumpleaños/Birthdate",
+      "member": "#{number}",
+      "placeholder": {
+        "name": "Nombre/Name",
+        "birthdate": "dd/mm/aaaa"
+      },
+      "download_pdf": "Descargar PDF",
+      "team_synastry": "Sinestria de Equipo",
+      "team_synastry_es": "Team Synastry",
+      "team_numerology_description": "Explora los cálculos individuales de cada miembro del equipo y el resultado de Sinergia de Equipo combinado generado del grupo.",
+      "team_synastry_description": "El resultado de Sinergia de Equipo combina los patrones numéricos de cada miembro en un cálculo compartido. Esto proporciona una referencia numérica colectiva que se puede explorar a través de estudios de Numerología e interpretación avanzada.",
+      "team_synastry_description_2": "Este cálculo inicial es solo el punto de partida. Este informe incluye cálculos para cada persona, ayudándote a explorar cómo los números interactúan en diferentes ciclos y períodos de tiempo.",
+      "team_synastry_chart_label": "Este es el resultado combinado; verifica los detalles abajo.",
+      "learn_more": "Saber Más",
+      "website_info": "www.numerana.com",
+      "by_author": "Por: Ana Dorotea",
+      "backButton": "Atrás",
+      "addMoreMembers": "Agregar Más Miembros",
+      "calculateButton": "Calcular Ahora"
     },
-    "download_pdf": "Descargar PDF",
-    "team_synastry": "Sinestria de Equipo",
-    "team_synastry_es": "Team Synastry",
-    "website_info": "www.numerana.com",
-    "by_author": "Por: Ana Dorotea"
-  },
    "singleBasic": {
      "title": "Numerología",
      "nameLabel": "¿Qué nombre te dieron al nacer?",

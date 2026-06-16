@@ -10,16 +10,46 @@ const translations = {
 const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
-  // Get initial language from localStorage or default to Spanish
-  const [language, setLanguage] = useState(() => {
+  // Get language from URL query string (?language=EN or ?language=ES)
+  const [language, setLanguageState] = useState(() => {
+    // Get URL search params
+    const searchParams = new URLSearchParams(window.location.search);
+    const languageParam = searchParams.get('language');
+    
+    // Priority: URL parameter > localStorage > default (es)
+    if (languageParam !== null) {
+      // Normalize to lowercase (en or es)
+      const normalized = languageParam.toLowerCase();
+      if (normalized === 'en' || normalized === 'es') {
+        return normalized;
+      }
+    }
+    
+    // Fallback to localStorage if no URL param
     const savedLanguage = localStorage.getItem('language');
-    return savedLanguage || 'es'; // Default to Spanish
+    if (savedLanguage) {
+      return savedLanguage;
+    }
+    
+    // Default to Spanish
+    return 'es';
   });
 
-  // Update localStorage when language changes
+  // Update localStorage when language changes (only if not from URL param)
   useEffect(() => {
-    localStorage.setItem('language', language);
+    const searchParams = new URLSearchParams(window.location.search);
+    const languageParam = searchParams.get('language');
+    
+    // Only save to localStorage if not controlled by URL parameter
+    if (languageParam === null) {
+      localStorage.setItem('language', language);
+    }
   }, [language]);
+  
+  // Wrapper function to set language
+  const setLanguage = (value) => {
+    setLanguageState(value);
+  };
 
   // Translation function
   const t = (key) => {

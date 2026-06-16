@@ -782,3 +782,135 @@ svg text {
     height: 16px;
   }
 }
+
+/* Back Button Styling */
+.singleBasic-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #fff;
+  color: #c9a961;
+  border: 2px solid #c9a961;
+  padding: 0.65rem 1.25rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+}
+
+.singleBasic-back-btn:hover {
+  background-color: #c9a961;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.singleBasic-back-btn i {
+  font-size: 1rem;
+}
+
+/* Download Button Styling */
+.download-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #fff;
+  color: #c9a961;
+  border: 2px solid #c9a961;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.download-button:hover {
+  background-color: #c9a961;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.download-button i {
+  font-size: 1.1rem;
+}
+
+/* Generate/Reload Button Styling (Calculate Now) */
+.generate-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #043362;
+  color: white;
+  border: 2px solid #043362;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.generate-button:hover {
+  background-color: #1a3a52;
+  border-color: #1a3a52;
+  transform: translateY(-2px);
+}
+
+.generate-button i {
+  font-size: 1.1rem;
+}
+
+/* Learn More Button Styling */
+.learn-more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #043362;
+  color: white;
+  border: 2px solid #043362;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1.5rem;
+}
+
+.learn-more-btn:hover {
+  background-color: #1a3a52;
+  border-color: #1a3a52;
+  transform: translateY(-2px);
+}
+
+/* Action Buttons Container */
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Responsive: Mobile Button Styling */
+@media (max-width: 768px) {
+  .singleBasic-back-btn,
+  .download-button,
+  .generate-button,
+  .learn-more-btn {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+    padding: 0.65rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+}

@@ -157,14 +157,9 @@ const SingleBasicComponent = () => {
        }
       setPinYear([yearData]); // Ensure it's always an array
 
-      setResultados(true);
-
-      // Scroll to results after rendering
-      setTimeout(() => {
-        if (myScrollContainerRef.current) {
-          myScrollContainerRef.current.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
+       setResultados(true);
+       // NO auto-scroll - page stays at top showing Pinaculo section
+       // User can click "Learn More" to scroll to Core Energetic Numbers
     } catch (error) {
       console.error('Error calculating results:', error);
       alert(`${t('singleBasic.calculationError')}: ${error.message || t('singleBasic.tryAgain')}`);
@@ -397,6 +392,16 @@ const SingleBasicComponent = () => {
         {/* Results Section */}
         {resultados && (
            <div id="page1" className="page">
+              {/* Back Button */}
+              <button 
+                className="singleBasic-back-btn"
+                onClick={reload}
+                aria-label="Go back"
+                title="New Calculation"
+              >
+                <i className="bi bi-arrow-left"></i> {t('singleBasic.reloadButton')}
+              </button>
+
               {/* 2-Column Results Header Layout */}
               <div className="results-header-wrapper">
                 {/* Left Column - Info */}
@@ -470,7 +475,11 @@ const SingleBasicComponent = () => {
                     })}
                   </div>
 
-                  <button className="learn-more-btn" onClick={reload}>
+                  <button className="learn-more-btn" onClick={() => {
+                    if (myScrollContainerRef.current) {
+                      myScrollContainerRef.current.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}>
                     {t('singleBasic.learnMoreButton')} ↓
                   </button>
                 </div>

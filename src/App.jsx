@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import HomeNumerana from './pages/numerana/HomeNumerana';
 import Home from './pages/home/Home';
 import Single from './pages/single/Single';
 import Couple from './pages/couple/Couple';
@@ -9,27 +10,29 @@ import SingleBasic from './pages/singlebasic/SingleBasic';
 // BrowserRouter
 import './App.css';
 import { LanguageProvider } from './utils/i18n/LanguageContext';
+import { MenuVisibilityProvider } from './utils/i18n/MenuVisibilityContext';
 
 function App() {
-  const [showMenu, setShowMenu] = useState(true);
-  
   return (
     <LanguageProvider>
-      <Router>
-        <div className="App">
-          <Routes>
-            <Route path="/" element={<Navigate to="/home" replace />} />
-            <Route path="/home" element={<Home setShowMenu={setShowMenu} />} />
-            <Route path="/single" element={<Single setShowMenu={setShowMenu} />} />
-            <Route path="/singlebasic" element={<SingleBasic setShowMenu={setShowMenu} />} />
-            <Route path="/reload" element={<Single setShowMenu={setShowMenu} />} />
-            <Route path="/couple" element={<Couple setShowMenu={setShowMenu} />} />
-            <Route path="/team" element={<Team setShowMenu={setShowMenu} />} />
-            <Route path="/reloadc" element={<Single setShowMenu={setShowMenu} />} />
-            <Route path="/reloadt" element={<Team setShowMenu={setShowMenu} />} />
-          </Routes>
-        </div>
-      </Router>
+      <MenuVisibilityProvider>
+        <Router>
+          <div className="App">
+            <Routes>
+              <Route path="/" element={<HomeNumerana />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/homenumerana" element={<HomeNumerana />} />
+              <Route path="/single" element={<Single />} />
+              <Route path="/singlebasic" element={<SingleBasic />} />
+              <Route path="/reload" element={<Single />} />
+              <Route path="/couple" element={<Couple />} />
+              <Route path="/team" element={<Team />} />
+              <Route path="/reloadc" element={<Single />} />
+              <Route path="/reloadt" element={<Team />} />
+            </Routes>
+          </div>
+        </Router>
+      </MenuVisibilityProvider>
     </LanguageProvider>
   );
 }
