@@ -1,5 +1,138 @@
 
 
+/* Couple Results Header - Text Content */
+.couple-results-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a3a52;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+}
+
+.couple-results-dates {
+  font-size: 1.1rem;
+  color: #c9a961;
+  font-weight: 600;
+  margin: 0 0 1.5rem 0;
+}
+
+.couple-date {
+  font-weight: 700;
+}
+
+.couple-results-description {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.7;
+  margin: 0 0 1.5rem 0;
+  max-width: 650px;
+}
+
+.couple-results-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.couple-btn-download,
+.couple-btn-learn-more {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.couple-btn-download {
+  background-color: transparent;
+  color: #1a3a52;
+  border: 2px solid #c9a961;
+}
+
+.couple-btn-download:hover {
+  background-color: #c9a961;
+  color: #fff;
+}
+
+.couple-btn-learn-more {
+  background-color: #1a3a52;
+  color: #fff;
+}
+
+.couple-btn-learn-more:hover {
+  background-color: #0f1f2e;
+  transform: translateY(-2px);
+}
+
+.couple-results-caption {
+  font-size: 0.95rem;
+  color: #555;
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+/* Relationship Structure Section Header */
+.couple-section-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.couple-section-header-img {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  object-fit: contain;
+}
+
+.couple-section-subtitle {
+  text-align: center;
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 2rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Year Slider Label */
+.year-slider-wrapper {
+  width: 100%;
+}
+
+.year-label {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a3a52;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+  order: -1;
+}
+
+/* Couple Form 2-Column Layout (Name left, DOB right) */
+.couple-form-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.couple-form-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .couple-form-wrapper {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
 /* --- Parent Container Adjustments --- */
 
 .couple-content {
@@ -25,7 +158,11 @@
   box-sizing: border-box;
 }
 
-/* Add to your CoupleComponent.css or a relevant stylesheet */
+/* HIDDEN: Old annual years grid - keeping code but hiding with display: none */
+/* Using new couple-year-charts-section with Swiper sliders instead (has year labels on top) */
+.annual-years-grid {
+  display: none !important;
+}
 
 .couple-year-charts-section {
   /* Add padding/margin as needed */
@@ -65,9 +202,12 @@
 }
 
 .couple-chart-title {
-  margin-bottom: 15px;
-  font-size: 1.1rem; /* Adjust */
-  font-weight: bold;
+  margin-top: 15px !important;
+  margin-bottom: 0 !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  color: #1a3a52 !important;
+  text-align: center !important;
 }
 
 .person-year-swiper {
@@ -82,6 +222,7 @@
 
 .year-chart-slide {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
@@ -360,14 +501,16 @@ html, body {
 
 /* Loading spinner matching Angular version */
 .couple-lds-ripple {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
-  margin: 0 auto;
+  display: flex;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
 }
 
 .couple-lds-ripple div {

@@ -5,13 +5,15 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import PinaculoChartComponent from './couple/PinaculoChartComponent';
+import PinaculoChartComponent from './common/PinaculoChartComponent';
 import DesktopMonthGridComponent from './common/DesktopMonthGridComponent';
 import DesktopDayGridComponent from './common/DesktopDayGridComponent';
 import YearChartComponent from './common/YearChartComponent';
+import ResultsHeaderComponent from './common/ResultsHeaderComponent';
 
 // Import utility functions
 import { calculosUtils } from '../utils/calculosUtils';
+import { useTranslation } from '../utils/i18n/LanguageContext';
 
 // Import Bootstrap icons
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -20,10 +22,19 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import leftDecoration from '../assets/img/Lleft.png';
 import rightDecoration from '../assets/img/Lright.png';
 import logoImage from '../assets/img/logonumerana80.png';
+import annualCalcImg from '../assets/img/Annual-calculation.png';
+import monthlyCalcImg from '../assets/img/monthly-calculation.png';
+import dailyCalcImg from '../assets/img/daily-calculatiom-header.png';
+import coupleHeaderImg from '../assets/img/couple-header.png';
+import coupleBigImg from '../assets/img/couple-big.png';
+import caracol from '../assets/img/caracol.png';
+import relationshipStructureImg from '../assets/img/relationship-structure.png';
 
 import './CoupleComponent.css';
+import './SingleComponent.css';
 
 const CoupleComponent = () => {
+  const { t } = useTranslation();
   // State variables for person 1
   const [nombre, setNombre] = useState('saurav');
   const [birthdate, setBirthdate] = useState('11/11/1984');
@@ -244,15 +255,15 @@ const CoupleComponent = () => {
       // Calculate for person 1
       const pinaculo1 = calculosUtils.GetFirstLine(birthdate);
       console.log('.....bitrhdat .......', birthdate, '..................', pinaculo1);
-      setRpinaculo(pinaculo1);
+      setRpinaculo([pinaculo1[0]]);
       
       // Calculate for person 2
       const pinaculo2 = calculosUtils.GetFirstLine(birthdate2);
       console.log('.....bitrhdat2 .......', birthdate2, '..................', pinaculo2);
-      setRpinaculo2(pinaculo2);
+      setRpinaculo2([pinaculo2[0]]);
       
       // Calculate couple compatibility
-      calculateCoupleCompatibility(pinaculo1, pinaculo2);
+      calculateCoupleCompatibility(pinaculo1[0], pinaculo2[0]);
       
       // Calculate year data
       const yearData1 = calculosUtils.GetYear(birthdate);
@@ -307,6 +318,7 @@ const CoupleComponent = () => {
         NG: person2.C,
         NH: person2.D
       };
+      console.log('Combined Sinastra:', combinedSinastra);
       
       setSinastra([combinedSinastra]);
       
@@ -317,9 +329,23 @@ const CoupleComponent = () => {
         C: calculosUtils.sum(parseInt(person1.C) || 0, parseInt(person2.C) || 0),
         D: calculosUtils.sum(parseInt(person1.D) || 0, parseInt(person2.D) || 0),
         top: calculosUtils.sum(parseInt(person1.top) || 0, parseInt(person2.top) || 0),
+        E: calculosUtils.sum(parseInt(person1.top) || 0, parseInt(person2.top) || 0),
+        N1: person1.A,
+        N2: person1.B,
+        N3: person1.C,
+        N4: person1.D,
+        P1: person2.A,
+        P2: person2.B,
+        P3: person2.C,
+        P4: person2.D,
+        P5:calculosUtils.sum(parseInt(person1.bottom) || 0, parseInt(person2.bottom) || 0),
+      bottom: calculosUtils.sum(parseInt(person1.bottom) || 0, parseInt(person2.bottom) || 0)
       };
+      console.log('pina 3', combinedPinaculo);
       
       setRpinaculo3([combinedPinaculo]);
+      // setRpinaculo3([combinedSinastra]);
+      
     } catch (error) {
       console.error('Error in compatibility calculation:', error);
     }
@@ -502,155 +528,77 @@ const CoupleComponent = () => {
   
   // Render input form
   const renderForm = () => (
-    <div 
-      className="couple-container" 
-      style={{
-        opacity: isVisible ? 1 : 0,
-        transition: 'opacity 1s ease-in-out',
-        border: '5px solid #858585', 
-        borderRadius: '5px'
-      }}
-    >
-      <div className="couple-content">
-        <div className="couple-row couple-resultado2">
-          <div className="couple-col-2">
-            <img src={leftDecoration} alt="Left decoration" className="couple-lleft" />
+    <div className={`singleBasic-form-wrapper ${isVisible ? 'visible' : 'hidden'}`}>
+      <div className="singleBasic-hero-container">
+        <div className="singleBasic-left-column">
+          <div className="singleBasic-title-section">
+            <img src={coupleHeaderImg} alt="" className="singleBasic-title-img" />
           </div>
-          <div className="couple-col-8" style={{ textAlign: 'center' }}>
-            <img src={logoImage} alt="numeranamx" className="couple-logo" style={{ height: '80px' }} />
-            <h1 className="couple-titulo">Numerology | Numerología</h1>
-          </div>
-          <div className="couple-col-2">
-            <img src={rightDecoration} alt="Right decoration" className="couple-lright" />
-          </div>
-        </div>
-        
-        <div className="couple-row">
-          <div className="couple-col-2"></div>
-          <div className="couple-col-3">
-            <h2 className="couple-name couple-bold couple-titulo">{nombre}</h2>
-          </div>
-          <div className="couple-col-1"></div>
-          <div className="couple-col-3">
-            <h2 className="couple-name couple-bold couple-titulo">{nombre2}</h2>
-          </div>
-          <div className="couple-col-2"></div>
-        </div>
-        
-        <br />
-        
-        <div className="couple-row">
-          <div className="couple-col-2"></div>
-          <div className="couple-col-3" style={{ textAlign: 'center' }}>
-            <span className="couple-masc">
-              <b style={{ fontSize: '2.6rem', position: 'absolute', marginLeft: '-2rem', marginTop: '-7px' }}>1</b>
-              <i className="bi bi-person-fill couple-iconin"></i>
-            </span>
-          </div>
-          <div className="couple-col-2"></div>
-          <div className="couple-col-3" style={{ textAlign: 'center' }}>
-            <span className="couple-masc">
-              <b style={{ fontSize: '2.6rem', position: 'absolute', marginLeft: '-2rem', marginTop: '-7px' }}>2</b>
-              <i className="bi bi-person-fill couple-iconin"></i>
-            </span>
-          </div>
-          <div className="couple-col-2"></div>
-        </div>
-        
-        <div className="couple-row" id="name">
-          <div className="couple-col-2 couple-telefono"></div>
-          <div className="couple-col-3" style={{ textAlign: 'center' }}>
-            <div className="couple-form-group">
-              <label htmlFor="name1"><b>Name/Nombre</b></label>
-              <input 
-                type="text" 
-                id="name1"
-                autoComplete="off" 
-                className="couple-form-control couple-nombres" 
-                value={nombre}
-                onChange={(e) => setNombre(e.target.value)}
-                placeholder="Name/Nombre" 
-              />
+          <div className="singleBasic-form-content">
+            <div className="couple-form-wrapper">
+              <div className="couple-form-column">
+                <div className="singleBasic-form-group">
+                  <label htmlFor="name1">Enter your name</label>
+                  <input 
+                    type="text" 
+                    id="name1"
+                    autoComplete="off" 
+                    className="singleBasic-form-control" 
+                    value={nombre}
+                    onChange={(e) => setNombre(e.target.value)}
+                    placeholder="John Doe" 
+                  />
+                </div>
+                <div className="singleBasic-form-group">
+                  <label htmlFor="name2">Enter your partner's name</label>
+                  <input 
+                    type="text" 
+                    id="name2"
+                    autoComplete="off" 
+                    className="singleBasic-form-control" 
+                    value={nombre2}
+                    onChange={(e) => setNombre2(e.target.value)}
+                    placeholder="John Doe" 
+                  />
+                </div>
+              </div>
+              <div className="couple-form-column">
+                <div className="singleBasic-form-group">
+                  <label htmlFor="birth1">Enter your DOB</label>
+                  <input
+                    className="singleBasic-form-control"
+                    id="birth1"
+                    autoComplete="off"
+                    placeholder="dd/mm/yyyy"
+                    type="tel"
+                    value={birthdate}
+                    onChange={(e) => handleBirthdateChange(e, setBirthdate)}
+                    ref={birth1Ref}
+                  />
+                </div>
+                <div className="singleBasic-form-group">
+                  <label htmlFor="birth2">Enter your partner's DOB</label>
+                  <input
+                    className="singleBasic-form-control"
+                    id="birth2"
+                    autoComplete="off"
+                    placeholder="dd/mm/yyyy"
+                    type="tel"
+                    value={birthdate2}
+                    onChange={(e) => handleBirthdateChange(e, setBirthdate2)}
+                    ref={birth2Ref}
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="couple-col-2"></div>
-          <div className="couple-col-3">
-            <div className="couple-form-group" style={{ textAlign: 'center' }}>
-              <label htmlFor="name2"><b>Name/Nombre</b></label>
-              <input 
-                type="text" 
-                id="name2"
-                autoComplete="off" 
-                className="couple-form-control couple-nombres" 
-                value={nombre2}
-                onChange={(e) => setNombre2(e.target.value)}
-                placeholder="Name/Nombre" 
-              />
-            </div>
-          </div>
-          <div className="couple-col-2"></div>
-        </div>
-        
-        <div className="couple-row" style={{ textAlign: 'center' }}>
-          <div className="couple-col-2 couple-telefono"></div>
-          <div className="couple-col-3">
-            <div className="couple-form-group">
-              <label htmlFor="birth1"><b>Birthdate/Cumple</b></label>
-              <input
-                className="couple-form-control couple-nombres"
-                id="birth1"
-                autoComplete="off"
-                placeholder="dd/mm/yyyy"
-                type="tel"
-                value={birthdate}
-                onChange={(e) => handleBirthdateChange(e, setBirthdate)}
-                ref={birth1Ref}
-              />
-            </div>
-          </div>
-          <div className="couple-col-2"></div>
-          <div className="couple-col-3">
-            <div className="couple-form-group">
-              <label htmlFor="birth2"><b>Birthdate/Cumple</b></label>
-              <input
-                className="couple-form-control couple-nombres"
-                id="birth2"
-                autoComplete="off"
-                placeholder="dd/mm/yyyy"
-                type="tel"
-                value={birthdate2}
-                onChange={(e) => handleBirthdateChange(e, setBirthdate2)}
-                ref={birth2Ref}
-              />
-            </div>
-          </div>
-          <div className="couple-col-2"></div>
-        </div>
-        
-        <div className="couple-row" style={{ marginBottom: '1rem' }}>
-          <div className="couple-col-3"></div>
-          <div className="couple-col-6">
-            <button 
-              style={{ marginTop: '1rem' }} 
-              type="button" 
-              onClick={subm} 
-              className="couple-btn couple-btn-primary couple-btn-lg couple-btn-block couple-send"
-            >
-              <i className="bi bi-play-btn-fill" style={{ zoom: 2, lineHeight: 1 }}></i>
+            <button onClick={subm} className="singleBasic-submit-btn">
+              <img src={caracol} alt="caracol" className="singleBasic-btn-icon" />
+              {t('singleBasic.submitButton') || 'Calculate Now'}
             </button>
           </div>
-          <div className="couple-col-3">
-            <div className="couple-row">
-              <div className="couple-col-3"></div>
-              <div className="couple-col-3"></div>
-              <div className="couple-col-6"><h2 className="couple-website" style={{ fontSize: '11px' }}>www.numerana.com</h2></div>
-            </div>
-            <div className="couple-row">
-              <div className="couple-col-2"></div>
-              <div className="couple-col-2"></div>
-              <div className="couple-col-8"><h2 className="couple-website couple-ana" style={{ fontSize: '11px' }}>By: Ana Dorotea</h2></div>
-            </div>
-          </div>
+        </div>
+        <div className="singleBasic-right-column">
+          <img src={coupleBigImg} alt="" className="singleBasic-hero-img" />
         </div>
       </div>
     </div>
@@ -700,125 +648,74 @@ const CoupleComponent = () => {
   // Render results
   const renderResults = () => (
     <>
-    <div 
-      className="couple-container" 
-      style={{
-        opacity: resultados ? 1 : 0,
-        transition: 'opacity 1s ease-in-out',
-        border: '5px solid #858585', 
-        borderRadius: '5px'
-      }}
-      ref={myScrollContainerRef}
-    >
-      <div className="couple-row couple-resultado2">
-        <div className="couple-col-2">
-          <img src={leftDecoration} alt="Left decoration" className="couple-lleft" />
-        </div>
-        <div className="couple-col-8" style={{ textAlign: 'center' }}>
-          <img src={logoImage} alt="numeranamx" className="couple-logo" style={{ height: '80px' }} />
-          <h1 className="couple-titulo">Numerology | Numerología</h1>
-        </div>
-        <div className="couple-col-2">
-          <img src={rightDecoration} alt="Right decoration" className="couple-lright" />
-        </div>
-      </div>
-      
-      <div className="couple-row">
-        <div className="couple-col-2"></div>
-        <div className="couple-col-3" style={{ textAlign: 'center' }}>
-          <span className="couple-masc">
-            <b style={{ fontSize: '2.6rem', position: 'absolute', marginLeft: '-2rem', marginTop: '-7px' }}>1</b>
-            <i className="bi bi-person-fill couple-iconin"></i>
-          </span>
-        </div>
-        <div className="couple-col-2"></div>
-        <div className="couple-col-3" style={{ textAlign: 'center' }}>
-          <span className="couple-masc">
-            <b style={{ fontSize: '2.6rem', position: 'absolute', marginLeft: '-2rem', marginTop: '-7px' }}>2</b>
-            <i className="bi bi-person-fill couple-iconin"></i>
-          </span>
-        </div>
-        <div className="couple-col-2"></div>
-      </div>
-      
-      <div className="couple-row">
-        <div className="couple-col-2"></div>
-        <div className="couple-col-3">
-          <h2 className="couple-name couple-bold couple-titulo" style={{ textAlign: 'center' }}>{nombre}</h2>
-        </div>
-        <div className="couple-col-1"></div>
-        <div className="couple-col-3">
-          <h2 className="couple-name couple-bold couple-titulo" style={{ textAlign: 'center' }}>{nombre2}</h2>
-        </div>
-        <div className="couple-col-2"></div>
-      </div>
-      
-      <div className="couple-row">
-        <div className="couple-col-2"></div>
-        <div className="couple-col-3">
-          <h2 className="couple-name couple-bold couple-titulo" style={{ textAlign: 'center' }}>{birthdate}</h2>
-        </div>
-        <div className="couple-col-1"></div>
-        <div className="couple-col-3">
-          <h2 className="couple-name couple-bold couple-titulo" style={{ textAlign: 'center' }}>{birthdate2}</h2>
-        </div>
-        <div className="couple-col-2"></div>
-      </div>
-      
-      <div className="couple-row" style={{ marginBottom: '1rem' }}>
-        <div className="couple-col-3"></div>
-        <div className="couple-col-6">
-          <button 
-            style={{ marginTop: '1rem' }} 
-            type="button" 
-            onClick={reload} 
-            className="couple-btn couple-btn-primary couple-btn-lg couple-btn-block couple-send"
-          >
-            <i className="bi bi-play-btn-fill" style={{ zoom: 2, lineHeight: 1 }}></i>
-          </button>
-        </div>
-        <div className="couple-col-3">
-          <div className="couple-row">
-            <div className="couple-col-3"></div>
-            <div className="couple-col-3"></div>
-            <div className="couple-col-6"><h2 className="couple-website" style={{ fontSize: '11px' }}>www.numerana.com</h2></div>
-          </div>
-          <div className="couple-row">
-            <div className="couple-col-2"></div>
-            <div className="couple-col-2"></div>
-            <div className="couple-col-8"><h2 className="couple-website couple-ana" style={{ fontSize: '11px' }}>By: Ana Dorotea</h2></div>
-          </div>
-        </div>
-      </div>
+    <div id="page1" className="page" ref={myScrollContainerRef}>
+      {/* Back Button */}
+      <button 
+        className="singleBasic-back-btn"
+        onClick={reload}
+        aria-label="Go back"
+        title="New Calculation"
+      >
+        <i className="bi bi-arrow-left"></i> Back
+      </button>
 
+      {/* 2-Column Results Header Layout */}
+      <div className="results-header-wrapper">
+        <div className="results-header-left">
+          <h1 className="couple-results-title">{nombre} & {nombre2}</h1>
+          <p className="couple-results-dates">
+            <span className="couple-date">{moment(birthdate, 'DD/MM/YYYY').format('MMM D, YYYY')}</span> • <span className="couple-date">{moment(birthdate2, 'DD/MM/YYYY').format('MMM D, YYYY')}</span>
+          </p>
+          <p className="couple-results-description">
+            This analysis merges the numerical data from both individuals into a detailed outcome. Delve into personal patterns, relationship metrics, yearly cycles, monthly trends, and daily numerical insights.
+          </p>
+          <p className="couple-results-description">
+            This initial calculation is just the starting point. This report includes individual calculations for each person alongside a combined relationship calculation, helping you explore how the numbers interact across different cycles and time periods.
+          </p>
+          <div className="couple-results-actions">
+            <button className="couple-btn-download">
+              <i className="bi bi-download"></i> Download PDF
+            </button>
+            <button className="couple-btn-learn-more">
+              Learn More ↓
+            </button>
+          </div>
+        </div>
+        <div className="results-header-right">
+          {rpinaculo3.length > 0 && (
+            <PinaculoChartComponent pinaculo={rpinaculo3[0]} />
+          )}
+          <p className="couple-results-caption">This is the combined result; check the details below.</p>
+        </div>
       </div>
-     
-      <div>
       
-      {/* Compatibility Section */}
+      {/* Relationship Structure Section */}
       <div className="couple-compatibility-section">
-        <h3 className="couple-section-title">Compatibility | Compatibilidad</h3>
+        <div className="couple-section-header">
+          <img src={relationshipStructureImg} alt="" className="couple-section-header-img" />
+        </div>
+        <p className="couple-section-subtitle">The charts below display the individual calculations for each person generated from both profiles.</p>
         
         <div className="couple-compatibility-charts">
           {getScreenWidth ? (
             // Desktop view
             <div className="couple-charts-desktop">
-              <div className="couple-chart-row">
-                <div className="couple-chart-column">
-                  <h4 className="couple-chart-title">{nombre}</h4>
-                  <PinaculoChartComponent pinaculo={rpinaculo.length > 0 ? rpinaculo[0] : null} />
-                </div>
+               <div className="couple-chart-row">
+                 <div className="couple-chart-column">
+                   <PinaculoChartComponent pinaculo={rpinaculo.length > 0 ? rpinaculo[0] : null} />
+                   <h4 className="couple-chart-title">{nombre}</h4>
+                 </div>
 
-                <div className="couple-chart-column">
-                  <h4 className="couple-chart-title">{nombre2}</h4>
-                  <PinaculoChartComponent pinaculo={rpinaculo2.length > 0 ? rpinaculo2[0] : null} />
-                </div>
+                 <div className="couple-chart-column">
+                   <PinaculoChartComponent pinaculo={rpinaculo2.length > 0 ? rpinaculo2[0] : null} />
+                   <h4 className="couple-chart-title">{nombre2}</h4>
+                 </div>
 
-                <div className="couple-chart-column">
-                  <h4 className="couple-chart-title">Combined | Combinado</h4>
-                  <PinaculoChartComponent pinaculo={rpinaculo3.length > 0 ? rpinaculo3[0] : null} />
-                </div>
-              </div>
+                 <div className="couple-chart-column">
+                   <PinaculoChartComponent pinaculo={rpinaculo3.length > 0 ? rpinaculo3[0] : null} />
+                   <h4 className="couple-chart-title">Combined | Combinado</h4>
+                 </div>
+               </div>
               
             </div>
           ) : (
@@ -831,43 +728,19 @@ const CoupleComponent = () => {
                 onSlideChange={slideChangeMobil}
               >
                 <SwiperSlide className="couple-slide-chart">
-                  <h4 className="couple-chart-title">{nombre}</h4>
-                  {rpinaculo.length > 0 && (
-                    <div className="couple-numerology-diagram">
-                      <div className="couple-number-node couple-top">{rpinaculo[0]?.top}</div>
-                      <div className="couple-number-node couple-left">{rpinaculo[0]?.A}</div>
-                      <div className="couple-number-node couple-right">{rpinaculo[0]?.B}</div>
-                      <div className="couple-number-node couple-bottom-left">{rpinaculo[0]?.C}</div>
-                      <div className="couple-number-node couple-bottom-right">{rpinaculo[0]?.D}</div>
-                    </div>
-                  )}
-                </SwiperSlide>
-                
-                <SwiperSlide className="couple-slide-chart">
-                  <h4 className="couple-chart-title">{nombre2}</h4>
-                  {rpinaculo2.length > 0 && (
-                    <div className="couple-numerology-diagram">
-                      <div className="couple-number-node couple-top">{rpinaculo2[0]?.top}</div>
-                      <div className="couple-number-node couple-left">{rpinaculo2[0]?.A}</div>
-                      <div className="couple-number-node couple-right">{rpinaculo2[0]?.B}</div>
-                      <div className="couple-number-node couple-bottom-left">{rpinaculo2[0]?.C}</div>
-                      <div className="couple-number-node couple-bottom-right">{rpinaculo2[0]?.D}</div>
-                    </div>
-                  )}
-                </SwiperSlide>
-                
-                <SwiperSlide className="couple-slide-chart">
-                  <h4 className="couple-chart-title">Combined | Combinado</h4>
-                  {rpinaculo3.length > 0 && (
-                    <div className="couple-numerology-diagram">
-                      <div className="couple-number-node couple-top">{rpinaculo3[0]?.top}</div>
-                      <div className="couple-number-node couple-left">{rpinaculo3[0]?.A}</div>
-                      <div className="couple-number-node couple-right">{rpinaculo3[0]?.B}</div>
-                      <div className="couple-number-node couple-bottom-left">{rpinaculo3[0]?.C}</div>
-                      <div className="couple-number-node couple-bottom-right">{rpinaculo3[0]?.D}</div>
-                    </div>
-                  )}
-                </SwiperSlide>
+                   <PinaculoChartComponent pinaculo={rpinaculo.length > 0 ? rpinaculo[0] : null} />
+                   <h4 className="couple-chart-title">{nombre}</h4>
+                 </SwiperSlide>
+                 
+                 <SwiperSlide className="couple-slide-chart">
+                   <PinaculoChartComponent pinaculo={rpinaculo2.length > 0 ? rpinaculo2[0] : null} />
+                   <h4 className="couple-chart-title">{nombre2}</h4>
+                 </SwiperSlide>
+                 
+                 <SwiperSlide className="couple-slide-chart">
+                   <PinaculoChartComponent pinaculo={rpinaculo3.length > 0 ? rpinaculo3[0] : null} />
+                   <h4 className="couple-chart-title">Combined | Combinado</h4>
+                 </SwiperSlide>
                 
                 <SwiperSlide className="couple-slide-chart">
                   <h4 className="couple-chart-title">Compatibility | Compatibilidad</h4>
@@ -916,6 +789,32 @@ const CoupleComponent = () => {
         </div>
       </div>
 
+      {/* Annual Calculations Section */}
+      <div className="annual-section">
+        <div className="annual-header">
+          <img src={annualCalcImg} alt="Annual Calculations" className="annual-header-image" />
+        </div>
+         {/* HIDDEN: Using couple-year-charts-section with Swiper sliders below instead (year labels on top of pinaculos) */}
+         <div className="annual-years-grid">
+           <div className="annual-year-block">
+             <h3 className="annual-year-title">{year}</h3>
+             <YearChartComponent 
+               year={year} 
+               data={pinYear.length > 0 ? pinYear[0] : null} 
+               isCurrentYear={true} 
+             />
+           </div>
+           <div className="annual-year-block">
+             <h3 className="annual-year-title">{nxYear}</h3>
+             <YearChartComponent 
+               year={nxYear} 
+               data={pinYear2.length > 0 ? pinYear2[0] : null} 
+               isCurrentYear={false} 
+             />
+           </div>
+         </div>
+      </div>
+
       {/* Year Chart Section */}
       <div className="couple-year-charts-section">
 
@@ -925,99 +824,61 @@ const CoupleComponent = () => {
             {/* --- Person 1 Year Chart Slider --- */}
             <div className="couple-person-year-charts">
               {pinYear.length > 0 ? (
-                <Swiper {...yearSliderSettings} className="person-year-swiper">
-                  {/*
-                    IMPORTANT DATA STRUCTURE ASSUMPTION:
-                    calculosUtils.GetYear() currently seems to return ONE object (stored in pinYear[0]).
-                    For a multi-year slider, you ideally need data for EACH year separately.
-                    The example below simulates sliding between the current year (year) and next year (nxYear)
-                    using the SAME data (pinYear[0]) as per your original setup.
-                    You SHOULD modify calculosUtils.GetYear or data fetching
-                    to provide distinct data for each year if they differ numerically.
-
-                    Example of desired data structure for pinYear:
-                    [
-                      { year: 2025, data: { ...data specifically calculated for 2025... } },
-                      { year: 2026, data: { ...data specifically calculated for 2026... } },
-                      // Potentially more years
-                    ]
-                    If pinYear[0] ALREADY contains all info and YearChartComponent uses the 'year' prop
-                    to extract the relevant part, then this structure is fine.
-                  */}
-                  {[
-                    { yearValue: year, dataValue: pinYear[0], isCurrent: true },
-                    { yearValue: nxYear, dataValue: pinYear[0], isCurrent: false },
-                    // Add more year objects here if calculosUtils.GetYear provides more data
-                  ].map((yearData, index) => (
-                    <SwiperSlide key={`${nombre}-year-${yearData.yearValue}-${index}`} className="year-chart-slide">
-                      <YearChartComponent
-                        year={yearData.yearValue}
-                        data={yearData.dataValue} // Use the data corresponding to the year
-                        isCurrentYear={yearData.isCurrent} // Or better: yearData.yearValue === new Date().getFullYear()
-                      />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+                <div className="year-slider-wrapper">
+                  <Swiper {...yearSliderSettings} className="person-year-swiper">
+                    {[
+                      { yearValue: year, dataValue: pinYear[0], isCurrent: true },
+                      { yearValue: nxYear, dataValue: pinYear[0], isCurrent: false },
+                    ].map((yearData, index) => (
+                      <SwiperSlide key={`${nombre}-year-${yearData.yearValue}-${index}`} className="year-chart-slide">
+                        <p className="year-label">{yearData.yearValue}</p>
+                        <YearChartComponent
+                          year={yearData.yearValue}
+                          data={yearData.dataValue}
+                          isCurrentYear={yearData.isCurrent}
+                        />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                </div>
               ) : (
                 <div className="no-data-placeholder">No year data for {nombre}.</div>
               )}
-            </div>
-
-            {/* --- Person 2 Year Chart Slider --- */}
-            <div className="couple-person-year-charts">
-               {pinYear2.length > 0 ? (
-                <Swiper {...yearSliderSettings} className="person-year-swiper">
-                   {/* Same data structure assumption applies to pinYear2 */}
-                  {[
-                    { yearValue: year, dataValue: pinYear2[0], isCurrent: true },
-                    { yearValue: nxYear, dataValue: pinYear2[0], isCurrent: false },
-                    // Add more year objects here if calculosUtils.GetYear provides more data
-                  ].map((yearData, index) => (
-                    <SwiperSlide key={`${nombre2}-year-${yearData.yearValue}-${index}`} className="year-chart-slide">
-                      <YearChartComponent
-                        year={yearData.yearValue}
-                        data={yearData.dataValue} // Use the data corresponding to the year
-                        isCurrentYear={yearData.isCurrent} // Or better: yearData.yearValue === new Date().getFullYear()
-                      />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-              ) : (
-                <div className="no-data-placeholder">No year data for {nombre2}.</div>
-              )}
-            </div>
-
+             </div>
 
              {/* --- Person 2 Year Chart Slider --- */}
              <div className="couple-person-year-charts">
                {pinYear2.length > 0 ? (
-                <Swiper {...yearSliderSettings} className="person-year-swiper">
-                   {/* Same data structure assumption applies to pinYear2 */}
-                  {[
-                    { yearValue: year, dataValue: pinYear2[0], isCurrent: true },
-                    { yearValue: nxYear, dataValue: pinYear2[0], isCurrent: false },
-                    // Add more year objects here if calculosUtils.GetYear provides more data
-                  ].map((yearData, index) => (
-                    <SwiperSlide key={`${nombre2}-year-${yearData.yearValue}-${index}`} className="year-chart-slide">
-                      <YearChartComponent
-                        year={yearData.yearValue}
-                        data={yearData.dataValue} // Use the data corresponding to the year
-                        isCurrentYear={yearData.isCurrent} // Or better: yearData.yearValue === new Date().getFullYear()
-                      />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-              ) : (
-                <div className="no-data-placeholder">No year data for {nombre2}.</div>
-              )}
-            </div>
+                 <div className="year-slider-wrapper">
+                   <Swiper {...yearSliderSettings} className="person-year-swiper">
+                     {[
+                       { yearValue: year, dataValue: pinYear2[0], isCurrent: true },
+                       { yearValue: nxYear, dataValue: pinYear2[0], isCurrent: false },
+                     ].map((yearData, index) => (
+                       <SwiperSlide key={`${nombre2}-year-${yearData.yearValue}-${index}`} className="year-chart-slide">
+                         <p className="year-label">{yearData.yearValue}</p>
+                         <YearChartComponent
+                           year={yearData.yearValue}
+                           data={yearData.dataValue}
+                           isCurrentYear={yearData.isCurrent}
+                         />
+                       </SwiperSlide>
+                     ))}
+                   </Swiper>
+                 </div>
+               ) : (
+                 <div className="no-data-placeholder">No year data for {nombre2}.</div>
+               )}
+             </div>
 
           </div> {/* End of couple-year-charts-row */}
         </div> {/* End of couple-year-charts-container */}
       </div> {/* End of couple-year-charts-section */}
 
-      <div className="couple-monthly-forecast-section">
-        
+      <div className="monthly-section">
+        <div className="monthly-header">
+          <img src={monthlyCalcImg} alt="" className="monthly-header-image" />
+        </div>
         {listMobileM.length > 0 && (
           <div className="couple-forecast-content">
             {getScreenWidth ? (
@@ -1123,8 +984,10 @@ const CoupleComponent = () => {
         )}
       </div>
       
-      <div className="couple-monthly-forecast-section">
-        
+      <div className="daily-section">
+        <div className="daily-header">
+          <img src={dailyCalcImg} alt="" className="daily-header-image" />
+        </div>
         {listMobileM.length > 0 && (
           <div className="couple-forecast-content">
             {getScreenWidth ? (
@@ -1153,9 +1016,9 @@ const CoupleComponent = () => {
   
   return (
     <div className="couple-main">
+      {loading && <div className="couple-lds-ripple"><div></div><div></div></div>}
+      
       <div ref={contentRef} className="couple-content">
-        {loading && <div className="couple-lds-ripple"><div></div><div></div></div>}
-        
         {!resultados && renderForm()}
         
         {resultados && (

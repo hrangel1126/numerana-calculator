@@ -10,28 +10,19 @@ const ResultsHeaderComponent = ({
   reload, 
   downloadPdf, 
   getScreenWidth,
-  print 
+  print,
+  t
 }) => {
   return (
     <div className="Results-header">
       <div className="Results-headerContent">
-        {/* Back button */}
-        <button 
-          className="Results-backBtn" 
-          onClick={reload}
-          aria-label="Go back"
-        >
-          <i className="bi bi-arrow-left"></i>
-          <span>{typeof resultados === 'object' && resultados.back ? resultados.back : 'Back'}</span>
-        </button>
-        
         {/* Name and Date Section */}
         <div className="Results-personInfo">
           <h1 className="Results-personName">{nombre}</h1>
           <p className="Results-birthdate">{birthdateShow}</p>
           
           {/* Info Text */}
-          <p className="Results-descriptionText Results-descriptionText--right">
+          <p className="Results-descriptionText Results-descriptionText--left">
             This map is generated from your birthdate and forms a structured pattern of your energy.<br />
             Each number is placed with intention, revealing how different aspects of your personality connect and influence one another.<br />
             The outer points reflect visible traits, while the inner connections represent deeper patterns.

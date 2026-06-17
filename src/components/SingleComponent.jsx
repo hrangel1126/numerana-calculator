@@ -8,6 +8,9 @@ import { useTranslation } from '../utils/i18n/LanguageContext';
 import heroNumerology from '../assets/img/hero-numerology.png';
 import titleHead from '../assets/img/title-head.png';
 import caracol from '../assets/img/caracol.png';
+import annualCalcImg from '../assets/img/Annual-calculation.png';
+import monthlyCalcImg from '../assets/img/monthly-calculation.png';
+import dailyCalcImg from '../assets/img/daily-calculatiom-header.png';
 
 // Import modular components
 import ResultsHeaderComponent from '../components/common/ResultsHeaderComponent';
@@ -156,7 +159,7 @@ const SingleComponent = () => {
       console.log("Calculating with date:", formattedDate);
       const pinaculo = calculosUtils.GetFirstLine(formattedDate);
       console.log("Pinaculo result...................", pinaculo);
-      setRpinaculo(pinaculo);
+      setRpinaculo([pinaculo[0]]);
       
       const yearData = calculosUtils.GetYear(formattedDate);
       console.log("Year data result:", yearData);
@@ -303,69 +306,115 @@ const SingleComponent = () => {
           </div>
         )}
         
-        <div id="page1" className="page" style={{display: resultados ? 'block' : 'none'}}>
-          <ResultsHeaderComponent
-            resultados={resultados}
-            nombre={nombre}
-            birthdateShow={birthdateShow}
-            reload={reload}
-            downloadPdf={downloadPdf}
-            getScreenWidth={getScreenWidth}
-            print={print}
-          />
+         {/* Results Section */}
+         {resultados && (
+           <div id="page1" className="page" ref={myScrollContainerRef}>
+             {/* Back Button */}
+             <button 
+               className="singleBasic-back-btn"
+               onClick={reload}
+               aria-label="Go back"
+               title="New Calculation"
+             >
+               <i className="bi bi-arrow-left"></i> Back
+             </button>
 
-          <div className="container">
-            <div className="row">
-              <div className="col-8">
-                <PinaculoChartComponent pinaculo={rpinaculo.length > 0 ? rpinaculo[0] : null} />
-              </div>
-              <div className="col-4">
-                <div className="rside">
-                  <YearChartComponent 
-                    year={year} 
-                    data={pinYear.length > 0 ? pinYear[0] : null} 
-                    isCurrentYear={true} 
+             {/* 2-Column Results Header Layout */}
+             <div className="results-header-wrapper">
+               <div className="results-header-left">
+                  <ResultsHeaderComponent
+                    resultados={resultados}
+                    nombre={nombre}
+                    birthdateShow={birthdateShow}
+                    reload={reload}
+                    downloadPdf={downloadPdf}
+                    getScreenWidth={getScreenWidth}
+                    print={print}
+                    t={t}
                   />
-                  <div className="selected">
-                    <YearChartComponent 
-                      year={nxYear} 
-                      data={pinYear.length > 0 ? pinYear[0] : null} 
-                      isCurrentYear={false} 
-                    />
+               </div>
+               <div className="results-header-right">
+                 <PinaculoChartComponent pinaculo={rpinaculo.length > 0 ? rpinaculo[0] : null} />
+                 <p className="pinaculo-caption">{t('singleBasic.seeWhatYourNumbersReveal') || 'See what your numbers reveal →'}</p>
+               </div>
+             </div>
+
+             <div className="container results-container">
+               {/* Annual Calculations Section */}
+               <div className="annual-section">
+                 <div className="annual-header">
+                   <img src={annualCalcImg} alt="Annual Calculations" className="annual-header-image" />
+                 </div>
+                 {/* {t('annual.description') || 'Explore your annual numerology cycles...'} */}
+                 <div className="annual-years-grid">
+                   <div className="annual-year-block">
+                     <h3 className="annual-year-title">{year}</h3>
+                     <YearChartComponent 
+                       year={year} 
+                       data={pinYear.length > 0 ? pinYear[0] : null} 
+                       isCurrentYear={true} 
+                     />
+                   </div>
+                   <div className="annual-year-block">
+                     <h3 className="annual-year-title">{nxYear}</h3>
+                     <YearChartComponent 
+                       year={nxYear} 
+                       data={pinYear.length > 0 ? pinYear[0] : null} 
+                       isCurrentYear={false} 
+                     />
+                   </div>
+                 </div>
+               </div>
+
+                <div className="monthly-section">
+                  <div className="monthly-header">
+                    <img src={monthlyCalcImg} alt="" className="monthly-header-image" />
                   </div>
+                  {/* {t('monthly.description') || 'Discover the monthly energy patterns...'} */}
+                  {getScreenWidth ? (
+                    <DesktopMonthGridComponent birthdate={birthdate} />
+                  ) : (
+                    <MobileYearSliderComponent
+                      currentYear={year}
+                      nextYear={nxYear}
+                      onYearSelect={handleYearSelect}
+                      listMobileM={listMobileM}
+                      mobilMesSelect={mobilMesSelect}
+                      setMobilMesSelect={setMobilMesSelect}
+                    />
+                  )}
                 </div>
-              </div>
-            </div>
-            
-            {getScreenWidth ? (
-              // Desktop view
-              <>
-                <DesktopMonthGridComponent birthdate={birthdate} />
-                <DesktopDayGridComponent birthdate={birthdate} />
-              </>
-            ) : (
-              // Mobile view
-              <>
-                <div className="section-divider"></div>
-                <MobileYearSliderComponent
-                  currentYear={year}
-                  nextYear={nxYear}
-                  onYearSelect={handleYearSelect}
-                  listMobileM={listMobileM}
-                  mobilMesSelect={mobilMesSelect}
-                  setMobilMesSelect={setMobilMesSelect}
-                />
-                <MobileMonthDayViewComponent
-                  birthdate={birthdate}
-                  mobilMesSelect={mobilMesSelect}
-                  smallLoading={smallLoading}
-                />
-              </>
-            )}
-          </div>
-        </div>
-        
-        <div ref={myScrollContainerRef}></div>
+
+                <div className="daily-section">
+                  <div className="daily-header">
+                    <img src={dailyCalcImg} alt="" className="daily-header-image" />
+                  </div>
+                  {/* {t('daily.description') || 'Understand the daily numerical influences...'} */}
+                  {getScreenWidth ? (
+                    <DesktopDayGridComponent birthdate={birthdate} />
+                  ) : (
+                    <MobileMonthDayViewComponent
+                      birthdate={birthdate}
+                      mobilMesSelect={mobilMesSelect}
+                      smallLoading={smallLoading}
+                    />
+                  )}
+                </div>
+
+               {/* Action Buttons */}
+               <div className="action-buttons" style={{ marginTop: '2rem', textAlign: 'center' }}>
+                 <button className="download-button" onClick={downloadPdf}>
+                   Download PDF
+                 </button>
+                 <button className="generate-button" onClick={reload}>
+                   New Calculation
+                 </button>
+               </div>
+             </div>
+           </div>
+         )}
+
+         <div></div>
       </div>
     </main>
   );

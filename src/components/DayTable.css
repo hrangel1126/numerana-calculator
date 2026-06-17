@@ -5,11 +5,11 @@
 
 /* Month block */
 .mescuadro {
-  border: 1px solid #163c8a;
+  border: 1px solid #1a3a52;
   padding-left: 0;
   padding-right: 0;
   margin-bottom: 1rem;
-  background-color: #fff;
+  background: transparent;
   border-radius: 6px;
   overflow: hidden;
 }
@@ -23,8 +23,8 @@
   padding: 4px 2px;
   min-height: 28px;
   border-bottom: 1px solid #dee2e6;
-  background-color: #f8f9fa;
-  color: #343a40;
+  background: #FBF2DB;
+  color: #0C2B4F;
 }
 
 /* Day Label Headers */
@@ -34,9 +34,27 @@
   padding: 4px 2px;
   min-height: 28px;
   border-bottom: 1px solid #dee2e6;
-  background-color: #f8f9fa;
+  background: #FBF2DB;
   font-size: 12.5px;
-  color: #495057;
+  color: #0C2B4F;
+}
+
+/* Header Cells (D, U, P) */
+.header-cell {
+  background: #FBF2DB;
+  color: #0C2B4F;
+  font-weight: 700;
+  font-size: 0.85rem;
+  border-right: 1px solid #d4c5b5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 1px;
+  min-height: 28px;
+}
+
+.header-cell:last-child {
+  border-right: none;
 }
 
 /* Cell Styling */
@@ -55,7 +73,7 @@
 .master-number {
   color: #594363;
   font-weight: bold;
-  background-color: rgba(89, 67, 99, 0.05);
+  background-color: rgb(217 84 84 / 11%);
 }
 
 /* Highlight for Vibra 22 */

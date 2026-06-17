@@ -1,0 +1,269 @@
+/* Color Variables */
+:root {
+  --cream-bg: #f5f0e8;
+  --dark-navy: #1a3a52;
+  --navy-button: #043362;
+  --gold: #c9a961;
+  --gold-light: #f0e68c;
+  --gold-dark: #8b7355;
+  --orange-accent: #ff9800;
+}
+
+/* ============================================
+   HomeNumerana Main Container
+   ============================================ */
+
+.HomeNumerana-main {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--cream-bg);
+  padding-top: 0;
+}
+
+.HomeNumerana-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ============================================
+   Header Section
+   ============================================ */
+
+.HomeNumerana-header {
+  position: relative;
+  width: 100%;
+  margin-bottom: 3rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.HomeNumerana-headerImage {
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+  object-fit: contain;
+}
+
+
+/* ============================================
+   Calculator Cards Grid
+   ============================================ */
+
+.HomeNumerana-cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================================
+   Individual Card Styling
+   ============================================ */
+
+.HomeNumerana-card {
+  background: transparent;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid rgba(201, 169, 97, 0.2);
+}
+
+.HomeNumerana-card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  border-color: var(--gold);
+  transform: translateY(-6px);
+}
+
+.HomeNumerana-card:hover .HomeNumerana-cardImage {
+  transform: scale(1.05);
+}
+
+.HomeNumerana-card:focus-visible {
+  outline: 3px solid var(--navy-button);
+  outline-offset: 2px;
+}
+
+.HomeNumerana-card:active {
+  transform: translateY(-4px);
+}
+
+.HomeNumerana-cardImage {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease-out;
+}
+
+.HomeNumerana-cardImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.HomeNumerana-cardContent {
+  padding: 0.8rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  position: relative;
+  text-align: center;
+}
+
+.HomeNumerana-cardTitle {
+  font-family: 'Georgia', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--dark-navy);
+  margin: 0;
+  line-height: 1.2;
+  text-align: center;
+}
+
+
+
+/* ============================================
+   Card-specific Styling
+   ============================================ */
+
+.HomeNumerana-personalCard .HomeNumerana-cardImage {
+  background: transparent;
+}
+
+.HomeNumerana-coupleCard .HomeNumerana-cardImage {
+  background: transparent;
+}
+
+.HomeNumerana-groupCard .HomeNumerana-cardImage {
+  background: transparent;
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.HomeNumerana-card {
+  animation: slideInUp 0.6s ease-out forwards;
+}
+
+.HomeNumerana-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.HomeNumerana-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.HomeNumerana-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* ============================================
+   Tablet Responsive (max-width: 768px)
+   ============================================ */
+
+@media (max-width: 768px) {
+  .HomeNumerana-cardsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .HomeNumerana-main {
+    padding-top: 11vh;
+  }
+
+  .HomeNumerana-container {
+    padding: 0 1.5rem;
+  }
+
+  .HomeNumerana-header {
+    margin-bottom: 3rem;
+  }
+
+  .HomeNumerana-cardsGrid {
+    gap: 1rem;
+  }
+
+  .HomeNumerana-card:hover {
+    transform: translateY(-4px);
+  }
+}
+
+/* ============================================
+   Mobile Responsive (max-width: 600px)
+   ============================================ */
+
+@media (max-width: 600px) {
+  .HomeNumerana-cardImage {
+    height: 160px;
+  }
+
+  .HomeNumerana-cardTitle {
+    font-size: 1.5rem;
+  }
+
+  .HomeNumerana-cardDescription {
+    font-size: 0.9rem;
+  }
+
+  .HomeNumerana-cardImage {
+    height: 140px;
+  }
+
+  .HomeNumerana-container {
+    padding: 0 1rem;
+  }
+
+  .HomeNumerana-header {
+    margin-bottom: 2rem;
+    gap: 1rem;
+  }
+
+  .HomeNumerana-cardContent {
+    padding: 1.5rem;
+  }
+
+  .HomeNumerana-cardsGrid {
+    margin-bottom: 2rem;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+
+@media print {
+  .HomeNumerana-main {
+    display: none;
+  }
+}

@@ -4,37 +4,27 @@ const MenuVisibilityContext = createContext();
 
 export const MenuVisibilityProvider = ({ children }) => {
   // Get menu parameter from URL query string (?menu=false or ?menu=true)
+  // ONLY use URL query parameters - do NOT save to localStorage
   const [showMenu, setShowMenuState] = useState(() => {
     // Get URL search params
     const searchParams = new URLSearchParams(window.location.search);
     const menuParam = searchParams.get('menu');
     
-    // Priority: URL parameter > localStorage > default (true)
+    // If URL parameter is 'false', hide menu; otherwise show menu (default)
     if (menuParam !== null) {
-      // Convert string 'true'/'false' to boolean
-      return menuParam.toLowerCase() === 'true';
+      // Convert string 'false' to boolean - only hide if explicitly false
+      return menuParam.toLowerCase() !== 'false';
     }
     
-    // Fallback to localStorage if no URL param
-    const savedShowMenu = localStorage.getItem('showMenu');
-    if (savedShowMenu !== null) {
-      return JSON.parse(savedShowMenu);
-    }
-    
-    // Default: show menu
+    // Default: show menu if no URL parameter provided
     return true;
   });
 
-  // Update localStorage when showMenu changes (only if not from URL param)
+  // Do NOT save to localStorage - only use URL query parameters
   useEffect(() => {
-    const searchParams = new URLSearchParams(window.location.search);
-    const menuParam = searchParams.get('menu');
-    
-    // Only save to localStorage if not controlled by URL parameter
-    if (menuParam === null) {
-      localStorage.setItem('showMenu', JSON.stringify(showMenu));
-    }
-  }, [showMenu]);
+    // This effect is a placeholder if needed for future enhancements
+    // Currently, we do NOT persist to localStorage
+  }, []);
 
   // Wrapper function to set menu visibility
   const setShowMenu = (value) => {

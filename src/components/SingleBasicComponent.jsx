@@ -12,10 +12,10 @@ import coreengImg from '../assets/img/coreeng.png';
 import divideImg from '../assets/img/divide.png';
 
 // Import modular components
-import NumerologyInputFormComponent from '../components/common/NumerologyInputFormComponent';
-import ResultsHeaderComponent from '../components/common/ResultsHeaderComponent';
-import PinaculoChartComponent from '../components/common/PinaculoChartComponent';
-import LoadingComponent from '../components/common/LoadingComponent';
+import NumerologyInputFormComponent from './common/NumerologyInputFormComponent';
+import ResultsHeaderComponent from './common/ResultsHeaderComponent';
+import PinaculoChartComponent from './common/PinaculoChartComponent';
+import LoadingComponent from './common/LoadingComponent';
 
 const SingleBasicComponent = () => {
   const { t } = useTranslation(); // Get the translation function
@@ -147,7 +147,7 @@ const SingleBasicComponent = () => {
       if (!pinaculo || pinaculo.length === 0 || typeof pinaculo[0] !== 'object') {
            throw new Error("Invalid Pinaculo result structure.");
       }
-      setRpinaculo(pinaculo);
+      setRpinaculo([pinaculo[0]]);
 
       const yearData = calculosUtils.GetYear(birthdate); // Pass original valid input 'birthdate' to GetYear if it expects MM/DD/YYYY
       console.log("Year data result:", yearData);
@@ -389,41 +389,41 @@ const SingleBasicComponent = () => {
         )}
 
 
-        {/* Results Section */}
-        {resultados && (
-           <div id="page1" className="page">
-              {/* Back Button */}
-              <button 
-                className="singleBasic-back-btn"
-                onClick={reload}
-                aria-label="Go back"
-                title="New Calculation"
-              >
-                <i className="bi bi-arrow-left"></i> {t('singleBasic.reloadButton')}
-              </button>
+         {/* Results Section */}
+         {resultados && (
+            <div id="page1" className="page">
+               {/* Back Button - OUTSIDE the 2-column layout */}
+               <button 
+                 className="singleBasic-back-btn"
+                 onClick={reload}
+                 aria-label="Go back"
+                 title="New Calculation"
+               >
+                 <i className="bi bi-arrow-left"></i> Back
+               </button>
 
-              {/* 2-Column Results Header Layout */}
-              <div className="results-header-wrapper">
-                {/* Left Column - Info */}
-                <div className="results-header-left">
-                  <ResultsHeaderComponent
-                    resultados={resultados}
-                    nombre={nombre}
-                    birthdateShow={birthdateShow}
-                    reload={reload}
-                    downloadPdf={downloadPdf}
-                    getScreenWidth={getScreenWidth}
-                    print={print}
-                    t={t}
-                  />
-                </div>
+               {/* 2-Column Results Header Layout - LEFT: Text, RIGHT: Pinaculo */}
+               <div className="results-header-wrapper">
+                 {/* Left Column - Name, Date, Description, Buttons */}
+                 <div className="results-header-left">
+                   <ResultsHeaderComponent
+                     resultados={resultados}
+                     nombre={nombre}
+                     birthdateShow={birthdateShow}
+                     reload={reload}
+                     downloadPdf={downloadPdf}
+                     getScreenWidth={getScreenWidth}
+                     print={print}
+                     t={t}
+                   />
+                 </div>
 
-                {/* Right Column - Pinaculo Chart */}
-                <div className="results-header-right">
-                  <PinaculoChartComponent pinaculo={rpinaculo.length > 0 ? rpinaculo[0] : null} />
-                  <p className="pinaculo-caption">{t('singleBasic.seeWhatYourNumbersReveal')}</p>
-                </div>
-              </div>
+                 {/* Right Column - Pinaculo Chart */}
+                 <div className="results-header-right">
+                   <PinaculoChartComponent pinaculo={rpinaculo.length > 0 ? rpinaculo[0] : null} />
+                   <p className="pinaculo-caption">{t('singleBasic.seeWhatYourNumbersReveal')}</p>
+                 </div>
+               </div>
 
               <div className="container results-container" ref={myScrollContainerRef}>
                 {/* Core Energetic Numbers Section */}
@@ -483,7 +483,6 @@ const SingleBasicComponent = () => {
                     {t('singleBasic.learnMoreButton')} ↓
                   </button>
                 </div>
-
 
                 {/* Action Buttons Section - Placed after all content */}
                <div className="action-buttons">

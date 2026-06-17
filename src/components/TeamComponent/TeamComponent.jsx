@@ -4,6 +4,8 @@ import moment from 'moment';
 import calculosUtils from '../../utils/calculosUtils';
 import './TeamComponent.css';
 import { useTranslation } from '../../utils/i18n/LanguageContext';
+import PinaculoChartComponent from '../common/PinaculoChartComponent';
+import ResultsHeaderComponent from '../common/ResultsHeaderComponent';
 
 // Import images directly
 import leftDecoration from '../../assets/img/Lleft.png';
@@ -13,6 +15,9 @@ import teamHeaderImage from '../../assets/img/team-header.png';
 import teamImage from '../../assets/img/team-image.png';
 import teamHeaderGroupImage from '../../assets/img/team-header-group.png';
 import teamNumerologyCalcHeader from '../../assets/img/team-numerology-calculation.png';
+import annualCalcImg from '../../assets/img/Annual-calculation.png';
+import monthlyCalcImg from '../../assets/img/monthly-calculation.png';
+import dailyCalcImg from '../../assets/img/daily-calculatiom-header.png';
 
 const TeamComponent = () => {
   const navigate = useNavigate();
@@ -329,58 +334,39 @@ const TeamComponent = () => {
     <div>
       {/* Back Button */}
       <button 
-        type="button" 
+        className="singleBasic-back-btn"
         onClick={() => navigate('/homenumerana')}
-        className="team-back-btn"
-        style={{
-          display: resultados ? 'block' : 'none',
-          marginBottom: '1rem'
-        }}
+        aria-label="Go back"
+        title="New Calculation"
       >
-        <i className="bi bi-arrow-left"></i> {t('team.backButton')}
+        <i className="bi bi-arrow-left"></i> Back
       </button>
 
-      <div className="containerBox" style={{
-        border: '5px solid #858585', 
-        borderRadius: '5px',
-        display: 'none'
-      }}>
-        <div className="row">
-          <div className="col-2 person resultado2">
-            <img src={leftDecoration} className="Lleft" alt="Left decoration" />
-          </div>
-          <div className="col-8" style={{ textAlign: 'center' }}>
-            <img src={logoImage} alt="numeranamx" className="logo" style={{ height: '80px' }} />
-            <h1 className="titulom">Numerology | Numerología</h1>
-          </div>
-          <div className="col-2 person">
-            <img src={rightDecoration} className="Lright" alt="Right decoration" />
-          </div>
+      {/* 2-Column Results Header Layout */}
+      <div className="results-header-wrapper">
+        <div className="results-header-left">
+          <ResultsHeaderComponent
+            resultados={resultados}
+            nombre={t('team.team_synergy_title') || 'Team Synergy'}
+            birthdateShow={`${sinastraE.length} ${t('team.members') || 'Members'}`}
+            reload={() => navigate('/homenumerana')}
+            downloadPdf={downloadPdf}
+            getScreenWidth={true}
+            print={true}
+            t={t}
+          />
         </div>
-        
-        <div className="row">
-          <div className="col-3"></div>
-          <div className="col-6">
-            <button 
-              type="button" 
-              onClick={reload} 
-              className="btn btn-primary btn-lg btn-block send"
-            >
-              <i className="bi bi-arrow-clockwise" style={{ zoom: 2, lineHeight: 1 }}></i>
-            </button>
-          </div>
-          <div className="col-3"></div>
-        </div>
-        
-        <div className="row">
-          <div className="col-2"></div>
-          <div className="col-2"></div>
-          <div className="col-8"><h2 className="website" style={{ fontSize: '11px' }}>{t('team.website_info')}</h2></div>
-        </div>
-        <div className="row">
-          <div className="col-2"></div>
-          <div className="col-2"></div>
-          <div className="col-8"><h2 className="website" style={{ fontSize: '11px' }}>{t('team.by_author')}</h2></div>
+        <div className="results-header-right">
+          <PinaculoChartComponent 
+            pinaculo={{
+              A: teamCalculo.FA,
+              B: teamCalculo.FB,
+              C: teamCalculo.FC,
+              D: teamCalculo.FD,
+              top: calculosUtils.breakdown(teamCalculo.FA + teamCalculo.FB + teamCalculo.FC + teamCalculo.FD, 0)
+            }} 
+          />
+          <p className="pinaculo-caption">{t('singleBasic.seeWhatYourNumbersReveal') || 'See what your numbers reveal →'}</p>
         </div>
       </div>
       

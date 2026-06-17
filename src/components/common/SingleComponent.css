@@ -921,4 +921,161 @@ svg text {
   .rside {
     gap: 1rem;
   }
+}
+
+/* ============================================
+   Annual, Monthly, Daily Sections
+   ============================================ */
+
+.annual-section,
+.monthly-section,
+.daily-section {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: #f5f0e8;
+  border-radius: 8px;
+}
+
+.annual-header,
+.monthly-header,
+.daily-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.annual-header-image,
+.monthly-header-image,
+.daily-header-image {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Annual Years Grid - 2 columns side by side */
+.annual-years-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.annual-year-block {
+  text-align: center;
+}
+
+.annual-year-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1a3a52;
+  margin: 0 0 1rem 0;
+}
+
+.monthly-month-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.monthly-month-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #1a3a52;
+  text-transform: uppercase;
+}
+
+.monthly-month-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #c9a961;
+}
+
+/* Daily Calendar Table */
+.daily-calendar {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.daily-calendar th {
+  background: #1a3a52;
+  color: white;
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.daily-calendar td {
+  padding: 0.6rem 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #333;
+  border-bottom: 1px solid #eee;
+}
+
+.daily-calendar tr:last-child td {
+  border-bottom: none;
+}
+
+.daily-calendar tr:hover td {
+  background: #f9f5ed;
+}
+
+.daily-month-name {
+  font-weight: 600;
+  color: #1a3a52;
+  text-transform: uppercase;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .annual-years-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .annual-section,
+  .monthly-section,
+  .daily-section {
+    padding: 1.5rem;
+  }
+
+  .annual-header-image,
+  .monthly-header-image,
+  .daily-header-image {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .annual-section,
+  .monthly-section,
+  .daily-section {
+    padding: 1rem;
+    margin-top: 2rem;
+  }
+
+  .annual-years-grid {
+    gap: 1.5rem;
+  }
+
+  .monthly-month-card {
+    padding: 0.4rem;
+  }
+
+  .daily-calendar th,
+  .daily-calendar td {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
 } 

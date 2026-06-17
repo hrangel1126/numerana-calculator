@@ -1,26 +1,40 @@
 {
   "files": {
-    "main.css": "/numerana-calculator/static/css/main.3813d4cc.css",
-    "main.js": "/numerana-calculator/static/js/main.e5bb3099.js",
+    "main.css": "/numerana-calculator/static/css/main.498d5a54.css",
+    "main.js": "/numerana-calculator/static/js/main.ed4e362e.js",
     "static/media/urban-sprite.png": "/numerana-calculator/static/media/urban-sprite.cdecf8f93039c2ff79c1.png",
     "static/media/natureSmaller.png": "/numerana-calculator/static/media/natureSmaller.4dbf15959f88ffd8cabb.png",
+    "static/media/team-image.png": "/numerana-calculator/static/media/team-image.5bb416b46330197a6b2b.png",
+    "static/media/couple-big.png": "/numerana-calculator/static/media/couple-big.e5ac933193590dbecafe.png",
     "static/media/hero-numerology.png": "/numerana-calculator/static/media/hero-numerology.6ec3701d0d22d744a2f3.png",
+    "static/media/home-personal.png": "/numerana-calculator/static/media/home-personal.81eccad44b483289744d.png",
     "static/media/Lright.png": "/numerana-calculator/static/media/Lright.849218fb26af8a535260.png",
     "static/media/Lleft.png": "/numerana-calculator/static/media/Lleft.59c643da27e8f411c8d1.png",
     "static/media/bootstrap-icons.woff?": "/numerana-calculator/static/media/bootstrap-icons.39795c0b4513de014cf8.woff",
+    "static/media/home-couple.png": "/numerana-calculator/static/media/home-couple.15f48fd43e761f1279d6.png",
+    "static/media/home-group.png": "/numerana-calculator/static/media/home-group.54836d1f8fecaf5b34f6.png",
     "static/media/bootstrap-icons.woff2?": "/numerana-calculator/static/media/bootstrap-icons.b7bcc075b395c14ce8c2.woff2",
+    "static/media/team-numerology-calculation.png": "/numerana-calculator/static/media/team-numerology-calculation.c7e7d679148a383df60f.png",
     "static/media/nature-sprite.png": "/numerana-calculator/static/media/nature-sprite.d49281ab63d2c034e5c5.png",
     "static/media/span.png": "/numerana-calculator/static/media/span.56468312791bd54403a2.png",
+    "static/media/team-header.png": "/numerana-calculator/static/media/team-header.b817aa4b680cbca4f490.png",
+    "static/media/couple-header.png": "/numerana-calculator/static/media/couple-header.cf4d8a271054ff98a2f8.png",
     "static/media/coreeng.png": "/numerana-calculator/static/media/coreeng.836643045968ea5da103.png",
+    "static/media/team-header-group.png": "/numerana-calculator/static/media/team-header-group.ee665324f2696792b467.png",
+    "static/media/relationship-structure.png": "/numerana-calculator/static/media/relationship-structure.808ee14f06d48eaaeead.png",
+    "static/media/Annual-calculation.png": "/numerana-calculator/static/media/Annual-calculation.3795a51c04a0c867439f.png",
+    "static/media/beyond-numbers.png": "/numerana-calculator/static/media/beyond-numbers.4b6a3600aade24577854.png",
+    "static/media/daily-calculatiom-header.png": "/numerana-calculator/static/media/daily-calculatiom-header.4a143e2f8dbe1923c71a.png",
+    "static/media/monthly-calculation.png": "/numerana-calculator/static/media/monthly-calculation.78ca084bd4d377262aca.png",
     "static/media/title-head.png": "/numerana-calculator/static/media/title-head.bd6a7714249679c37324.png",
     "static/media/logonumerana80.png": "/numerana-calculator/static/media/logonumerana80.b4ac50ab310bde289346.png",
     "static/media/logon.webp": "/numerana-calculator/static/media/logon.37718d62552604790f91.webp",
     "index.html": "/numerana-calculator/index.html",
-    "main.3813d4cc.css.map": "/numerana-calculator/static/css/main.3813d4cc.css.map",
-    "main.e5bb3099.js.map": "/numerana-calculator/static/js/main.e5bb3099.js.map"
+    "main.498d5a54.css.map": "/numerana-calculator/static/css/main.498d5a54.css.map",
+    "main.ed4e362e.js.map": "/numerana-calculator/static/js/main.ed4e362e.js.map"
   },
   "entrypoints": [
-    "static/css/main.3813d4cc.css",
-    "static/js/main.e5bb3099.js"
+    "static/css/main.498d5a54.css",
+    "static/js/main.ed4e362e.js"
   ]
 }
