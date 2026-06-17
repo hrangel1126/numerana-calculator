@@ -50,6 +50,7 @@
 |------|---------|-----------|
 | [DEPLOYMENT.md](./DEPLOYMENT.md) | CI/CD & GitHub Pages | 8 min |
 | [MENU_VISIBILITY.md](./MENU_VISIBILITY.md) | Menu control system | 7 min |
+| [REACT_ROUTER_BASENAME.md](./REACT_ROUTER_BASENAME.md) | Route basename config | 8 min |
 | [IMPLEMENTATION_GUIDE.md](./IMPLEMENTATION_GUIDE.md) | Implementation steps | 10 min |
 
 ### 🔵 Quick References

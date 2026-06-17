@@ -185,6 +185,7 @@
 |----------|---------|--------|
 | DEPLOYMENT.md | CI/CD & GitHub Pages | ✅ Current |
 | MENU_VISIBILITY.md | Menu control system | ✅ Current |
+| REACT_ROUTER_BASENAME.md | Route basename config | ✅ Current |
 | ANNUAL_CALCULATION_ANALYSIS.md | Year calculations | ✅ Current |
 | YEAR_DATA_CODE_SNIPPETS.md | Code examples | ✅ Current |
 | AI_QUICK_REFERENCE.md | Initial quick ref | 📚 Archive |
