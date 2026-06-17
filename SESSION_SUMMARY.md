@@ -92,13 +92,25 @@ All AI-generated markdown files are saved in the root directory:
 - **Result:** Auto-deploys to `https://hrangel1126.github.io/numerana-calculator/`
 - **Status:** Matches previous successful workflow (ran 2 weeks ago in 18s)
 
+### 11. ✅ React Router Basename Configuration
+**Purpose:** Fix routing for GitHub Pages subfolder deployment
+**Implementation:** 
+- Added environment-aware basename in `src/App.jsx`
+- Development (npm start): basename = `/`
+- Production (GitHub Pages): basename = `/numerana-calculator`
+- **Result:** Routes now work correctly on both local and production
+- **Build Output:** "Project built assuming it is hosted at /numerana-calculator/"
+- **File:** `src/App.jsx:15-35` + `package.json:3` (homepage field)
+- **Status:** Tested - build successful
+
 ---
 
 ## 📊 Build Results
 
 ✅ **Compilation:** Successful with warnings only  
-📦 **Output Size:** 195.72 kB gzip (main.js), 28.62 kB gzip (main.css)  
-⚠️ **Warnings:** 76 eslint warnings (no-unused-vars, missing dependencies) - non-critical
+📦 **Output Size:** 195.73 kB gzip (main.js), 28.62 kB gzip (main.css)  
+⚠️ **Warnings:** 76 eslint warnings (no-unused-vars, missing dependencies) - non-critical  
+✅ **Build Message:** "Project built assuming it is hosted at /numerana-calculator/" - ✓ Confirms basename config
 
 ---
 

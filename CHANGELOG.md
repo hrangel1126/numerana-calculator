@@ -61,6 +61,16 @@ All notable changes to this project are documented here.
   - `?menu=true` - Shows menu
   - Enables clean embedding in iframes and webviews
 
+### 🛣️ React Router Basename Configuration
+- **Problem:** Routes not working on GitHub Pages subfolder `/numerana-calculator/`
+- **Solution:** Added environment-aware basename to `<Router>`
+  - Development: `basename = '/'` (runs at http://localhost:3000/)
+  - Production: `basename = '/numerana-calculator'` (GitHub Pages)
+  - File: `src/App.jsx:15-35`
+- **Verification:** Build output confirms "Project built assuming it is hosted at /numerana-calculator/"
+- **Impact:** All routes now work correctly on GitHub Pages
+- **Related:** `package.json` homepage field already configured
+
 ### 📚 Documentation
 - **New Documents Created:**
   - `DEPLOYMENT.md` - Complete CI/CD and GitHub Pages guide

@@ -13,10 +13,17 @@ import { LanguageProvider } from './utils/i18n/LanguageContext';
 import { MenuVisibilityProvider } from './utils/i18n/MenuVisibilityContext';
 
 function App() {
+  // Determine basename based on environment
+  // Development (npm start): basename = '/'
+  // Production (GitHub Pages): basename = '/numerana-calculator'
+  const basename = process.env.NODE_ENV === 'production' 
+    ? '/numerana-calculator' 
+    : '/';
+
   return (
     <LanguageProvider>
       <MenuVisibilityProvider>
-        <Router>
+        <Router basename={basename}>
           <div className="App">
             <Routes>
               <Route path="/" element={<HomeNumerana />} />
