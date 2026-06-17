@@ -11,6 +11,30 @@ import SingleBasic from './pages/singlebasic/SingleBasic';
 import './App.css';
 import { LanguageProvider } from './utils/i18n/LanguageContext';
 import { MenuVisibilityProvider } from './utils/i18n/MenuVisibilityContext';
+import useRedirectPath from './utils/useRedirectPath';
+
+// Component to handle GitHub Pages redirects
+function AppContent() {
+  // Handle redirect from 404.html (GitHub Pages)
+  useRedirectPath();
+
+  return (
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<HomeNumerana />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/homenumerana" element={<HomeNumerana />} />
+        <Route path="/single" element={<Single />} />
+        <Route path="/singlebasic" element={<SingleBasic />} />
+        <Route path="/reload" element={<Single />} />
+        <Route path="/couple" element={<Couple />} />
+        <Route path="/team" element={<Team />} />
+        <Route path="/reloadc" element={<Single />} />
+        <Route path="/reloadt" element={<Team />} />
+      </Routes>
+    </div>
+  );
+}
 
 function App() {
   // Determine basename based on environment
@@ -24,20 +48,7 @@ function App() {
     <LanguageProvider>
       <MenuVisibilityProvider>
         <Router basename={basename}>
-          <div className="App">
-            <Routes>
-              <Route path="/" element={<HomeNumerana />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/homenumerana" element={<HomeNumerana />} />
-              <Route path="/single" element={<Single />} />
-              <Route path="/singlebasic" element={<SingleBasic />} />
-              <Route path="/reload" element={<Single />} />
-              <Route path="/couple" element={<Couple />} />
-              <Route path="/team" element={<Team />} />
-              <Route path="/reloadc" element={<Single />} />
-              <Route path="/reloadt" element={<Team />} />
-            </Routes>
-          </div>
+          <AppContent />
         </Router>
       </MenuVisibilityProvider>
     </LanguageProvider>

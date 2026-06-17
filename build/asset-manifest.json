@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/numerana-calculator/static/css/main.498d5a54.css",
-    "main.js": "/numerana-calculator/static/js/main.d1bbe3d0.js",
+    "main.js": "/numerana-calculator/static/js/main.760df0be.js",
     "static/media/urban-sprite.png": "/numerana-calculator/static/media/urban-sprite.cdecf8f93039c2ff79c1.png",
     "static/media/natureSmaller.png": "/numerana-calculator/static/media/natureSmaller.4dbf15959f88ffd8cabb.png",
     "static/media/team-image.png": "/numerana-calculator/static/media/team-image.5bb416b46330197a6b2b.png",
@@ -31,10 +31,10 @@
     "static/media/logon.webp": "/numerana-calculator/static/media/logon.37718d62552604790f91.webp",
     "index.html": "/numerana-calculator/index.html",
     "main.498d5a54.css.map": "/numerana-calculator/static/css/main.498d5a54.css.map",
-    "main.d1bbe3d0.js.map": "/numerana-calculator/static/js/main.d1bbe3d0.js.map"
+    "main.760df0be.js.map": "/numerana-calculator/static/js/main.760df0be.js.map"
   },
   "entrypoints": [
     "static/css/main.498d5a54.css",
-    "static/js/main.d1bbe3d0.js"
+    "static/js/main.760df0be.js"
   ]
 }

@@ -10,32 +10,37 @@
 
       // This script handles 404 redirects for GitHub Pages
       // When a route like /numerana-calculator/singlebasic is accessed,
-      // GitHub Pages serves this 404.html. We redirect to the app with
-      // the original path as a query parameter, and React Router handles it.
+      // GitHub Pages serves this 404.html. We extract the path and pass it
+      // as a query parameter (?p=/singlebasic) to the app.
 
       var l = window.location;
       
-      // Extract the path, removing the /numerana-calculator prefix
-      var path = l.pathname;
-      if (path.startsWith('/numerana-calculator/')) {
-        path = path.substring('/numerana-calculator'.length); // Keep the leading /
+      // Extract the full pathname
+      var pathname = l.pathname;
+      
+      // Remove /numerana-calculator prefix if present
+      var basePath = '/numerana-calculator';
+      if (pathname.startsWith(basePath + '/')) {
+        pathname = pathname.substring(basePath.length);
+      } else if (pathname === basePath) {
+        pathname = '/';
       }
       
-      // Store the redirect path in sessionStorage for React to use
-      sessionStorage.redirect = path + l.search + l.hash;
+      // Encode the path for use in query parameter
+      var pathParam = encodeURIComponent(pathname);
       
-      // Navigate to the main app
+      // Build the redirect URL with the path as a query parameter
+      var redirectUrl;
       if (l.hostname === 'localhost' || l.hostname === '127.0.0.1') {
-        // Local development - redirect to root
-        l.replace(
-          l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + '/'
-        );
+        // Local development
+        redirectUrl = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + '/?p=' + pathParam;
       } else {
-        // GitHub Pages production - redirect to /numerana-calculator/
-        l.replace(
-          l.protocol + '//' + l.hostname + '/numerana-calculator/'
-        );
+        // GitHub Pages production
+        redirectUrl = l.protocol + '//' + l.hostname + '/numerana-calculator/?p=' + pathParam;
       }
+      
+      // Redirect to the app
+      l.replace(redirectUrl);
     </script>
   </head>
   <body></body>

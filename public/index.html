@@ -16,12 +16,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js" integrity="sha512-MpDFIChbcXl2QgipQrt1VcPHMldRILetapBl5MPCA9Y8r7qvlwx1/Mc9hNTzY+kS5kX6PdoDq41ws1HiVNLdZA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript">
       // Handle redirect from 404.html for GitHub Pages routing
-      // Redirects routes like /numerana-calculator/singlebasic to /numerana-calculator/?p=/singlebasic
+      // 404.html passes the intended path as a query parameter: ?p=/singlebasic
+      // We extract it and navigate React Router to the correct route
       (function() {
-        var redirect = sessionStorage.redirect;
-        delete sessionStorage.redirect;
-        if (redirect && redirect !== location.href) {
-          history.replaceState(null, null, redirect);
+        var params = new URLSearchParams(window.location.search);
+        var redirectPath = params.get('p');
+        
+        if (redirectPath) {
+          // Store the path for React to navigate to after it loads
+          window.__REDIRECT_PATH__ = decodeURIComponent(redirectPath);
+          
+          // Clean up the URL by removing the ?p= parameter
+          var basePath = window.location.pathname;
+          window.history.replaceState(null, null, basePath);
         }
       })();
     </script>
