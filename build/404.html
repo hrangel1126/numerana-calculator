@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting...</title>
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages
+      // MIT License
+      // https://github.com/rafgraph/spa-github-pages
+
+      // This script handles 404 redirects for GitHub Pages
+      // When a route like /numerana-calculator/singlebasic is accessed,
+      // GitHub Pages serves this 404.html. We store the path in sessionStorage
+      // and redirect to index.html so React Router can handle the route.
+
+      var l = window.location;
+      sessionStorage.redirect = l.pathname + l.search + l.hash;
+      
+      // Navigate to the main app
+      if (l.hostname === 'localhost' || l.hostname === '127.0.0.1') {
+        // Local development
+        l.replace(
+          l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + '/'
+        );
+      } else {
+        // GitHub Pages production - redirect to /numerana-calculator/
+        l.replace(
+          l.protocol + '//' + l.hostname + '/numerana-calculator/'
+        );
+      }
+    </script>
+  </head>
+  <body></body>
+</html>
