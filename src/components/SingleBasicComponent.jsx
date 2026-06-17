@@ -16,6 +16,7 @@ import NumerologyInputFormComponent from './common/NumerologyInputFormComponent'
 import ResultsHeaderComponent from './common/ResultsHeaderComponent';
 import PinaculoChartComponent from './common/PinaculoChartComponent';
 import LoadingComponent from './common/LoadingComponent';
+import CaptchaComponent from './common/CaptchaComponent';
 
 const SingleBasicComponent = () => {
   const { t } = useTranslation(); // Get the translation function
@@ -54,6 +55,7 @@ const SingleBasicComponent = () => {
   const contentRef = useRef(null);
   const birthRef = useRef(null);
   const myScrollContainerRef = useRef(null);
+  const captchaRef = useRef(null);
 
   // Effects
   useEffect(() => {
@@ -97,6 +99,16 @@ const SingleBasicComponent = () => {
   }, []);
   // Form submission
   const handleSubmit = () => {
+    // Step 1: Validate Captcha FIRST
+    if (captchaRef.current) {
+      const userCaptchaInput = captchaRef.current.getUserInput();
+      if (!captchaRef.current.validate(userCaptchaInput)) {
+        alert(t('captcha.validationFailed'));
+        return;
+      }
+    }
+
+    // Step 2: Validate form fields
     if (nombre.length <= 1 || !birthdate) {
        // Use translated alert or a more robust notification system
       alert(t('singleBasic.validation.emptyFields'));
@@ -357,26 +369,32 @@ const SingleBasicComponent = () => {
                     />
                   </div>
 
-                  {/* Email Field */}
-                  <div className="singleBasic-form-group">
-                    <label htmlFor="email-input">{t('singleBasic.emailLabel')}</label>
-                    <input
-                      id="email-input"
-                      className="singleBasic-form-control" 
-                      placeholder={t('singleBasic.emailPlaceholder')}
-                      type="email"
-                      autoComplete="off"
-                    />
-                  </div>
+                   {/* Email Field */}
+                   <div className="singleBasic-form-group">
+                     <label htmlFor="email-input">{t('singleBasic.emailLabel')}</label>
+                     <input
+                       id="email-input"
+                       className="singleBasic-form-control" 
+                       placeholder={t('singleBasic.emailPlaceholder')}
+                       type="email"
+                       autoComplete="off"
+                     />
+                   </div>
 
-                  {/* Submit Button */}
-                  <button 
-                    onClick={handleSubmit}
-                    className="singleBasic-submit-btn"
-                  >
-                    <img src={caracol} alt="caracol" className="singleBasic-btn-icon" />
-                    {t('singleBasic.submitButton')}
-                  </button>
+                   {/* Captcha Component */}
+                   <div className="singleBasic-form-group">
+                     <label>Captcha Verification</label>
+                     <CaptchaComponent ref={captchaRef} />
+                   </div>
+
+                   {/* Submit Button */}
+                   <button 
+                     onClick={handleSubmit}
+                     className="singleBasic-submit-btn"
+                   >
+                     <img src={caracol} alt="caracol" className="singleBasic-btn-icon" />
+                     {t('singleBasic.submitButton')}
+                   </button>
                 </div>
               </div>
 

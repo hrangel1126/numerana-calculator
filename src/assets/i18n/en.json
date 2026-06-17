@@ -206,17 +206,20 @@
      }
    },
     "months": {
-    "jan": "JAN",
-    "feb": "FEB",
-    "mar": "MAR",
-    "apr": "APR",
-    "may": "MAY",
-    "jun": "JUN",
-    "jul": "JUL",
-    "aug": "AUG",
-    "sep": "SEP",
-    "oct": "OCT",
-    "nov": "NOV",
-    "dec": "DEC"
-  }
+     "jan": "JAN",
+     "feb": "FEB",
+     "mar": "MAR",
+     "apr": "APR",
+     "may": "MAY",
+     "jun": "JUN",
+     "jul": "JUL",
+     "aug": "AUG",
+     "sep": "SEP",
+     "oct": "OCT",
+     "nov": "NOV",
+     "dec": "DEC"
+   },
+   "captcha": {
+     "validationFailed": "Captcha validation failed"
+   }
 }

@@ -21,6 +21,7 @@ import MobileMonthDayViewComponent from '../components/common/MobileMonthDayView
 import DesktopMonthGridComponent from '../components/common/DesktopMonthGridComponent';
 import DesktopDayGridComponent from '../components/common/DesktopDayGridComponent';
 import LoadingComponent from '../components/common/LoadingComponent';
+import CaptchaComponent from '../components/common/CaptchaComponent';
 
 const SingleComponent = () => {
   const { t } = useTranslation();
@@ -58,6 +59,7 @@ const SingleComponent = () => {
   const contentRef = useRef(null);
   const birthRef = useRef(null);
   const myScrollContainerRef = useRef(null);
+  const captchaRef = useRef(null);
   
   // Effects
   useEffect(() => {
@@ -121,6 +123,16 @@ const SingleComponent = () => {
   
   // Form submission
   const handleSubmit = () => {
+    // Step 1: Validate Captcha FIRST
+    if (captchaRef.current) {
+      const userCaptchaInput = captchaRef.current.getUserInput();
+      if (!captchaRef.current.validate(userCaptchaInput)) {
+        alert(t('captcha.validationFailed'));
+        return;
+      }
+    }
+
+    // Step 2: Validate form fields
     if (nombre.length <= 1 || !birthdate) {
       alert("Name and birthdate can't be empty.\nNombre y cumpleaños no pueden estar vacios.");
       return;
@@ -283,20 +295,24 @@ const SingleComponent = () => {
                       autoComplete="off"
                     />
                   </div>
-                  <div className="singleBasic-form-group">
-                    <label htmlFor="email-input">{t('singleBasic.emailLabel')}</label>
-                    <input
-                      id="email-input"
-                      className="singleBasic-form-control"
-                      placeholder={t('singleBasic.emailPlaceholder')}
-                      type="email"
-                      autoComplete="off"
-                    />
-                  </div>
-                  <button onClick={handleSubmit} className="singleBasic-submit-btn">
-                    <img src={caracol} alt="caracol" className="singleBasic-btn-icon" />
-                    {t('singleBasic.submitButton')}
-                  </button>
+                   <div className="singleBasic-form-group">
+                     <label htmlFor="email-input">{t('singleBasic.emailLabel')}</label>
+                     <input
+                       id="email-input"
+                       className="singleBasic-form-control"
+                       placeholder={t('singleBasic.emailPlaceholder')}
+                       type="email"
+                       autoComplete="off"
+                     />
+                   </div>
+                   <div className="singleBasic-form-group">
+                     <label>Captcha Verification</label>
+                     <CaptchaComponent ref={captchaRef} />
+                   </div>
+                   <button onClick={handleSubmit} className="singleBasic-submit-btn">
+                     <img src={caracol} alt="caracol" className="singleBasic-btn-icon" />
+                     {t('singleBasic.submitButton')}
+                   </button>
                 </div>
               </div>
               <div className="singleBasic-right-column">

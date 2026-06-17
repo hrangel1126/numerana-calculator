@@ -10,6 +10,7 @@ import DesktopMonthGridComponent from './common/DesktopMonthGridComponent';
 import DesktopDayGridComponent from './common/DesktopDayGridComponent';
 import YearChartComponent from './common/YearChartComponent';
 import ResultsHeaderComponent from './common/ResultsHeaderComponent';
+import CaptchaComponent from './common/CaptchaComponent';
 
 // Import utility functions
 import { calculosUtils } from '../utils/calculosUtils';
@@ -100,6 +101,7 @@ const CoupleComponent = () => {
   const swiperAnoRef = useRef(null);
   const swiperSinaRef = useRef(null);
   const swiperMbRef = useRef(null);
+  const captchaRef = useRef(null);
   
   // Swiper configurations
   const swiperConfig = {
@@ -210,11 +212,28 @@ const CoupleComponent = () => {
   
   // Form submission
   const subm = () => {
+    // Step 1: Validate Captcha FIRST
+    if (captchaRef.current) {
+      const userCaptchaInput = captchaRef.current.getUserInput();
+      if (!captchaRef.current.validate(userCaptchaInput)) {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Validation Error",
+          html: t('captcha.validationFailed'),
+          showConfirmButton: false,
+          timer: 2500
+        });
+        return;
+      }
+    }
+
     console.log('nombre', nombre);
     console.log('birthdate', birthdate);
     console.log('nombre2', nombre2);
     console.log('birthdate2', birthdate2);
     
+    // Step 2: Validate form fields
     if (!birthdate || !birthdate2) {
       Swal.fire({
         position: "center",
@@ -587,14 +606,18 @@ const CoupleComponent = () => {
                     value={birthdate2}
                     onChange={(e) => handleBirthdateChange(e, setBirthdate2)}
                     ref={birth2Ref}
-                  />
-                </div>
-              </div>
-            </div>
-            <button onClick={subm} className="singleBasic-submit-btn">
-              <img src={caracol} alt="caracol" className="singleBasic-btn-icon" />
-              {t('singleBasic.submitButton') || 'Calculate Now'}
-            </button>
+                   />
+                 </div>
+               </div>
+             </div>
+             <div className="singleBasic-form-group">
+               <label>Captcha Verification</label>
+               <CaptchaComponent ref={captchaRef} />
+             </div>
+             <button onClick={subm} className="singleBasic-submit-btn">
+               <img src={caracol} alt="caracol" className="singleBasic-btn-icon" />
+               {t('singleBasic.submitButton') || 'Calculate Now'}
+             </button>
           </div>
         </div>
         <div className="singleBasic-right-column">

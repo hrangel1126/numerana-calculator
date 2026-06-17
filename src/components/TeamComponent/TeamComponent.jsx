@@ -6,6 +6,7 @@ import './TeamComponent.css';
 import { useTranslation } from '../../utils/i18n/LanguageContext';
 import PinaculoChartComponent from '../common/PinaculoChartComponent';
 import ResultsHeaderComponent from '../common/ResultsHeaderComponent';
+import CaptchaComponent from '../common/CaptchaComponent';
 
 // Import images directly
 import leftDecoration from '../../assets/img/Lleft.png';
@@ -51,6 +52,7 @@ const TeamComponent = () => {
   
   // Refs
   const contentRef = useRef(null);
+  const captchaRef = useRef(null);
   
   useEffect(() => {
     // Initial loading
@@ -138,6 +140,16 @@ const TeamComponent = () => {
   
   // Handle form submission
   const handleSubmit = () => {
+    // Step 1: Validate Captcha FIRST
+    if (captchaRef.current) {
+      const userCaptchaInput = captchaRef.current.getUserInput();
+      if (!captchaRef.current.validate(userCaptchaInput)) {
+        alert(t('captcha.validationFailed'));
+        return;
+      }
+    }
+
+    // Step 2: Continue with form submission
     setIsVisible(false);
     setLoading(true);
     
@@ -299,26 +311,32 @@ const TeamComponent = () => {
             ))}
           </div>
 
-          {/* Add More Members - Clickable Link */}
-          <div className="team-add-more-section">
-            <button
-              type="button"
-              onClick={addTeamMember}
-              className="team-add-more-btn"
-              title="Add another team member"
-            >
-              <i className="bi bi-person-plus"></i> {t('team.addMoreMembers') || 'Add More Members'}
-            </button>
-          </div>
+           {/* Add More Members - Clickable Link */}
+           <div className="team-add-more-section">
+             <button
+               type="button"
+               onClick={addTeamMember}
+               className="team-add-more-btn"
+               title="Add another team member"
+             >
+               <i className="bi bi-person-plus"></i> {t('team.addMoreMembers') || 'Add More Members'}
+             </button>
+           </div>
 
-          {/* Calculate Button */}
-          <button 
-            type="button" 
-            onClick={handleSubmit} 
-            className="team-calculate-btn"
-          >
-            <i className="bi bi-play-btn-fill"></i> {t('team.calculateButton') || 'Calculate Now'}
-          </button>
+           {/* Captcha Component */}
+           <div className="team-form-captcha">
+             <label>Captcha Verification</label>
+             <CaptchaComponent ref={captchaRef} />
+           </div>
+
+           {/* Calculate Button */}
+           <button 
+             type="button" 
+             onClick={handleSubmit} 
+             className="team-calculate-btn"
+           >
+             <i className="bi bi-play-btn-fill"></i> {t('team.calculateButton') || 'Calculate Now'}
+           </button>
         </div>
 
         {/* Right Column - Team Image */}

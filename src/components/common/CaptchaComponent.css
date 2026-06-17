@@ -1,0 +1,161 @@
+/* Captcha Component Styles */
+
+.captcha-wrapper {
+  width: 100%;
+  margin: 0.75rem 0;
+}
+
+.captcha-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+/* Horizontal Layout - 50/50 Split: Canvas LEFT, Input RIGHT */
+.captcha-input-layout {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Captcha Canvas Wrapper - 50% WIDTH LEFT SIDE */
+.captcha-canvas-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  padding: 0.25rem;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  flex-shrink: 0;
+  width: 50%;
+  height: 50px;
+  min-width: 140px;
+}
+
+/* Canvas Element Styling - Fits in 50% container */
+.captcha-canvas-wrapper canvas {
+  max-width: 100%;
+  height: 45px;
+  width: auto;
+  top: 10px;
+  position: relative;
+}
+
+/* Captcha Input Wrapper - 50% WIDTH RIGHT SIDE */
+.captcha-input-wrapper {
+  display: flex;
+  width: 50%;
+  min-width: 140px;
+}
+
+/* Captcha Input Field - Compact */
+.captcha-input {
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  font-family: Arial, sans-serif;
+  letter-spacing: 2px;
+  text-align: center;
+  width: 100%;
+}
+
+.captcha-input:focus {
+  outline: none;
+  border-color: #1e88e5;
+  box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.1);
+  background-color: #f5f5f5;
+}
+
+.captcha-input::placeholder {
+  color: #999;
+  letter-spacing: normal;
+}
+
+/* Reload link - Below */
+.captcha-reload {
+  text-align: center;
+  margin-top: 0.25rem;
+}
+
+/* Reload Captcha Link Styling */
+#reload_href {
+  cursor: pointer;
+  color: blue;
+  z-index: 999;
+  position: relative;
+  top: -5px;
+}
+
+/* Responsive Design - Maintain 50/50 split */
+@media (max-width: 600px) {
+  .captcha-container {
+    padding: 0.4rem;
+    gap: 0.4rem;
+  }
+
+  .captcha-input-layout {
+    gap: 0.4rem;
+  }
+
+  .captcha-canvas-wrapper {
+    width: 50%;
+    height: 45px;
+    padding: 0.2rem;
+    min-width: 120px;
+  }
+
+  .captcha-canvas-wrapper canvas {
+    height: 40px;
+  }
+
+  .captcha-input-wrapper {
+    width: 50%;
+    min-width: 120px;
+  }
+
+  .captcha-input {
+    padding: 0.4rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* Button compatibility - when captcha is next to submit button */
+.captcha-with-button {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+
+.captcha-with-button .captcha-container {
+  flex: 1;
+  margin: 0;
+}
+
+/* Dark mode support (if implemented) */
+@media (prefers-color-scheme: dark) {
+  .captcha-container {
+    background-color: #f0f0f0;
+    border-color: #ddd;
+  }
+
+  .captcha-canvas-wrapper {
+    background-color: white;
+  }
+
+  .captcha-input {
+    background-color: white;
+    color: black;
+  }
+
+  .captcha-input:focus {
+    background-color: #f5f5f5;
+  }
+}

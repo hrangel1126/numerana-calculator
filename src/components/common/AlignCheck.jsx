@@ -49,18 +49,18 @@ Object.entries(pinaculo).forEach(([key, value]) => {
        y1="601.78"
        x2="1343.65"
        y2="439.492">
-      <stop
-         class="stop0"
-         offset="0"
-         stop-opacity="1"
-         stop-color="rgb(248,231,194)"
-         id="stop1" />
-      <stop
-         class="stop1"
-         offset="1"
-         stop-opacity="1"
-         stop-color="rgb(255,255,252)"
-         id="stop2" />
+       <stop
+          className="stop0"
+          offset="0"
+          stopOpacity="1"
+          stopColor="rgb(248,231,194)"
+          id="stop1" />
+       <stop
+          className="stop1"
+          offset="1"
+          stopOpacity="1"
+          stopColor="rgb(255,255,252)"
+          id="stop2" />
     </linearGradient>
     <linearGradient
        id="Gradient2"
@@ -70,16 +70,16 @@ Object.entries(pinaculo).forEach(([key, value]) => {
        x2="1425.29"
        y2="553.048">
       <stop
-         class="stop0"
+                   className="stop0"
          offset="0"
-         stop-opacity="1"
-         stop-color="rgb(107,58,0)"
+                   stopOpacity="1"
+                   stopColor="rgb(107,58,0)"
          id="stop3" />
       <stop
-         class="stop1"
+                   className="stop1"
          offset="1"
-         stop-opacity="1"
-         stop-color="rgb(162,100,21)"
+                   stopOpacity="1"
+                   stopColor="rgb(162,100,21)"
          id="stop4" />
     </linearGradient>
     <linearGradient
@@ -90,16 +90,16 @@ Object.entries(pinaculo).forEach(([key, value]) => {
        x2="1114.15"
        y2="364.358">
       <stop
-         class="stop0"
+                   className="stop0"
          offset="0"
-         stop-opacity="1"
-         stop-color="rgb(160,90,0)"
+                   stopOpacity="1"
+                   stopColor="rgb(160,90,0)"
          id="stop5" />
       <stop
-         class="stop1"
+                   className="stop1"
          offset="1"
-         stop-opacity="1"
-         stop-color="rgb(109,64,19)"
+                   stopOpacity="1"
+                   stopColor="rgb(109,64,19)"
          id="stop6" />
     </linearGradient>
     <linearGradient
@@ -110,16 +110,16 @@ Object.entries(pinaculo).forEach(([key, value]) => {
        x2="1614.28"
        y2="992.317">
       <stop
-         class="stop0"
+                   className="stop0"
          offset="0"
-         stop-opacity="1"
-         stop-color="rgb(251,237,205)"
+                   stopOpacity="1"
+                   stopColor="rgb(251,237,205)"
          id="stop7" />
       <stop
-         class="stop1"
+                   className="stop1"
          offset="1"
-         stop-opacity="1"
-         stop-color="rgb(255,255,244)"
+                   stopOpacity="1"
+                   stopColor="rgb(255,255,244)"
          id="stop8" />
     </linearGradient>
     <linearGradient
@@ -130,16 +130,16 @@ Object.entries(pinaculo).forEach(([key, value]) => {
        x2="1656.65"
        y2="972.006">
       <stop
-         class="stop0"
+                   className="stop0"
          offset="0"
-         stop-opacity="1"
-         stop-color="rgb(255,224,158)"
+                   stopOpacity="1"
+                   stopColor="rgb(255,224,158)"
          id="stop9" />
       <stop
-         class="stop1"
+                   className="stop1"
          offset="1"
-         stop-opacity="1"
-         stop-color="rgb(246,242,204)"
+                   stopOpacity="1"
+                   stopColor="rgb(246,242,204)"
          id="stop10" />
     </linearGradient>
     <linearGradient
@@ -150,16 +150,16 @@ Object.entries(pinaculo).forEach(([key, value]) => {
        x2="865.923"
        y2="1366.57">
       <stop
-         class="stop0"
+                   className="stop0"
          offset="0"
-         stop-opacity="1"
-         stop-color="rgb(246,227,187)"
+                   stopOpacity="1"
+                   stopColor="rgb(246,227,187)"
          id="stop11" />
       <stop
-         class="stop1"
+                   className="stop1"
          offset="1"
-         stop-opacity="1"
-         stop-color="rgb(255,255,251)"
+                   stopOpacity="1"
+                   stopColor="rgb(255,255,251)"
          id="stop12" />
     </linearGradient>
     <linearGradient
@@ -170,16 +170,16 @@ Object.entries(pinaculo).forEach(([key, value]) => {
        x2="863.156"
        y2="1237.32">
       <stop
-         class="stop0"
+                   className="stop0"
          offset="0"
-         stop-opacity="1"
-         stop-color="rgb(134,68,0)"
+                   stopOpacity="1"
+                   stopColor="rgb(134,68,0)"
          id="stop13" />
       <stop
-         class="stop1"
+                   className="stop1"
          offset="1"
-         stop-opacity="1"
-         stop-color="rgb(187,117,22)"
+                   stopOpacity="1"
+                   stopColor="rgb(187,117,22)"
          id="stop14" />
     </linearGradient>
     <linearGradient
@@ -190,16 +190,16 @@ Object.entries(pinaculo).forEach(([key, value]) => {
        x2="1058.22"
        y2="1257.81">
       <stop
-         class="stop0"
+                   className="stop0"
          offset="0"
-         stop-opacity="1"
-         stop-color="rgb(247,227,186)"
+                   stopOpacity="1"
+                   stopColor="rgb(247,227,186)"
          id="stop15" />
       <stop
-         class="stop1"
+                   className="stop1"
          offset="1"
-         stop-opacity="1"
-         stop-color="rgb(255,255,253)"
+                   stopOpacity="1"
+                   stopColor="rgb(255,255,253)"
          id="stop16" />
     </linearGradient>
     <linearGradient
@@ -210,16 +210,16 @@ Object.entries(pinaculo).forEach(([key, value]) => {
        x2="1027.06"
        y2="1313.84">
       <stop
-         class="stop0"
+                   className="stop0"
          offset="0"
-         stop-opacity="1"
-         stop-color="rgb(149,87,2)"
+                   stopOpacity="1"
+                   stopColor="rgb(149,87,2)"
          id="stop17" />
       <stop
-         class="stop1"
+                   className="stop1"
          offset="1"
-         stop-opacity="1"
-         stop-color="rgb(121,71,32)"
+                   stopOpacity="1"
+                   stopColor="rgb(121,71,32)"
          id="stop18" />
     </linearGradient>
     <linearGradient
@@ -230,16 +230,16 @@ Object.entries(pinaculo).forEach(([key, value]) => {
        x2="1284.67"
        y2="983.998">
       <stop
-         class="stop0"
+                   className="stop0"
          offset="0"
-         stop-opacity="1"
-         stop-color="rgb(252,237,206)"
+                   stopOpacity="1"
+                   stopColor="rgb(252,237,206)"
          id="stop19" />
       <stop
-         class="stop1"
+                   className="stop1"
          offset="1"
-         stop-opacity="1"
-         stop-color="rgb(255,255,244)"
+                   stopOpacity="1"
+                   stopColor="rgb(255,255,244)"
          id="stop20" />
     </linearGradient>
     <linearGradient
@@ -250,16 +250,16 @@ Object.entries(pinaculo).forEach(([key, value]) => {
        x2="1316.84"
        y2="1249.85">
       <stop
-         class="stop0"
+                   className="stop0"
          offset="0"
-         stop-opacity="1"
-         stop-color="rgb(140,82,12)"
+                   stopOpacity="1"
+                   stopColor="rgb(140,82,12)"
          id="stop21" />
       <stop
-         class="stop1"
+                   className="stop1"
          offset="1"
-         stop-opacity="1"
-         stop-color="rgb(162,105,26)"
+                   stopOpacity="1"
+                   stopColor="rgb(162,105,26)"
          id="stop22" />
     </linearGradient>
     <linearGradient
@@ -270,16 +270,16 @@ Object.entries(pinaculo).forEach(([key, value]) => {
        x2="1343.91"
        y2="979.346">
       <stop
-         class="stop0"
+                   className="stop0"
          offset="0"
-         stop-opacity="1"
-         stop-color="rgb(255,216,151)"
+                   stopOpacity="1"
+                   stopColor="rgb(255,216,151)"
          id="stop23" />
       <stop
-         class="stop1"
+                   className="stop1"
          offset="1"
-         stop-opacity="1"
-         stop-color="rgb(246,239,198)"
+                   stopOpacity="1"
+                   stopColor="rgb(246,239,198)"
          id="stop24" />
     </linearGradient>
     <linearGradient
@@ -290,16 +290,16 @@ Object.entries(pinaculo).forEach(([key, value]) => {
        x2="864.965"
        y2="992.259">
       <stop
-         class="stop0"
+                   className="stop0"
          offset="0"
-         stop-opacity="1"
-         stop-color="rgb(251,238,207)"
+                   stopOpacity="1"
+                   stopColor="rgb(251,238,207)"
          id="stop25" />
       <stop
-         class="stop1"
+                   className="stop1"
          offset="1"
-         stop-opacity="1"
-         stop-color="rgb(255,255,243)"
+                   stopOpacity="1"
+                   stopColor="rgb(255,255,243)"
          id="stop26" />
     </linearGradient>
     <linearGradient
@@ -310,16 +310,16 @@ Object.entries(pinaculo).forEach(([key, value]) => {
        x2="573.623"
        y2="1125.35">
       <stop
-         class="stop0"
+                   className="stop0"
          offset="0"
-         stop-opacity="1"
-         stop-color="rgb(140,90,0)"
+                   stopOpacity="1"
+                   stopColor="rgb(140,90,0)"
          id="stop27" />
       <stop
-         class="stop1"
+                   className="stop1"
          offset="1"
-         stop-opacity="1"
-         stop-color="rgb(131,76,33)"
+                   stopOpacity="1"
+                   stopColor="rgb(131,76,33)"
          id="stop28" />
     </linearGradient>
     <linearGradient
@@ -330,16 +330,16 @@ Object.entries(pinaculo).forEach(([key, value]) => {
        x2="868.68"
        y2="1803.89">
       <stop
-         class="stop0"
+                   className="stop0"
          offset="0"
-         stop-opacity="1"
-         stop-color="rgb(245,225,185)"
+                   stopOpacity="1"
+                   stopColor="rgb(245,225,185)"
          id="stop29" />
       <stop
-         class="stop1"
+                   className="stop1"
          offset="1"
-         stop-opacity="1"
-         stop-color="rgb(255,255,251)"
+                   stopOpacity="1"
+                   stopColor="rgb(255,255,251)"
          id="stop30" />
     </linearGradient>
     <linearGradient
@@ -350,16 +350,16 @@ Object.entries(pinaculo).forEach(([key, value]) => {
        x2="675.593"
        y2="1256.99">
       <stop
-         class="stop0"
+                   className="stop0"
          offset="0"
-         stop-opacity="1"
-         stop-color="rgb(245,226,184)"
+                   stopOpacity="1"
+                   stopColor="rgb(245,226,184)"
          id="stop31" />
       <stop
-         class="stop1"
+                   className="stop1"
          offset="1"
-         stop-opacity="1"
-         stop-color="rgb(255,255,255)"
+                   stopOpacity="1"
+                   stopColor="rgb(255,255,255)"
          id="stop32" />
     </linearGradient>
     <linearGradient
@@ -370,16 +370,16 @@ Object.entries(pinaculo).forEach(([key, value]) => {
        x2="762.612"
        y2="1361.49">
       <stop
-         class="stop0"
+                   className="stop0"
          offset="0"
-         stop-opacity="1"
-         stop-color="rgb(102,56,0)"
+                   stopOpacity="1"
+                   stopColor="rgb(102,56,0)"
          id="stop33" />
       <stop
-         class="stop1"
+                   className="stop1"
          offset="1"
-         stop-opacity="1"
-         stop-color="rgb(151,99,34)"
+                   stopOpacity="1"
+                   stopColor="rgb(151,99,34)"
          id="stop34" />
     </linearGradient>
     <linearGradient
@@ -390,16 +390,16 @@ Object.entries(pinaculo).forEach(([key, value]) => {
        x2="868.254"
        y2="1590.06">
       <stop
-         class="stop0"
+                   className="stop0"
          offset="0"
-         stop-opacity="1"
-         stop-color="rgb(244,223,182)"
+                   stopOpacity="1"
+                   stopColor="rgb(244,223,182)"
          id="stop35" />
       <stop
-         class="stop1"
+                   className="stop1"
          offset="1"
-         stop-opacity="1"
-         stop-color="rgb(255,255,252)"
+                   stopOpacity="1"
+                   stopColor="rgb(255,255,252)"
          id="stop36" />
     </linearGradient>
     <linearGradient
@@ -410,16 +410,16 @@ Object.entries(pinaculo).forEach(([key, value]) => {
        x2="868.56"
        y2="465.404">
       <stop
-         class="stop0"
+                   className="stop0"
          offset="0"
-         stop-opacity="1"
-         stop-color="rgb(248,231,192)"
+                   stopOpacity="1"
+                   stopColor="rgb(248,231,192)"
          id="stop37" />
       <stop
-         class="stop1"
+                   className="stop1"
          offset="1"
-         stop-opacity="1"
-         stop-color="rgb(255,255,255)"
+                   stopOpacity="1"
+                   stopColor="rgb(255,255,255)"
          id="stop38" />
     </linearGradient>
     <linearGradient
@@ -430,16 +430,16 @@ Object.entries(pinaculo).forEach(([key, value]) => {
        x2="694.109"
        y2="787.497">
       <stop
-         class="stop0"
+                   className="stop0"
          offset="0"
-         stop-opacity="1"
-         stop-color="rgb(247,230,190)"
+                   stopOpacity="1"
+                   stopColor="rgb(247,230,190)"
          id="stop39" />
       <stop
-         class="stop1"
+                   className="stop1"
          offset="1"
-         stop-opacity="1"
-         stop-color="rgb(255,255,255)"
+                   stopOpacity="1"
+                   stopColor="rgb(255,255,255)"
          id="stop40" />
     </linearGradient>
     <linearGradient
@@ -450,16 +450,16 @@ Object.entries(pinaculo).forEach(([key, value]) => {
        x2="881.936"
        y2="234.475">
       <stop
-         class="stop0"
+                   className="stop0"
          offset="0"
-         stop-opacity="1"
-         stop-color="rgb(247,230,193)"
+                   stopOpacity="1"
+                   stopColor="rgb(247,230,193)"
          id="stop41" />
       <stop
-         class="stop1"
+                   className="stop1"
          offset="1"
-         stop-opacity="1"
-         stop-color="rgb(255,255,254)"
+                   stopOpacity="1"
+                   stopColor="rgb(255,255,254)"
          id="stop42" />
     </linearGradient>
     <linearGradient
@@ -470,16 +470,16 @@ Object.entries(pinaculo).forEach(([key, value]) => {
        x2="886.748"
        y2="748.606">
       <stop
-         class="stop0"
+                   className="stop0"
          offset="0"
-         stop-opacity="1"
-         stop-color="rgb(38,21,13)"
+                   stopOpacity="1"
+                   stopColor="rgb(38,21,13)"
          id="stop43" />
       <stop
-         class="stop1"
+                   className="stop1"
          offset="1"
-         stop-opacity="1"
-         stop-color="rgb(69,50,23)"
+                   stopOpacity="1"
+                   stopColor="rgb(69,50,23)"
          id="stop44" />
     </linearGradient>
     <linearGradient
@@ -490,16 +490,16 @@ Object.entries(pinaculo).forEach(([key, value]) => {
        x2="873.391"
        y2="677.074">
       <stop
-         class="stop0"
+                   className="stop0"
          offset="0"
-         stop-opacity="1"
-         stop-color="rgb(246,229,190)"
+                   stopOpacity="1"
+                   stopColor="rgb(246,229,190)"
          id="stop45" />
       <stop
-         class="stop1"
+                   className="stop1"
          offset="1"
-         stop-opacity="1"
-         stop-color="rgb(255,255,254)"
+                   stopOpacity="1"
+                   stopColor="rgb(255,255,254)"
          id="stop46" />
     </linearGradient>
     <linearGradient
@@ -510,16 +510,16 @@ Object.entries(pinaculo).forEach(([key, value]) => {
        x2="1048.55"
        y2="790.135">
       <stop
-         class="stop0"
+                   className="stop0"
          offset="0"
-         stop-opacity="1"
-         stop-color="rgb(247,229,188)"
+                   stopOpacity="1"
+                   stopColor="rgb(247,229,188)"
          id="stop47" />
       <stop
-         class="stop1"
+                   className="stop1"
          offset="1"
-         stop-opacity="1"
-         stop-color="rgb(255,255,253)"
+                   stopOpacity="1"
+                   stopColor="rgb(255,255,253)"
          id="stop48" />
     </linearGradient>
   </defs>

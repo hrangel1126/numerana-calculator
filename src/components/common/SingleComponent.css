@@ -954,7 +954,7 @@ svg text {
 
 /* Annual Years Grid - 2 columns side by side */
 .annual-years-grid {
-  display: grid;
+  display: grid !important;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   align-items: start;
