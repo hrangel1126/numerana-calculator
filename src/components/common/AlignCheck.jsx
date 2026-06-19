@@ -1624,7 +1624,7 @@ Object.entries(pinaculo).forEach(([key, value]) => {
      x="958.50775"
      y="294.64539"
      id="text253"
-     transform={`scale(${String(pinaculo?.top).length == 1 ? .88 : String(pinaculo?.top).length >= 2 ? 0.84 : 0.86},1.1937643)`}><tspan
+     transform={`scale(${String(pinaculo?.top).length == 1 ? .88 : String(pinaculo?.top).length >= 2 ? 0.86 : 0.86},1.1937643)`}><tspan
        
        id="tspan253"
        style={{ strokeWidth:6.01061 }}
@@ -1757,7 +1757,7 @@ Object.entries(pinaculo).forEach(([key, value]) => {
       textAnchor="middle"
       dominantBaseline="base"
      id="text256"
-     transform={`scale(${String(pinaculo?.A).length == 1 ? 1 : String(pinaculo?.A).length >= 2 ? 0.82 : 0.89},1.1225976)`}><tspan
+     transform={`scale(${String(pinaculo?.A).length == 1 ? 1 : String(pinaculo?.A).length >= 2 ? 0.86 : 0.89},1.1225976)`}><tspan
        
        id="tspan256"
        style={{ strokeWidth:11.6611 }}
@@ -1793,7 +1793,7 @@ Object.entries(pinaculo).forEach(([key, value]) => {
      x="1715.7646"
      y="1029.5625"
      id="text256-2"
-     transform={`scale(${String(pinaculo?.D).length == 1 ? 0.915 : String(pinaculo?.D).length >= 2 ? 0.82 : 0.89},1.1225976)`}><tspan
+     transform={`scale(${String(pinaculo?.D).length == 1 ? 0.915 : String(pinaculo?.D).length >= 2 ? 0.86 : 0.89},1.1225976)`}><tspan
        
        id="tspan256-33"
        style={{ strokeWidth:11.6611 }}

@@ -1,5 +1,7 @@
 import React from 'react';
-import YearSvg from '../YearSvg';
+// import YearSvg from '../YearSvg';
+import YearSvg from '../YearSvgNew';
+
 import './SingleComponent.css';
 
 const YearChartComponent = ({ year, data, isCurrentYear }) => {

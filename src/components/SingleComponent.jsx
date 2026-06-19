@@ -336,8 +336,15 @@ const SingleComponent = () => {
              </button>
 
              {/* 2-Column Results Header Layout */}
-             <div className="results-header-wrapper">
+                   <p className="Results-title">Personal Numerology Cart</p>
+                     <p className="Results-descriptionText Results-descriptionText--left title-descripcion">
+                    This personalized report provides insights into your 
+                    annual monthly, and daily numerology cycles.
+                   </p>
+             <div className="results-header-wrapper" style={{ left: '-10%', position: 'relative' }}>
                <div className="results-header-left">
+             <PinaculoChartComponent pinaculo={rpinaculo.length > 0 ? rpinaculo[0] : null} style={{ position: 'relative', top: '-20px'}} />
+
                   <ResultsHeaderComponent
                     resultados={resultados}
                     nombre={nombre}
@@ -350,19 +357,7 @@ const SingleComponent = () => {
                   />
                </div>
                <div className="results-header-right">
-                 <PinaculoChartComponent pinaculo={rpinaculo.length > 0 ? rpinaculo[0] : null} />
-                 <p className="pinaculo-caption">{t('singleBasic.seeWhatYourNumbersReveal') || 'See what your numbers reveal →'}</p>
-               </div>
-             </div>
-
-             <div className="container results-container">
-               {/* Annual Calculations Section */}
-               <div className="annual-section">
-                 <div className="annual-header">
-                   <img src={annualCalcImg} alt="Annual Calculations" className="annual-header-image" />
-                 </div>
-                 {/* {t('annual.description') || 'Explore your annual numerology cycles...'} */}
-                 <div className="annual-years-grid">
+            <div className="annual-years-grid">
                    <div className="annual-year-block">
                      <h3 className="annual-year-title">{year}</h3>
                      <YearChartComponent 
@@ -381,6 +376,34 @@ const SingleComponent = () => {
                    </div>
                  </div>
                </div>
+             </div>
+
+             <div className="container results-container">
+               {/* Annual Calculations Section */}
+               {/* <div className="annual-section">
+                 <div className="annual-header">
+                   <img src={annualCalcImg} alt="Annual Calculations" className="annual-header-image" />
+                 </div> */}
+                 {/* {t('annual.description') || 'Explore your annual numerology cycles...'} */}
+                 {/* <div className="annual-years-grid">
+                   <div className="annual-year-block">
+                     <h3 className="annual-year-title">{year}</h3>
+                     <YearChartComponent 
+                       year={year} 
+                       data={pinYear.length > 0 ? pinYear[0] : null} 
+                       isCurrentYear={true} 
+                     />
+                   </div>
+                   <div className="annual-year-block">
+                     <h3 className="annual-year-title">{nxYear}</h3>
+                     <YearChartComponent 
+                       year={nxYear} 
+                       data={pinYear.length > 0 ? pinYear[0] : null} 
+                       isCurrentYear={false} 
+                     />
+                   </div>
+                 </div>
+               </div> */}
 
                 <div className="monthly-section">
                   <div className="monthly-header">
