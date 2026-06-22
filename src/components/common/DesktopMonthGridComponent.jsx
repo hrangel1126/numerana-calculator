@@ -1,5 +1,5 @@
 import React from 'react';
-import MonthVisualizer from '../MonthVisualizer';
+import MonthVisualizer from '../MonthVisualizerNew';
 import './SingleComponent.css';
 
 const DesktopMonthGridComponent = ({ birthdate, isCouple, birthdate2 }) => {
