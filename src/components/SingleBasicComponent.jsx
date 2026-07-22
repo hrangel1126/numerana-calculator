@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import moment from 'moment';
 import calculosUtils from '../utils/calculosUtils';
+import { createOrUpdateShopifyCustomer } from '../services/shopifyService'; // Import Shopify service
 import './SingleComponent.css'; // Assuming shared CSS or adjust path
 import { useTranslation } from '../utils/i18n/LanguageContext'; // Import the hook
 
@@ -98,7 +99,7 @@ const SingleBasicComponent = () => {
     };
   }, []);
   // Form submission
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // Step 1: Validate Captcha FIRST
     if (captchaRef.current) {
       const userCaptchaInput = captchaRef.current.getUserInput();
@@ -108,10 +109,20 @@ const SingleBasicComponent = () => {
       }
     }
 
-    // Step 2: Validate form fields
+    // Step 2: Get email from form
+    const emailInput = document.getElementById('email-input');
+    const email = emailInput ? emailInput.value.trim() : '';
+
+    // Step 3: Validate form fields
     if (nombre.length <= 1 || !birthdate) {
        // Use translated alert or a more robust notification system
       alert(t('singleBasic.validation.emptyFields'));
+      return;
+    }
+
+    // Step 4: Validate email
+    if (!email || !email.includes('@')) {
+      alert('Please enter a valid email address');
       return;
     }
 
@@ -170,6 +181,35 @@ const SingleBasicComponent = () => {
       setPinYear([yearData]); // Ensure it's always an array
 
        setResultados(true);
+
+       // ================================================================
+       // Step 5: Save customer to Shopify (non-blocking, background task)
+       // ================================================================
+       // This happens AFTER calculation succeeds and doesn't block the UI.
+       // If the PHP API is not available, the user still sees results.
+       // 
+       // The PHP API URL is configured in: src/services/shopifyService.js
+       // Change SHOPIFY_API_BASE_URL there to point to your PHP server
+       // ================================================================
+       
+       console.log('📤 Saving customer to Shopify...');
+       const shopifyResult = await createOrUpdateShopifyCustomer({
+         email: email,
+         firstName: nombre,
+         lastName: '', // Optional, can be added if needed
+         birthdate: formattedDate
+       });
+
+       if (shopifyResult.success) {
+         console.log(`✅ Customer ${shopifyResult.action} in Shopify successfully`);
+         console.log('📍 Check your Shopify Admin > Customers to see the new customer');
+       } else {
+         console.warn('⚠️ Failed to save customer to Shopify:', shopifyResult.error);
+         console.warn('ℹ️  Check that your PHP ShopifyApi server is running and');
+         console.warn('ℹ️  the URL in src/services/shopifyService.js is correct');
+         // Don't block user experience, just log warning
+       }
+
        // NO auto-scroll - page stays at top showing Pinaculo section
        // User can click "Learn More" to scroll to Core Energetic Numbers
     } catch (error) {

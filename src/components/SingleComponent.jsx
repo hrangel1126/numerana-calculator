@@ -16,6 +16,7 @@ import dailyCalcImg from '../assets/img/daily-calculatiom-header.png';
 import ResultsHeaderComponent from '../components/common/ResultsHeaderComponent';
 import PinaculoChartComponent from '../components/common/PinaculoChartComponent';
 import YearChartComponent from '../components/common/YearChartComponent';
+
 import MobileYearSliderComponent from '../components/common/MobileYearSliderComponent';
 import MobileMonthDayViewComponent from '../components/common/MobileMonthDayViewComponent';
 import DesktopMonthGridComponent from '../components/common/DesktopMonthGridComponent';
