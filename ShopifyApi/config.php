@@ -28,12 +28,7 @@ return [
     
     // Admin API Access Token (starts with shpat_)
     // This token allows the API to create/update customers in your Shopify store
-    'ADMIN_API_TOKEN' => 'ADMIN_ENTER HERE',
-    
-    // Optional: OAuth credentials (for future use)
-    // From original: src/config/shopify.js
-    'CLIENT_ID' => 'ENTGERID',
-    'CLIENT_SECRET' => 'ENTERSECRET',
+
     
     // ============================================
     // Application Settings
