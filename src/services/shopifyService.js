@@ -55,7 +55,14 @@ export const createOrUpdateShopifyCustomer = async (customerData) => {
       birthdate: customerData.birthdate
     });
 
-    const response = await fetch(`${SHOPIFY_API_BASE_URL}/api/create-customer`, {
+    // Use relative URL if deployed on same domain, otherwise use absolute URL
+    const endpoint = SHOPIFY_API_BASE_URL.startsWith('http') 
+      ? `${SHOPIFY_API_BASE_URL}/api/create-customer`
+      : `/ShopifyApi/public/api/create-customer`;
+
+    console.log('🔗 API Endpoint:', endpoint);
+
+    const response = await fetch(endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

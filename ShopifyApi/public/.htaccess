@@ -1,0 +1,20 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php [L,QSA]
+</IfModule>
+
+<IfModule mod_headers.c>
+    # Allow CORS from all origins (for development)
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization, Accept"
+    Header set Access-Control-Max-Age "3600"
+    
+    # Handle preflight requests
+    <IfModule mod_rewrite.c>
+        RewriteCond %{REQUEST_METHOD} ^OPTIONS$
+        RewriteRule ^(.*)$ - [L]
+    </IfModule>
+</IfModule>
